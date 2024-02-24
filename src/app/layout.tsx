@@ -25,7 +25,7 @@ export default function RootLayout({
             { text: 'bar', href: 'bar' },
           ]}
         ></Navbar>
-        {children}
+        <main className="">{children}</main>
       </body>
     </html>
   );
