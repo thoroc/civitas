@@ -23,6 +23,7 @@ export default function RootLayout({
           navItems={[
             { text: 'foo', href: 'foo' },
             { text: 'bar', href: 'bar' },
+            { text: 'cat', href: 'cat' },
           ]}
         ></Navbar>
         <main className="">{children}</main>
