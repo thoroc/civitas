@@ -18,7 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="imbc">
       <body className={inter.className}>
-        <Navbar />
+        <Navbar
+          brandName="IMBC"
+          navItems={[
+            { text: 'foo', href: 'foo' },
+            { text: 'bar', href: 'bar' },
+          ]}
+        ></Navbar>
         {children}
       </body>
     </html>
