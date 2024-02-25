@@ -8,13 +8,17 @@ interface Datapoint {
   close: number;
 }
 
-const Linechart = () => {
+interface LinechartProps {
+  width: number;
+  height: number;
+}
+
+const Linechart = (props: LinechartProps) => {
   const ref = useRef<SVGSVGElement | null>(null);
+  const { width = 928, height = 500 } = props;
 
   useEffect(() => {
     // Declare the chart dimensions and margins.
-    const width = 928;
-    const height = 500;
     const marginTop = 20;
     const marginRight = 30;
     const marginBottom = 30;
@@ -50,7 +54,7 @@ const Linechart = () => {
       // Declare the y (vertical position) scale.
       const y = d3
         .scaleLinear()
-        .domain([0, d3.max(data, (d) => d.close)] as number[])
+        .domain([0, d3.max(datapoints, (d) => d.close)] as number[])
         .range([height - marginBottom, marginTop]);
 
       // Declare the line generator.
@@ -99,14 +103,11 @@ const Linechart = () => {
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
         .attr('stroke-width', 1.5)
-        .attr('d', line(data as unknown as Datapoint[]));
-      // })
-      // .catch((error) => {
-      //   console.error('Error:', error);
+        .attr('d', line(datapoints));
     });
-  }, []);
+  }, [height, width]);
 
-  return <svg width={460} height={400} id="linechart" ref={ref} />;
+  return <svg width={width} height={height} id="linechart" ref={ref} />;
 };
 
 export default Linechart;
