@@ -16,13 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="imbc">
+    <html lang="en" data-theme="light">
       <body className={inter.className}>
         <Navbar
           brandName="IMBC"
           navItems={[
-            { text: 'foo', href: 'foo' },
-            { text: 'bar', href: 'bar' },
+            { text: 'Chamber Composition', href: 'parliament' },
+            { text: 'Election Map', href: 'constituency' },
             { text: 'cat', href: 'cat' },
           ]}
         ></Navbar>

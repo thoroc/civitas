@@ -17,6 +17,9 @@ const config: Config = {
   },
   daisyui: {
     themes: [
+      'light',
+      'dark',
+      'cyberpunk',
       {
         imbc: {
           primary: '#a16207',
