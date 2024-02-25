@@ -1,6 +1,7 @@
 'use client';
 import * as d3 from 'd3';
 import { useEffect, useRef } from 'react';
+import { Parlementarian, getParlementarians } from './data/sparql';
 
 interface HemicycleProps {
   width?: number;
@@ -13,6 +14,10 @@ const Hemicycle = (props: HemicycleProps) => {
   const ref = useRef<SVGSVGElement | null>(null);
   const { width = 928, height = 500 } = props;
 
+  const parlementarians: Promise<Parlementarian[]> = getParlementarians(
+    '2021-01-01T00:00:00Z'
+  );
+
   useEffect(() => {
     const svg = d3
       .select(ref.current!)
@@ -21,10 +26,23 @@ const Hemicycle = (props: HemicycleProps) => {
       .attr('height', height)
       .attr('viewBox', [0, 0, width, height]);
 
-    d3.json('foo').then((data) => {
+    d3.json(await parlementarians).then((data) => {
+      const datapoints: Parlementarian[] = data.map(
+        (d: d3.DSVRowString<string>) => ({
+          mp: d.mp,
+          mpLabel: d.mpLabel,
+          constituency: d.constituency,
+          constituencyLabel: d.constituencyLabel,
+          partyTextLabel: d.partyTextLabel,
+          genderLabel: d.genderLabel,
+          rgb: d.rgb,
+          age: d.age,
+        })
+      );
+
       const radius = 20;
-      const totalSeats = data.length;
-      if (data.length == 0) return 'No data to display';
+      const totalSeats = datapoints.length;
+      if (datapoints.length == 0) return 'No data to display';
       const numberOfRings = findN(totalSeats, radius);
       const a0 = findA(totalSeats, numberOfRings, radius); // calculate seat distance
       let points = [];
@@ -82,10 +100,10 @@ const Hemicycle = (props: HemicycleProps) => {
       points = merge(points);
 
       // add code to store the MPs' name, QID URL and gender
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < datapoints.length; i++) {
         for (let j = 0; j < points.length; j++) {
           if (
-            data[i].partyTextLabel.value == points[j][4] &&
+            datapoints[i].partyTextLabel.value == points[j][4] &&
             points[j].length == 5
           ) {
             // points[j][5] = data[i].mpLabel.value;
@@ -109,7 +127,7 @@ const Hemicycle = (props: HemicycleProps) => {
         .data(points)
         .join('a')
         //      .attr("href", d => d[6])
-        .attr('href', (d) => data[d[5]].mp.value)
+        .attr('href', (d) => datapoints[d[5]].mp.value)
         .attr('target', '_blank');
 
       let count = 0;
@@ -139,13 +157,13 @@ const Hemicycle = (props: HemicycleProps) => {
         })
         //      .append("title").text(d => `${d[5]} (${d[4]})`); //   // add code to store the MPs' name and QID URL
         .append('title')
-        .text((d) => `${data[d[5]].mpLabel.value} (${d[4]})`); //   // add code to store the MPs' name and QID URL
+        .text((d) => `${datapoints[d[5]].mpLabel.value} (${d[4]})`); //   // add code to store the MPs' name and QID URL
     });
   }, [height, width]);
 };
 
-function filterByGender(d) {
-  let dataItem = data[d[5]];
+function filterByGender(datapoints, d) {
+  let dataItem = datapoints[d[5]];
   for (let i = 0; i < selectGender.length; i++) {
     //    if (d[7] == selectGender[i]) return true;
     if (dataItem.genderLabel.value == selectGender[i]) return true;
@@ -159,8 +177,8 @@ function filterByParty(d) {
   return false;
 }
 
-function filterByAge(d) {
-  let dataItem = data[d[5]];
+function filterByAge(datapoints, d) {
+  let dataItem = datapoints[d[5]];
   if (dataItem.age.value >= selectAge[0] && dataItem.age.value <= selectAge[1])
     return true;
   return false;
