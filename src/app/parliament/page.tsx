@@ -1,4 +1,5 @@
 import Barchart from '../components/d3/Barchart';
+import Linechart from '../components/d3/linechart';
 
 const Foo = () => {
   return (
@@ -13,6 +14,7 @@ const Foo = () => {
         </ul>
       </div>
       <Barchart />
+      <Linechart />
     </div>
   );
 };
