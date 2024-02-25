@@ -9,8 +9,8 @@ interface Datapoint {
 }
 
 interface LinechartProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
 const Linechart = (props: LinechartProps) => {
