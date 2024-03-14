@@ -24,8 +24,8 @@ dependencies:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
   wikibase-sdk:
-    specifier: ^9.2.4
-    version: 9.2.5
+    specifier: ^10.0.0
+    version: 10.0.0
 
 devDependencies:
   '@types/d3':
@@ -3388,8 +3388,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /wikibase-sdk@9.2.5:
-    resolution: {integrity: sha512-bJ8hPVbnf8UU5AvnZAU6Jp35Uz6sXFzJTLSZRPCwTe1ZMN67szEnGD6gs5f6Ogr+j1b7h2Yis0WXHZBw0YU4XA==}
+  /wikibase-sdk@10.0.0:
+    resolution: {integrity: sha512-Kkd0dpdz3MdV/j1v9AvJ7wDAkGo8/xUa7V9ETA+kwXsbVykidmYNfCJuPEt2nb3Gp4q1lcPh8FBJrC3SWmjGMQ==}
     engines: {node: '>= 12.0.0'}
     dev: false
 
