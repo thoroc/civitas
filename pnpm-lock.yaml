@@ -45,7 +45,7 @@ devDependencies:
     version: 10.4.19(postcss@8.4.38)
   daisyui:
     specifier: ^4.7.2
-    version: 4.12.2(postcss@8.4.38)
+    version: 4.12.4(postcss@8.4.38)
   eslint:
     specifier: ^9.0.0
     version: 9.5.0
@@ -1233,8 +1233,8 @@ packages:
       d3-zoom: 3.0.0
     dev: false
 
-  /daisyui@4.12.2(postcss@8.4.38):
-    resolution: {integrity: sha512-ed3EFwPRLN+9+/MYPRB1pYjk6plRCBMobfBdSeB3voAS81KdL2pCKtbwJfUUpDdOnJ0F8T6oRdVX02P6UCD0Hg==}
+  /daisyui@4.12.4(postcss@8.4.38):
+    resolution: {integrity: sha512-sClWVYzLvHaJTH/0z/y6nW5/g2FIVlE3uWXY8oHGrxEk+Es5/u/vRsYbYiW5udLU6nZ6ZeFCnMKfrLwzOZbKSQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
