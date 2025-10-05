@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "snapshot:parliament": "ts-node --project scripts/tsconfig.scripts.json scripts/generateParliamentSnapshot.ts --date 2021-01-01T00:00:00Z"
   },
   "dependencies": {
     "axios": "^1.6.7",

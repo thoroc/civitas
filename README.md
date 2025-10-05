@@ -39,3 +39,41 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - DaisyUI: <https://daisyui.com/>
 - D3js: <https://d3js.org/>
+
+## Parliament Snapshot & Hemicycle
+
+A static parliament snapshot is used to render the hemicycle at `/parliament`.
+
+### Generate a snapshot
+
+```bash
+npm run snapshot:parliament -- --date 2021-01-01T00:00:00Z
+```
+
+The `--date` must be an ISO timestamp (UTC) matching the Wikidata query timeframe.
+
+### Output file naming
+
+Snapshots are written to `public/data` with colons replaced by dashes for filesystem safety:
+
+```
+public/data/parliament-2021-01-01T00-00-00Z.json
+```
+
+Only the dash-normalised filename is loaded (the app no longer checks the raw colon form). If you change the constant `SNAPSHOT_DATE` in `src/app/parliament/page.tsx`, ensure a corresponding snapshot file exists.
+
+### Data contents
+
+Each snapshot file contains:
+- `meta.date`: the requested snapshot date (original form)
+- `meta.generatedAt`: ISO timestamp when the file was created
+- `meta.total`: number of members
+- `members[]`: normalised member objects with id, label, optional party & constituency, gender, age
+
+### Legend & Visualisation
+
+`HemicycleReact.tsx` renders the semicircle layout in pure React/SVG using precomputed geometry helpers. `PartyLegend.tsx` summarises seat counts per party (independents grouped under a neutral colour if no party data present).
+
+### Regenerating / adding dates
+
+Repeat the generation command with a new date and commit the produced JSON. Consider pruning obsolete large snapshots if size becomes an issue.
