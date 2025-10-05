@@ -10,7 +10,7 @@ interface HemicycleReactProps {
   height?: number;
 }
 
-const HemicycleReact = ({ members, width = 600, height = 320 }: HemicycleReactProps) => {
+const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactProps) => {
   const { apply } = useParliamentFilters();
   const visibleMembers = apply(members);
   if (!visibleMembers || visibleMembers.length === 0) {
