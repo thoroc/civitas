@@ -1,28 +1,59 @@
 'use client';
 import { findA, findN, distribute, populateRings } from './d3';
-import { Member, ParliamentSnapshot } from './types';
-
+import { Member } from './types';
 import { useParliamentFilters } from './filtersContext';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 
 interface HemicycleReactProps {
   members: Member[];
-  width?: number;
+  width?: number; // kept for potential external sizing overrides
   height?: number;
 }
 
 const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
   const [seatScale, setSeatScale] = useState(1);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; member: Member } | null>(null);
 
+  const { apply } = useParliamentFilters();
+  const visibleMembers = apply(members);
+
+  // Early return if no data
+  if (!visibleMembers || visibleMembers.length === 0) {
+    return <div>No data</div>;
+  }
+
+  // Geometry constants & memoized seat layout
+  const r0 = 40;
+  const { seats, pad, vbWidth, vbHeight } = useMemo(() => {
+    const totalSeats = visibleMembers.length;
+    const numberOfRings = findN(totalSeats, r0);
+    const a0 = findA(totalSeats, numberOfRings, r0);
+    const ringRadiis: number[] = [];
+    for (let i = 1; i <= numberOfRings; i++) {
+      ringRadiis[i] = r0 - (i - 1) * a0;
+    }
+    const seatsPerRing = distribute(ringRadiis, totalSeats);
+    const rings = populateRings(seatsPerRing, numberOfRings, r0, a0);
+    const flatSeats = rings.flat();
+    const mappedSeats = flatSeats.map((seat, idx) => ({
+      ...seat,
+      member: visibleMembers[idx],
+    }));
+    const padLocal = r0 * 1.2;
+    const vbWidthLocal = r0 * 2 + padLocal * 2;
+    const vbHeightLocal = r0 + padLocal * 2;
+    return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal };
+  }, [visibleMembers]);
+
+  // ResizeObserver for responsive seat scaling
   useEffect(() => {
     if (!containerRef.current) return;
     const el = containerRef.current;
     const observer = new ResizeObserver(entries => {
       for (const entry of entries) {
         const w = entry.contentRect.width;
-        // Base scale around 600px width; cap min/max
         const scale = Math.min(1.8, Math.max(0.6, w / 600));
         setSeatScale(scale);
       }
@@ -30,40 +61,103 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-  const { apply } = useParliamentFilters();
-  const visibleMembers = apply(members);
-  if (!visibleMembers || visibleMembers.length === 0) {
-    return <div>No data</div>;
-  }
 
-  const r0 = 40;
-  const totalSeats = visibleMembers.length;
-  const numberOfRings = findN(totalSeats, r0);
-  const a0 = findA(totalSeats, numberOfRings, r0);
+  // Export helpers
+  const downloadSVG = () => {
+    if (!svgRef.current) return;
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(svgRef.current);
+    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
+      source = source.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'hemicycle.svg';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
-  let ringRadiis: number[] = [];
-  for (let i = 1; i <= numberOfRings; i++) {
-    ringRadiis[i] = r0 - (i - 1) * a0;
-  }
-  const seatsPerRing = distribute(ringRadiis, totalSeats);
-  const rings = populateRings(seatsPerRing, numberOfRings, r0, a0);
+  const downloadPNG = () => {
+    if (!svgRef.current) return;
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(svgRef.current);
+    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
+      source = source.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    const svgBlob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const scale = 3; // higher scale for sharper export
+      // Use bounding box width/height if available else fallback to client sizes
+      const bbox = svgRef.current!.getBoundingClientRect();
+      canvas.width = Math.max(1, bbox.width) * scale;
+      canvas.height = Math.max(1, bbox.height) * scale;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(b => {
+          if (!b) return;
+            const pngUrl = URL.createObjectURL(b);
+            const a = document.createElement('a');
+            a.href = pngUrl;
+            a.download = 'hemicycle.png';
+            a.click();
+            URL.revokeObjectURL(pngUrl);
+        });
+      }
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
+  };
 
-  // Flatten rings and zip with members (simple order mapping for now)
-  const flatSeats = rings.flat();
-  const seats = flatSeats.map((seat, idx) => ({
-    ...seat,
-    member: visibleMembers[idx],
-  }));
-
-  // Compute viewBox dimensions (simple padding around r0)
-  const pad = r0 * 1.2;
-  const vbWidth = r0 * 2 + pad * 2;
-  const vbHeight = r0 + pad * 2;
+  // Tooltip rendering logic with boundary-aware positioning
+  const renderTooltip = () => {
+    if (!tooltip) return null;
+    const w = 150;
+    const h = 34;
+    const leftLimit = -pad;
+    const rightLimit = -pad + vbWidth;
+    // Try right side first
+    let offsetX = 8;
+    if (tooltip.x + offsetX + w > rightLimit) {
+      // Try left side
+      offsetX = -w - 8;
+      if (tooltip.x + offsetX < leftLimit) {
+        // Clamp within bounds if still overflowing
+        offsetX = Math.min(Math.max(leftLimit - tooltip.x, -w / 2), rightLimit - tooltip.x - w);
+      }
+    }
+    const offsetY = -h / 2;
+    return (
+      <g transform={`translate(${tooltip.x}, ${tooltip.y})`} pointerEvents="none">
+        <rect x={offsetX} y={offsetY} rx={3} ry={3} width={w} height={h} fill="#111827" opacity={0.9} />
+        <text x={offsetX + 6} y={offsetY + 14} fill="#fff" fontSize={11} fontFamily="system-ui, sans-serif">
+          {tooltip.member.label}
+        </text>
+        {tooltip.member.party?.label && (
+          <text x={offsetX + 6} y={offsetY + 26} fill="#d1d5db" fontSize={9} fontFamily="system-ui, sans-serif">
+            {tooltip.member.party.label}
+          </text>
+        )}
+      </g>
+    );
+  };
 
   return (
     <div ref={containerRef} className="w-full mx-auto">
       <div className="relative w-full" style={{ paddingBottom: '55%' }}>
+        <div className="absolute top-2 right-2 flex gap-2 z-20">
+          <button type="button" className="btn btn-xs" onClick={downloadSVG} aria-label="Download SVG hemicycle">SVG</button>
+          <button type="button" className="btn btn-xs" onClick={downloadPNG} aria-label="Download PNG hemicycle">PNG</button>
+        </div>
         <svg
+          ref={svgRef}
           className="absolute inset-0 w-full h-full"
           role="img"
           aria-label={`Hemicycle showing ${visibleMembers.length} members`}
@@ -86,19 +180,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
               tabIndex={0}
             />
           ))}
-          {tooltip && (
-            <g transform={`translate(${tooltip.x}, ${tooltip.y})`}>
-              <rect x={6} y={-4} rx={2} ry={2} fill="#111827" opacity={0.85} height={28} width={180} />
-              <text x={10} y={12} fill="#fff" fontSize={10} fontFamily="system-ui, sans-serif">
-                {tooltip.member.label}
-              </text>
-              {tooltip.member.party?.label && (
-                <text x={10} y={22} fill="#d1d5db" fontSize={9} fontFamily="system-ui, sans-serif">
-                  {tooltip.member.party.label}
-                </text>
-              )}
-            </g>
-          )}
+          {renderTooltip()}
         </svg>
       </div>
     </div>
