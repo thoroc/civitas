@@ -46,6 +46,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     const vbHeightLocal = r0 + padLocal * 2;
     return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal };
   }, [visibleMembers]);
+  const aspectPaddingPercent = (vbHeight / vbWidth) * 100;
 
   // ResizeObserver for responsive seat scaling
   useEffect(() => {
@@ -151,7 +152,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
 
   return (
     <div ref={containerRef} className="w-full mx-auto">
-      <div className="relative w-full" style={{ paddingBottom: '55%' }}>
+      <div className="relative w-full" style={{ paddingBottom: `${aspectPaddingPercent}%` }}>
         <div className="absolute top-2 right-2 flex gap-2 z-20">
           <button type="button" className="btn btn-xs" onClick={downloadSVG} aria-label="Download SVG hemicycle">SVG</button>
           <button type="button" className="btn btn-xs" onClick={downloadPNG} aria-label="Download PNG hemicycle">PNG</button>
