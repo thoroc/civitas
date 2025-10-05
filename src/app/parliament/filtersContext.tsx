@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState, useCallback } from 'react';
 import { Member } from './types';
 
 export interface ParliamentFiltersState {
@@ -28,23 +28,23 @@ const ParliamentFiltersContext = createContext<ParliamentFiltersContextValue | u
 export const ParliamentFiltersProvider = ({ children }: { children: React.ReactNode }) => {
   const [filters, setFiltersInternal] = useState<ParliamentFiltersState>(defaultState);
 
-  const setFilters = (updater: (prev: ParliamentFiltersState) => ParliamentFiltersState) => {
+  const setFilters = useCallback((updater: (prev: ParliamentFiltersState) => ParliamentFiltersState) => {
     setFiltersInternal(updater);
-  };
+  }, []);
 
-  const apply = (members: Member[]) => {
+  const apply = useCallback((members: Member[]) => {
     return members.filter(m => {
       if (filters.parties.length && !filters.parties.includes(m.party?.id || 'independent')) return false;
-      if (filters.genders.length && !filters.genders.includes(m.gender || 'unknown')) return false;
+      if (filters.genders.length && (!m.gender || !filters.genders.includes(m.gender))) return false;
       if (filters.minAge !== null && (m.age ?? Infinity) < filters.minAge) return false;
       if (filters.maxAge !== null && (m.age ?? -Infinity) > filters.maxAge) return false;
       return true;
     });
-  };
+  }, [filters]);
 
-  const reset = () => setFiltersInternal(defaultState);
+  const reset = useCallback(() => setFiltersInternal(defaultState), []);
 
-  const value = useMemo(() => ({ filters, setFilters, apply, reset }), [filters]);
+  const value = useMemo(() => ({ filters, setFilters, apply, reset }), [filters, setFilters, apply, reset]);
 
   return <ParliamentFiltersContext.Provider value={value}>{children}</ParliamentFiltersContext.Provider>;
 };

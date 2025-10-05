@@ -1,6 +1,7 @@
 import HemicycleReact from './HemicycleReact';
 import { ParliamentFiltersProvider } from './filtersContext';
 import PartyLegend from './PartyLegend';
+import FiltersPanel from './FiltersPanel';
 import type { ParliamentSnapshot } from './types';
 import fs from 'fs';
 import path from 'path';
@@ -38,6 +39,9 @@ const ParliamentPage = () => {
               <HemicycleReact members={snapshot.members} />
             </div>
             <aside className="lg:col-span-1 order-1 lg:order-2 space-y-4">
+              <div className="card-muted">
+                <FiltersPanel members={snapshot.members} />
+              </div>
               <div className="card-muted">
                 <h2 className="mb-2">Party Totals</h2>
                 <PartyLegend members={snapshot.members} />
