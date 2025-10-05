@@ -30,9 +30,16 @@ const ParliamentPage = () => {
       {snapshot && (
         <ParliamentFiltersProvider>
           <div>
-            <p className="text-sm text-gray-500">Snapshot date: {snapshot.meta.date} (total members: {snapshot.meta.total})</p>
-            <HemicycleReact members={snapshot.members} />
-            <PartyLegend members={snapshot.members} />
+            <p className="text-sm text-gray-500 mb-2">Snapshot date: {snapshot.meta.date} (total members: {snapshot.meta.total})</p>
+            <div className="grid gap-6 lg:grid-cols-4 items-start">
+              <div className="lg:col-span-3 order-2 lg:order-1">
+                <HemicycleReact members={snapshot.members} />
+              </div>
+              <aside className="lg:col-span-1 order-1 lg:order-2">
+                <h2 className="font-semibold mb-2">Party Totals</h2>
+                <PartyLegend members={snapshot.members} />
+              </aside>
+            </div>
           </div>
         </ParliamentFiltersProvider>
       )}

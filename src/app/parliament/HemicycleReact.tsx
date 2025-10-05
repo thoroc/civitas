@@ -14,6 +14,7 @@ interface HemicycleReactProps {
 const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [seatScale, setSeatScale] = useState(1);
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; member: Member } | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -76,10 +77,28 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
               cy={s.y}
               r={(s.a ? s.a / 2.2 : 2.4) * seatScale}
               fill={s.member?.party?.color || '#808080'}
-            >
-              <title>{`${s.member?.label} (${s.member?.party?.label || 'Independent'})`}</title>
-            </circle>
+              stroke="#1f2937"
+              strokeWidth={0.4 / seatScale}
+              onMouseEnter={() => setTooltip({ x: s.x, y: s.y, member: s.member })}
+              onMouseLeave={() => setTooltip(null)}
+              onFocus={() => setTooltip({ x: s.x, y: s.y, member: s.member })}
+              onBlur={() => setTooltip(null)}
+              tabIndex={0}
+            />
           ))}
+          {tooltip && (
+            <g transform={`translate(${tooltip.x}, ${tooltip.y})`}>
+              <rect x={6} y={-4} rx={2} ry={2} fill="#111827" opacity={0.85} height={28} width={180} />
+              <text x={10} y={12} fill="#fff" fontSize={10} fontFamily="system-ui, sans-serif">
+                {tooltip.member.label}
+              </text>
+              {tooltip.member.party?.label && (
+                <text x={10} y={22} fill="#d1d5db" fontSize={9} fontFamily="system-ui, sans-serif">
+                  {tooltip.member.party.label}
+                </text>
+              )}
+            </g>
+          )}
         </svg>
       </div>
     </div>
