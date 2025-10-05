@@ -78,6 +78,15 @@ Each snapshot file contains:
 
 Repeat the generation command with a new date and commit the produced JSON. Consider pruning obsolete large snapshots if size becomes an issue.
 
+### Snapshot Size & Versioning Guidance
+
+Snapshots are treated as deterministic build inputs:
+- Keep only the dates you actively surface in the UI to limit repository size.
+- Large diffs: Prefer adding new snapshots rather than rewriting historical ones (immutability aids reproducibility).
+- If the underlying SPARQL query changes shape (new fields), bump an internal data version constant (e.g. `SCHEMA_VERSION = 2`) in the generator and gate consumer logic if needed.
+- For very large legislatures, consider gzipping snapshots at the CDN layer (static hosting typically auto‑compresses JSON). Avoid committing compressed variants alongside raw JSON.
+- Validate snapshot schema with a lightweight runtime check (could be added later) before rendering to avoid silent geometry or filter failures.
+
 ### Filtering & Controls
 
 `FiltersPanel.tsx` exposes interactive filters (Parties, Gender, Age range). Internally, empty filter arrays mean "no restriction"; when a user first deselects a party/gender the UI materialises an explicit inclusion list. Re‑selecting all options collapses back to the empty (all) state for simplicity.
