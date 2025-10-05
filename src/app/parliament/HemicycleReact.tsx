@@ -15,6 +15,12 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [seatScale, setSeatScale] = useState(1);
   const [tooltip, setTooltip] = useState<{ x: number; y: number; member: Member } | null>(null);
+  const [compactTooltip, setCompactTooltip] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return true;
+    try { return localStorage.getItem('parliamentTooltipMode') !== 'full'; } catch { return true; }
+  });
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipFade, setTooltipFade] = useState(false);
 
   const { apply } = useParliamentFilters();
   const visibleMembers = apply(members);
@@ -147,7 +153,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     }
     const offsetY = -h / 2;
     return (
-      <g transform={`translate(${tooltip.x}, ${tooltip.y})`} pointerEvents="none">
+      <g transform={`translate(${tooltip.x}, ${tooltip.y})`} pointerEvents="none" className={tooltipFade ? 'opacity-100 transition-opacity duration-100' : 'opacity-0 transition-opacity duration-100'}>
         <rect x={offsetX} y={offsetY} rx={3} ry={3} width={w} height={h} fill="#111827" opacity={0.9} />
         <text x={offsetX + 4} y={offsetY + 11} fill="#fff" fontSize={9} fontFamily="system-ui, sans-serif">
           {displayedPrimary}
@@ -165,6 +171,14 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     <div ref={containerRef} className="w-full mx-auto">
       <div className="relative w-full" style={{ paddingBottom: `${aspectPaddingPercent}%` }}>
         <div className="absolute top-2 right-2 flex gap-2 z-20">
+          <button type="button" className="btn btn-xs" onClick={() => {
+            setCompactTooltip(c => {
+              const next = !c; try { localStorage.setItem('parliamentTooltipMode', next ? 'compact' : 'full'); } catch {}
+              return next;
+            });
+          }} aria-label={compactTooltip ? 'Switch to full tooltip' : 'Switch to compact tooltip'}>
+            {compactTooltip ? 'Full' : 'Compact'}
+          </button>
           <button type="button" className="btn btn-xs" onClick={downloadSVG} aria-label="Download SVG hemicycle">SVG</button>
           <button type="button" className="btn btn-xs" onClick={downloadPNG} aria-label="Download PNG hemicycle">PNG</button>
         </div>
@@ -185,10 +199,10 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
               fill={s.member?.party?.color || '#808080'}
               stroke="#1f2937"
               strokeWidth={0.4 / seatScale}
-              onMouseEnter={() => setTooltip({ x: s.x, y: s.y, member: s.member })}
-              onMouseLeave={() => setTooltip(null)}
-              onFocus={() => setTooltip({ x: s.x, y: s.y, member: s.member })}
-              onBlur={() => setTooltip(null)}
+              onMouseEnter={() => { setTooltip({ x: s.x, y: s.y, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
+              onMouseLeave={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 120); }}
+              onFocus={() => { setTooltip({ x: s.x, y: s.y, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
+              onBlur={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 120); }}
               tabIndex={0}
             />
           ))}
