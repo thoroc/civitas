@@ -290,61 +290,74 @@ If no index exists you will see an instructional message.
 
 Planned enhancement: support `?date=YYYY-MM-DDTHH:MM:SSZ` to preselect a snapshot.
 
-## Official Members API Timeline (Experimental)
+## Official Members Timeline (UK Parliament)
 
-An alternative pipeline builds a seat & party timeline using the official UK Parliament Members API instead of Wikidata snapshots.
+An alternative pipeline builds a seat & party timeline from official UK Parliament data (Members Data Platform XML “OData style”) instead of Wikidata snapshots.
 
 ### Status
-Current implementation is a scaffold: member harvesting works, but party and seat spells return 404s for the placeholder endpoints; resulting snapshots are empty except for general election events. Further endpoint shape reconciliation is required.
+Implemented OData/XML harvester: multi‑seat careers and election/by‑election/vacancy events are produced from authoritative incumbency rows. Party history within a continuous seat tenure is currently coarse (only the final/current party is exposed per incumbency row), so intra‑tenure party switches that do not coincide with a constituency change are not yet emitted as `partySwitch` events.
 
 ### Rationale
-- Reduce dependence on SPARQL reliability & query service rate limits.
-- Access authoritative spell boundaries (party switches, by-elections) with fewer inference heuristics.
-- Enable higher‑frequency snapshots (event or monthly) once raw spells are complete.
+- Reduce dependence on SPARQL rate limits & transient failures.
+- Provide an events stream (general elections, by‑elections, seat changes, vacancies, party switches where detectable) for higher‑frequency snapshots.
+- Lay groundwork to reconcile with richer party history sources later.
+
+### Data Source
+Bulk Commons membership endpoint (single fetch):
+```
+https://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons|Membership=All/
+```
+Each `<Member>` row represents a continuous incumbency (may span multiple general elections). Fields extracted: `Member_Id`, `DisplayAs`, `Party (Id + text)`, `MemberFrom`, `HouseStartDate`, `HouseEndDate`.
 
 ### Components
-- `scripts/harvest/membersApiClient.ts` – pages through member search, fetches party & seat spells (needs correct endpoint fields).
-- `scripts/harvest/normalize.ts` – date normalisation, party alias & (optional) Labour/Co‑op merge.
-- `scripts/harvest/buildEvents.ts` – derives `generalElection`, `byElection`, `partySwitch`, `vacancyStart/End` events from spells.
-- `scripts/harvest/buildSnapshots.ts` – applies ordered events to maintain active chamber state and emit snapshots.
-- `scripts/harvest/electionsBaseline.ts` – curated list of general election dates since 2005.
-- `scripts/generateOfficialTimeline.ts` – orchestrator CLI.
+- `scripts/harvest/odataHarvester.ts` – fetch + XML parse to raw `SeatSpell` & `PartySpell` records.
+- `scripts/harvest/membersApiClient.ts` – legacy fallback (still available via `--source membersApi`).
+- `scripts/harvest/normalize.ts` – ISO normalisation, filtering by `--since`, party alias handling, optional Labour & Co‑op merge.
+- `scripts/harvest/buildEvents.ts` – derives events from spells + curated elections baseline.
+- `scripts/harvest/buildSnapshots.ts` – applies events to chamber state, emits snapshots (event or monthly granularity).
+- `scripts/generateOfficialTimeline.ts` – orchestrator CLI with enhanced validation (overlaps, gaps, negative durations).
 
 ### Usage
 ```bash
-npm run snapshot:official -- --since 2005-01-01 --granularity events
+npm run snapshot:official -- --since 2005-01-01 --granularity events --source odata
 ```
 Options:
-- `--since <YYYY-MM-DD>`: trim spells & events before date (default 2005-01-01)
-- `--granularity events|monthly|both`: snapshot emission strategy (currently events|monthly; both would require adjusting orchestrator)
+- `--since <YYYY-MM-DD>`: trim spells/events before date (default 2005-01-01)
+- `--granularity events|monthly`: snapshot emission strategy
 - `--merge-labour-coop`: collapse Labour & Co‑operative joint entries
-- `--force-refresh`: ignore HTTP cache and re-fetch all endpoints
-- `--max-concurrency <n>`: parallel member detail fetches (default 6)
-- `--cache-dir <path>`: override cache directory (default `.cache/members-api`)
+- `--force-refresh`: ignore HTTP/XML cache
+- `--max-concurrency <n>`: not currently used by bulk OData fetch (still honored for legacy membersApi path)
+- `--cache-dir <path>`: cache base (default `.cache/members-api`)
+- `--source membersApi|odata`: choose harvester (recommend `odata`)
 
 ### Output
-Writes to `public/data/official/`:
+`public/data/official/`:
 - `events.json` – ordered event list
-- `official.index.json` – list of snapshot files
-- `official-parliament-<date>.json` – individual snapshots (structure parallels existing parliament snapshots: `date`, `meta`, `members[]`, `parties`, `total`)
+- `official.index.json` – snapshot index
+- `official-parliament-<date>.json` – individual snapshots `{ date, meta, members[], parties, total }`
 
-### Next Steps
-1. Confirm correct Members API endpoints & adapt response parsing (replace placeholder property names).
-2. Implement richer seeding logic at each general election (clear defeated MPs, add starters based on seat spells at date).
-3. Add integrity checks: overlapping spells, gaps, negative durations.
-4. Reconcile party ids to a canonical scheme (e.g. short codes) and supply color/leaning mapping.
-5. Integrate UI toggle to switch between Wikidata snapshot mode and Official timeline mode.
-6. Add automated test harness for event derivation with synthetic spells.
-7. Replace provisional fallback spells with full histories once endpoints verified.
+### Validation
+The orchestrator logs counts (per spell type) of:
+- Overlaps (temporal overlaps same member)
+- Gaps (non-contiguous spells leaving vacancy potential)
+- Negative durations (end < start)
+Only summary + first samples are printed; address anomalies at source or during normalization.
 
-### Provisional Spells
-If the API does not return explicit party or incumbency histories, the harvester derives a single fallback spell for each member using `latestParty` and `latestHouseMembership`. These derived spells are marked with `provisional: true` in both party and seat spell arrays and propagate to snapshot members (a snapshot member is provisional if either underlying spell is provisional). Treat provisional data as non-authoritative.
+### Known Limitations
+- Intra‑incumbency party switches not exposed: missing `partySwitch` events when a member changes party without a seat change and remains in continuous service.
+- Constituency slug collisions are possible if distinct historical names normalise identically (not yet de‑duplicated).
+- Party color / ideological metadata not yet integrated with official IDs (current IDs are raw Party Ids from source).
 
-Enable (experimental) history endpoint prefetch attempts with:
-```
-MEMBERS_API_INCLUDE_HISTORY=1 npm run snapshot:official -- --since 2005-01-01
-```
-Currently these endpoints are placeholders and may 404; failures are logged at debug level (`[harvest][history][dbg]`). Once real endpoints are confirmed this flag will pull full multi‑spell histories and eliminate provisional fallbacks.
+### Planned Enhancements
+1. Discover supplemental endpoint(s) or alternate dataset for detailed party affiliation history.
+2. Constituency slug collision detection / stable ID mapping.
+3. Party ID reconciliation and color/leaning mapping file akin to Wikidata path.
+4. Optional monthly snapshots on top of event snapshots for smoother trend charts.
+5. UI mode toggle (Wikidata vs Official) with clear provenance badge.
+6. Synthetic test fixtures for event derivation edge cases (gap, overlapping spells, multi-switch sequences).
+
+### Fallback / Legacy Path
+`--source membersApi` retains earlier JSON-based placeholder logic (single provisional spells when history absent). Prefer `--source odata` now; provisional flags are no longer set for OData-derived spells.
 
 ### Caution
-Until endpoints are verified the produced data should not be considered authoritative; avoid surfacing in production graphs without validation.
+Treat party switch analytics as incomplete until intra‑tenure party history is sourced. Seat-based events (elections, by‑elections, vacancies, seat changes) are reliable within data extraction constraints.

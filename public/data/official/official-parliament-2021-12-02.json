@@ -1,7 +1,7 @@
 {
-  "date": "2019-12-12",
+  "date": "2021-12-02",
   "meta": {
-    "generatedAt": "2025-10-05T23:45:00.478Z",
+    "generatedAt": "2025-10-05T23:45:00.527Z",
     "source": {
       "membersHash": "662f124e7b",
       "eventsHash": "499957fe92"
@@ -13,15 +13,6 @@
       "name": "Sir John Redwood",
       "constituencyId": "wokingham",
       "constituencyName": "Wokingham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 18,
-      "name": "Dame Cheryl Gillan",
-      "constituencyId": "chesham-and-amersham",
-      "constituencyName": "Chesham and Amersham",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -40,15 +31,6 @@
       "name": "Sir Bernard Jenkin",
       "constituencyId": "harwich-and-north-essex",
       "constituencyName": "Harwich and North Essex",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 44,
-      "name": "Sir David Amess",
-      "constituencyId": "southend-west",
-      "constituencyName": "Southend West",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -337,15 +319,6 @@
       "name": "James Gray",
       "constituencyId": "north-wiltshire",
       "constituencyName": "North Wiltshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 274,
-      "name": "Mr Owen Paterson",
-      "constituencyId": "north-shropshire",
-      "constituencyName": "North Shropshire",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -967,15 +940,6 @@
       "name": "Sir Mike Penning",
       "constituencyId": "hemel-hempstead",
       "constituencyName": "Hemel Hempstead",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1530,
-      "name": "James Brokenshire",
-      "constituencyId": "old-bexley-and-sidcup",
-      "constituencyName": "Old Bexley and Sidcup",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -2583,15 +2547,6 @@
       "provisional": false
     },
     {
-      "memberId": 4365,
-      "name": "Neil Gray",
-      "constituencyId": "airdrie-and-shotts",
-      "constituencyName": "Airdrie and Shotts",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4366,
       "name": "Sir James Cleverly",
       "constituencyId": "braintree",
@@ -4131,15 +4086,6 @@
       "provisional": false
     },
     {
-      "memberId": 4644,
-      "name": "Mike Hill",
-      "constituencyId": "hartlepool",
-      "constituencyName": "Hartlepool",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 4645,
       "name": "Emma Hardy",
       "constituencyId": "kingston-upon-hull-west-and-haltemprice",
@@ -5623,15 +5569,60 @@
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
+    },
+    {
+      "memberId": 4916,
+      "name": "Jill Mortimer",
+      "constituencyId": "hartlepool",
+      "constituencyName": "Hartlepool",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": false
+    },
+    {
+      "memberId": 4917,
+      "name": "Ms Anum Qaisar",
+      "constituencyId": "airdrie-and-shotts",
+      "constituencyName": "Airdrie and Shotts",
+      "partyId": "29",
+      "partyName": "Scottish National Party",
+      "provisional": false
+    },
+    {
+      "memberId": 4918,
+      "name": "Sarah Green",
+      "constituencyId": "chesham-and-amersham",
+      "constituencyName": "Chesham and Amersham",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": false
+    },
+    {
+      "memberId": 4923,
+      "name": "Kim Leadbeater",
+      "constituencyId": "spen-valley",
+      "constituencyName": "Spen Valley",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4932,
+      "name": "Mr Louie French",
+      "constituencyId": "old-bexley-and-sidcup",
+      "constituencyName": "Old Bexley and Sidcup",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": false
     }
   ],
   "parties": {
     "1": 1,
-    "4": 335,
+    "4": 333,
     "7": 7,
     "8": 29,
     "15": 180,
-    "17": 11,
+    "17": 12,
     "22": 3,
     "29": 43,
     "30": 7,
@@ -5641,5 +5632,5 @@
     "1034": 2,
     "1036": 2
   },
-  "total": 624
+  "total": 623
 }

@@ -1,31 +1,13 @@
 {
-  "date": "2019-12-12",
+  "date": "2024-05-30",
   "meta": {
-    "generatedAt": "2025-10-05T23:45:00.478Z",
+    "generatedAt": "2025-10-05T23:45:01.342Z",
     "source": {
       "membersHash": "662f124e7b",
       "eventsHash": "499957fe92"
     }
   },
   "members": [
-    {
-      "memberId": 14,
-      "name": "Sir John Redwood",
-      "constituencyId": "wokingham",
-      "constituencyName": "Wokingham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 18,
-      "name": "Dame Cheryl Gillan",
-      "constituencyId": "chesham-and-amersham",
-      "constituencyName": "Chesham and Amersham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
     {
       "memberId": 39,
       "name": "Sir John Whittingdale",
@@ -40,15 +22,6 @@
       "name": "Sir Bernard Jenkin",
       "constituencyId": "harwich-and-north-essex",
       "constituencyName": "Harwich and North Essex",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 44,
-      "name": "Sir David Amess",
-      "constituencyId": "southend-west",
-      "constituencyName": "Southend West",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -72,33 +45,6 @@
       "provisional": false
     },
     {
-      "memberId": 62,
-      "name": "Dr Alan Whitehead",
-      "constituencyId": "southampton-test",
-      "constituencyName": "Southampton, Test",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 69,
-      "name": "Sir Oliver Heald",
-      "constituencyId": "north-east-hertfordshire",
-      "constituencyName": "North East Hertfordshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 76,
-      "name": "Damian Green",
-      "constituencyId": "ashford",
-      "constituencyName": "Ashford",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 87,
       "name": "Sir Roger Gale",
       "constituencyId": "herne-bay-and-sandwich",
@@ -112,42 +58,6 @@
       "name": "Sir Paul Beresford",
       "constituencyId": "mole-valley",
       "constituencyName": "Mole Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 104,
-      "name": "Crispin Blunt",
-      "constituencyId": "reigate",
-      "constituencyName": "Reigate",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 111,
-      "name": "Nick Gibb",
-      "constituencyId": "bognor-regis-and-littlehampton",
-      "constituencyName": "Bognor Regis and Littlehampton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 114,
-      "name": "Tim Loughton",
-      "constituencyId": "east-worthing-and-shoreham",
-      "constituencyName": "East Worthing and Shoreham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 117,
-      "name": "Sir Peter Bottomley",
-      "constituencyId": "worthing-west",
-      "constituencyName": "Worthing West",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -168,15 +78,6 @@
       "constituencyName": "Chingford and Woodford Green",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 155,
-      "name": "Geraint Davies",
-      "constituencyId": "swansea-west",
-      "constituencyName": "Swansea West",
-      "partyId": "8",
-      "partyName": "Independent",
       "provisional": false
     },
     {
@@ -270,46 +171,10 @@
       "provisional": false
     },
     {
-      "memberId": 223,
-      "name": "Sir Liam Fox",
-      "constituencyId": "north-somerset",
-      "constituencyName": "North Somerset",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 230,
-      "name": "Mr Ben Bradshaw",
-      "constituencyId": "exeter",
-      "constituencyName": "Exeter",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 234,
-      "name": "Sir Gary Streeter",
-      "constituencyId": "south-west-devon",
-      "constituencyName": "South West Devon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 242,
       "name": "Sir Christopher Chope",
       "constituencyId": "christchurch",
       "constituencyName": "Christchurch",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 245,
-      "name": "Sir Robert Syms",
-      "constituencyId": "poole",
-      "constituencyName": "Poole",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -324,37 +189,10 @@
       "provisional": false
     },
     {
-      "memberId": 253,
-      "name": "Mr Laurence Robertson",
-      "constituencyId": "tewkesbury",
-      "constituencyName": "Tewkesbury",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 261,
       "name": "James Gray",
       "constituencyId": "north-wiltshire",
       "constituencyName": "North Wiltshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 274,
-      "name": "Mr Owen Paterson",
-      "constituencyId": "north-shropshire",
-      "constituencyName": "North Shropshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 280,
-      "name": "Michael Fabricant",
-      "constituencyId": "lichfield",
-      "constituencyName": "Lichfield",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -423,15 +261,6 @@
       "provisional": false
     },
     {
-      "memberId": 411,
-      "name": "Mr Barry Sheerman",
-      "constituencyId": "huddersfield",
-      "constituencyName": "Huddersfield",
-      "partyId": "15",
-      "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
       "memberId": 413,
       "name": "Hilary Benn",
       "constituencyId": "leeds-south",
@@ -477,15 +306,6 @@
       "provisional": false
     },
     {
-      "memberId": 450,
-      "name": "Tony Lloyd",
-      "constituencyId": "rochdale",
-      "constituencyName": "Rochdale",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 467,
       "name": "Sir Lindsay Hoyle",
       "constituencyId": "chorley",
@@ -501,24 +321,6 @@
       "constituencyName": "Preston",
       "partyId": "15",
       "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
-      "memberId": 474,
-      "name": "Mr Nigel Evans",
-      "constituencyId": "ribble-valley",
-      "constituencyName": "Ribble Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 481,
-      "name": "Sir George Howarth",
-      "constituencyId": "knowsley",
-      "constituencyName": "Knowsley",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -558,30 +360,12 @@
       "provisional": false
     },
     {
-      "memberId": 650,
-      "name": "Sir Jeffrey M Donaldson",
-      "constituencyId": "lagan-valley",
-      "constituencyName": "Lagan Valley",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 1171,
       "name": "Liam Byrne",
       "constituencyId": "birmingham-hodge-hill-and-solihull-north",
       "constituencyName": "Birmingham Hodge Hill and Solihull North",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 1198,
-      "name": "Sir David Evennett",
-      "constituencyId": "bexleyheath-and-crayford",
-      "constituencyName": "Bexleyheath and Crayford",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -621,15 +405,6 @@
       "provisional": false
     },
     {
-      "memberId": 1392,
-      "name": "Mr Khalid Mahmood",
-      "constituencyId": "birmingham-perry-barr",
-      "constituencyName": "Birmingham, Perry Barr",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 1396,
       "name": "Mr Ian Liddell-Grainger",
       "constituencyId": "bridgwater-and-west-somerset",
@@ -657,57 +432,12 @@
       "provisional": false
     },
     {
-      "memberId": 1406,
-      "name": "Jon Cruddas",
-      "constituencyId": "dagenham-and-rainham",
-      "constituencyName": "Dagenham and Rainham",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 1409,
       "name": "Mr Gregory Campbell",
       "constituencyId": "east-londonderry",
       "constituencyName": "East Londonderry",
       "partyId": "7",
       "partyName": "Democratic Unionist Party",
-      "provisional": false
-    },
-    {
-      "memberId": 1416,
-      "name": "Michelle Gildernew",
-      "constituencyId": "fermanagh-and-south-tyrone",
-      "constituencyName": "Fermanagh and South Tyrone",
-      "partyId": "30",
-      "partyName": "Sinn Féin",
-      "provisional": false
-    },
-    {
-      "memberId": 1423,
-      "name": "Boris Johnson",
-      "constituencyId": "uxbridge-and-south-ruislip",
-      "constituencyName": "Uxbridge and South Ruislip",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1425,
-      "name": "Mr Jonathan Djanogly",
-      "constituencyId": "huntingdon",
-      "constituencyName": "Huntingdon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1428,
-      "name": "Sir Bill Wiggin",
-      "constituencyId": "north-herefordshire",
-      "constituencyName": "North Herefordshire",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -756,15 +486,6 @@
       "provisional": false
     },
     {
-      "memberId": 1451,
-      "name": "Mr Richard Bacon",
-      "constituencyId": "south-norfolk",
-      "constituencyName": "South Norfolk",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 1453,
       "name": "Andrew Selous",
       "constituencyId": "south-west-bedfordshire",
@@ -783,37 +504,10 @@
       "provisional": false
     },
     {
-      "memberId": 1480,
-      "name": "Dame Maria Miller",
-      "constituencyId": "basingstoke",
-      "constituencyName": "Basingstoke",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1481,
-      "name": "Ms Nadine Dorries",
-      "constituencyId": "mid-bedfordshire",
-      "constituencyName": "Mid Bedfordshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 1482,
       "name": "Graham Stuart",
       "constituencyId": "beverley-and-holderness",
       "constituencyName": "Beverley and Holderness",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1487,
-      "name": "Mr Tobias Ellwood",
-      "constituencyId": "bournemouth-east",
-      "constituencyName": "Bournemouth East",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -834,33 +528,6 @@
       "constituencyName": "Bristol East",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 1493,
-      "name": "Sir Charles Walker",
-      "constituencyId": "broxbourne",
-      "constituencyName": "Broxbourne",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1496,
-      "name": "Shailesh Vara",
-      "constituencyId": "north-west-cambridgeshire",
-      "constituencyName": "North West Cambridgeshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1500,
-      "name": "Theresa Villiers",
-      "constituencyId": "chipping-barnet",
-      "constituencyName": "Chipping Barnet",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -936,48 +603,12 @@
       "provisional": false
     },
     {
-      "memberId": 1522,
-      "name": "Adam Holloway",
-      "constituencyId": "gravesham",
-      "constituencyName": "Gravesham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 1524,
       "name": "Dame Meg Hillier",
       "constituencyId": "hackney-south-and-shoreditch",
       "constituencyName": "Hackney South and Shoreditch",
       "partyId": "15",
       "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
-      "memberId": 1526,
-      "name": "Greg Hands",
-      "constituencyId": "chelsea-and-fulham",
-      "constituencyName": "Chelsea and Fulham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1528,
-      "name": "Sir Mike Penning",
-      "constituencyId": "hemel-hempstead",
-      "constituencyName": "Hemel Hempstead",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1530,
-      "name": "James Brokenshire",
-      "constituencyId": "old-bexley-and-sidcup",
-      "constituencyName": "Old Bexley and Sidcup",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -994,24 +625,6 @@
       "name": "Emily Thornberry",
       "constituencyId": "islington-south-and-finsbury",
       "constituencyName": "Islington South and Finsbury",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 1537,
-      "name": "Mr Philip Hollobone",
-      "constituencyId": "kettering",
-      "constituencyName": "Kettering",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1538,
-      "name": "Rosie Cooper",
-      "constituencyId": "west-lancashire",
-      "constituencyName": "West Lancashire",
       "partyId": "15",
       "partyName": "Labour",
       "provisional": false
@@ -1053,15 +666,6 @@
       "provisional": false
     },
     {
-      "memberId": 1546,
-      "name": "Angus Brendan MacNeil",
-      "constituencyId": "na-h-eileanan-an-iar",
-      "constituencyName": "Na h-Eileanan an Iar",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 1548,
       "name": "Jessica Morden",
       "constituencyId": "newport-east",
@@ -1098,24 +702,6 @@
       "provisional": false
     },
     {
-      "memberId": 1562,
-      "name": "Sir Robert Goodwill",
-      "constituencyId": "scarborough-and-whitby",
-      "constituencyName": "Scarborough and Whitby",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1565,
-      "name": "Sir Philip Davies",
-      "constituencyId": "shipley",
-      "constituencyName": "Shipley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 1566,
       "name": "Daniel Kawczynski",
       "constituencyId": "shrewsbury-and-atcham",
@@ -1143,57 +729,12 @@
       "provisional": false
     },
     {
-      "memberId": 1578,
-      "name": "Greg Clark",
-      "constituencyId": "tunbridge-wells",
-      "constituencyName": "Tunbridge Wells",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 1581,
       "name": "Mr Peter Bone",
       "constituencyId": "wellingborough",
       "constituencyName": "Wellingborough",
       "partyId": "8",
       "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 1582,
-      "name": "Grant Shapps",
-      "constituencyId": "welwyn-hatfield",
-      "constituencyName": "Welwyn Hatfield",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1584,
-      "name": "John Penrose",
-      "constituencyId": "weston-super-mare",
-      "constituencyName": "Weston-super-Mare",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1585,
-      "name": "Stephen Hammond",
-      "constituencyId": "wimbledon",
-      "constituencyName": "Wimbledon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 1586,
-      "name": "Adam Afriyie",
-      "constituencyId": "windsor",
-      "constituencyName": "Windsor",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -1233,15 +774,6 @@
       "provisional": false
     },
     {
-      "memberId": 1604,
-      "name": "Mr Virendra Sharma",
-      "constituencyId": "ealing-southall",
-      "constituencyName": "Ealing, Southall",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 1605,
       "name": "Edward Timpson",
       "constituencyId": "eddisbury",
@@ -1260,30 +792,12 @@
       "provisional": false
     },
     {
-      "memberId": 1609,
-      "name": "Chloe Smith",
-      "constituencyId": "norwich-north",
-      "constituencyName": "Norwich North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3912,
       "name": "Richard Fuller",
       "constituencyId": "north-bedfordshire",
       "constituencyName": "North Bedfordshire",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3913,
-      "name": "Jack Dromey",
-      "constituencyId": "birmingham-erdington",
-      "constituencyName": "Birmingham, Erdington",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -1300,15 +814,6 @@
       "name": "Bob Stewart",
       "constituencyId": "beckenham",
       "constituencyName": "Beckenham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3922,
-      "name": "Sir Conor Burns",
-      "constituencyId": "bournemouth-west",
-      "constituencyName": "Bournemouth West",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1341,33 +846,6 @@
       "provisional": false
     },
     {
-      "memberId": 3930,
-      "name": "Caroline Lucas",
-      "constituencyId": "brighton-pavilion",
-      "constituencyName": "Brighton, Pavilion",
-      "partyId": "44",
-      "partyName": "Green Party",
-      "provisional": false
-    },
-    {
-      "memberId": 3932,
-      "name": "Dr Dan Poulter",
-      "constituencyId": "central-suffolk-and-north-ipswich",
-      "constituencyName": "Central Suffolk and North Ipswich",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 3934,
-      "name": "George Eustice",
-      "constituencyId": "camborne-and-redruth",
-      "constituencyName": "Camborne and Redruth",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3935,
       "name": "Sir Mel Stride",
       "constituencyId": "central-devon",
@@ -1386,24 +864,6 @@
       "provisional": false
     },
     {
-      "memberId": 3940,
-      "name": "Craig Whittaker",
-      "constituencyId": "calder-valley",
-      "constituencyName": "Calder Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3942,
-      "name": "John Stevenson",
-      "constituencyId": "carlisle",
-      "constituencyName": "Carlisle",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3943,
       "name": "Jonathan Edwards",
       "constituencyId": "carmarthen-east-and-dinefwr",
@@ -1413,28 +873,10 @@
       "provisional": false
     },
     {
-      "memberId": 3945,
-      "name": "Sir Sajid Javid",
-      "constituencyId": "bromsgrove",
-      "constituencyName": "Bromsgrove",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3948,
       "name": "Rebecca Harris",
       "constituencyId": "castle-point",
       "constituencyName": "Castle Point",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3950,
-      "name": "Dame Tracey Crouch",
-      "constituencyId": "chatham-and-aylesford",
-      "constituencyName": "Chatham and Aylesford",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1449,37 +891,10 @@
       "provisional": false
     },
     {
-      "memberId": 3953,
-      "name": "Jason McCartney",
-      "constituencyId": "colne-valley",
-      "constituencyName": "Colne Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3957,
       "name": "Martin Vickers",
       "constituencyId": "brigg-and-immingham",
       "constituencyName": "Brigg and Immingham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3958,
-      "name": "Fiona Bruce",
-      "constituencyId": "congleton",
-      "constituencyName": "Congleton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3960,
-      "name": "Henry Smith",
-      "constituencyId": "crawley",
-      "constituencyName": "Crawley",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1503,15 +918,6 @@
       "provisional": false
     },
     {
-      "memberId": 3970,
-      "name": "Gareth Johnson",
-      "constituencyId": "dartford",
-      "constituencyName": "Dartford",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3973,
       "name": "Grahame Morris",
       "constituencyId": "easington",
@@ -1525,51 +931,6 @@
       "name": "Chris Heaton-Harris",
       "constituencyId": "daventry",
       "constituencyName": "Daventry",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3985,
-      "name": "Robert Halfon",
-      "constituencyId": "harlow",
-      "constituencyName": "Harlow",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3986,
-      "name": "Damian Collins",
-      "constituencyId": "folkestone-and-hythe",
-      "constituencyName": "Folkestone and Hythe",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3987,
-      "name": "Rehman Chishti",
-      "constituencyId": "gillingham-and-rainham",
-      "constituencyName": "Gillingham and Rainham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3989,
-      "name": "Jack Lopresti",
-      "constituencyId": "filton-and-bradley-stoke",
-      "constituencyName": "Filton and Bradley Stoke",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3990,
-      "name": "Richard Graham",
-      "constituencyId": "gloucester",
-      "constituencyName": "Gloucester",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1593,30 +954,12 @@
       "provisional": false
     },
     {
-      "memberId": 3996,
-      "name": "Andrew Jones",
-      "constituencyId": "harrogate-and-knaresborough",
-      "constituencyName": "Harrogate and Knaresborough",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 3997,
       "name": "Sir Alec Shelbrooke",
       "constituencyId": "wetherby-and-easingwold",
       "constituencyName": "Wetherby and Easingwold",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 3998,
-      "name": "Mark Menzies",
-      "constituencyId": "fylde",
-      "constituencyName": "Fylde",
-      "partyId": "8",
-      "partyName": "Independent",
       "provisional": false
     },
     {
@@ -1629,37 +972,10 @@
       "provisional": false
     },
     {
-      "memberId": 4004,
-      "name": "Mike Freer",
-      "constituencyId": "finchley-and-golders-green",
-      "constituencyName": "Finchley and Golders Green",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4005,
       "name": "Bob Blackman",
       "constituencyId": "harrow-east",
       "constituencyName": "Harrow East",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4006,
-      "name": "Dr Matthew Offord",
-      "constituencyId": "hendon",
-      "constituencyName": "Hendon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4007,
-      "name": "Dominic Raab",
-      "constituencyId": "esher-and-walton",
-      "constituencyName": "Esher and Walton",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1674,28 +990,10 @@
       "provisional": false
     },
     {
-      "memberId": 4009,
-      "name": "Sir Brandon Lewis",
-      "constituencyId": "great-yarmouth",
-      "constituencyName": "Great Yarmouth",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4015,
       "name": "Iain Stewart",
       "constituencyId": "milton-keynes-south",
       "constituencyName": "Milton Keynes South",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4017,
-      "name": "Penny Mordaunt",
-      "constituencyId": "portsmouth-north",
-      "constituencyName": "Portsmouth North",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1728,39 +1026,12 @@
       "provisional": false
     },
     {
-      "memberId": 4024,
-      "name": "Mr Marcus Jones",
-      "constituencyId": "nuneaton",
-      "constituencyName": "Nuneaton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4025,
-      "name": "Mrs Pauline Latham",
-      "constituencyId": "mid-derbyshire",
-      "constituencyName": "Mid Derbyshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4026,
       "name": "Liz Kendall",
       "constituencyId": "leicester-west",
       "constituencyName": "Leicester West",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4028,
-      "name": "Karl McCartney",
-      "constituencyId": "lincoln",
-      "constituencyName": "Lincoln",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -1800,24 +1071,6 @@
       "provisional": false
     },
     {
-      "memberId": 4033,
-      "name": "David Rutley",
-      "constituencyId": "macclesfield",
-      "constituencyName": "Macclesfield",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4034,
-      "name": "Yvonne Fovargue",
-      "constituencyId": "makerfield",
-      "constituencyName": "Makerfield",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 4040,
       "name": "Chris Evans",
       "constituencyId": "caerphilly",
@@ -1854,37 +1107,10 @@
       "provisional": false
     },
     {
-      "memberId": 4050,
-      "name": "Gordon Henderson",
-      "constituencyId": "sittingbourne-and-sheppey",
-      "constituencyName": "Sittingbourne and Sheppey",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4051,
       "name": "John Glen",
       "constituencyId": "salisbury",
       "constituencyName": "Salisbury",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4052,
-      "name": "Mark Pawsey",
-      "constituencyId": "rugby",
-      "constituencyName": "Rugby",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4053,
-      "name": "Mrs Heather Wheeler",
-      "constituencyId": "south-derbyshire",
-      "constituencyName": "South Derbyshire",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -1908,48 +1134,12 @@
       "provisional": false
     },
     {
-      "memberId": 4058,
-      "name": "Paul Blomfield",
-      "constituencyId": "sheffield-central",
-      "constituencyName": "Sheffield Central",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4060,
-      "name": "Sir Jake Berry",
-      "constituencyId": "rossendale-and-darwen",
-      "constituencyName": "Rossendale and Darwen",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4061,
       "name": "Bill Esterson",
       "constituencyId": "sefton-central",
       "constituencyName": "Sefton Central",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4064,
-      "name": "Mr Steve Baker",
-      "constituencyId": "wycombe",
-      "constituencyName": "Wycombe",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4065,
-      "name": "Dame Jackie Doyle-Price",
-      "constituencyId": "thurrock",
-      "constituencyName": "Thurrock",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -1962,28 +1152,10 @@
       "provisional": false
     },
     {
-      "memberId": 4067,
-      "name": "Steve Brine",
-      "constituencyId": "winchester",
-      "constituencyName": "Winchester",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4069,
       "name": "Peter Aldous",
       "constituencyId": "waveney",
       "constituencyName": "Waveney",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4070,
-      "name": "Matt Hancock",
-      "constituencyId": "west-suffolk",
-      "constituencyName": "West Suffolk",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -2007,30 +1179,12 @@
       "provisional": false
     },
     {
-      "memberId": 4075,
-      "name": "Christopher Pincher",
-      "constituencyId": "tamworth",
-      "constituencyName": "Tamworth",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 4076,
       "name": "Valerie Vaz",
       "constituencyId": "walsall-and-bloxwich",
       "constituencyName": "Walsall and Bloxwich",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4079,
-      "name": "Julian Sturdy",
-      "constituencyId": "york-outer",
-      "constituencyName": "York Outer",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -2061,57 +1215,12 @@
       "provisional": false
     },
     {
-      "memberId": 4086,
-      "name": "Alun Cairns",
-      "constituencyId": "vale-of-glamorgan",
-      "constituencyName": "Vale of Glamorgan",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4088,
       "name": "Ms Stella Creasy",
       "constituencyId": "walthamstow",
       "constituencyName": "Walthamstow",
       "partyId": "15",
       "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
-      "memberId": 4090,
-      "name": "Mr Jonathan Lord",
-      "constituencyId": "woking",
-      "constituencyName": "Woking",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4091,
-      "name": "Mr Robin Walker",
-      "constituencyId": "worcester",
-      "constituencyName": "Worcester",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4092,
-      "name": "Stephen Metcalfe",
-      "constituencyId": "south-basildon-and-east-thurrock",
-      "constituencyName": "South Basildon and East Thurrock",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4093,
-      "name": "Stephen McPartland",
-      "constituencyId": "stevenage",
-      "constituencyName": "Stevenage",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -2124,28 +1233,10 @@
       "provisional": false
     },
     {
-      "memberId": 4097,
-      "name": "Elizabeth Truss",
-      "constituencyId": "south-west-norfolk",
-      "constituencyName": "South West Norfolk",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4099,
       "name": "Sir Jacob Rees-Mogg",
       "constituencyId": "north-east-somerset",
       "constituencyName": "North East Somerset",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4100,
-      "name": "Mrs Sheryll Murray",
-      "constituencyId": "south-east-cornwall",
-      "constituencyName": "South East Cornwall",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -2196,33 +1287,6 @@
       "provisional": false
     },
     {
-      "memberId": 4113,
-      "name": "Nadhim Zahawi",
-      "constituencyId": "stratford-on-avon",
-      "constituencyName": "Stratford-on-Avon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4116,
-      "name": "Sir Michael Ellis",
-      "constituencyId": "northampton-north",
-      "constituencyName": "Northampton North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4117,
-      "name": "Andrea Leadsom",
-      "constituencyId": "south-northamptonshire",
-      "constituencyName": "South Northamptonshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4118,
       "name": "Sir Julian Smith",
       "constituencyId": "skipton-and-ripon",
@@ -2238,24 +1302,6 @@
       "constituencyName": "Stalybridge and Hyde",
       "partyId": "15",
       "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
-      "memberId": 4120,
-      "name": "Kate Green",
-      "constituencyId": "stretford-and-urmston",
-      "constituencyName": "Stretford and Urmston",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4122,
-      "name": "Alex Cunningham",
-      "constituencyId": "stockton-north",
-      "constituencyName": "Stockton North",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -2286,66 +1332,12 @@
       "provisional": false
     },
     {
-      "memberId": 4129,
-      "name": "Ian Paisley",
-      "constituencyId": "north-antrim",
-      "constituencyName": "North Antrim",
-      "partyId": "7",
-      "partyName": "Democratic Unionist Party",
-      "provisional": false
-    },
-    {
       "memberId": 4131,
       "name": "Jim Shannon",
       "constituencyId": "strangford",
       "constituencyName": "Strangford",
       "partyId": "7",
       "partyName": "Democratic Unionist Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4132,
-      "name": "Richard Drax",
-      "constituencyId": "south-dorset",
-      "constituencyName": "South Dorset",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4133,
-      "name": "Andrew Bridgen",
-      "constituencyId": "north-west-leicestershire",
-      "constituencyName": "North West Leicestershire",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4134,
-      "name": "Kwasi Kwarteng",
-      "constituencyId": "spelthorne",
-      "constituencyName": "Spelthorne",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4135,
-      "name": "David Morris",
-      "constituencyId": "morecambe-and-lunesdale",
-      "constituencyName": "Morecambe and Lunesdale",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4136,
-      "name": "Nigel Mills",
-      "constituencyId": "amber-valley",
-      "constituencyName": "Amber Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -2367,15 +1359,6 @@
       "provisional": false
     },
     {
-      "memberId": 4142,
-      "name": "Guy Opperman",
-      "constituencyId": "hexham",
-      "constituencyName": "Hexham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4212,
       "name": "Debbie Abrahams",
       "constituencyId": "oldham-east-and-saddleworth",
@@ -2394,30 +1377,12 @@
       "provisional": false
     },
     {
-      "memberId": 4244,
-      "name": "Jonathan Ashworth",
-      "constituencyId": "leicester-south",
-      "constituencyName": "Leicester South",
-      "partyId": "15",
-      "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
       "memberId": 4245,
       "name": "Paul Maskey",
       "constituencyId": "belfast-west",
       "constituencyName": "Belfast West",
       "partyId": "30",
       "partyName": "Sinn Féin",
-      "provisional": false
-    },
-    {
-      "memberId": 4249,
-      "name": "Anne Marie Morris",
-      "constituencyId": "newton-abbot",
-      "constituencyName": "Newton Abbot",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -2472,15 +1437,6 @@
       "constituencyName": "Middlesbrough and Thornaby East",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4274,
-      "name": "Francie Molloy",
-      "constituencyId": "mid-ulster",
-      "constituencyName": "Mid Ulster",
-      "partyId": "30",
-      "partyName": "Sinn Féin",
       "provisional": false
     },
     {
@@ -2556,39 +1512,12 @@
       "provisional": false
     },
     {
-      "memberId": 4361,
-      "name": "Matt Warman",
-      "constituencyId": "boston-and-skegness",
-      "constituencyName": "Boston and Skegness",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4362,
       "name": "Edward Argar",
       "constituencyId": "melton-and-syston",
       "constituencyName": "Melton and Syston",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4363,
-      "name": "Kate Hollern",
-      "constituencyId": "blackburn",
-      "constituencyName": "Blackburn",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4365,
-      "name": "Neil Gray",
-      "constituencyId": "airdrie-and-shotts",
-      "constituencyName": "Airdrie and Shotts",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
       "provisional": false
     },
     {
@@ -2637,33 +1566,6 @@
       "provisional": false
     },
     {
-      "memberId": 4372,
-      "name": "Amanda Solloway",
-      "constituencyId": "derby-north",
-      "constituencyName": "Derby North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4373,
-      "name": "Mickey Brady",
-      "constituencyId": "newry-and-armagh",
-      "constituencyName": "Newry and Armagh",
-      "partyId": "30",
-      "partyName": "Sinn Féin",
-      "provisional": false
-    },
-    {
-      "memberId": 4374,
-      "name": "Martin Docherty-Hughes",
-      "constituencyId": "west-dunbartonshire",
-      "constituencyName": "West Dunbartonshire",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4378,
       "name": "Colleen Fletcher",
       "constituencyId": "coventry-north-east",
@@ -2697,15 +1599,6 @@
       "constituencyName": "Kingswinford and South Staffordshire",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4385,
-      "name": "Dr Philippa Whitford",
-      "constituencyId": "central-ayrshire",
-      "constituencyName": "Central Ayrshire",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
       "provisional": false
     },
     {
@@ -2781,30 +1674,12 @@
       "provisional": false
     },
     {
-      "memberId": 4398,
-      "name": "Chris Green",
-      "constituencyId": "bolton-west",
-      "constituencyName": "Bolton West",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4399,
       "name": "Victoria Atkins",
       "constituencyId": "louth-and-horncastle",
       "constituencyName": "Louth and Horncastle",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4400,
-      "name": "Margaret Greenwood",
-      "constituencyId": "wirral-west",
-      "constituencyName": "Wirral West",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -2823,15 +1698,6 @@
       "constituencyName": "Dundee Central",
       "partyId": "29",
       "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4406,
-      "name": "Mary Robinson",
-      "constituencyId": "cheadle",
-      "constituencyName": "Cheadle",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -2871,37 +1737,10 @@
       "provisional": false
     },
     {
-      "memberId": 4411,
-      "name": "Lucy Allan",
-      "constituencyId": "telford",
-      "constituencyName": "Telford",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 4412,
       "name": "Dr Lisa Cameron",
       "constituencyId": "east-kilbride-strathaven-and-lesmahagow",
       "constituencyName": "East Kilbride, Strathaven and Lesmahagow",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4413,
-      "name": "Kirsten Oswald",
-      "constituencyId": "east-renfrewshire",
-      "constituencyName": "East Renfrewshire",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4414,
-      "name": "Paul Scully",
-      "constituencyId": "sutton-and-cheam",
-      "constituencyName": "Sutton and Cheam",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -2916,66 +1755,12 @@
       "provisional": false
     },
     {
-      "memberId": 4417,
-      "name": "Deidre Brock",
-      "constituencyId": "edinburgh-north-and-leith",
-      "constituencyName": "Edinburgh North and Leith",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4418,
       "name": "Justin Madders",
       "constituencyId": "ellesmere-port-and-bromborough",
       "constituencyName": "Ellesmere Port and Bromborough",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4419,
-      "name": "Joanna Cherry",
-      "constituencyId": "edinburgh-south-west",
-      "constituencyName": "Edinburgh South West",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4420,
-      "name": "Gavin Newlands",
-      "constituencyId": "paisley-and-renfrewshire-north",
-      "constituencyName": "Paisley and Renfrewshire North",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4421,
-      "name": "Mhairi Black",
-      "constituencyId": "paisley-and-renfrewshire-south",
-      "constituencyName": "Paisley and Renfrewshire South",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4423,
-      "name": "Will Quince",
-      "constituencyId": "colchester",
-      "constituencyName": "Colchester",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4424,
-      "name": "John McNally",
-      "constituencyId": "falkirk",
-      "constituencyName": "Falkirk",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
       "provisional": false
     },
     {
@@ -2988,37 +1773,10 @@
       "provisional": false
     },
     {
-      "memberId": 4429,
-      "name": "Mr William Wragg",
-      "constituencyId": "hazel-grove",
-      "constituencyName": "Hazel Grove",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 4430,
       "name": "Alison Thewliss",
       "constituencyId": "glasgow-central",
       "constituencyName": "Glasgow Central",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4432,
-      "name": "Patrick Grady",
-      "constituencyId": "glasgow-north",
-      "constituencyName": "Glasgow North",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4435,
-      "name": "Patricia Gibson",
-      "constituencyId": "north-ayrshire-and-arran",
-      "constituencyName": "North Ayrshire and Arran",
       "partyId": "29",
       "partyName": "Scottish National Party",
       "provisional": false
@@ -3030,15 +1788,6 @@
       "constituencyName": "Lancaster and Wyre",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4437,
-      "name": "Anne McLaughlin",
-      "constituencyId": "glasgow-north-east",
-      "constituencyName": "Glasgow North East",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
       "provisional": false
     },
     {
@@ -3105,66 +1854,12 @@
       "provisional": false
     },
     {
-      "memberId": 4446,
-      "name": "Mr Marcus Fysh",
-      "constituencyId": "yeovil",
-      "constituencyName": "Yeovil",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4447,
-      "name": "Maggie Throup",
-      "constituencyId": "erewash",
-      "constituencyName": "Erewash",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4450,
-      "name": "Luke Hall",
-      "constituencyId": "thornbury-and-yate",
-      "constituencyName": "Thornbury and Yate",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4451,
-      "name": "Kevin Foster",
-      "constituencyId": "torbay",
-      "constituencyName": "Torbay",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4452,
-      "name": "Steve Double",
-      "constituencyId": "st-austell-and-newquay",
-      "constituencyName": "St Austell and Newquay",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4453,
       "name": "Tommy Sheppard",
       "constituencyId": "edinburgh-east",
       "constituencyName": "Edinburgh East",
       "partyId": "29",
       "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4454,
-      "name": "Dame Amanda Milling",
-      "constituencyId": "cannock-chase",
-      "constituencyName": "Cannock Chase",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -3186,15 +1881,6 @@
       "provisional": false
     },
     {
-      "memberId": 4458,
-      "name": "Conor McGinn",
-      "constituencyId": "st-helens-north",
-      "constituencyName": "St Helens North",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
       "memberId": 4459,
       "name": "Mrs Flick Drummond",
       "constituencyId": "meon-valley",
@@ -3213,30 +1899,12 @@
       "provisional": false
     },
     {
-      "memberId": 4461,
-      "name": "Stewart Malcolm McDonald",
-      "constituencyId": "glasgow-south",
-      "constituencyName": "Glasgow South",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4462,
       "name": "Tom Tugendhat",
       "constituencyId": "tonbridge",
       "constituencyName": "Tonbridge",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4463,
-      "name": "Chris Stephens",
-      "constituencyId": "glasgow-south-west",
-      "constituencyName": "Glasgow South West",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
       "provisional": false
     },
     {
@@ -3276,30 +1944,12 @@
       "provisional": false
     },
     {
-      "memberId": 4470,
-      "name": "Alan Brown",
-      "constituencyId": "kilmarnock-and-loudoun",
-      "constituencyName": "Kilmarnock and Loudoun",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4471,
       "name": "Rachael Maskell",
       "constituencyId": "york-central",
       "constituencyName": "York Central",
       "partyId": "8",
       "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4472,
-      "name": "Holly Lynch",
-      "constituencyId": "halifax",
-      "constituencyName": "Halifax",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -3339,15 +1989,6 @@
       "provisional": false
     },
     {
-      "memberId": 4478,
-      "name": "Royston Smith",
-      "constituencyId": "southampton-itchen",
-      "constituencyName": "Southampton, Itchen",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4479,
       "name": "Nick Thomas-Symonds",
       "constituencyId": "torfaen",
@@ -3366,24 +2007,6 @@
       "provisional": false
     },
     {
-      "memberId": 4481,
-      "name": "Alex Chalk",
-      "constituencyId": "cheltenham",
-      "constituencyName": "Cheltenham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4482,
-      "name": "Owen Thompson",
-      "constituencyId": "midlothian",
-      "constituencyName": "Midlothian",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4483,
       "name": "Rishi Sunak",
       "constituencyId": "richmond-and-northallerton",
@@ -3397,33 +2020,6 @@
       "name": "Alan Mak",
       "constituencyId": "havant",
       "constituencyName": "Havant",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4485,
-      "name": "Johnny Mercer",
-      "constituencyId": "plymouth-moor-view",
-      "constituencyName": "Plymouth, Moor View",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4486,
-      "name": "Hannah Bardell",
-      "constituencyId": "livingston",
-      "constituencyName": "Livingston",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4487,
-      "name": "Kelly Tolhurst",
-      "constituencyId": "rochester-and-strood",
-      "constituencyName": "Rochester and Strood",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -3456,15 +2052,6 @@
       "provisional": false
     },
     {
-      "memberId": 4492,
-      "name": "Maria Caulfield",
-      "constituencyId": "lewes",
-      "constituencyName": "Lewes",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4493,
       "name": "Richard Burgon",
       "constituencyId": "leeds-east",
@@ -3487,33 +2074,6 @@
       "name": "Kit Malthouse",
       "constituencyId": "north-west-hampshire",
       "constituencyName": "North West Hampshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4496,
-      "name": "Scott Mann",
-      "constituencyId": "north-cornwall",
-      "constituencyName": "North Cornwall",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4497,
-      "name": "Michael Tomlinson",
-      "constituencyId": "mid-dorset-and-north-poole",
-      "constituencyName": "Mid Dorset and North Poole",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4498,
-      "name": "Mr Ranil Jayawardena",
-      "constituencyId": "north-east-hampshire",
-      "constituencyName": "North East Hampshire",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -3564,15 +2124,6 @@
       "provisional": false
     },
     {
-      "memberId": 4507,
-      "name": "Sir Jeremy Quin",
-      "constituencyId": "horsham",
-      "constituencyName": "Horsham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4509,
       "name": "Craig Tracey",
       "constituencyId": "north-warwickshire",
@@ -3597,15 +2148,6 @@
       "constituencyName": "Ealing Central and Acton",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4512,
-      "name": "Caroline Ansell",
-      "constituencyId": "eastbourne",
-      "constituencyName": "Eastbourne",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -3735,28 +2277,10 @@
       "provisional": false
     },
     {
-      "memberId": 4530,
-      "name": "Michelle Donelan",
-      "constituencyId": "chippenham",
-      "constituencyName": "Chippenham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4531,
       "name": "Anne-Marie Trevelyan",
       "constituencyId": "berwick-upon-tweed",
       "constituencyName": "Berwick-upon-Tweed",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4532,
-      "name": "Derek Thomas",
-      "constituencyId": "st-ives",
-      "constituencyName": "St Ives",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -3807,15 +2331,6 @@
       "provisional": false
     },
     {
-      "memberId": 4589,
-      "name": "Robert Courts",
-      "constituencyId": "witney",
-      "constituencyName": "Witney",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4591,
       "name": "Sarah Olney",
       "constituencyId": "richmond-park",
@@ -3858,15 +2373,6 @@
       "constituencyName": "Bedford",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4600,
-      "name": "Leo Docherty",
-      "constituencyId": "aldershot",
-      "constituencyName": "Aldershot",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4050,15 +2556,6 @@
       "provisional": false
     },
     {
-      "memberId": 4633,
-      "name": "Paul Girvan",
-      "constituencyId": "south-antrim",
-      "constituencyName": "South Antrim",
-      "partyId": "7",
-      "partyName": "Democratic Unionist Party",
-      "provisional": false
-    },
-    {
       "memberId": 4634,
       "name": "Christine Jardine",
       "constituencyId": "edinburgh-west",
@@ -4104,39 +2601,12 @@
       "provisional": false
     },
     {
-      "memberId": 4640,
-      "name": "David Linden",
-      "constituencyId": "glasgow-east",
-      "constituencyName": "Glasgow East",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4641,
       "name": "Alex Norris",
       "constituencyId": "nottingham-north-and-kimberley",
       "constituencyName": "Nottingham North and Kimberley",
       "partyId": "15",
       "partyName": "Labour (Co-op)",
-      "provisional": false
-    },
-    {
-      "memberId": 4643,
-      "name": "Jack Brereton",
-      "constituencyId": "stoke-on-trent-south",
-      "constituencyName": "Stoke-on-Trent South",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4644,
-      "name": "Mike Hill",
-      "constituencyId": "hartlepool",
-      "constituencyName": "Hartlepool",
-      "partyId": "15",
-      "partyName": "Labour",
       "provisional": false
     },
     {
@@ -4167,15 +2637,6 @@
       "provisional": false
     },
     {
-      "memberId": 4652,
-      "name": "Lee Rowley",
-      "constituencyId": "north-east-derbyshire",
-      "constituencyName": "North East Derbyshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4653,
       "name": "Stephen Morgan",
       "constituencyId": "portsmouth-south",
@@ -4191,15 +2652,6 @@
       "constituencyName": "Reading Central",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4655,
-      "name": "Sir Simon Clarke",
-      "constituencyId": "middlesbrough-south-and-east-cleveland",
-      "constituencyName": "Middlesbrough South and East Cleveland",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4230,39 +2682,12 @@
       "provisional": false
     },
     {
-      "memberId": 4659,
-      "name": "Andrew Lewer",
-      "constituencyId": "northampton-south",
-      "constituencyName": "Northampton South",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4663,
-      "name": "Ben Bradley",
-      "constituencyId": "mansfield",
-      "constituencyName": "Mansfield",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4667,
       "name": "Mike Amesbury",
       "constituencyId": "runcorn-and-helsby",
       "constituencyName": "Runcorn and Helsby",
       "partyId": "8",
       "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4669,
-      "name": "Damien Moore",
-      "constituencyId": "southport",
-      "constituencyName": "Southport",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4275,15 +2700,6 @@
       "provisional": false
     },
     {
-      "memberId": 4674,
-      "name": "Vicky Ford",
-      "constituencyId": "chelmsford",
-      "constituencyName": "Chelmsford",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4676,
       "name": "Marsha De Cordova",
       "constituencyId": "battersea",
@@ -4293,28 +2709,10 @@
       "provisional": false
     },
     {
-      "memberId": 4677,
-      "name": "Giles Watling",
-      "constituencyId": "clacton",
-      "constituencyName": "Clacton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4679,
       "name": "Neil O'Brien",
       "constituencyId": "harborough-oadby-and-wigston",
       "constituencyName": "Harborough, Oadby and Wigston",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4680,
-      "name": "Gillian Keegan",
-      "constituencyId": "chichester",
-      "constituencyName": "Chichester",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -4383,15 +2781,6 @@
       "provisional": false
     },
     {
-      "memberId": 4737,
-      "name": "Dehenna Davison",
-      "constituencyId": "bishop-auckland",
-      "constituencyName": "Bishop Auckland",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4738,
       "name": "Alyn Smith",
       "constituencyId": "stirling",
@@ -4405,24 +2794,6 @@
       "name": "Jerome Mayhew",
       "constituencyId": "broadland-and-fakenham",
       "constituencyName": "Broadland and Fakenham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4740,
-      "name": "Allan Dorans",
-      "constituencyId": "ayr-carrick-and-cumnock",
-      "constituencyName": "Ayr, Carrick and Cumnock",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4741,
-      "name": "Nickie Aiken",
-      "constituencyId": "cities-of-london-and-westminster",
-      "constituencyName": "Cities of London and Westminster",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -4443,24 +2814,6 @@
       "constituencyName": "Ashfield",
       "partyId": "1036",
       "partyName": "Reform UK",
-      "provisional": false
-    },
-    {
-      "memberId": 4744,
-      "name": "Simon Fell",
-      "constituencyId": "barrow-and-furness",
-      "constituencyName": "Barrow and Furness",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4745,
-      "name": "Rob Butler",
-      "constituencyId": "aylesbury",
-      "constituencyName": "Aylesbury",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4500,24 +2853,6 @@
       "provisional": false
     },
     {
-      "memberId": 4750,
-      "name": "Jane Stevenson",
-      "constituencyId": "wolverhampton-north-east",
-      "constituencyName": "Wolverhampton North East",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4751,
-      "name": "Chris Loder",
-      "constituencyId": "west-dorset",
-      "constituencyName": "West Dorset",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4752,
       "name": "Mark Jenkinson",
       "constituencyId": "workington",
@@ -4536,30 +2871,12 @@
       "provisional": false
     },
     {
-      "memberId": 4754,
-      "name": "Peter Gibson",
-      "constituencyId": "darlington",
-      "constituencyName": "Darlington",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4755,
       "name": "Mick Whitley",
       "constituencyId": "birkenhead",
       "constituencyName": "Birkenhead",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4756,
-      "name": "Brendan Clarke-Smith",
-      "constituencyId": "bassetlaw",
-      "constituencyName": "Bassetlaw",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4572,28 +2889,10 @@
       "provisional": false
     },
     {
-      "memberId": 4758,
-      "name": "Cherilyn Mackrory",
-      "constituencyId": "truro-and-falmouth",
-      "constituencyName": "Truro and Falmouth",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4759,
       "name": "Joy Morrissey",
       "constituencyId": "beaconsfield",
       "constituencyName": "Beaconsfield",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4760,
-      "name": "Gary Sambrook",
-      "constituencyId": "birmingham-northfield",
-      "constituencyName": "Birmingham, Northfield",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -4653,24 +2952,6 @@
       "provisional": false
     },
     {
-      "memberId": 4767,
-      "name": "James Sunderland",
-      "constituencyId": "bracknell",
-      "constituencyName": "Bracknell",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4768,
-      "name": "Julie Marson",
-      "constituencyId": "hertford-and-stortford",
-      "constituencyName": "Hertford and Stortford",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4769,
       "name": "Daisy Cooper",
       "constituencyId": "st-albans",
@@ -4689,15 +2970,6 @@
       "provisional": false
     },
     {
-      "memberId": 4771,
-      "name": "Tom Hunt",
-      "constituencyId": "ipswich",
-      "constituencyName": "Ipswich",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4772,
       "name": "Kenny MacAskill",
       "constituencyId": "east-lothian",
@@ -4711,24 +2983,6 @@
       "name": "Kate Kniveton",
       "constituencyId": "burton",
       "constituencyName": "Burton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4774,
-      "name": "Mark Fletcher",
-      "constituencyId": "bolsover",
-      "constituencyName": "Bolsover",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4775,
-      "name": "Elliot Colburn",
-      "constituencyId": "carshalton-and-wallington",
-      "constituencyName": "Carshalton and Wallington",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -4806,15 +3060,6 @@
       "provisional": false
     },
     {
-      "memberId": 4784,
-      "name": "Duncan Baker",
-      "constituencyId": "north-norfolk",
-      "constituencyName": "North Norfolk",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4785,
       "name": "Dr Ben Spencer",
       "constituencyId": "runnymede-and-weybridge",
@@ -4866,42 +3111,6 @@
       "constituencyName": "Poplar and Limehouse",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4791,
-      "name": "Andy Carter",
-      "constituencyId": "warrington-south",
-      "constituencyName": "Warrington South",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4792,
-      "name": "Paul Bristow",
-      "constituencyId": "peterborough",
-      "constituencyName": "Peterborough",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4793,
-      "name": "Scott Benton",
-      "constituencyId": "blackpool-south",
-      "constituencyName": "Blackpool South",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4794,
-      "name": "Darren Henry",
-      "constituencyId": "broxtowe",
-      "constituencyName": "Broxtowe",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -4959,24 +3168,6 @@
       "provisional": false
     },
     {
-      "memberId": 4801,
-      "name": "Anthony Browne",
-      "constituencyId": "south-cambridgeshire",
-      "constituencyName": "South Cambridgeshire",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4802,
-      "name": "Suzanne Webb",
-      "constituencyId": "stourbridge",
-      "constituencyName": "Stourbridge",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4803,
       "name": "Paul Holmes",
       "constituencyId": "hamble-valley",
@@ -5022,15 +3213,6 @@
       "provisional": false
     },
     {
-      "memberId": 4808,
-      "name": "Ruth Edwards",
-      "constituencyId": "rushcliffe",
-      "constituencyName": "Rushcliffe",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4809,
       "name": "Beth Winter",
       "constituencyId": "cynon-valley",
@@ -5058,15 +3240,6 @@
       "provisional": false
     },
     {
-      "memberId": 4812,
-      "name": "Dean Russell",
-      "constituencyId": "watford",
-      "constituencyName": "Watford",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4813,
       "name": "Mr Richard Holden",
       "constituencyId": "basildon-and-billericay",
@@ -5076,55 +3249,10 @@
       "provisional": false
     },
     {
-      "memberId": 4814,
-      "name": "Jonathan Gullis",
-      "constituencyId": "stoke-on-trent-north",
-      "constituencyName": "Stoke-on-Trent North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4815,
-      "name": "Mark Logan",
-      "constituencyId": "bolton-north-east",
-      "constituencyName": "Bolton North East",
-      "partyId": "8",
-      "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4816,
-      "name": "Miss Sarah Dines",
-      "constituencyId": "derbyshire-dales",
-      "constituencyName": "Derbyshire Dales",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4817,
-      "name": "Jo Gideon",
-      "constituencyId": "stoke-on-trent-central",
-      "constituencyName": "Stoke-on-Trent Central",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4818,
       "name": "Saqib Bhatti",
       "constituencyId": "meriden-and-solihull-east",
       "constituencyName": "Meriden and Solihull East",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4819,
-      "name": "Theo Clarke",
-      "constituencyId": "stafford",
-      "constituencyName": "Stafford",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -5175,24 +3303,6 @@
       "provisional": false
     },
     {
-      "memberId": 4825,
-      "name": "Jacob Young",
-      "constituencyId": "redcar",
-      "constituencyName": "Redcar",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4826,
-      "name": "Laura Farris",
-      "constituencyId": "newbury",
-      "constituencyName": "Newbury",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4827,
       "name": "Claire Hanna",
       "constituencyId": "belfast-south-and-mid-down",
@@ -5206,15 +3316,6 @@
       "name": "Paula Barker",
       "constituencyId": "liverpool-wavertree",
       "constituencyName": "Liverpool Wavertree",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4829,
-      "name": "Sam Tarry",
-      "constituencyId": "ilford-south",
-      "constituencyName": "Ilford South",
       "partyId": "15",
       "partyName": "Labour",
       "provisional": false
@@ -5247,73 +3348,10 @@
       "provisional": false
     },
     {
-      "memberId": 4833,
-      "name": "Antony Higginbotham",
-      "constituencyId": "burnley",
-      "constituencyName": "Burnley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4834,
-      "name": "Katherine Fletcher",
-      "constituencyId": "south-ribble",
-      "constituencyName": "South Ribble",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4835,
       "name": "Chris Clarkson",
       "constituencyId": "heywood-and-middleton",
       "constituencyName": "Heywood and Middleton",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4836,
-      "name": "Ben Everitt",
-      "constituencyId": "milton-keynes-north",
-      "constituencyName": "Milton Keynes North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4837,
-      "name": "Aaron Bell",
-      "constituencyId": "newcastle-under-lyme",
-      "constituencyName": "Newcastle-under-Lyme",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4838,
-      "name": "Sara Britcliffe",
-      "constituencyId": "hyndburn",
-      "constituencyName": "Hyndburn",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4839,
-      "name": "Jane Hunt",
-      "constituencyId": "loughborough",
-      "constituencyName": "Loughborough",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4840,
-      "name": "Angela Richardson",
-      "constituencyId": "guildford",
-      "constituencyName": "Guildford",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -5325,15 +3363,6 @@
       "constituencyName": "Wakefield",
       "partyId": "8",
       "partyName": "Independent",
-      "provisional": false
-    },
-    {
-      "memberId": 4842,
-      "name": "Sally-Ann Hart",
-      "constituencyId": "hastings-and-rye",
-      "constituencyName": "Hastings and Rye",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -5355,39 +3384,12 @@
       "provisional": false
     },
     {
-      "memberId": 4845,
-      "name": "Tom Randall",
-      "constituencyId": "gedling",
-      "constituencyName": "Gedling",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4846,
       "name": "Colum Eastwood",
       "constituencyId": "foyle",
       "constituencyName": "Foyle",
       "partyId": "31",
       "partyName": "Social Democratic & Labour Party",
-      "provisional": false
-    },
-    {
-      "memberId": 4847,
-      "name": "Siobhan Baillie",
-      "constituencyId": "stroud",
-      "constituencyName": "Stroud",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4848,
-      "name": "Claudia Webbe",
-      "constituencyId": "leicester-east",
-      "constituencyName": "Leicester East",
-      "partyId": "8",
-      "partyName": "Independent",
       "provisional": false
     },
     {
@@ -5418,48 +3420,12 @@
       "provisional": false
     },
     {
-      "memberId": 4852,
-      "name": "Robert Largan",
-      "constituencyId": "high-peak",
-      "constituencyName": "High Peak",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4853,
       "name": "Dr Neil Hudson",
       "constituencyId": "epping-forest",
       "constituencyName": "Epping Forest",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4854,
-      "name": "James Daly",
-      "constituencyId": "bury-north",
-      "constituencyName": "Bury North",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4855,
-      "name": "Sarah Atherton",
-      "constituencyId": "wrexham",
-      "constituencyName": "Wrexham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4856,
-      "name": "Stephen Farry",
-      "constituencyId": "north-down",
-      "constituencyName": "North Down",
-      "partyId": "1",
-      "partyName": "Alliance",
       "provisional": false
     },
     {
@@ -5478,15 +3444,6 @@
       "constituencyName": "East Wiltshire",
       "partyId": "1036",
       "partyName": "Reform UK",
-      "provisional": false
-    },
-    {
-      "memberId": 4859,
-      "name": "Virginia Crosbie",
-      "constituencyId": "ynys-m-n",
-      "constituencyName": "Ynys Môn",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -5517,48 +3474,12 @@
       "provisional": false
     },
     {
-      "memberId": 4863,
-      "name": "Selaine Saxby",
-      "constituencyId": "north-devon",
-      "constituencyName": "North Devon",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
       "memberId": 4864,
       "name": "Olivia Blake",
       "constituencyId": "sheffield-hallam",
       "constituencyName": "Sheffield Hallam",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": false
-    },
-    {
-      "memberId": 4865,
-      "name": "Miriam Cates",
-      "constituencyId": "penistone-and-stocksbridge",
-      "constituencyName": "Penistone and Stocksbridge",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4866,
-      "name": "Alexander Stafford",
-      "constituencyId": "rother-valley",
-      "constituencyName": "Rother Valley",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 4867,
-      "name": "Holly Mumby-Croft",
-      "constituencyId": "scunthorpe",
-      "constituencyName": "Scunthorpe",
-      "partyId": "4",
-      "partyName": "Conservative",
       "provisional": false
     },
     {
@@ -5623,23 +3544,192 @@
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
+    },
+    {
+      "memberId": 4918,
+      "name": "Sarah Green",
+      "constituencyId": "chesham-and-amersham",
+      "constituencyName": "Chesham and Amersham",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": false
+    },
+    {
+      "memberId": 4923,
+      "name": "Kim Leadbeater",
+      "constituencyId": "spen-valley",
+      "constituencyName": "Spen Valley",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4932,
+      "name": "Mr Louie French",
+      "constituencyId": "old-bexley-and-sidcup",
+      "constituencyName": "Old Bexley and Sidcup",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": false
+    },
+    {
+      "memberId": 4934,
+      "name": "Helen Morgan",
+      "constituencyId": "north-shropshire",
+      "constituencyName": "North Shropshire",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": false
+    },
+    {
+      "memberId": 4936,
+      "name": "Anna Firth",
+      "constituencyId": "southend-west",
+      "constituencyName": "Southend West",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": false
+    },
+    {
+      "memberId": 4938,
+      "name": "Paulette Hamilton",
+      "constituencyId": "birmingham-erdington",
+      "constituencyName": "Birmingham Erdington",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4942,
+      "name": "Richard Foord",
+      "constituencyId": "honiton-and-sidmouth",
+      "constituencyName": "Honiton and Sidmouth",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": false
+    },
+    {
+      "memberId": 4943,
+      "name": "Simon Lightwood",
+      "constituencyId": "wakefield-and-rothwell",
+      "constituencyName": "Wakefield and Rothwell",
+      "partyId": "15",
+      "partyName": "Labour (Co-op)",
+      "provisional": false
+    },
+    {
+      "memberId": 4976,
+      "name": "Samantha Dixon",
+      "constituencyId": "chester-north-and-neston",
+      "constituencyName": "Chester North and Neston",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4979,
+      "name": "Andrew Western",
+      "constituencyId": "stretford-and-urmston",
+      "constituencyName": "Stretford and Urmston",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4981,
+      "name": "Ashley Dalton",
+      "constituencyId": "west-lancashire",
+      "constituencyName": "West Lancashire",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4993,
+      "name": "Keir Mather",
+      "constituencyId": "selby",
+      "constituencyName": "Selby",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 4995,
+      "name": "Sarah Dyke",
+      "constituencyId": "glastonbury-and-somerton",
+      "constituencyName": "Glastonbury and Somerton",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": false
+    },
+    {
+      "memberId": 4998,
+      "name": "Michael Shanks",
+      "constituencyId": "rutherglen",
+      "constituencyName": "Rutherglen",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 5000,
+      "name": "Alistair Strathern",
+      "constituencyId": "hitchin",
+      "constituencyName": "Hitchin",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 5001,
+      "name": "Sarah Edwards",
+      "constituencyId": "tamworth",
+      "constituencyName": "Tamworth",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 5010,
+      "name": "Damien Egan",
+      "constituencyId": "bristol-north-east",
+      "constituencyName": "Bristol North East",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 5011,
+      "name": "Gen Kitchen",
+      "constituencyId": "wellingborough-and-rushden",
+      "constituencyName": "Wellingborough and Rushden",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
+    },
+    {
+      "memberId": 5025,
+      "name": "Chris Webb",
+      "constituencyId": "blackpool-south",
+      "constituencyName": "Blackpool South",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": false
     }
   ],
   "parties": {
-    "1": 1,
-    "4": 335,
-    "7": 7,
-    "8": 29,
-    "15": 180,
-    "17": 11,
+    "4": 166,
+    "7": 5,
+    "8": 16,
+    "15": 172,
+    "17": 15,
     "22": 3,
-    "29": 43,
-    "30": 7,
+    "29": 24,
+    "30": 4,
     "31": 2,
-    "44": 1,
     "47": 1,
     "1034": 2,
     "1036": 2
   },
-  "total": 624
+  "total": 412
 }

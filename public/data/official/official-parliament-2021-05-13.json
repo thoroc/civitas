@@ -1,7 +1,7 @@
 {
-  "date": "2019-12-12",
+  "date": "2021-05-13",
   "meta": {
-    "generatedAt": "2025-10-05T23:45:00.478Z",
+    "generatedAt": "2025-10-05T23:45:00.501Z",
     "source": {
       "membersHash": "662f124e7b",
       "eventsHash": "499957fe92"
@@ -13,15 +13,6 @@
       "name": "Sir John Redwood",
       "constituencyId": "wokingham",
       "constituencyName": "Wokingham",
-      "partyId": "4",
-      "partyName": "Conservative",
-      "provisional": false
-    },
-    {
-      "memberId": 18,
-      "name": "Dame Cheryl Gillan",
-      "constituencyId": "chesham-and-amersham",
-      "constituencyName": "Chesham and Amersham",
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
@@ -2583,15 +2574,6 @@
       "provisional": false
     },
     {
-      "memberId": 4365,
-      "name": "Neil Gray",
-      "constituencyId": "airdrie-and-shotts",
-      "constituencyName": "Airdrie and Shotts",
-      "partyId": "29",
-      "partyName": "Scottish National Party",
-      "provisional": false
-    },
-    {
       "memberId": 4366,
       "name": "Sir James Cleverly",
       "constituencyId": "braintree",
@@ -4131,15 +4113,6 @@
       "provisional": false
     },
     {
-      "memberId": 4644,
-      "name": "Mike Hill",
-      "constituencyId": "hartlepool",
-      "constituencyName": "Hartlepool",
-      "partyId": "15",
-      "partyName": "Labour",
-      "provisional": false
-    },
-    {
       "memberId": 4645,
       "name": "Emma Hardy",
       "constituencyId": "kingston-upon-hull-west-and-haltemprice",
@@ -5623,6 +5596,24 @@
       "partyId": "4",
       "partyName": "Conservative",
       "provisional": false
+    },
+    {
+      "memberId": 4916,
+      "name": "Jill Mortimer",
+      "constituencyId": "hartlepool",
+      "constituencyName": "Hartlepool",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": false
+    },
+    {
+      "memberId": 4917,
+      "name": "Ms Anum Qaisar",
+      "constituencyId": "airdrie-and-shotts",
+      "constituencyName": "Airdrie and Shotts",
+      "partyId": "29",
+      "partyName": "Scottish National Party",
+      "provisional": false
     }
   ],
   "parties": {
@@ -5630,7 +5621,7 @@
     "4": 335,
     "7": 7,
     "8": 29,
-    "15": 180,
+    "15": 179,
     "17": 11,
     "22": 3,
     "29": 43,
@@ -5641,5 +5632,5 @@
     "1034": 2,
     "1036": 2
   },
-  "total": 624
+  "total": 623
 }
