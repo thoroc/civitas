@@ -1,0 +1,80 @@
+{
+  "date": "2019-12-12",
+  "meta": {
+    "generatedAt": "2025-10-05T23:31:36.737Z",
+    "source": {
+      "membersHash": "f91b31ca75",
+      "eventsHash": "640aad2619"
+    }
+  },
+  "members": [
+    {
+      "memberId": 1586,
+      "name": "Adam Afriyie",
+      "constituencyId": "3855",
+      "constituencyName": "Windsor",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4057,
+      "name": "Nigel Adams",
+      "constituencyId": "3720",
+      "constituencyName": "Selby and Ainsty",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4069,
+      "name": "Peter Aldous",
+      "constituencyId": "3834",
+      "constituencyName": "Waveney",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4411,
+      "name": "Lucy Allan",
+      "constituencyId": "3797",
+      "constituencyName": "Telford",
+      "partyId": "8",
+      "partyName": "Independent",
+      "provisional": true
+    },
+    {
+      "memberId": 4639,
+      "name": "Bim Afolami",
+      "constituencyId": "3535",
+      "constituencyName": "Hitchin and Harpenden",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4741,
+      "name": "Nickie Aiken",
+      "constituencyId": "3415",
+      "constituencyName": "Cities of London and Westminster",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4841,
+      "name": "Imran Ahmad Khan",
+      "constituencyId": "3821",
+      "constituencyName": "Wakefield",
+      "partyId": "8",
+      "partyName": "Independent",
+      "provisional": true
+    }
+  ],
+  "parties": {
+    "4": 5,
+    "8": 2
+  },
+  "total": 7
+}

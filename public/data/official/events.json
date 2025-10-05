@@ -1,0 +1,27 @@
+[
+  {
+    "date": "2005-05-05",
+    "type": "generalElection",
+    "note": "2005 General Election"
+  },
+  {
+    "date": "2010-05-06",
+    "type": "generalElection",
+    "note": "2010 General Election"
+  },
+  {
+    "date": "2015-05-07",
+    "type": "generalElection",
+    "note": "2015 General Election"
+  },
+  {
+    "date": "2017-06-08",
+    "type": "generalElection",
+    "note": "2017 General Election"
+  },
+  {
+    "date": "2019-12-12",
+    "type": "generalElection",
+    "note": "2019 General Election"
+  }
+]

@@ -216,3 +216,135 @@ After modifying overrides or updating the snapshot query:
 npm run snapshot:partyMeta -- --snapshot public/data/parliament-YYYY-MM-DDTHH-MM-SSZ.json
 ```
 Then reload `/parliament` to see updated wedges.
+
+### Multiple Historical Snapshots
+
+The application now supports selecting among multiple historical snapshots (typically UK Parliament term starts) via a dropdown on `/parliament`.
+
+#### Generate a Range of Snapshots
+
+Run the batch script (discovers all UK parliamentary term start dates >= 2005):
+```bash
+npm run snapshot:range:terms
+```
+Options (pass after `--` if invoking via npm):
+- `--force` regenerate even if snapshot file already exists
+- `--throttle <ms>` delay between requests (default 300)
+
+Each discovered date generates:
+- `public/data/parliament-<safeDate>.json`
+- `public/data/partyMeta-<safeDate>.json` (dated party meta)
+
+An index file is (re)built:
+```
+public/data/parliament.index.json
+```
+Structure (array):
+```jsonc
+[
+  {
+    "date": "2021-01-01T00:00:00Z",
+    "safeDate": "2021-01-01T00-00-00Z",
+    "file": "parliament-2021-01-01T00-00-00Z.json",
+    "partyMetaFile": "partyMeta-2021-01-01T00-00-00Z.json",
+    "total": 650,
+    "generatedAt": "2025-10-05T12:34:56.000Z"
+  }
+]
+```
+
+#### SPARQL Reliability & Troubleshooting
+
+The range generator now includes:
+- Retry (up to 3 attempts) with exponential backoff for the term start date discovery query
+- A simplified fallback query (drops subclass traversal) if the primary returns zero rows
+- Detailed logging: HTTP status codes, retry notices, zero-row warnings
+
+Common scenarios:
+- Zero rows every attempt: Wikidata Query Service may be under load or the query pattern temporarily cached poorly. The script will fall back to scanning existing `public/data/parliament-*.json` files and still regenerate the index.
+- HTTP 429 or 5xx: These are automatically retried. Consider increasing `--throttle` (default 300ms between snapshot generations) for very large ranges.
+
+Manual verification:
+1. Copy the primary query from `generateParliamentSnapshotsRange.ts` and run it in https://query.wikidata.org/ to confirm expected rows.
+2. If primary succeeds there but script fails, temporarily run with `DEBUG=1` (future enhancement) or inspect logged statuses for network issues.
+
+If both primary and fallback queries fail persistently you can still add manual dates using the single snapshot generator and re-run the range script to rebuild the index from files.
+
+#### Client Loading Flow
+
+`/parliament` now renders `SnapshotExplorer` which:
+- Fetches `parliament.index.json` (no-cache)
+- Determines selected date (last used from `localStorage` or latest entry)
+- Fetches the snapshot file & corresponding dated party meta
+- Resets filters upon snapshot change
+
+If no index exists you will see an instructional message.
+
+#### Adding New Snapshots
+
+1. Run the single snapshot generator for a new date OR rerun the range generator.
+2. Commit new `parliament-<date>.json`, `partyMeta-<date>.json`, and updated `parliament.index.json`.
+3. Deploy — the UI will automatically include the new date.
+
+#### Deep Linking (Future)
+
+Planned enhancement: support `?date=YYYY-MM-DDTHH:MM:SSZ` to preselect a snapshot.
+
+## Official Members API Timeline (Experimental)
+
+An alternative pipeline builds a seat & party timeline using the official UK Parliament Members API instead of Wikidata snapshots.
+
+### Status
+Current implementation is a scaffold: member harvesting works, but party and seat spells return 404s for the placeholder endpoints; resulting snapshots are empty except for general election events. Further endpoint shape reconciliation is required.
+
+### Rationale
+- Reduce dependence on SPARQL reliability & query service rate limits.
+- Access authoritative spell boundaries (party switches, by-elections) with fewer inference heuristics.
+- Enable higher‑frequency snapshots (event or monthly) once raw spells are complete.
+
+### Components
+- `scripts/harvest/membersApiClient.ts` – pages through member search, fetches party & seat spells (needs correct endpoint fields).
+- `scripts/harvest/normalize.ts` – date normalisation, party alias & (optional) Labour/Co‑op merge.
+- `scripts/harvest/buildEvents.ts` – derives `generalElection`, `byElection`, `partySwitch`, `vacancyStart/End` events from spells.
+- `scripts/harvest/buildSnapshots.ts` – applies ordered events to maintain active chamber state and emit snapshots.
+- `scripts/harvest/electionsBaseline.ts` – curated list of general election dates since 2005.
+- `scripts/generateOfficialTimeline.ts` – orchestrator CLI.
+
+### Usage
+```bash
+npm run snapshot:official -- --since 2005-01-01 --granularity events
+```
+Options:
+- `--since <YYYY-MM-DD>`: trim spells & events before date (default 2005-01-01)
+- `--granularity events|monthly|both`: snapshot emission strategy (currently events|monthly; both would require adjusting orchestrator)
+- `--merge-labour-coop`: collapse Labour & Co‑operative joint entries
+- `--force-refresh`: ignore HTTP cache and re-fetch all endpoints
+- `--max-concurrency <n>`: parallel member detail fetches (default 6)
+- `--cache-dir <path>`: override cache directory (default `.cache/members-api`)
+
+### Output
+Writes to `public/data/official/`:
+- `events.json` – ordered event list
+- `official.index.json` – list of snapshot files
+- `official-parliament-<date>.json` – individual snapshots (structure parallels existing parliament snapshots: `date`, `meta`, `members[]`, `parties`, `total`)
+
+### Next Steps
+1. Confirm correct Members API endpoints & adapt response parsing (replace placeholder property names).
+2. Implement richer seeding logic at each general election (clear defeated MPs, add starters based on seat spells at date).
+3. Add integrity checks: overlapping spells, gaps, negative durations.
+4. Reconcile party ids to a canonical scheme (e.g. short codes) and supply color/leaning mapping.
+5. Integrate UI toggle to switch between Wikidata snapshot mode and Official timeline mode.
+6. Add automated test harness for event derivation with synthetic spells.
+7. Replace provisional fallback spells with full histories once endpoints verified.
+
+### Provisional Spells
+If the API does not return explicit party or incumbency histories, the harvester derives a single fallback spell for each member using `latestParty` and `latestHouseMembership`. These derived spells are marked with `provisional: true` in both party and seat spell arrays and propagate to snapshot members (a snapshot member is provisional if either underlying spell is provisional). Treat provisional data as non-authoritative.
+
+Enable (experimental) history endpoint prefetch attempts with:
+```
+MEMBERS_API_INCLUDE_HISTORY=1 npm run snapshot:official -- --since 2005-01-01
+```
+Currently these endpoints are placeholders and may 404; failures are logged at debug level (`[harvest][history][dbg]`). Once real endpoints are confirmed this flag will pull full multi‑spell histories and eliminate provisional fallbacks.
+
+### Caution
+Until endpoints are verified the produced data should not be considered authoritative; avoid surfacing in production graphs without validation.

@@ -1,0 +1,63 @@
+{
+  "date": "2015-05-07",
+  "meta": {
+    "generatedAt": "2025-10-05T23:31:36.737Z",
+    "source": {
+      "membersHash": "f91b31ca75",
+      "eventsHash": "640aad2619"
+    }
+  },
+  "members": [
+    {
+      "memberId": 1586,
+      "name": "Adam Afriyie",
+      "constituencyId": "3855",
+      "constituencyName": "Windsor",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4057,
+      "name": "Nigel Adams",
+      "constituencyId": "3720",
+      "constituencyName": "Selby and Ainsty",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4069,
+      "name": "Peter Aldous",
+      "constituencyId": "3834",
+      "constituencyName": "Waveney",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 4411,
+      "name": "Lucy Allan",
+      "constituencyId": "3797",
+      "constituencyName": "Telford",
+      "partyId": "8",
+      "partyName": "Independent",
+      "provisional": true
+    },
+    {
+      "memberId": 4427,
+      "name": "Ms Tasmina Ahmed-Sheikh",
+      "constituencyId": "2234",
+      "constituencyName": "Ochil and South Perthshire",
+      "partyId": "29",
+      "partyName": "Scottish National Party",
+      "provisional": true
+    }
+  ],
+  "parties": {
+    "4": 3,
+    "8": 1,
+    "29": 1
+  },
+  "total": 5
+}

@@ -28,3 +28,12 @@ export interface ParliamentSnapshot {
   meta: ParliamentSnapshotMeta;
   members: Member[];
 }
+
+export interface ParliamentIndexEntry {
+  date: string;       // snapshot meta.date
+  safeDate: string;   // date with colons replaced by dashes
+  file: string;       // snapshot JSON filename
+  partyMetaFile: string | null; // dated party meta filename if present
+  total: number;      // seat count
+  generatedAt: string; // snapshot generation timestamp
+}

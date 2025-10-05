@@ -2,6 +2,10 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2018",
+    "downlevelIteration": true,
+    "isolatedModules": false,
     "noEmit": false,
     "outDir": "../.tmp-script-dist"
   },

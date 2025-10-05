@@ -245,6 +245,19 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
   const outDir = path.join(process.cwd(), 'public', 'data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, 'partyMeta.json');
-  fs.writeFileSync(outFile, JSON.stringify({ generatedAt: new Date().toISOString(), parties: records }, null, 2));
+  const payload = { generatedAt: new Date().toISOString(), parties: records };
+  fs.writeFileSync(outFile, JSON.stringify(payload, null, 2));
   console.log(`Party meta written: ${outFile}`);
+  try {
+    const rawSnap = JSON.parse(fs.readFileSync(snapshot, 'utf-8')) as any;
+    const snapDate: string | undefined = rawSnap?.meta?.date;
+    if (snapDate) {
+      const safeDate = snapDate.replace(/:/g, '-');
+      const datedFile = path.join(outDir, `partyMeta-${safeDate}.json`);
+      fs.writeFileSync(datedFile, JSON.stringify({ ...payload, snapshotDate: snapDate }, null, 2));
+      console.log(`Per-date party meta written: ${datedFile}`);
+    }
+  } catch {
+    // ignore
+  }
 })();

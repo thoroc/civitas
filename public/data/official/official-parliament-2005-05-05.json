@@ -1,0 +1,73 @@
+{
+  "date": "2005-05-05",
+  "meta": {
+    "generatedAt": "2025-10-05T23:31:36.735Z",
+    "source": {
+      "membersHash": "f91b31ca75",
+      "eventsHash": "640aad2619"
+    }
+  },
+  "members": [
+    {
+      "memberId": 99,
+      "name": "Mr Peter Ainsworth",
+      "constituencyId": "998",
+      "constituencyName": "East Surrey",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 306,
+      "name": "Mr Bob Ainsworth",
+      "constituencyId": "3427",
+      "constituencyName": "Coventry North East",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": true
+    },
+    {
+      "memberId": 537,
+      "name": "Nick Ainger",
+      "constituencyId": "602",
+      "constituencyName": "Carmarthen West and South Pembrokeshire",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": true
+    },
+    {
+      "memberId": 645,
+      "name": "Mr Gerry Adams",
+      "constituencyId": "3317",
+      "constituencyName": "Belfast West",
+      "partyId": "30",
+      "partyName": "Sinn Féin",
+      "provisional": true
+    },
+    {
+      "memberId": 1535,
+      "name": "Danny Alexander",
+      "constituencyId": "1561",
+      "constituencyName": "Inverness, Nairn, Badenoch and Strathspey",
+      "partyId": "17",
+      "partyName": "Liberal Democrat",
+      "provisional": true
+    },
+    {
+      "memberId": 1586,
+      "name": "Adam Afriyie",
+      "constituencyId": "3855",
+      "constituencyName": "Windsor",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    }
+  ],
+  "parties": {
+    "4": 2,
+    "15": 2,
+    "17": 1,
+    "30": 1
+  },
+  "total": 6
+}

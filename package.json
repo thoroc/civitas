@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "snapshot:parliament": "ts-node --project scripts/tsconfig.scripts.json scripts/generateParliamentSnapshot.ts --date 2021-01-01T00-00-00Z",
-    "snapshot:partyMeta": "ts-node --project scripts/tsconfig.scripts.json scripts/generatePartyMeta.ts --snapshot public/data/parliament-2021-01-01T00-00-00Z.json"
+    "snapshot:partyMeta": "ts-node --project scripts/tsconfig.scripts.json scripts/generatePartyMeta.ts --snapshot public/data/parliament-2021-01-01T00-00-00Z.json",
+    "snapshot:range:terms": "ts-node --project scripts/tsconfig.scripts.json scripts/generateParliamentSnapshotsRange.ts --mode terms --throttle 300",
+    "snapshot:official": "ts-node --project scripts/tsconfig.scripts.json scripts/generateOfficialTimeline.ts --since 2005-01-01 --granularity events"
   },
   "dependencies": {
     "axios": "^1.6.7",
@@ -17,7 +19,8 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "wikibase-sdk": "^10.0.0"
+    "wikibase-sdk": "^10.0.0",
+    "p-limit": "^5.0.0"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
@@ -26,10 +29,11 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.7.2",
-    "eslint": "^9.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "ts-node": "^10.9.2"
   }
 }

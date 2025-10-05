@@ -8,9 +8,10 @@ type Leaning = 'left' | 'center' | 'right';
 
 interface HemicycleReactProps {
   members: Member[];
+  partyMetaOverride?: Record<string, { leaning: Leaning }>; // optional injected map
 }
-
-const HemicycleReact = ({ members }: HemicycleReactProps) => {
+ 
+const HemicycleReact = ({ members, partyMetaOverride }: HemicycleReactProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [seatScale, setSeatScale] = useState(1);
@@ -28,6 +29,11 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
   const [partyMetaLoaded, setPartyMetaLoaded] = useState(false);
 
   useEffect(() => {
+    if (partyMetaOverride) {
+      setPartyMeta(partyMetaOverride);
+      setPartyMetaLoaded(true);
+      return;
+    }
     let cancelled = false;
     const load = async () => {
       try {
@@ -37,9 +43,9 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
         if (cancelled) return;
         if (json?.parties && Array.isArray(json.parties)) {
           const map: Record<string, { leaning: Leaning }> = {};
-            for (const p of json.parties) {
-              if (p.id && p.leaning) map[p.id] = { leaning: p.leaning };
-            }
+          for (const p of json.parties) {
+            if (p.id && p.leaning) map[p.id] = { leaning: p.leaning };
+          }
           setPartyMeta(map);
         }
       } catch {
@@ -50,7 +56,7 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
     };
     load();
     return () => { cancelled = true; };
-  }, []);
+  }, [partyMetaOverride]);
 
   const { apply } = useParliamentFilters();
   const filteredMembers = apply(members);
