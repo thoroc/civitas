@@ -23,14 +23,17 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
   const [liveMessage, setLiveMessage] = useState('');
 
   const { apply } = useParliamentFilters();
-  const visibleMembers = apply(members);
+  const filteredMembers = apply(members);
+  const filteredIds = useMemo(() => new Set(filteredMembers.map(m => m.id)), [filteredMembers]);
+  const isFiltered = filteredMembers.length !== members.length;
 
-  const hasData = visibleMembers && visibleMembers.length > 0;
+  const hasData = members.length > 0;
 
   // Geometry constants & memoized seat layout
-  const r0 = 40;
+  // Increased base radius for larger overall hemicycle
+  const r0 = 80;
   const { seats, pad, vbWidth, vbHeight, ringMeta } = useMemo(() => {
-    const totalSeats = visibleMembers.length;
+    const totalSeats = members.length;
     const numberOfRings = findN(totalSeats, r0);
     const a0 = findA(totalSeats, numberOfRings, r0);
     const ringRadiis: number[] = [];
@@ -50,13 +53,17 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
     });
     const mappedSeats = flatSeats.map((seat, idx) => ({
       ...seat,
-      member: visibleMembers[idx],
+      x: seat.x + r0,
+      y: seat.y + r0,
+      member: members[idx],
+      active: filteredIds.has(members[idx]?.id),
     }));
-    const padLocal = r0 * 1.2;
+    // Reduced padding to expand seat cluster within viewBox
+    const padLocal = 10; // previously r0 * 1.05
     const vbWidthLocal = r0 * 2 + padLocal * 2;
     const vbHeightLocal = r0 + padLocal * 2;
     return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal, ringMeta };
-  }, [visibleMembers]);
+  }, [members, filteredIds]);
   const aspectPaddingPercent = (vbHeight / vbWidth) * 100;
   const [lockedIndex, setLockedIndex] = useState<number | null>(null);
 
@@ -82,7 +89,7 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
     const observer = new ResizeObserver(entries => {
       for (const entry of entries) {
         const w = entry.contentRect.width;
-        const scale = Math.min(1.8, Math.max(0.6, w / 600));
+        const h = entry.contentRect.height || w / 2; const scale = Math.min(3.4, Math.max(0.9, Math.min(w / 360, h / 200)));
         setSeatScale(scale);
       }
     });
@@ -202,24 +209,34 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
   };
 
   // Move focus helper
-  const moveFocus = (targetIndex: number) => {
+  const moveFocus = (targetIndex: number, direction: 1 | -1 = 1) => {
     if (targetIndex < 0 || targetIndex >= seats.length) return;
-    setFocusIndex(targetIndex);
-    const seat = seats[targetIndex];
-    setTooltip({ x: seat.x, y: seat.y, i: targetIndex, member: seat.member });
-    setTooltipFade(true);
+    // Skip inactive seats
+    let idx = targetIndex;
+    while (idx >= 0 && idx < seats.length && !seats[idx].active) {
+      idx += direction;
+    }
+    if (idx < 0 || idx >= seats.length) return;
+    setFocusIndex(idx);
+    const seat = seats[idx];
+    if (seat.active) {
+      setTooltip({ x: seat.x, y: seat.y, i: idx, member: seat.member });
+      setTooltipFade(true);
+    } else {
+      setTooltip(null);
+    }
     requestAnimationFrame(() => {
       const svg = svgRef.current;
       if (!svg) return;
       const nodeList = svg.querySelectorAll('g[data-seat]');
-      const targetNode = nodeList[targetIndex] as SVGGElement | undefined;
+      const targetNode = nodeList[idx] as SVGGElement | undefined;
       if (targetNode) (targetNode as any).focus();
     });
   };
 
   return (
     <div ref={containerRef} className="w-full mx-auto">
-      <div className="relative w-full" style={{ paddingBottom: `${aspectPaddingPercent}%` }}>
+      <div className="relative w-full aspect-[2/1]">
         <div className="absolute top-2 right-2 flex gap-2 z-20">
           <button type="button" className="btn btn-xs" onClick={() => {
             setCompactTooltip(c => {
@@ -241,58 +258,71 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
               ref={svgRef}
               className="absolute inset-0 w-full h-full"
               role="group"
-              aria-label={`Hemicycle showing ${visibleMembers.length} members`}
+              aria-label={`Hemicycle: ${filteredMembers.length} of ${members.length} seats match current filters`}
               aria-describedby="hemicycle-instructions"
               preserveAspectRatio="xMidYMid meet"
               viewBox={`-${pad} -${pad} ${vbWidth} ${vbHeight}`}
             >
-              {seats.map((s, i) => (
-                <g key={i} data-seat tabIndex={focusIndex === i ? 0 : -1}
-                  onMouseEnter={() => { setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); setFocusIndex(i); }}
-                  onMouseLeave={() => { if (lockedIndex !== i) { setTooltipFade(false); setTimeout(() => { if (lockedIndex !== i) { setTooltip(null); } }, 200); } }}
-                  onFocus={() => { setFocusIndex(i); setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); }}
-                  onBlur={() => { if (lockedIndex !== i) { setTooltipFade(false); setTimeout(() => { if (lockedIndex !== i) { setTooltip(null); } }, 200); } }}
-                  onClick={() => { setFocusIndex(i); setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); setLockedIndex(prev => prev === i ? null : i); }}
-                  onKeyDown={(e) => {
-                    const total = seats.length;
-                    if (e.key === 'ArrowRight') { e.preventDefault(); moveFocus((i + 1) % total); }
-                    else if (e.key === 'ArrowLeft') { e.preventDefault(); moveFocus((i - 1 + total) % total); }
-                    else if (e.key === 'ArrowUp') { e.preventDefault(); moveFocus(moveVertical(i, -1)); }
-                    else if (e.key === 'ArrowDown') { e.preventDefault(); moveFocus(moveVertical(i, 1)); }
-                    else if (e.key === 'Home') { e.preventDefault(); moveFocus(0); }
-                    else if (e.key === 'End') { e.preventDefault(); moveFocus(total - 1); }
-                    else if (e.key === 'PageDown') { e.preventDefault(); moveFocus(Math.min(total - 1, i + 10)); }
-                    else if (e.key === 'PageUp') { e.preventDefault(); moveFocus(Math.max(0, i - 10)); }
-                    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLockedIndex(prev => prev === i ? null : i); if (tooltip) setLiveMessage(`Seat ${i + 1} ${lockedIndex === i ? 'unlocked' : 'locked'}`); }
-                  }}
-                  role="button"
-                  aria-pressed={lockedIndex === i ? 'true' : 'false'}
-                  aria-label={`Seat ${i + 1}: ${s.member.label}${s.member.party?.label ? ', ' + s.member.party.label : ''}`}
-                >
-                  <title>{`${s.member.label}${s.member.party?.label ? ' – ' + s.member.party.label : ''}`}</title>
-                  {lockedIndex === i && (
+              {seats.map((s, i) => {
+                const inactive = !s.active;
+                return (
+                  <g key={i} data-seat tabIndex={focusIndex === i && s.active ? 0 : -1}
+                    className={inactive ? 'opacity-35 transition-opacity' : 'opacity-100 transition-opacity'}
+                    onMouseEnter={() => { if (inactive) return; setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); setFocusIndex(i); }}
+                    onMouseLeave={() => { if (inactive) return; if (lockedIndex !== i) { setTooltipFade(false); setTimeout(() => { if (lockedIndex !== i) { setTooltip(null); } }, 200); } }}
+                    onFocus={() => { if (inactive) return; setFocusIndex(i); setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); }}
+                    onBlur={() => { if (inactive) return; if (lockedIndex !== i) { setTooltipFade(false); setTimeout(() => { if (lockedIndex !== i) { setTooltip(null); } }, 200); } }}
+                    onClick={() => { if (inactive) return; setFocusIndex(i); setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipFade(true); setLockedIndex(prev => prev === i ? null : i); }}
+                    onKeyDown={(e) => {
+                      const total = seats.length;
+                      if (e.key === 'ArrowRight') { e.preventDefault(); moveFocus((i + 1) % total, 1); }
+                      else if (e.key === 'ArrowLeft') { e.preventDefault(); moveFocus((i - 1 + total) % total, -1); }
+                      else if (e.key === 'ArrowUp') { e.preventDefault(); moveFocus(moveVertical(i, -1), -1); }
+                      else if (e.key === 'ArrowDown') { e.preventDefault(); moveFocus(moveVertical(i, 1), 1); }
+                      else if (e.key === 'Home') { e.preventDefault(); moveFocus(0, 1); }
+                      else if (e.key === 'End') { e.preventDefault(); moveFocus(total - 1, -1); }
+                      else if (e.key === 'PageDown') { e.preventDefault(); moveFocus(Math.min(total - 1, i + 10), 1); }
+                      else if (e.key === 'PageUp') { e.preventDefault(); moveFocus(Math.max(0, i - 10), -1); }
+                      else if (!inactive && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setLockedIndex(prev => prev === i ? null : i); if (tooltip) setLiveMessage(`Seat ${i + 1} ${lockedIndex === i ? 'unlocked' : 'locked'}`); }
+                    }}
+                    role="button"
+                    aria-disabled={inactive ? 'true' : undefined}
+                    aria-pressed={!inactive && lockedIndex === i ? 'true' : 'false'}
+                    aria-label={`Seat ${i + 1}: ${s.member.label}${s.member.party?.label ? ', ' + s.member.party.label : ''}${inactive ? ' (filtered out)' : ''}`}
+                  >
+                    <title>{`${s.member.label}${s.member.party?.label ? ' – ' + s.member.party.label : ''}${inactive ? ' (filtered out)' : ''}`}</title>
+                    {lockedIndex === i && !inactive && (
+                      <circle
+                        cx={s.x}
+                        cy={s.y}
+                        r={(s.a ? s.a / 2.05 : 2.7) * seatScale + (1.5 / seatScale)}
+                        fill="none"
+                        stroke="#111827"
+                        strokeWidth={0.8 / seatScale}
+                        opacity={0.75}
+                      />
+                    )}
                     <circle
                       cx={s.x}
                       cy={s.y}
-                      r={(s.a ? s.a / 2.2 : 2.4) * seatScale + (1.2 / seatScale)}
-                      fill="none"
-                      stroke="#111827"
-                      strokeWidth={0.8 / seatScale}
-                      opacity={0.75}
+                      r={(s.a ? s.a / 2.05 : 2.7) * seatScale}
+                      fill={s.member?.party?.color || '#808080'}
+                      stroke={lockedIndex === i && !inactive ? '#0f172a' : '#1f2937'}
+                      strokeWidth={(lockedIndex === i && !inactive ? 0.9 : 0.4) / seatScale}
+                      data-locked={lockedIndex === i && !inactive ? 'true' : undefined}
                     />
-                  )}
-                  <circle
-                    cx={s.x}
-                    cy={s.y}
-                    r={(s.a ? s.a / 2.2 : 2.4) * seatScale}
-                    fill={s.member?.party?.color || '#808080'}
-                    stroke={lockedIndex === i ? '#0f172a' : '#1f2937'}
-                    strokeWidth={(lockedIndex === i ? 0.9 : 0.4) / seatScale}
-                    data-locked={lockedIndex === i ? 'true' : undefined}
-                  />
-                </g>
-              ))}
+                  </g>
+                );
+              })}
               {renderTooltip()}
+              {filteredMembers.length === 0 && (
+                <g aria-hidden="true">
+                  <rect x={-pad} y={-pad} width={vbWidth} height={vbHeight} fill="white" opacity={0.6} />
+                  <text x={vbWidth/2 - pad} y={vbHeight/2 - pad} textAnchor="middle" fill="#374151" fontSize={10} fontFamily="system-ui, sans-serif" fontWeight={600}>
+                    No seats match current filters
+                  </text>
+                </g>
+              )}
             </svg>
             <div className="sr-only" aria-live="polite" aria-atomic="true">{liveMessage}</div>
           </>
