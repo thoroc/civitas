@@ -14,7 +14,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   const containerRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [seatScale, setSeatScale] = useState(1);
-  const [tooltip, setTooltip] = useState<{ x: number; y: number; member: Member } | null>(null);
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; i: number; member: Member } | null>(null);
   const [compactTooltip, setCompactTooltip] = useState<boolean>(() => {
     if (typeof window === 'undefined') return true;
     try { return localStorage.getItem('parliamentTooltipMode') !== 'full'; } catch { return true; }
@@ -191,20 +191,22 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
           viewBox={`-${pad} -${pad} ${vbWidth} ${vbHeight}`}
         >
           {seats.map((s, i) => (
-            <circle
-              key={i}
-              cx={s.x}
-              cy={s.y}
-              r={(s.a ? s.a / 2.2 : 2.4) * seatScale}
-              fill={s.member?.party?.color || '#808080'}
-              stroke="#1f2937"
-              strokeWidth={0.4 / seatScale}
-              onMouseEnter={() => { setTooltip({ x: s.x, y: s.y, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
-              onMouseLeave={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 120); }}
-              onFocus={() => { setTooltip({ x: s.x, y: s.y, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
-              onBlur={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 120); }}
-              tabIndex={0}
-            />
+            <g key={i} tabIndex={0}
+              onMouseEnter={() => { setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
+              onMouseLeave={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 200); }}
+              onFocus={() => { setTooltip({ x: s.x, y: s.y, i, member: s.member }); setTooltipVisible(true); setTooltipFade(true); }}
+              onBlur={() => { setTooltipFade(false); setTimeout(() => { setTooltipVisible(false); setTooltip(null); }, 200); }}
+              aria-label={`Seat ${i + 1}: ${s.member.label}${s.member.party?.label ? ', ' + s.member.party.label : ''}`}>
+              <title>{`${s.member.label}${s.member.party?.label ? ' – ' + s.member.party.label : ''}`}</title>
+              <circle
+                cx={s.x}
+                cy={s.y}
+                r={(s.a ? s.a / 2.2 : 2.4) * seatScale}
+                fill={s.member?.party?.color || '#808080'}
+                stroke="#1f2937"
+                strokeWidth={0.4 / seatScale}
+              />
+            </g>
           ))}
           {renderTooltip()}
         </svg>
