@@ -42,19 +42,29 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   const vbHeight = r0 + pad * 2;
 
   return (
-    <svg width={width} height={height} viewBox={`-${pad} -${pad} ${vbWidth} ${vbHeight}`}>
-      {seats.map((s, i) => (
-        <circle
-          key={i}
-          cx={s.x}
-            cy={s.y}
-            r={s.a ? s.a / 2.5 : 2}
-            fill={s.member?.party?.color || '#808080'}
+    <div className="w-full max-w-5xl mx-auto">
+      <div className="relative w-full" style={{ paddingBottom: '55%' }}>
+        <svg
+          className="absolute inset-0 w-full h-full"
+          role="img"
+          aria-label={`Hemicycle showing ${visibleMembers.length} members`}
+          preserveAspectRatio="xMidYMid meet"
+          viewBox={`-${pad} -${pad} ${vbWidth} ${vbHeight}`}
         >
-          <title>{`${s.member?.label} (${s.member?.party?.label || 'Independent'})`}</title>
-        </circle>
-      ))}
-    </svg>
+          {seats.map((s, i) => (
+            <circle
+              key={i}
+              cx={s.x}
+              cy={s.y}
+              r={s.a ? s.a / 2.2 : 2.4}
+              fill={s.member?.party?.color || '#808080'}
+            >
+              <title>{`${s.member?.label} (${s.member?.party?.label || 'Independent'})`}</title>
+            </circle>
+          ))}
+        </svg>
+      </div>
+    </div>
   );
 };
 
