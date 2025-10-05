@@ -120,8 +120,8 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   // Tooltip rendering logic with boundary-aware positioning
   const renderTooltip = () => {
     if (!tooltip) return null;
-    const w = 150;
-    const h = 34;
+    const w = 110;
+    const h = 28;
     const leftLimit = -pad;
     const rightLimit = -pad + vbWidth;
     // Try right side first
@@ -138,11 +138,11 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     return (
       <g transform={`translate(${tooltip.x}, ${tooltip.y})`} pointerEvents="none">
         <rect x={offsetX} y={offsetY} rx={3} ry={3} width={w} height={h} fill="#111827" opacity={0.9} />
-        <text x={offsetX + 6} y={offsetY + 14} fill="#fff" fontSize={11} fontFamily="system-ui, sans-serif">
+        <text x={offsetX + 5} y={offsetY + 12} fill="#fff" fontSize={10} fontFamily="system-ui, sans-serif">
           {tooltip.member.label}
         </text>
         {tooltip.member.party?.label && (
-          <text x={offsetX + 6} y={offsetY + 26} fill="#d1d5db" fontSize={9} fontFamily="system-ui, sans-serif">
+          <text x={offsetX + 5} y={offsetY + 22} fill="#d1d5db" fontSize={8} fontFamily="system-ui, sans-serif">
             {tooltip.member.party.label}
           </text>
         )}
