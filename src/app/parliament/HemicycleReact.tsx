@@ -35,7 +35,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     return <div>No data</div>;
   }
 
-  const r0 = 20;
+  const r0 = 40;
   const totalSeats = visibleMembers.length;
   const numberOfRings = findN(totalSeats, r0);
   const a0 = findA(totalSeats, numberOfRings, r0);
@@ -60,7 +60,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   const vbHeight = r0 + pad * 2;
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div ref={containerRef} className="w-full mx-auto">
       <div className="relative w-full" style={{ paddingBottom: '55%' }}>
         <svg
           className="absolute inset-0 w-full h-full"
