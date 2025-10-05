@@ -146,7 +146,8 @@ const matchLeaningFromTextArray = (texts: string[], partyLabel: string): { leani
   }
   // 2. Fallback to party label heuristics
   const labelLC = partyLabel.toLowerCase();
-  for (const leaning of ['left', 'center', 'right'] as Leaning[]) {
+  // Order adjusted to evaluate 'right' before 'center' so parties containing both conservative and liberal indicators classify as right.
+  for (const leaning of ['left', 'right', 'center'] as Leaning[]) {
     const matches = collectMatches(leaning, labelLC);
     if (matches.length) {
       return { leaning, matched: matches, method: 'party-label-regex' };

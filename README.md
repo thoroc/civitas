@@ -52,6 +52,10 @@ npm run snapshot:parliament -- --date 2021-01-01T00:00:00Z
 
 The `--date` must be an ISO timestamp (UTC) matching the Wikidata query timeframe.
 
+Accepted input formats:
+- `YYYY-MM-DDTHH:MM:SSZ` (canonical ISO)
+- `YYYY-MM-DDTHH-MM-SSZ` (dash form; auto-normalized for the query, still used for filename)
+
 ### Output file naming
 
 Snapshots are written to `public/data` with colons replaced by dashes for filesystem safety:

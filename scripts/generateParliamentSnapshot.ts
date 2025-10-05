@@ -96,20 +96,32 @@ const normalize = (raw: any): Member[] => {
   });
 };
 
+const normalizeDate = (input: string): string => {
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z$/.test(input)) {
+    return input.replace(/^(\d{4}-\d{2}-\d{2}T\d{2})-(\d{2})-(\d{2})Z$/, '$1:$2:$3Z');
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(input)) {
+    return input;
+  }
+  console.error('Unsupported date format. Use 2021-01-01T00-00-00Z or 2021-01-01T00:00:00Z');
+  process.exit(1);
+};
+
 (async () => {
-  const { date } = parseArgs();
-  console.log(`Fetching parliament snapshot for ${date}`);
-  const query = buildQuery(date);
+  const { date: inputDate } = parseArgs();
+  const isoDate = normalizeDate(inputDate);
+  console.log(`Fetching parliament snapshot for ${inputDate} (ISO: ${isoDate})`);
+  const query = buildQuery(isoDate);
   const raw = await fetchData(query);
   const members = normalize(raw);
   const snapshot: ParliamentSnapshot = {
-    meta: { date, generatedAt: new Date().toISOString(), total: members.length },
+    meta: { date: isoDate, generatedAt: new Date().toISOString(), total: members.length },
     members,
   };
   const outDir = path.join(process.cwd(), 'public', 'data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-  const safeDate = date.replace(/:/g, '-');
+  const safeDate = isoDate.replace(/:/g, '-');
   const outFile = path.join(outDir, `parliament-${safeDate}.json`);
   fs.writeFileSync(outFile, JSON.stringify(snapshot, null, 2));
-  console.log(`Snapshot written: ${outFile}`);
+  console.log(`Snapshot written: ${outFile} (members: ${members.length})`);
 })();

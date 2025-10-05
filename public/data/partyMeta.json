@@ -1,0 +1,284 @@
+{
+  "generatedAt": "2025-10-05T22:34:25.717Z",
+  "parties": [
+    {
+      "id": "Q9630",
+      "originalSnapshotId": "Q9630",
+      "qidResolved": true,
+      "label": "Labour Party",
+      "color": "#DC241F",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "social democracy",
+          "democratic socialism"
+        ],
+        "matched": [
+          "social",
+          "social[- ]?democ",
+          "social",
+          "democratic socialism"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q9626",
+      "originalSnapshotId": "Q9626",
+      "qidResolved": true,
+      "label": "Conservative Party",
+      "color": "#0087DC",
+      "leaning": "center",
+      "spectrumPosition": 0.5,
+      "source": {
+        "ideologies": [
+          "conservatism",
+          "neoconservatism",
+          "economic liberalism",
+          "liberal conservatism",
+          "social conservatism",
+          "unionism in the United Kingdom",
+          "Traditionalist School"
+        ],
+        "matched": [
+          "liberal",
+          "liberal"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q9624",
+      "originalSnapshotId": "Q9624",
+      "qidResolved": true,
+      "label": "Liberal Democrats",
+      "color": "#FAA61A",
+      "leaning": "center",
+      "spectrumPosition": 0.5,
+      "source": {
+        "ideologies": [
+          "liberalism",
+          "social liberalism",
+          "pro-Europeanism"
+        ],
+        "matched": [
+          "liberal",
+          "liberal"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q10658",
+      "originalSnapshotId": "Q10658",
+      "qidResolved": true,
+      "label": "Scottish National Party",
+      "color": "#FFF95D",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "social democracy",
+          "Scottish independence",
+          "Scottish nationalism",
+          "pro-Europeanism"
+        ],
+        "matched": [
+          "social",
+          "social[- ]?democ"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q6467393",
+      "originalSnapshotId": "Q6467393",
+      "qidResolved": true,
+      "label": "Labour Co-operative",
+      "color": "#DC241F",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "centre-left"
+        ],
+        "matched": [
+          "labou?r"
+        ],
+        "method": "party-label-regex",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q10691",
+      "originalSnapshotId": "Q10691",
+      "qidResolved": true,
+      "label": "Plaid Cymru",
+      "color": "#3F8428",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "social democracy",
+          "democratic socialism",
+          "Welsh nationalism",
+          "linguistic nationalism"
+        ],
+        "matched": [
+          "social",
+          "social[- ]?democ",
+          "social",
+          "democratic socialism"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q327591",
+      "originalSnapshotId": "Q327591",
+      "qidResolved": true,
+      "label": "independent politician",
+      "color": "#DDDDDD",
+      "leaning": "center",
+      "spectrumPosition": 0.5,
+      "source": {
+        "ideologies": [],
+        "matched": [],
+        "method": "fallback",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q215519",
+      "originalSnapshotId": "Q215519",
+      "qidResolved": true,
+      "label": "Democratic Unionist Party",
+      "color": "#D46A4C",
+      "leaning": "right",
+      "spectrumPosition": 0.75,
+      "source": {
+        "ideologies": [
+          "euroscepticism",
+          "right-wing populism",
+          "national conservatism",
+          "social conservatism",
+          "unionism in the United Kingdom",
+          "British nationalism"
+        ],
+        "matched": [
+          "right-?wing",
+          "populis(t|m)"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q175443",
+      "originalSnapshotId": "Q175443",
+      "qidResolved": true,
+      "label": "Social Democratic and Labour Party",
+      "color": "#006400",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "social democracy",
+          "Irish nationalism",
+          "United Ireland",
+          "pro-Europeanism"
+        ],
+        "matched": [
+          "social",
+          "social[- ]?democ"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q76382",
+      "originalSnapshotId": "Q76382",
+      "qidResolved": true,
+      "label": "Sinn Féin",
+      "color": "#326760",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "Irish republicanism",
+          "Republicanism",
+          "left-wing nationalism",
+          "linguistic nationalism",
+          "populist socialism"
+        ],
+        "matched": [
+          "social"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q464103",
+      "originalSnapshotId": "Q464103",
+      "qidResolved": true,
+      "label": "Speaker of the House of Commons",
+      "color": "#000000",
+      "leaning": "center",
+      "spectrumPosition": 0.5,
+      "source": {
+        "ideologies": [],
+        "matched": [],
+        "method": "fallback",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q244927",
+      "originalSnapshotId": "Q244927",
+      "qidResolved": true,
+      "label": "Alliance Party of Northern Ireland",
+      "color": "#F6CB2F",
+      "leaning": "center",
+      "spectrumPosition": 0.5,
+      "source": {
+        "ideologies": [
+          "liberalism",
+          "pro-Europeanism",
+          "nonsectarian"
+        ],
+        "matched": [
+          "liberal"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    },
+    {
+      "id": "Q9669",
+      "originalSnapshotId": "Q9669",
+      "qidResolved": true,
+      "label": "Green Party of England and Wales",
+      "color": "#02A95B",
+      "leaning": "left",
+      "spectrumPosition": 0.25,
+      "source": {
+        "ideologies": [
+          "eco-socialism"
+        ],
+        "matched": [
+          "social"
+        ],
+        "method": "ideology-labels",
+        "generatedAt": "2025-10-05T22:34:25.715Z"
+      }
+    }
+  ]
+}
