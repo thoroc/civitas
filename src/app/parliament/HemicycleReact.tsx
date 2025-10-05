@@ -51,15 +51,129 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
       const end = cursor - 1;
       ringMeta.push({ start, end, size: end - start + 1 });
     });
+
+    // ---- Party / ideology based contiguous wedge ordering ----
+    type Leaning = 'left' | 'center' | 'right';
+    const LEANING_ORDER: Leaning[] = ['left', 'center', 'right'];
+
+    const classifyMember = (m: Member): Leaning => {
+      const label = m.party?.label?.toLowerCase() || '';
+      if (/green|labour|social|democrat|sinn|plaid|sdlp|alliance/.test(label)) return 'left';
+      if (/conservative|unionist|reform|libertarian|ukip/.test(label)) return 'right';
+      if (/liberal/.test(label)) return 'center';
+      return 'center';
+    };
+
+    interface PartyGroup { id: string; label: string; members: Member[]; leaning: Leaning; color?: string; }
+    const partyGroupsMap = new Map<string, PartyGroup>();
+
+    for (const m of members) {
+      const partyId = m.party?.id || '__independent';
+      let pg = partyGroupsMap.get(partyId);
+      if (!pg) {
+        pg = { id: partyId, label: m.party?.label || 'Independent', members: [], leaning: classifyMember(m), color: m.party?.color };
+        partyGroupsMap.set(partyId, pg);
+      }
+      pg.members.push(m);
+    }
+
+    let partyGroups = Array.from(partyGroupsMap.values());
+    partyGroups.sort((a, b) => {
+      const leanDiff = LEANING_ORDER.indexOf(a.leaning) - LEANING_ORDER.indexOf(b.leaning);
+      if (leanDiff !== 0) return leanDiff;
+      const sizeDiff = b.members.length - a.members.length;
+      if (sizeDiff !== 0) return sizeDiff;
+      return a.label.localeCompare(b.label);
+    });
+
+    const partyOrderIndex: Record<string, number> = {};
+    partyGroups.forEach((pg, idx) => { partyOrderIndex[pg.id] = idx; });
+
+    const remainingPerParty: Record<string, number> = {};
+    partyGroups.forEach(pg => { remainingPerParty[pg.id] = pg.members.length; });
+    let remainingTotal = totalSeats;
+
+    const nextIndexPerParty: Record<string, number> = {};
+    partyGroups.forEach(pg => { nextIndexPerParty[pg.id] = 0; });
+
+    const assignedMembersByRing: Member[][] = [];
+
+    // Allocate seats ring by ring, proportional to remaining seats per party to keep wedges contiguous across rings.
+    for (let ringIdx = 1; ringIdx <= numberOfRings; ringIdx++) {
+      const ringSeatCount = seatsPerRing[ringIdx];
+      const allocations: { partyId: string; base: number; remainder: number }[] = [];
+      let baseSum = 0;
+
+      for (const pg of partyGroups) {
+        const remaining = remainingPerParty[pg.id];
+        if (remaining <= 0 || remainingTotal === 0) {
+          allocations.push({ partyId: pg.id, base: 0, remainder: 0 });
+          continue;
+        }
+        const quota = (remaining / remainingTotal) * ringSeatCount;
+        const base = Math.floor(quota);
+        const remainder = quota - base;
+        allocations.push({ partyId: pg.id, base, remainder });
+        baseSum += base;
+      }
+
+      let leftover = ringSeatCount - baseSum;
+      // Distribute leftover seats by largest remainder
+      allocations.sort((a, b) => b.remainder - a.remainder);
+      for (let i = 0; i < allocations.length && leftover > 0; i++) {
+        if (remainingPerParty[allocations[i].partyId] > 0) {
+          allocations[i].base += 1;
+          leftover--;
+        }
+      }
+      // Restore original ideological ordering
+      allocations.sort((a, b) => partyOrderIndex[a.partyId] - partyOrderIndex[b.partyId]);
+
+      const ringAssigned: Member[] = [];
+      for (const alloc of allocations) {
+        let take = Math.min(alloc.base, remainingPerParty[alloc.partyId]);
+        if (take <= 0) continue;
+        const pg = partyGroups[partyOrderIndex[alloc.partyId]]; // safe by construction
+        const start = nextIndexPerParty[alloc.partyId];
+        const end = start + take;
+        const slice = pg.members.slice(start, end);
+        ringAssigned.push(...slice);
+        nextIndexPerParty[alloc.partyId] = end;
+        remainingPerParty[alloc.partyId] -= take;
+        remainingTotal -= take;
+      }
+
+      // If due to rounding we underfilled/overfilled the ring, patch with any remaining members.
+      if (ringAssigned.length < ringSeatCount) {
+        for (const pg of partyGroups) {
+          while (ringAssigned.length < ringSeatCount && remainingPerParty[pg.id] > 0) {
+            const idx = nextIndexPerParty[pg.id];
+            ringAssigned.push(pg.members[idx]);
+            nextIndexPerParty[pg.id] = idx + 1;
+            remainingPerParty[pg.id] -= 1;
+            remainingTotal -= 1;
+          }
+          if (ringAssigned.length === ringSeatCount) break;
+        }
+      }
+      assignedMembersByRing.push(ringAssigned);
+    }
+
+    let orderedMembers: Member[] = assignedMembersByRing.flat();
+    if (orderedMembers.length !== members.length) {
+      // Fallback to original ordering on mismatch
+      orderedMembers = members.slice();
+    }
+
     const mappedSeats = flatSeats.map((seat, idx) => ({
       ...seat,
       x: seat.x + r0,
       y: seat.y + r0,
-      member: members[idx],
-      active: filteredIds.has(members[idx]?.id),
+      member: orderedMembers[idx],
+      active: filteredIds.has(orderedMembers[idx]?.id),
     }));
-    // Reduced padding to expand seat cluster within viewBox
-    const padLocal = 10; // previously r0 * 1.05
+
+    const padLocal = 10;
     const vbWidthLocal = r0 * 2 + padLocal * 2;
     const vbHeightLocal = r0 + padLocal * 2;
     return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal, ringMeta };
