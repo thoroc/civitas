@@ -120,8 +120,19 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
   // Tooltip rendering logic with boundary-aware positioning
   const renderTooltip = () => {
     if (!tooltip) return null;
-    const w = 110;
-    const h = 28;
+    const hasParty = Boolean(tooltip.member.party?.label);
+    const maxW = vbWidth * 0.2; // cap at 20% of hemicycle width
+    const primaryLabel = tooltip.member.label;
+    const secondaryLabel = hasParty ? tooltip.member.party!.label : '';
+    const approxChar = 5; // rough char width basis in viewBox units
+    const desiredPrimary = primaryLabel.length * approxChar + 8;
+    const desiredSecondary = hasParty ? secondaryLabel.length * (approxChar - 0.8) + 8 : 0;
+    const w = Math.min(maxW, Math.max(34, desiredPrimary, desiredSecondary));
+    const h = hasParty ? 20 : 16;
+    const capacityPrimary = Math.floor((w - 8) / approxChar);
+    const displayedPrimary = primaryLabel.length > capacityPrimary ? primaryLabel.slice(0, Math.max(0, capacityPrimary - 1)) + '…' : primaryLabel;
+    const capacitySecondary = hasParty ? Math.floor((w - 8) / (approxChar - 0.8)) : 0;
+    const displayedSecondary = hasParty && secondaryLabel.length > capacitySecondary ? secondaryLabel.slice(0, Math.max(0, capacitySecondary - 1)) + '…' : secondaryLabel;
     const leftLimit = -pad;
     const rightLimit = -pad + vbWidth;
     // Try right side first
@@ -138,12 +149,12 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
     return (
       <g transform={`translate(${tooltip.x}, ${tooltip.y})`} pointerEvents="none">
         <rect x={offsetX} y={offsetY} rx={3} ry={3} width={w} height={h} fill="#111827" opacity={0.9} />
-        <text x={offsetX + 5} y={offsetY + 12} fill="#fff" fontSize={10} fontFamily="system-ui, sans-serif">
-          {tooltip.member.label}
+        <text x={offsetX + 4} y={offsetY + 11} fill="#fff" fontSize={9} fontFamily="system-ui, sans-serif">
+          {displayedPrimary}
         </text>
         {tooltip.member.party?.label && (
-          <text x={offsetX + 5} y={offsetY + 22} fill="#d1d5db" fontSize={8} fontFamily="system-ui, sans-serif">
-            {tooltip.member.party.label}
+          <text x={offsetX + 4} y={offsetY + 19} fill="#d1d5db" fontSize={7} fontFamily="system-ui, sans-serif">
+            {displayedSecondary}
           </text>
         )}
       </g>
