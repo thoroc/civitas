@@ -134,3 +134,81 @@ Buttons above the hemicycle export the current SVG directly or render a high‑r
 - Geometry is precomputed each render based on the filtered member count; ring metadata (`ringMeta`) enables proportional vertical navigation.
 - Filters are intentionally stateless from the perspective of components: consumers call `apply(members)` on their own list, easing reuse with future datasets.
 - Legend recomputes counts from both full and filtered sets to display `filtered / total` succinctly.
+- Seat ordering groups parties into left → center → right wedges using party metadata (see below). If metadata is missing it falls back to a heuristic regex against party labels.
+
+### Party Metadata (Ideological Leaning)
+
+A separate metadata file enriches parties with an inferred ideological leaning used to produce contiguous wedges:
+
+`public/data/partyMeta.json`
+
+Structure:
+```jsonc
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "parties": [
+    {
+      "id": "Q12345",              // Wikidata QID (preferred stable id)
+      "originalSnapshotId": "Q12345", // For reconciliation if snapshot id differed
+      "label": "Example Party",
+      "color": "#0055AA",
+      "leaning": "center",          // one of left|center|right
+      "spectrumPosition": 0.5,        // coarse numeric slot (future use)
+      "qidResolved": true,
+      "source": {
+        "ideologies": ["liberalism"],
+        "matched": ["liberal"],
+        "method": "ideology-labels", // override | ideology-labels | party-label-regex | fallback
+        "generatedAt": "2025-01-01T00:00:00.000Z"
+      }
+    }
+  ]
+}
+```
+
+### Generate / Refresh Party Metadata
+
+1. Ensure you have an up‑to‑date parliament snapshot (see earlier section). The snapshot now stores party and member ids as Wikidata QIDs.
+2. Run:
+```bash
+npm run snapshot:partyMeta -- --snapshot public/data/parliament-2021-01-01T00-00-00Z.json
+```
+3. Commit the resulting `public/data/partyMeta.json`.
+
+The script attempts the following inference order:
+1. Overrides file (`public/data/partyMeta.overrides.json`) if present
+2. Wikidata ideology properties P1142 / P1387 (keyword matched)
+3. Party label regex heuristics
+4. Fallback to `center`
+
+### Overrides
+
+Create `public/data/partyMeta.overrides.json` (not committed by default unless you add it) to pin values:
+```json
+{
+  "Q12345": { "leaning": "left" },
+  "Q67890": { "leaning": "right", "label": "Custom Label", "spectrumPosition": 0.8 }
+}
+```
+Keys can be either the party QID or (legacy) the snapshot party id; QID takes precedence.
+
+### Updating Snapshot Script (QIDs)
+
+The snapshot generator (`scripts/generateParliamentSnapshot.ts`) now stores:
+- `member.id` = MP QID (without full URI)
+- `party.id` = Party QID
+- `party.label` = Party label
+
+If you still have older snapshots where `party.id` was a label, regenerate them for consistent meta matching.
+
+### Client Integration
+
+`HemicycleReact.tsx` loads `partyMeta.json` at runtime (graceful fallback). If the file is absent or a given party not present, it applies the previous regex heuristics so the visualization still renders deterministically.
+
+### Regeneration Guidance
+
+After modifying overrides or updating the snapshot query:
+```bash
+npm run snapshot:partyMeta -- --snapshot public/data/parliament-YYYY-MM-DDTHH-MM-SSZ.json
+```
+Then reload `/parliament` to see updated wedges.

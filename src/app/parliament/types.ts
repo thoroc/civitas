@@ -1,7 +1,7 @@
 export interface Party {
-  id: string; // QID
+  id: string; // Wikidata QID (e.g. 'Q12345')
   label: string;
-  color: string; // hex (no #) or CSS color
+  color: string; // normalized CSS color (currently '#RRGGBB')
 }
 
 export interface Constituency {

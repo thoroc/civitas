@@ -20,7 +20,7 @@ const parseArgs = (): Args => {
   return { date: process.argv[dateIndex + 1] };
 };
 
-const buildQuery = (date: string): string => `SELECT ?mp ?mpLabel ?constituency ?constituencyLabel ?partyTextLabel ?genderLabel ?rgb (SAMPLE(?age) AS ?age) WITH { 
+const buildQuery = (date: string): string => `SELECT ?mp ?mpLabel ?constituency ?constituencyLabel ?party ?partyLabel ?genderLabel ?rgb (SAMPLE(?age) AS ?age) WITH { 
 SELECT ?parliament $DATE WHERE {
   VALUES $DATE { "${date}"^^xsd:dateTime } 
   VALUES $PARL_TERMS {  wd:Q21094819  wd:Q21095053 }
@@ -58,7 +58,7 @@ WHERE {
   BIND(FLOOR(?ageInYears) AS ?age).
   BIND(IF(BOUND(?age), ?age, 0) AS ?age) 
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-} GROUP BY ?mp ?mpLabel ?constituency ?constituencyLabel ?partyTextLabel ?genderLabel ?rgb`;
+} GROUP BY ?mp ?mpLabel ?constituency ?constituencyLabel ?party ?partyLabel ?genderLabel ?rgb`;
 
 const fetchData = async (query: string) => {
   const endpoint = 'https://query.wikidata.org/sparql';
@@ -73,9 +73,9 @@ const normalize = (raw: any): Member[] => {
     return [];
   }
   return raw.results.bindings.map((b: any) => {
-    const party: Party | null = b.partyTextLabel?.value ? {
-      id: b.partyTextLabel.value,
-      label: b.partyTextLabel.value,
+    const party: Party | null = b.party?.value ? {
+      id: b.party.value.replace('http://www.wikidata.org/entity/', ''),
+      label: b.partyLabel?.value || b.party.value.replace('http://www.wikidata.org/entity/', ''),
       color: `#${b.rgb?.value || '808080'}`
     } : null;
 
@@ -85,8 +85,8 @@ const normalize = (raw: any): Member[] => {
     } : null;
 
     const member: Member = {
-      id: b.mp.value,
-      label: b.mpLabel?.value || b.mp.value,
+      id: b.mp.value.replace('http://www.wikidata.org/entity/', ''),
+      label: b.mpLabel?.value || b.mp.value.replace('http://www.wikidata.org/entity/', ''),
       constituency,
       party,
       gender: b.genderLabel?.value || null,

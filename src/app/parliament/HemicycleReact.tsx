@@ -4,6 +4,8 @@ import { Member } from './types';
 import { useParliamentFilters } from './filtersContext';
 import { useRef, useEffect, useState, useMemo } from 'react';
 
+type Leaning = 'left' | 'center' | 'right';
+
 interface HemicycleReactProps {
   members: Member[];
 }
@@ -21,6 +23,34 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
   const [tooltipFade, setTooltipFade] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0); // roving tabindex index
   const [liveMessage, setLiveMessage] = useState('');
+  // Party meta (ideological leaning) loaded from static JSON if available
+  const [partyMeta, setPartyMeta] = useState<Record<string, { leaning: Leaning }>>({});
+  const [partyMetaLoaded, setPartyMetaLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch('/data/partyMeta.json', { cache: 'no-store' });
+        if (!res.ok) { setPartyMetaLoaded(true); return; }
+        const json = await res.json();
+        if (cancelled) return;
+        if (json?.parties && Array.isArray(json.parties)) {
+          const map: Record<string, { leaning: Leaning }> = {};
+            for (const p of json.parties) {
+              if (p.id && p.leaning) map[p.id] = { leaning: p.leaning };
+            }
+          setPartyMeta(map);
+        }
+      } catch {
+        // silent fallback
+      } finally {
+        if (!cancelled) setPartyMetaLoaded(true);
+      }
+    };
+    load();
+    return () => { cancelled = true; };
+  }, []);
 
   const { apply } = useParliamentFilters();
   const filteredMembers = apply(members);
@@ -57,6 +87,8 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
     const LEANING_ORDER: Leaning[] = ['left', 'center', 'right'];
 
     const classifyMember = (m: Member): Leaning => {
+      const pid = m.party?.id;
+      if (pid && partyMeta[pid]?.leaning) return partyMeta[pid].leaning;
       const label = m.party?.label?.toLowerCase() || '';
       if (/green|labour|social|democrat|sinn|plaid|sdlp|alliance/.test(label)) return 'left';
       if (/conservative|unionist|reform|libertarian|ukip/.test(label)) return 'right';
@@ -177,7 +209,7 @@ const HemicycleReact = ({ members }: HemicycleReactProps) => {
     const vbWidthLocal = r0 * 2 + padLocal * 2;
     const vbHeightLocal = r0 + padLocal * 2;
     return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal, ringMeta };
-  }, [members, filteredIds]);
+  }, [members, filteredIds, partyMeta, partyMetaLoaded]);
   const aspectPaddingPercent = (vbHeight / vbWidth) * 100;
   const [lockedIndex, setLockedIndex] = useState<number | null>(null);
 
