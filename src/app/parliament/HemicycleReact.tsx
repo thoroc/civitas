@@ -74,7 +74,7 @@ const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactPr
               key={i}
               cx={s.x}
               cy={s.y}
-              r={s.a ? s.a / 2.2 : 2.4}
+              r={(s.a ? s.a / 2.2 : 2.4) * seatScale}
               fill={s.member?.party?.color || '#808080'}
             >
               <title>{`${s.member?.label} (${s.member?.party?.label || 'Independent'})`}</title>
