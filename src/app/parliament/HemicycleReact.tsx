@@ -3,6 +3,7 @@ import { findA, findN, distribute, populateRings } from './d3';
 import { Member, ParliamentSnapshot } from './types';
 
 import { useParliamentFilters } from './filtersContext';
+import { useRef, useEffect, useState } from 'react';
 
 interface HemicycleReactProps {
   members: Member[];
@@ -11,6 +12,23 @@ interface HemicycleReactProps {
 }
 
 const HemicycleReact = ({ members, width = 900, height = 480 }: HemicycleReactProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [seatScale, setSeatScale] = useState(1);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const el = containerRef.current;
+    const observer = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const w = entry.contentRect.width;
+        // Base scale around 600px width; cap min/max
+        const scale = Math.min(1.8, Math.max(0.6, w / 600));
+        setSeatScale(scale);
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const { apply } = useParliamentFilters();
   const visibleMembers = apply(members);
   if (!visibleMembers || visibleMembers.length === 0) {
