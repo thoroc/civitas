@@ -1,11 +1,13 @@
 #!/usr/bin/env ts-node
 import fs from 'fs';
 import path from 'path';
+import { z } from 'zod';
 import { harvestMembers } from './harvest/membersApiClient';
 import { normalize } from './harvest/normalize';
 import { buildEvents } from './harvest/buildEvents';
 import { buildSnapshots } from './harvest/buildSnapshots';
-import { HarvestConfig } from './harvest/types';
+import { HarvestConfig } from './harvest/schemas';
+import { HarvestConfigSchema, NormalizedDataSchema, EventSchema, SnapshotSchema } from './harvest/schemas';
 
 interface Args { [k: string]: string | boolean | undefined }
 
@@ -35,6 +37,8 @@ async function main() {
   const source = (args.source as any) || 'membersApi';
 
   const cfg: HarvestConfig = { since, granularity, cacheDir, mergeLabourCoop, maxConcurrency, forceRefresh, partyAliases, source };
+  // Runtime validate config
+  try { HarvestConfigSchema.parse(cfg); } catch (e) { console.error('[official] Invalid config', (e as Error).message); process.exit(1); }
 
   console.log(`[official] Harvest starting since=${since} granularity=${granularity} source=${source}`);
   let harvest;
@@ -47,9 +51,11 @@ async function main() {
   console.log(`[official] Harvest members=${harvest.members.length} partySpells=${harvest.partySpells.length} seatSpells=${harvest.seatSpells.length}`);
 
   const normalized = normalize(harvest, cfg);
+  try { NormalizedDataSchema.parse(normalized); } catch (e) { console.error('[official] Invalid normalized data', (e as Error).message); }
   console.log(`[official] Normalized parties=${normalized.parties.length} constituencies=${normalized.constituencies.length}`);
 
   const events = buildEvents(normalized, cfg);
+  try { events.forEach(ev => EventSchema.parse(ev)); } catch (e) { console.error('[official] Event validation error', (e as Error).message); }
   console.log(`[official] Events count=${events.length}`);
 
   // Enhanced validation: overlaps, negative durations, gaps between spells (per member)
@@ -103,6 +109,7 @@ async function main() {
 
   const monthly = granularity !== 'events';
   const snapshots = buildSnapshots(normalized, events, { monthly });
+  try { snapshots.forEach(sn => SnapshotSchema.parse(sn)); } catch (e) { console.error('[official] Snapshot validation error', (e as Error).message); }
   console.log(`[official] Snapshots count=${snapshots.length}`);
 
   const outDir = path.join('public','data','official');

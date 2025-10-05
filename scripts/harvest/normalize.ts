@@ -1,5 +1,5 @@
 import { HarvestResult } from './membersApiClient';
-import { HarvestConfig, NormalizedData, PartySpell, SeatSpell } from './types';
+import { HarvestConfig, NormalizedData, PartySpell, SeatSpell } from './schemas';
 
 function toISO(dateStr: string | undefined): string | undefined {
   if (!dateStr) return undefined;

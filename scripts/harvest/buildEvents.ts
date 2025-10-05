@@ -1,4 +1,4 @@
-import { NormalizedData, Event, HarvestConfig, PartySpell, SeatSpell } from './types';
+import { NormalizedData, Event, HarvestConfig, PartySpell, SeatSpell } from './schemas';
 import { GENERAL_ELECTIONS } from './electionsBaseline';
 
 function byStart<T extends { start: string }>(a: T, b: T) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; }

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import axios from 'axios';
-import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './types';
+import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './schemas';
 import { ensureDir } from './cache';
 import type { HarvestResult } from './membersApiClient';
 

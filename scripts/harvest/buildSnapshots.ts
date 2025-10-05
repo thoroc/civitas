@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { Event, NormalizedData, Snapshot, SnapshotMember } from './types';
+import { Event, NormalizedData, Snapshot, SnapshotMember } from './schemas';
 
 function hash(obj: any): string { return crypto.createHash('sha1').update(JSON.stringify(obj)).digest('hex').slice(0,10); }
 
