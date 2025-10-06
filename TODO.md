@@ -2,7 +2,7 @@
 
 ## Last Updated
 
-2025-10-06 (geometry extraction & layout refactor applied)
+2025-10-07 (geometry + filters + export + e2e assertions committed)
 
 ## Completed (Phase 2)
 
@@ -32,35 +32,37 @@
 - Refactored `useHemicycleLayout` to orchestration-only hook using new pure modules
 - Removed outdated ESLint warnings snapshot (now 0 warnings)
 - Updated TODO to reflect clean state and future targets
-- (Pending commit for geometry/layout extraction refactor) _— commit next step_
+- Commits: geometry/layout extraction, filters apply module, unified export API (`exportHemicycle`), strengthened e2e
+  assertions
 
 ## Current State
 
-- Working tree contains uncommitted geometry/layout refactor changes.
+- Working tree clean: geometry/layout, filters extraction, export refactor all merged.
 - Lint: 0 warnings / 0 errors; TypeScript: 0 errors.
 - Playwright E2E infrastructure active (multi-browser, trace on first retry).
 - E2E tests: parliament (hemicycle + legend + meta), homepage, cat (fixme in dev).
 - GitHub Actions `e2e` job in place.
-- Strengthened parliament test (legend structural + totals checks).
+- Parliament test strengthened (legend structure + aggregated totals + seat count).
 - Geometry & allocation logic is now isolated and pure (easier future unit tests).
 - Remaining refactor candidates (no active warnings):
-  - `parliament/d3.ts`: introduce `GeometryConfig` (param consolidation) + stronger typing.
-  - `parliament/exportUtils.ts`: wrap multi-arg export into `ExportSeatsOptions`.
-  - `parliament/context/filtersContext.tsx`: extract `apply()` + predicates.
+  - `parliament/d3.ts`: incremental tightening of `GeometryConfig` usage (some done, review for leftovers).
+  - `parliament/exportUtils.ts`: verify callers migrated to unified `exportHemicycle` (delete legacy wrappers once
+    stable).
+  - Consider pruning legacy comments / dead code after stability window.
 
 ### In Progress
 
-- Planning parameter/options object consolidation (survey phase; implementation not started).
-- Prioritization discussion pending for next concrete coding step (filters context vs. export utils vs. d3 config).
+- Monitoring stability of recent refactors (geometry, filters, export, e2e) before removing backward-compatible
+  wrappers.
+- Light survey of residual multi-param functions for options object migration (low priority).
 
 ## Pending / Next Decisions
 
-- **select-next-track**: Choose immediate focus (Filters context simplification vs Options object rollout vs Export
-  utilities cleanup).
-- **e2e-refactor-parliament**: Extract polling + legend assertions to reduce test file complexity.
-- **e2e-legend-sum-assertion**: Sum party legend counts vs total members (allow vacancy delta).
-- **e2e-seat-count-assertion**: Count rendered seat nodes vs total members for integrity.
+- **select-next-track**: Decide next improvement (tighten polling vs further geometry typing vs export deprecation
+  cleanup).
 - **e2e-tighten-polling**: Reduce 25s polling window to 12–15s after stability confirmation.
+- (DONE) e2e-refactor-parliament.
+- (DONE) legend sum + seat count assertions.
 
 ## Candidate Next Refactors
 
@@ -102,13 +104,14 @@
 
 ### G. Context / Filters Complexity
 
-- Extract filter application (`apply()`) into pure utility for easier unit testing later
-- Split age range + party/gender predicate construction into helpers to reduce complexity
+- (DONE) Extract filter application (`apply()`) into pure utility for easier unit testing later
+- Split age range + party/gender predicate construction into helpers to reduce complexity (evaluate further extraction
+  if logic grows)
 
 ### H. d3 Utilities Typing
 
 - Replace remaining `any` with explicit structural types
-- Introduce a `GeometryConfig` interface to consolidate parameters (moves under parameter options adoption)
+- Introduce / finish adopting a `GeometryConfig` interface to consolidate parameters (partially implemented)
 
 ### I. Documentation & API Surface
 
@@ -185,8 +188,8 @@
 Select one focused track:
 
 - Logic Isolation: Extract `apply()` + predicates from filters context (G)
-- Parameter Objects: Implement `ExportSeatsOptions` + `GeometryConfig` (L/H)
-- E2E Assertions: Legend sum + seat count (test integrity improvements)
+- Parameter Objects: Finalize `GeometryConfig` adoption and consider deprecating legacy export wrapper
+- E2E Assertions: (DONE) Legend sum + seat count (test integrity improvements)
 
 ---
 
