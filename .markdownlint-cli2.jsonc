@@ -1,0 +1,6 @@
+// markdownlint-cli2 configuration specifying globs (so scripts need no args)
+// Reference: https://github.com/DavidAnson/markdownlint-cli2#configuration
+{
+  "globs": ["**/*.md", "!node_modules", "!out", "!.next"],
+  "fix": false,
+}
