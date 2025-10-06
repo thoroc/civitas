@@ -1,6 +1,8 @@
 'use client';
 import { useMemo } from 'react';
 
+import FilterBadge from './components/FilterBadge';
+import FilterSection from './components/FilterSection';
 import { useParliamentFilters } from './filtersContext';
 import { Member } from './types';
 
@@ -45,25 +47,22 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
         </button>
       </div>
 
-      <fieldset className='space-y-2'>
-        <legend className='text-sm font-medium'>Parties</legend>
+      <FilterSection title='Parties'>
         <div className='flex flex-wrap gap-2'>
           {partyOptions.map(p => {
             const active =
               !filters.parties.length || filters.parties.includes(p.id);
             return (
-              <button
+              <FilterBadge
                 key={p.id}
-                type='button'
-                className={`badge badge-sm cursor-pointer select-none ${active ? 'badge-primary' : 'badge-outline'}`}
-                aria-pressed={active}
-                onClick={() =>
+                label={p.label}
+                active={active}
+                variant='primary'
+                onToggle={() =>
                   setFilters(prev => {
                     const set = new Set(prev.parties);
                     if (active) {
-                      // turning off means explicitly include all others (so we start filtering)
                       if (!prev.parties.length) {
-                        // start with all then remove
                         partyOptions.forEach(opt => set.add(opt.id));
                       }
                       set.delete(p.id);
@@ -71,33 +70,29 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
                       set.add(p.id);
                     }
                     const arr = Array.from(set.values());
-                    // if all selected, clear to represent 'all'
                     if (arr.length === partyOptions.length)
                       return { ...prev, parties: [] };
                     return { ...prev, parties: arr };
                   })
                 }
-              >
-                {p.label}
-              </button>
+              />
             );
           })}
         </div>
-      </fieldset>
+      </FilterSection>
 
-      <fieldset className='space-y-2'>
-        <legend className='text-sm font-medium'>Gender</legend>
+      <FilterSection title='Gender'>
         <div className='flex flex-wrap gap-2'>
           {genderOptions.map(g => {
             const active =
               !filters.genders.length || filters.genders.includes(g);
             return (
-              <button
+              <FilterBadge
                 key={g}
-                type='button'
-                className={`badge badge-sm cursor-pointer select-none ${active ? 'badge-secondary' : 'badge-outline'}`}
-                aria-pressed={active}
-                onClick={() =>
+                label={g}
+                active={active}
+                variant='secondary'
+                onToggle={() =>
                   setFilters(prev => {
                     const set = new Set(prev.genders);
                     if (active) {
@@ -113,18 +108,13 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
                     return { ...prev, genders: arr };
                   })
                 }
-              >
-                {g}
-              </button>
+              />
             );
           })}
         </div>
-      </fieldset>
+      </FilterSection>
 
-      <fieldset className='space-y-3'>
-        <legend className='text-sm font-medium flex items-center gap-2'>
-          Age Range
-        </legend>
+      <FilterSection title='Age Range'>
         <div className='flex items-center gap-2'>
           <label className='text-xs flex flex-col'>
             Min
@@ -155,7 +145,7 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
             />
           </label>
         </div>
-      </fieldset>
+      </FilterSection>
     </div>
   );
 };
