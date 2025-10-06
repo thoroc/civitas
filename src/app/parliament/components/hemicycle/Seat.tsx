@@ -57,7 +57,11 @@ const Seat: React.FC<SeatProps> = memo(
         setLiveMessage,
       });
 
-    const { ariaLabel, titleText } = buildSeatAria(index, seat, inactive);
+    const { ariaLabel, titleText } = buildSeatAria({
+      seatIndex: index,
+      seat,
+      inactive,
+    });
 
     return (
       <g

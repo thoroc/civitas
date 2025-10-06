@@ -121,6 +121,15 @@
 - Replace multi-arg export function with `ExportSeatsOptions` in `exportUtils.ts`
 - Audit remaining >2 param helpers in hooks after initial utility conversions
 
+### M. Deployment Automation (Planned)
+
+- Decide triggers: SSR deploy on push to `main`; static export on `v*` tags (pending confirmation)
+- Add GitHub Actions deploy jobs (SSR + static) with conditional skip when secrets missing
+- Document required secrets in `docs/deployment.md`: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+- Add clear skip messaging in workflow when secrets absent (do not fail CI)
+- After secrets present: wire production alias for SSR; tag-based alias for static build
+- Consider `workflow_dispatch` manual static preview trigger for dry runs
+
 ## Prioritization Guidance
 
 1. High user impact: reduce SnapshotExplorer + HemicycleReact length
