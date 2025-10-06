@@ -1,6 +1,6 @@
 # Refactor Plan & Progress
 
-_Last updated: 2025-10-06 (post useSeatHandlers extraction)_
+_Last updated: 2025-10-06 (post component barrels + filters context relocation)_
 
 ## Completed (Phase 2)
 
@@ -11,13 +11,31 @@ _Last updated: 2025-10-06 (post useSeatHandlers extraction)_
 - Reverted unrelated formatting changes prior to commit
 - Commit: `d6394c3 refactor(parliament): extract tooltip layout and seat interaction utilities`
 
+## Completed (Phase 3 – Session Updates)
+
+- Added component barrels: `components/hemicycle/index.ts`, `components/filters/index.ts`
+- Relocated `filtersContext.tsx` → `context/filtersContext.tsx` and updated all imports
+- Consolidated filter component imports via barrel in `FiltersPanel.tsx`
+- Simplified several arrow callbacks (minor stylistic cleanup, no behavior change)
+- Normalized import ordering (axios/WBK, etc.)
+- Commit: `dd7826a refactor(parliament): add component barrels and relocate filters context`
+
 ## Current State
 
-Lint now flags only warnings for size/complexity in multiple components. No new type errors.
+- Working tree clean; 0 type errors.
+- ESLint warnings (representative hotspots):
+  - `linechart.tsx`: 2 × max-lines-per-function
+  - `HemicycleReact.tsx`: max-lines-per-function
+  - `SnapshotExplorer.tsx`: max-lines-per-function + complexity
+  - `context/filtersContext.tsx`: complexity
+  - `useHemicycleLayout.ts`: max-lines + complexity (full run, not shown in staged-only lint)
+  - `d3.ts`: `no-explicit-any`, max-params
+- Overall focus now shifts from structural extraction → complexity & size reduction.
 
 ## Pending / Next Decisions
 
-- **plan-next-phase**: Choose next focus area for complexity reduction.
+- **plan-next-phase**: Choose which warning cluster to address first (geometry, snapshot UI, or
+  context logic).
 
 ## Candidate Next Refactors
 
@@ -31,10 +49,11 @@ Lint now flags only warnings for size/complexity in multiple components. No new 
 - Move color constants + sizing tokens to `tooltipLayout.ts` or a `tooltipTheme.ts`
 - Split secondary info/text block into its own component for line count reduction
 
-### C. HemicycleReact Simplification
+### C. HemicycleReact Simplification (Phase 2 complete; Phase 3 targets)
 
 - (DONE) Separate state orchestration vs render container (`HemicycleReact` -> `HemicycleView`)
 - (DONE) Extract export logic via `useHemicycleExport` hook
+- NEXT: Lift ephemeral selection / hover derived state into a small hook to drop line count
 
 ### D. FiltersPanel Modularization
 
@@ -46,19 +65,37 @@ Lint now flags only warnings for size/complexity in multiple components. No new 
 
 ### E. useHemicycleLayout Heavy Function
 
-- Split geometry calculations (rings, seat placement) into pure utilities in `d3.ts` or
-  `layout/geometry.ts`
-- Keep hook focused on memo orchestration + dependency wiring
+- Split geometry calculations (rings, seat placement) into pure utilities (`d3.ts` or
+  `layout/geometry.ts`)
+- Wrap multi-parameter geometry calls into a config object to reduce `max-params`
+- Add thin memo boundaries per derived structure (rings, seat positions, color mapping)
 
 ### F. SnapshotExplorer / Filters / Legend
 
 - Decompose long render blocks into smaller presentational components (pure props)
+- Isolate async snapshot loading + validation into a hook (`useSnapshotData`)
+
+### G. Context / Filters Complexity
+
+- Extract filter application (`apply()`) into pure utility for easier unit testing later
+- Split age range + party/gender predicate construction into helpers to reduce complexity
+
+### H. d3 Utilities Typing
+
+- Replace remaining `any` with explicit structural types
+- Introduce a `GeometryConfig` interface to remove `max-params` warning
+
+### I. Documentation & API Surface
+
+- Add short note to `CONTRIBUTING.md` about new `context/` + component barrel conventions
+- Consider root `parliament/index.ts` barrel exporting common hooks + components
 
 ## Prioritization Guidance
 
-1. Target components users interact with most (HemicycleReact + FiltersPanel)
-2. Reduce cognitive load in hooks with >150 LOC (`useHemicycleLayout`)
-3. Only further split tooltip/seat if still noisy after larger structural wins
+1. High user impact: reduce SnapshotExplorer + HemicycleReact length
+2. High technical debt payoff: isolate geometry & layout math (E + H)
+3. Medium: simplify filters context (G) to ease future test introduction
+4. Low: docs + root barrel (I) once structural churn slows
 
 ## Definition of Done for Each Refactor
 
@@ -74,8 +111,11 @@ Lint now flags only warnings for size/complexity in multiple components. No new 
 
 ## Suggested Next Step
 
-Pick one: `A` (Seat handlers), `C` (HemicycleReact), or `D` (FiltersPanel) based on desired
-user-facing impact.
+Select one focused track:
+
+- Complexity: Split `useHemicycleLayout` (E + H)
+- UI Decomposition: Break down `SnapshotExplorer` (F)
+- Logic Isolation: Extract `apply()` + predicates from filters context (G)
 
 ---
 
