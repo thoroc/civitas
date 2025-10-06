@@ -12,6 +12,7 @@ import { useRef, useEffect, useState, useMemo } from 'react';
 import HemicycleExportBar from './components/HemicycleExportBar';
 import HemicycleSeats from './components/HemicycleSeats';
 import HemicycleTooltip from './components/HemicycleTooltip';
+import { exportSvg, exportPng } from './exportUtils';
 import { useParliamentFilters } from './filtersContext';
 import useHemicycleLayout from './hooks/useHemicycleLayout';
 import { Member } from './types';
@@ -153,64 +154,15 @@ const HemicycleReact = ({
     }
   }, [tooltip]);
 
-  // Export helpers
+  // Export helpers via utilities
   const downloadSVG = () => {
     if (!svgRef.current) return;
-    const serializer = new XMLSerializer();
-    let source = serializer.serializeToString(svgRef.current);
-    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
-      source = source.replace(
-        '<svg',
-        '<svg xmlns="http://www.w3.org/2000/svg"'
-      );
-    }
-    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'hemicycle.svg';
-    a.click();
-    URL.revokeObjectURL(url);
+    exportSvg(svgRef.current, 'hemicycle.svg');
   };
 
   const downloadPNG = () => {
     if (!svgRef.current) return;
-    const serializer = new XMLSerializer();
-    let source = serializer.serializeToString(svgRef.current);
-    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
-      source = source.replace(
-        '<svg',
-        '<svg xmlns="http://www.w3.org/2000/svg"'
-      );
-    }
-    const svgBlob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(svgBlob);
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const scale = 3; // higher scale for sharper export
-      // Use bounding box width/height if available else fallback to client sizes
-      const bbox = svgRef.current!.getBoundingClientRect();
-      canvas.width = Math.max(1, bbox.width) * scale;
-      canvas.height = Math.max(1, bbox.height) * scale;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(b => {
-          if (!b) return;
-          const pngUrl = URL.createObjectURL(b);
-          const a = document.createElement('a');
-          a.href = pngUrl;
-          a.download = 'hemicycle.png';
-          a.click();
-          URL.revokeObjectURL(pngUrl);
-        });
-      }
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
+    exportPng(svgRef.current, 'hemicycle.png', 3);
   };
 
   // Move focus helper
