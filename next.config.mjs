@@ -1,5 +1,32 @@
 /** @type {import('next').NextConfig} */
+const makeCsp = () => {
+  const directives = {
+    "default-src": ["'self'"],
+    "script-src": ["'self'"],
+    "style-src": ["'self'", "'unsafe-inline'"],
+    "img-src": ["'self'", "data:"],
+    "font-src": ["'self'"],
+    "connect-src": [
+      "'self'",
+      "https://catfact.ninja",
+      "https://query.wikidata.org",
+      "https://www.wikidata.org",
+      "https://raw.githubusercontent.com",
+      "https://gist.githubusercontent.com"
+    ],
+    "frame-ancestors": ["'self'"],
+    "object-src": ["'none'"],
+    "base-uri": ["'self'"],
+    "form-action": ["'self'"],
+    "upgrade-insecure-requests": [],
+  };
+  return Object.entries(directives)
+    .map(([k, v]) => v.length ? `${k} ${v.join(' ')}` : k)
+    .join('; ');
+};
+
 const securityHeaders = [
+  { key: 'Content-Security-Policy', value: makeCsp() },
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
   { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
