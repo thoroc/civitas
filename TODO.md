@@ -130,6 +130,22 @@
 - After secrets present: wire production alias for SSR; tag-based alias for static build
 - Consider `workflow_dispatch` manual static preview trigger for dry runs
 
+### N. Tooling Enhancements
+
+- Integrate `prettier-plugin-packagejson` to auto-sort `package.json` fields
+- Add as dev dependency; Prettier will auto-load without config changes
+- Run once: `npx prettier package.json -w` to normalize ordering
+- Rely on existing pre-commit Prettier hook to enforce sorting going forward
+
+### O. Lockfile Integrity
+
+- Add `lockfile-lint` dev dependency
+- Add script `lint:lockfile`:
+  `lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm,registry.npmjs.org`
+- Add CI step (post install, pre build) to run lockfile lint; non-blocking locally via optional pre-commit hook
+- Document override process (e.g. private registry) in `docs/development.md`
+- Goal: prevent compromised registries / insecure protocols in lockfile
+
 ## Prioritization Guidance
 
 1. High user impact: reduce SnapshotExplorer + HemicycleReact length
