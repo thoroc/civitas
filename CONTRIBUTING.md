@@ -1,7 +1,7 @@
 # Contributing
 
-Thanks for your interest in improving the project! This document outlines a lightweight workflow to
-keep changes consistent and reviewable.
+Thanks for your interest in improving the project! This document outlines a lightweight workflow to keep changes
+consistent and reviewable.
 
 ## Development Setup
 
@@ -14,8 +14,7 @@ keep changes consistent and reviewable.
 
 ## Pre-commit Hooks
 
-This project uses [lefthook](https://lefthook.dev/) for automated pre-commit hooks that ensure code
-quality:
+This project uses [lefthook](https://lefthook.dev/) for automated pre-commit hooks that ensure code quality:
 
 - **Linting**: ESLint runs on staged `.js`, `.ts`, `.jsx`, `.tsx` files
 - **Formatting**: Prettier runs on staged files (JS/TS/JSON/MD/CSS)
@@ -45,24 +44,27 @@ The hooks run in parallel for faster execution. If any hook fails, the commit is
 
 - Prefer functional React components with hooks.
 - Use arrow functions for all function declarations (components, utilities, event handlers).
-- Favor small modules focused on a single domain or responsibility—group related functionality
-  together.
-- Embrace SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface
-  Segregation, and Dependency Inversion.
-- Follow DRY (Don't Repeat Yourself) principle—extract common logic into reusable utilities and
-  hooks.
-- Keep filtering logic consolidated in `filtersContext.tsx`; consumers should call `apply()` instead
-  of duplicating logic.
-- Treat snapshot JSON as immutable historical data—add new files rather than editing old ones unless
-  correcting objective errors.
+- Favor small modules focused on a single domain or responsibility—group related functionality together.
+- Embrace SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and
+  Dependency Inversion.
+- Follow DRY (Don't Repeat Yourself) principle—extract common logic into reusable utilities and hooks.
+- Keep filtering logic consolidated in `filtersContext.tsx`; consumers should call `apply()` instead of duplicating
+  logic.
+- Treat snapshot JSON as immutable historical data—add new files rather than editing old ones unless correcting
+  objective errors.
 - Geometry helpers live in `parliament/d3.ts`; extend there if adding new layout variants.
 - Avoid premature abstraction; wait for a second concrete use case.
+- For any function taking more than two distinct scalar parameters, prefer a single options object typed by a dedicated
+  interface (e.g. `renderSeats(opts: RenderSeatsOptions)`). This improves readability, keeps call sites resilient to
+  parameter reordering, and enables optional/extended configuration without breaking existing calls. Name the interface
+  `<Verb><Noun>Options` or `<Domain>Config` consistently. Do not prematurely wrap when only two parameters or when the
+  function is clearly internal and stable.
 
 ## Accessibility
 
 - Maintain keyboard parity for any new interactive seat behaviors.
-- Provide `aria-label` or `aria-describedby` for new controls; reuse existing live region if
-  announcing seat-level changes.
+- Provide `aria-label` or `aria-describedby` for new controls; reuse existing live region if announcing seat-level
+  changes.
 
 ## Performance
 
@@ -87,8 +89,8 @@ No formal test suite yet. Pragmatic suggestions when adding one:
 
 ## Export Features
 
-- For new export formats, branch from the existing SVG -> canvas pipeline in `HemicycleReact.tsx`
-  (PNG exporter). Keep operations synchronous or show progress UI if >250ms.
+- For new export formats, branch from the existing SVG -> canvas pipeline in `HemicycleReact.tsx` (PNG exporter). Keep
+  operations synchronous or show progress UI if >250ms.
 
 ## Submitting Changes
 
