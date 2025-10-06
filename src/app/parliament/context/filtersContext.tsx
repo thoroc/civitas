@@ -52,25 +52,32 @@ export const ParliamentFiltersProvider = ({
     []
   );
 
+  const buildPredicates = (f: ParliamentFiltersState) => {
+    const preds: Array<(m: Member) => boolean> = [];
+    if (f.parties.length) {
+      const parties = new Set(f.parties);
+      preds.push(m => parties.has(m.party?.id || 'independent'));
+    }
+    if (f.genders.length) {
+      const genders = new Set(f.genders);
+      preds.push(m => !!m.gender && genders.has(m.gender));
+    }
+    if (f.minAge !== null) {
+      const min = f.minAge;
+      preds.push(m => (m.age ?? Infinity) >= min);
+    }
+    if (f.maxAge !== null) {
+      const max = f.maxAge;
+      preds.push(m => (m.age ?? -Infinity) <= max);
+    }
+    return preds;
+  };
+
   const apply = useCallback(
     (members: Member[]) => {
-      return members.filter(m => {
-        if (
-          filters.parties.length &&
-          !filters.parties.includes(m.party?.id || 'independent')
-        )
-          return false;
-        if (
-          filters.genders.length &&
-          (!m.gender || !filters.genders.includes(m.gender))
-        )
-          return false;
-        if (filters.minAge !== null && (m.age ?? Infinity) < filters.minAge)
-          return false;
-        if (filters.maxAge !== null && (m.age ?? -Infinity) > filters.maxAge)
-          return false;
-        return true;
-      });
+      const predicates = buildPredicates(filters);
+      if (!predicates.length) return members;
+      return members.filter(m => predicates.every(p => p(m)));
     },
     [filters]
   );
