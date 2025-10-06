@@ -31,32 +31,43 @@ export const getCoordinates = (radius: Radius, b: number): Item => {
   return { x, y };
 };
 
-export const findA = (size: Size, n: number, radius: Radius): Distance => {
+interface FindAOptions {
+  size: Size;
+  n: number;
+  radius: Radius;
+}
+
+export const findA = ({ size, n, radius }: FindAOptions): Distance => {
   const x = (Math.PI * n * radius) / (size - n);
   const y = 1 + (Math.PI * (n - 1) * n) / 2 / (size - n);
-
   return x / y;
 };
 
-export const getScore = (size: Size, n: number, radius: Radius): Score => {
-  return Math.abs((findA(size, n, radius) * n) / radius - 5 / 7);
+interface GetScoreOptions {
+  size: Size;
+  n: number;
+  radius: Radius;
+}
+
+export const getScore = ({ size, n, radius }: GetScoreOptions): Score => {
+  return Math.abs((findA({ size, n, radius }) * n) / radius - 5 / 7);
 };
 
 export const findN = (size: Size, radius: Radius): NumberOfElements => {
   let n = Math.floor(Math.log(size) / Math.log(2)) || 1;
-  let distance: Score = getScore(size, n, radius);
+  let distance: Score = getScore({ size, n, radius });
   let direction: number = 0;
 
-  if (getScore(size, n + 1, radius) < distance) {
+  if (getScore({ size, n: n + 1, radius }) < distance) {
     direction = 1;
   }
 
-  if (getScore(size, n - 1, radius) < distance && n > 1) {
+  if (getScore({ size, n: n - 1, radius }) < distance && n > 1) {
     direction = -1;
   }
 
-  while (getScore(size, n + direction, radius) < distance && n > 0) {
-    distance = getScore(size, n + direction, radius);
+  while (getScore({ size, n: n + direction, radius }) < distance && n > 0) {
+    distance = getScore({ size, n: n + direction, radius });
     n += direction;
   }
 
@@ -130,12 +141,19 @@ const calculateSeats = (
   return { distribution, seats };
 };
 
-export const populateRings = (
-  seatsPerRing: number[],
-  numberOfRings: number,
-  r0: Radius,
-  a0: number
-): Ring[] => {
+interface PopulateRingsOptions {
+  seatsPerRing: number[];
+  numberOfRings: number;
+  r0: Radius;
+  a0: number;
+}
+
+export const populateRings = ({
+  seatsPerRing,
+  numberOfRings,
+  r0,
+  a0,
+}: PopulateRingsOptions): Ring[] => {
   let radius: number;
   const points: Ring[] = [];
 

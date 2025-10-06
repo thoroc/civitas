@@ -28,13 +28,13 @@ export const useHemicycleLayout = ({
     const r0 = 80;
     const totalSeats = members.length;
     const numberOfRings = findN(totalSeats, r0);
-    const a0 = findA(totalSeats, numberOfRings, r0);
+    const a0 = findA({ size: totalSeats, n: numberOfRings, radius: r0 });
     const ringRadiis: number[] = [];
     for (let i = 1; i <= numberOfRings; i++) {
       ringRadiis[i] = r0 - (i - 1) * a0;
     }
     const seatsPerRing = distribute(ringRadiis, totalSeats);
-    const rings = populateRings(seatsPerRing, numberOfRings, r0, a0);
+    const rings = populateRings({ seatsPerRing, numberOfRings, r0, a0 });
     const ringMeta: { start: number; end: number; size: number }[] = [];
     const flatSeats: Item[] = [];
     let cursor = 0;
