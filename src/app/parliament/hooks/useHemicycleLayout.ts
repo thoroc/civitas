@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { findA, findN, distribute, populateRings, Item } from '../d3';
 import { Member } from '../types';
 
@@ -87,7 +88,7 @@ export const useHemicycleLayout = ({
       pg.members.push(m);
     }
 
-    let partyGroups = Array.from(partyGroupsMap.values());
+    const partyGroups = Array.from(partyGroupsMap.values());
     partyGroups.sort((a, b) => {
       const leanDiff =
         LEANING_ORDER.indexOf(a.leaning) - LEANING_ORDER.indexOf(b.leaning);

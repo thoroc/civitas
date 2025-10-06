@@ -1,0 +1,101 @@
+import { useCallback, useMemo } from 'react';
+
+import { SeatTooltip } from '../components/HemicycleSeats';
+import {
+  buildKeyHandler,
+  buildSeatInteractions,
+} from '../components/seatInteractions';
+
+import { HemicycleLayoutResult } from './useHemicycleLayout';
+
+interface UseSeatHandlersArgs {
+  inactive: boolean;
+  index: number;
+  seat: HemicycleLayoutResult['seats'][number];
+  lockedIndex: number | null;
+  tooltip: SeatTooltip | null;
+  moveFocus: (targetIndex: number, direction?: 1 | -1) => void;
+  moveVertical: (current: number, direction: 1 | -1) => number;
+  setTooltip: React.Dispatch<React.SetStateAction<SeatTooltip | null>>;
+  setTooltipFade: React.Dispatch<React.SetStateAction<boolean>>;
+  setFocusIndex: (i: number) => void;
+  setLockedIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  setLiveMessage: (msg: string) => void;
+}
+
+/**
+ * useSeatHandlers
+ * ----------------
+ * Consolidates per-seat interaction logic (hover/focus tooltip display,
+ * locking, keyboard navigation) into a single reusable hook. This keeps the
+ * Seat component lean while preserving existing behavior.
+ */
+const useSeatHandlers = ({
+  inactive,
+  index,
+  seat,
+  lockedIndex,
+  tooltip,
+  moveFocus,
+  moveVertical,
+  setTooltip,
+  setTooltipFade,
+  setFocusIndex,
+  setLockedIndex,
+  setLiveMessage,
+}: UseSeatHandlersArgs) => {
+  const { show, hideIfUnlocked, toggleLock } = useMemo(
+    () =>
+      buildSeatInteractions({
+        inactive,
+        index,
+        seat,
+        lockedIndex,
+        setTooltip,
+        setTooltipFade,
+        setFocusIndex,
+        setLockedIndex,
+      }),
+    [
+      inactive,
+      index,
+      seat,
+      lockedIndex,
+      setTooltip,
+      setTooltipFade,
+      setFocusIndex,
+      setLockedIndex,
+    ]
+  );
+
+  const handleKeyDown = useCallback(
+    buildKeyHandler({
+      index,
+      inactive,
+      lockedIndex,
+      tooltip,
+      nav: { moveFocus, moveVertical },
+      setLockedIndex,
+      setLiveMessage,
+    }),
+    [
+      index,
+      inactive,
+      lockedIndex,
+      tooltip,
+      moveFocus,
+      moveVertical,
+      setLockedIndex,
+      setLiveMessage,
+    ]
+  );
+
+  return {
+    showTooltip: show,
+    hideTooltipIfUnlocked: hideIfUnlocked,
+    toggleLock,
+    handleKeyDown,
+  };
+};
+
+export default useSeatHandlers;
