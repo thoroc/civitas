@@ -15,20 +15,39 @@ main {
 }
 
 /* Headings rhythm */
-.h1, h1 { @apply text-3xl font-semibold tracking-tight text-primary mb-4; }
-.h2, h2 { @apply text-xl font-semibold tracking-tight text-neutral mb-3; }
-.h3, h3 { @apply text-lg font-semibold tracking-tight text-neutral mb-2; }
+.h1,
+h1 {
+  @apply text-3xl font-semibold tracking-tight text-primary mb-4;
+}
+.h2,
+h2 {
+  @apply text-xl font-semibold tracking-tight text-neutral mb-3;
+}
+.h3,
+h3 {
+  @apply text-lg font-semibold tracking-tight text-neutral mb-2;
+}
 
 /* Reusable card surface */
-.card-surface { @apply bg-base-100 shadow-sm border border-base-300 rounded-lg p-4; }
-.card-muted { @apply bg-base-200/60 border border-base-300 rounded-lg p-4; }
+.card-surface {
+  @apply bg-base-100 shadow-sm border border-base-300 rounded-lg p-4;
+}
+.card-muted {
+  @apply bg-base-200/60 border border-base-300 rounded-lg p-4;
+}
 
 /* Subtle focus ring for accessibility */
-:focus-visible { @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-base-100; }
+:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-base-100;
+}
 
 /* Utilities */
-.text-muted { @apply text-neutral/70; }
+.text-muted {
+  @apply text-neutral/70;
+}
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
 }

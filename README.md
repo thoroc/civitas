@@ -42,27 +42,48 @@ from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-### Static Export & Security Headers
+### Deployment Modes: SSR vs Static Export
 
-This project uses `output: 'export'` (static export). Next.js does NOT apply `headers()` configuration to exported
-assets. To ship security headers (CSP, HSTS, etc.) with static hosting:
+The app supports two deployment modes controlled at build time.
 
-1. A template file lives at `static-headers/_headers`.
-2. During `npm run build` the script copies it to `out/_headers` (`headers:apply`).
-3. Deploy the contents of `out/` (Netlify, Vercel static, Cloudflare Pages). Netlify and some platforms automatically
-   interpret `_headers`.
-4. If your host ignores `_headers`, configure equivalent headers in its dashboard / CDN layer.
+1. Default (SSR / ISR capable): build without `STATIC_EXPORT`. Uses Next.js routing, `headers()` API, and can later
+   adopt incremental static regeneration or dynamic routes that require a server runtime.
+2. Static Export (`output: 'export'`): build with `STATIC_EXPORT=1` (or `true`). Produces fully static assets suitable
+   for CDN-only hosting. Avoid if you plan to add server components, dynamic data fetching, or revalidation.
 
-To update headers:
+Commands:
 
-- Edit `static-headers/_headers` and (optionally) `next.config.mjs` for local dev parity.
-- Re-run `npm run build` to regenerate `out/_headers`.
+```bash
+# SSR / ISR capable build (recommended for Vercel)
+npm run build
+
+# Static export build
+STATIC_EXPORT=1 npm run build
+```
+
+When exporting, ensure any future dynamic features are guarded or avoided; otherwise prefer the default mode on Vercel.
+
+### Security Headers
+
+Security headers are defined in `next.config.mjs` via `async headers()`. Key directives:
+
+- CSP: locked to required domains (cat facts, Wikidata, GitHub raw/gist). `style-src 'self'` no longer needs
+  `'unsafe-inline'`.
+- HSTS: two-year preload (`Strict-Transport-Security`). Only effective over HTTPS.
+- Frame / embed isolation: `X-Frame-Options: SAMEORIGIN`, COOP/COEP/CORP to enable stronger cross-origin protections.
+- Referrer policy: `no-referrer` (adjust to `strict-origin-when-cross-origin` if analytics need path info).
+- Permissions Policy: disables geolocation, mic, camera, and FLoC / Topics (`interest-cohort=()`).
+- Cross-domain policy blocked: `X-Permitted-Cross-Domain-Policies: none`.
+
+If you switch to static export hosting not honoring Next.js `headers()`, replicate equivalent headers at the CDN / host
+layer.
 
 CSP maintenance tips:
 
-- Keep `connect-src` limited to required domains (cat facts API, Wikidata endpoints, raw/gist GitHub for demo data).
-- Remove `'unsafe-inline'` from `style-src` once no inline styles remain.
-- If COEP/CORP (`Cross-Origin-Embedder-Policy: require-corp`) blocks resources, relax or remove that directive.
+- Keep `connect-src` minimal; remove unused endpoints before broadening.
+- If `Cross-Origin-Embedder-Policy` blocks required third-party scripts, consider dropping COEP/CORP pair first.
+- Validate changes in browser DevTools (Security & Network panels) and watch for CSP violation reports (add a
+  `report-uri` if needed).
 
 ## Technologies used additionally
 
@@ -233,7 +254,7 @@ Structure:
 npm run snapshot:partyMeta -- --snapshot public/data/parliament-2021-01-01T00-00-00Z.json
 ```
 
-3. Commit the resulting `public/data/partyMeta.json`.
+1. Commit the resulting `public/data/partyMeta.json`.
 
 The script attempts the following inference order:
 

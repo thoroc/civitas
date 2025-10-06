@@ -18,5 +18,9 @@
     "titleBar.inactiveBackground": "#4b8bbe99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.remoteColor": "#4B8BBE"
+  "peacock.remoteColor": "#4B8BBE",
+  "deno.path": "/Users/thomas.roche/.local/share/mise/shims/deno",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/thomas.roche/.local/share/mise/shims/node"
+  }
 }

@@ -50,11 +50,14 @@ const PartyLegend = ({ members }: PartyLegendProps) => {
             className='flex items-center justify-between gap-3 group rounded-md px-2 py-1 hover:bg-base-200/80 transition-colors'
           >
             <div className='flex items-center gap-2 min-w-0'>
-              <span
+              <svg
                 aria-hidden
-                className='inline-block w-3 h-3 rounded-full border border-base-300 shrink-0'
-                style={{ backgroundColor: p.color }}
-              />
+                className='w-3 h-3 shrink-0 border border-base-300 rounded-full'
+                viewBox='0 0 12 12'
+                role='img'
+              >
+                <circle cx='6' cy='6' r='5.5' fill={p.color} stroke='none' />
+              </svg>
               <span className='truncate' title={p.label}>
                 {p.label}
               </span>
