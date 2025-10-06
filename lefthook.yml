@@ -15,6 +15,9 @@ pre-commit:
     markdownlint:
       glob: '*.{md,markdown}'
       run: npx markdownlint-cli2 {staged_files}
+    lockfile:
+      glob: 'package-lock.json'
+      run: npx lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm,registry.npmjs.org || echo "(non-blocking)"
 # pre-push:
 #   commands:
 #     lint-all:

@@ -11,6 +11,7 @@ npm run dev
 
 - `npm run lint` / `lint:fix`
 - `npm run lint:md`
+- `npm run lint:lockfile`
 - `npm run format` / `format:check`
 - `npm run type-check`
 
@@ -20,7 +21,14 @@ Functions with >2 scalar parameters must take a single options object. Interface
 
 ## Pre-commit Hooks
 
-Lefthook runs lint, prettier, markdownlint, types.
+Lefthook runs lint, prettier, markdownlint, types. Optional non-blocking lockfile integrity check runs on staged
+`package-lock.json`.
+
+## Tooling Enhancements
+
+- `prettier-plugin-packagejson` auto-sorts `package.json` fields (enforced via existing Prettier hook).
+- `lockfile-lint` ensures the npm lockfile only references HTTPS endpoints and approved hosts
+  (`npm, registry.npmjs.org`). Run manually with `npm run lint:lockfile` or rely on CI step.
 
 ## Adding Filters
 
