@@ -1,4 +1,5 @@
 'use client';
+import ActiveFiltersSummary from './components/ActiveFiltersSummary';
 import FilterSection from './components/FilterSection';
 import GenderFilterList from './components/GenderFilterList';
 import PartyFilterList from './components/PartyFilterList';
@@ -25,6 +26,8 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
           Reset
         </button>
       </div>
+
+      <ActiveFiltersSummary members={members} />
 
       <FilterSection title='Parties'>
         <PartyFilterList members={members} />
