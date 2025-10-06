@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install deps
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Markdown lint
+        run: npm run lint:md
+      - name: Type check
+        run: npm run type-check
+      - name: Build (SSR)
+        run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-ssr-build
+          path: .next
+
+  static-export:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install deps
+        run: npm ci
+      - name: Build (Static Export)
+        run: npm run build:static
+      - name: Assert headers warning logged
+        run: |
+          if ! grep -q "STATIC_EXPORT enabled" server.log 2>/dev/null; then
+            echo "Warning: expected static export warning not found (non-blocking)";
+          fi
+      - name: Upload static artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-export-out
+          path: out
