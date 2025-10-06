@@ -1,6 +1,6 @@
 # Refactor Plan & Progress
 
-_Last updated: 2025-10-06 (post lint baseline capture & no new refactors)_
+_Last updated: 2025-10-06 (post parameter options rule enforcement)_
 
 ## Completed (Phase 2)
 
@@ -23,23 +23,24 @@ _Last updated: 2025-10-06 (post lint baseline capture & no new refactors)_
 ## Current State
 
 - Working tree clean; 0 type errors; no uncommitted changes.
-- This session outcome: captured a full, up-to-date lint warning baseline (no code edits committed).
-- ESLint warnings (full snapshot this run):
+- Latest commits added `max-params` tightening (3→2) and documentation example for options-object rule.
+- New lint pressure surfaces param offenders (candidates for options interfaces) without refactor yet.
+- ESLint warnings (current snapshot):
   - `components/d3/linechart.tsx`: 2 × max-lines-per-function
   - `parliament/HemicycleReact.tsx`: max-lines-per-function
   - `parliament/components/hemicycle/HemicycleView.tsx`: max-lines-per-function
   - `parliament/SnapshotExplorer.tsx`: max-lines-per-function + complexity
   - `parliament/components/hemicycle/SeatCircles.tsx`: complexity
+  - `parliament/components/hemicycle/seatAria.ts`: max-params (3) → convert to `SeatAriaOptions`
   - `parliament/components/hemicycle/seatInteractions.ts`: complexity
   - `parliament/components/hemicycle/tooltipLayout.ts`: complexity
   - `parliament/context/filtersContext.tsx`: complexity
   - `parliament/hooks/useHemicycleLayout.ts`: max-lines (2 fns) + complexity (primary hook)
-  - `parliament/d3.ts`: no-explicit-any + max-params
-  - `parliament/exportUtils.ts`: max-params
+  - `parliament/d3.ts`: no-explicit-any + multiple max-params (≥3) → consolidate into `GeometryConfig`
+  - `parliament/exportUtils.ts`: max-params (4) → define `ExportSeatsOptions` (or similar)
   - `parliament/hooks/useSeatFocusNavigation.ts`: no-explicit-any
   - `parliament/hooks/useSeatHandlers.ts`: react-hooks/exhaustive-deps (callback dependencies)
-- Overall focus remains: shift from structural extraction → complexity & size reduction (targeting large
-  hooks/components + geometry typing / params).
+- Focus refinement: begin parameter interface conversions in small leaf utilities before large hooks.
 
 ## Pending / Next Decisions
 
@@ -110,6 +111,13 @@ _Last updated: 2025-10-06 (post lint baseline capture & no new refactors)_
 - Add dependency to `markdownlint-cli2`
 - Add new script target to lint .md files
 - Add new pre-commit hook to lint .md files
+
+### L. Parameter Options Object Adoption
+
+- Convert `seatAria` function signature to single `SeatAriaOptions`
+- Introduce `GeometryConfig` in `d3.ts` (merge ring / seat coordinate params)
+- Replace multi-arg export function with `ExportSeatsOptions` in `exportUtils.ts`
+- Audit remaining >2 param helpers in hooks after initial utility conversions
 
 ## Prioritization Guidance
 
