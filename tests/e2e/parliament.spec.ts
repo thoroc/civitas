@@ -114,5 +114,31 @@ test.describe('Parliament Page', () => {
       anyValidRelation,
       'At least one legend entry has logical counts'
     ).toBeTruthy();
+
+    // Aggregate legend totals: sum of per-party total values should equal totalMembers
+    // (Vacant seats, if any, appear as independent or separate party id already.)
+    let summedTotals = 0;
+    let summedCounts = 0;
+    for (let i = 0; i < itemCount; i++) {
+      const txt = (await partyItems.nth(i).textContent()) || '';
+      const m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if (m) {
+        summedCounts += parseInt(m[1], 10);
+        summedTotals += parseInt(m[2], 10);
+      }
+    }
+    expect(summedTotals, 'Sum of legend totals equals total members').toBe(
+      totalMembers
+    );
+    expect(
+      summedCounts <= summedTotals,
+      'Filtered counts never exceed aggregate total'
+    ).toBeTruthy();
+
+    // Seat element count should equal totalMembers (active + inactive seats rendered)
+    const seatCount = await svg.locator('[data-seat]').count();
+    expect(seatCount, 'Rendered seat nodes equals total members').toBe(
+      totalMembers
+    );
   });
 });
