@@ -1,6 +1,8 @@
 # Refactor Plan & Progress
 
-_Last updated: 2025-10-06 (post parameter options rule enforcement)_
+## Last Updated
+
+2025-10-06 (post parameter options rule enforcement)
 
 ## Completed (Phase 2)
 
@@ -108,9 +110,9 @@ _Last updated: 2025-10-06 (post parameter options rule enforcement)_
 
 ### K. markdown linting
 
-- Add dependency to `markdownlint-cli2`
-- Add new script target to lint .md files
-- Add new pre-commit hook to lint .md files
+- (DONE) Add dependency to `markdownlint-cli2`
+- (DONE) Add new script target `lint:md` to lint .md files
+- (DONE) Add new pre-commit hook to lint .md files
 
 ### L. Parameter Options Object Adoption
 

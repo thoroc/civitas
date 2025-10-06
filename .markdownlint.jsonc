@@ -1,0 +1,11 @@
+// Markdownlint configuration for Civitas project
+// Allow longer narrative lines; keep other defaults.
+{
+  "MD013": {
+    "line_length": 200,
+    "code_blocks": false,
+    "tables": false,
+    "headings": false,
+    "heading_line_length": 200,
+  },
+}
