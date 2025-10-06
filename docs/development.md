@@ -21,7 +21,7 @@ Functions with >2 scalar parameters must take a single options object. Interface
 
 ## Pre-commit Hooks
 
-Lefthook runs lint, prettier, markdownlint, types. Optional non-blocking lockfile integrity check runs on staged
+Lefthook runs lint, prettier, markdownlint, types, and a blocking lockfile integrity check on staged
 `package-lock.json`.
 
 ## Tooling Enhancements
