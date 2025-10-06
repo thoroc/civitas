@@ -3,26 +3,29 @@ import { useEffect, useState, useCallback } from 'react';
 import HemicycleReact from './HemicycleReact';
 import PartyLegend from './PartyLegend';
 import FiltersPanel from './FiltersPanel';
-import { ParliamentIndexEntry, ParliamentSnapshot } from './types';
+import { ParliamentIndexEntry, ParliamentSnapshot, validateParliamentIndex, validateParliamentSnapshot, validatePartyMetaPayload } from './schemas';
 import { ParliamentFiltersProvider, useParliamentFilters } from './filtersContext';
-
-interface PartyMetaRecord { id: string; leaning: 'left' | 'center' | 'right'; }
-interface PartyMetaPayload { parties: PartyMetaRecord[] }
+import { ZodError } from 'zod';
 
 interface SnapshotExplorerProps { initialDate?: string; }
 
 const LOCAL_KEY = 'parliamentSelectedDate';
+
+const formatZodError = (prefix: string, z: ZodError) => {
+  const issues = z.issues.slice(0, 3).map(i => `${i.path.join('.') || '(root)'}: ${i.message}`);
+  return `${prefix}: ${issues.join('; ')}${z.issues.length > 3 ? '…' : ''}`;
+};
 
 const loadPartyMetaMap = async (file?: string | null): Promise<Record<string, { leaning: 'left' | 'center' | 'right' }>> => {
   if (!file) return {};
   try {
     const res = await fetch(`/data/${file}`, { cache: 'no-store' });
     if (!res.ok) return {};
-    const json: PartyMetaPayload & { snapshotDate?: string } = await res.json();
-    if (!json?.parties) return {};
+    const json = await res.json();
+    const parsed = validatePartyMetaPayload(json);
     const map: Record<string, { leaning: 'left' | 'center' | 'right' }> = {};
-    for (const p of json.parties) {
-      if (p.id && p.leaning) map[p.id] = { leaning: p.leaning };
+    for (const p of parsed.parties) {
+      map[p.id] = { leaning: p.leaning };
     }
     return map;
   } catch {
@@ -52,9 +55,14 @@ const SnapshotInner = ({ index, initialDate }: { index: ParliamentIndexEntry[]; 
       const res = await fetch(`/data/${entry.file}`, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Snapshot HTTP ${res.status}`);
       const json = await res.json();
-      setSnapshot(json);
+      const parsed = validateParliamentSnapshot(json);
+      setSnapshot(parsed);
     } catch (e: any) {
-      setError(e.message || 'Failed loading snapshot');
+      if (e instanceof ZodError) {
+        setError(formatZodError('Snapshot schema invalid', e));
+      } else {
+        setError(e.message || 'Failed loading snapshot');
+      }
       setSnapshot(null);
     } finally {
       setLoadingSnapshot(false);
@@ -84,7 +92,7 @@ const SnapshotInner = ({ index, initialDate }: { index: ParliamentIndexEntry[]; 
   // When date changes
   useEffect(() => {
     if (!selectedEntry) return;
-    reset(); // clear filters on snapshot change
+    reset();
     loadSnapshot(selectedEntry);
     loadPartyMeta(selectedEntry);
     try { localStorage.setItem(LOCAL_KEY, selectedEntry.date); } catch {}
@@ -146,10 +154,13 @@ const SnapshotExplorer = ({ initialDate }: SnapshotExplorerProps) => {
         const res = await fetch('/data/parliament.index.json', { cache: 'no-store' });
         if (!res.ok) throw new Error(`Index HTTP ${res.status}`);
         const json = await res.json();
-        if (!Array.isArray(json)) throw new Error('Malformed index');
-        if (!cancelled) setIndex(json);
+        const parsed = validateParliamentIndex(json);
+        if (!cancelled) setIndex(parsed);
       } catch (e: any) {
-        if (!cancelled) setError(e.message || 'Failed loading index');
+        if (!cancelled) {
+          if (e instanceof ZodError) setError(formatZodError('Index schema invalid', e));
+          else setError(e.message || 'Failed loading index');
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }

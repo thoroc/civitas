@@ -1,39 +1,11 @@
-export interface Party {
-  id: string; // Wikidata QID (e.g. 'Q12345')
-  label: string;
-  color: string; // normalized CSS color (currently '#RRGGBB')
-}
-
-export interface Constituency {
-  id: string;
-  label: string;
-}
-
-export interface Member {
-  id: string; // mp QID
-  label: string;
-  constituency: Constituency | null;
-  party: Party | null;
-  gender: string | null;
-  age: number | null;
-}
-
-export interface ParliamentSnapshotMeta {
-  date: string; // ISO date used for query
-  generatedAt: string; // ISO timestamp when snapshot generated
-  total: number;
-}
-
-export interface ParliamentSnapshot {
-  meta: ParliamentSnapshotMeta;
-  members: Member[];
-}
-
-export interface ParliamentIndexEntry {
-  date: string;       // snapshot meta.date
-  safeDate: string;   // date with colons replaced by dashes
-  file: string;       // snapshot JSON filename
-  partyMetaFile: string | null; // dated party meta filename if present
-  total: number;      // seat count
-  generatedAt: string; // snapshot generation timestamp
-}
+// Deprecated: type interfaces moved to schemas.ts; this file re-exports for compatibility.
+export type { 
+  Party,
+  Constituency,
+  Member,
+  ParliamentSnapshotMeta,
+  ParliamentSnapshot,
+  ParliamentIndexEntry,
+  PartyMetaRecord,
+  PartyMetaPayload,
+} from './schemas';

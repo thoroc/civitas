@@ -41,12 +41,15 @@ const HemicycleReact = ({ members, partyMetaOverride }: HemicycleReactProps) => 
         if (!res.ok) { setPartyMetaLoaded(true); return; }
         const json = await res.json();
         if (cancelled) return;
-        if (json?.parties && Array.isArray(json.parties)) {
+        // Lazy import to avoid bundling zod schema on initial render path unnecessarily
+        const { validatePartyMetaPayload } = await import('./schemas');
+        try {
+          const parsed = validatePartyMetaPayload(json);
           const map: Record<string, { leaning: Leaning }> = {};
-          for (const p of json.parties) {
-            if (p.id && p.leaning) map[p.id] = { leaning: p.leaning };
-          }
+          for (const p of parsed.parties) map[p.id] = { leaning: p.leaning };
           setPartyMeta(map);
+        } catch {
+          // ignore schema errors; keep empty meta
         }
       } catch {
         // silent fallback
