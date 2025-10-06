@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 // Reusable regex for ISO date/time (basic lenient check; detailed parsing left to consumer)
-const isoDateTime = z.string().refine(v => !Number.isNaN(Date.parse(v)), 'Invalid ISO date/time');
+const isoDateTime = z
+  .string()
+  .refine(v => !Number.isNaN(Date.parse(v)), 'Invalid ISO date/time');
 
 export const PartySchema = z.object({
   id: z.string().min(1),
@@ -29,13 +31,15 @@ export const ParliamentSnapshotMetaSchema = z.object({
   total: z.number().int().positive(),
 });
 
-export const ParliamentSnapshotSchema = z.object({
-  meta: ParliamentSnapshotMetaSchema,
-  members: z.array(MemberSchema),
-}).refine(obj => obj.meta.total === obj.members.length, {
-  message: 'meta.total must equal members.length',
-  path: ['meta', 'total'],
-});
+export const ParliamentSnapshotSchema = z
+  .object({
+    meta: ParliamentSnapshotMetaSchema,
+    members: z.array(MemberSchema),
+  })
+  .refine(obj => obj.meta.total === obj.members.length, {
+    message: 'meta.total must equal members.length',
+    path: ['meta', 'total'],
+  });
 
 export const ParliamentIndexEntrySchema = z.object({
   date: isoDateTime,
@@ -62,13 +66,18 @@ export const PartyMetaPayloadSchema = z.object({
 export type Party = z.infer<typeof PartySchema>;
 export type Constituency = z.infer<typeof ConstituencySchema>;
 export type Member = z.infer<typeof MemberSchema>;
-export type ParliamentSnapshotMeta = z.infer<typeof ParliamentSnapshotMetaSchema>;
+export type ParliamentSnapshotMeta = z.infer<
+  typeof ParliamentSnapshotMetaSchema
+>;
 export type ParliamentSnapshot = z.infer<typeof ParliamentSnapshotSchema>;
 export type ParliamentIndexEntry = z.infer<typeof ParliamentIndexEntrySchema>;
 export type PartyMetaRecord = z.infer<typeof PartyMetaRecordSchema>;
 export type PartyMetaPayload = z.infer<typeof PartyMetaPayloadSchema>;
 
 // Helper validation wrappers
-export const validateParliamentIndex = (data: unknown) => ParliamentIndexSchema.parse(data);
-export const validateParliamentSnapshot = (data: unknown) => ParliamentSnapshotSchema.parse(data);
-export const validatePartyMetaPayload = (data: unknown) => PartyMetaPayloadSchema.parse(data);
+export const validateParliamentIndex = (data: unknown) =>
+  ParliamentIndexSchema.parse(data);
+export const validateParliamentSnapshot = (data: unknown) =>
+  ParliamentSnapshotSchema.parse(data);
+export const validatePartyMetaPayload = (data: unknown) =>
+  PartyMetaPayloadSchema.parse(data);

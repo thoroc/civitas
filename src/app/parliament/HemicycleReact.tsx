@@ -7,7 +7,7 @@
  * state, and export actions. Rendering of individual seats is delegated to
  * HemicycleSeats for clarity and reduced per-render complexity.
  */
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useRef, useState, useMemo } from 'react';
 
 import HemicycleExportBar from './components/HemicycleExportBar';
 import HemicycleSeats from './components/HemicycleSeats';
@@ -15,9 +15,11 @@ import HemicycleTooltip from './components/HemicycleTooltip';
 import { exportSvg, exportPng } from './exportUtils';
 import { useParliamentFilters } from './filtersContext';
 import useHemicycleLayout from './hooks/useHemicycleLayout';
+import useLiveAnnouncements from './hooks/useLiveAnnouncements';
+import usePartyMeta, { Leaning } from './hooks/usePartyMeta';
+import useResponsiveSeatScale from './hooks/useResponsiveSeatScale';
+import useSeatFocusNavigation from './hooks/useSeatFocusNavigation';
 import { Member } from './types';
-
-type Leaning = 'left' | 'center' | 'right';
 
 interface HemicycleReactProps {
   members: Member[];
@@ -30,7 +32,7 @@ const HemicycleReact = ({
 }: HemicycleReactProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const [seatScale, setSeatScale] = useState(1);
+  const seatScale = useResponsiveSeatScale(containerRef);
   const [tooltip, setTooltip] = useState<{
     x: number;
     y: number;
@@ -49,41 +51,9 @@ const HemicycleReact = ({
   const [tooltipFade, setTooltipFade] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0); // roving tabindex index
   const [liveMessage, setLiveMessage] = useState('');
-  // Party meta (ideological leaning) loaded from static JSON if available
-  const [partyMeta, setPartyMeta] = useState<
-    Record<string, { leaning: Leaning }>
-  >({});
 
-  useEffect(() => {
-    if (partyMetaOverride) {
-      setPartyMeta(partyMetaOverride);
-      return;
-    }
-    let cancelled = false;
-    const load = async () => {
-      try {
-        const res = await fetch('/data/partyMeta.json', { cache: 'no-store' });
-        if (!res.ok) return;
-        const json = await res.json();
-        if (cancelled) return;
-        const { validatePartyMetaPayload } = await import('./schemas');
-        try {
-          const parsed = validatePartyMetaPayload(json);
-          const map: Record<string, { leaning: Leaning }> = {};
-          for (const p of parsed.parties) map[p.id] = { leaning: p.leaning };
-          setPartyMeta(map);
-        } catch {
-          // ignore schema errors
-        }
-      } catch {
-        // silent fallback
-      }
-    };
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [partyMetaOverride]);
+  // Party meta via custom hook (ideological leaning metadata)
+  const partyMeta = usePartyMeta({ partyMetaOverride });
 
   const { apply } = useParliamentFilters();
   const filteredMembers = apply(members);
@@ -94,14 +64,13 @@ const HemicycleReact = ({
 
   const hasData = members.length > 0;
 
-  // Announce filter-driven seat count changes (avoids overriding active tooltip announcements)
-  useEffect(() => {
-    if (!tooltip && members.length) {
-      setLiveMessage(
-        `${filteredMembers.length} of ${members.length} seats visible`
-      );
-    }
-  }, [filteredMembers.length, members.length, tooltip]);
+  // Live announcements (filter counts + tooltip focus)
+  useLiveAnnouncements({
+    tooltip,
+    members,
+    filteredMembers,
+    setLiveMessage,
+  });
 
   // Geometry & seat layout via hook
   const { seats, pad, vbWidth, vbHeight, ringMeta } = useHemicycleLayout({
@@ -110,49 +79,6 @@ const HemicycleReact = ({
     partyMeta,
   });
   const [lockedIndex, setLockedIndex] = useState<number | null>(null);
-
-  const findRingForIndex = (idx: number) =>
-    ringMeta.findIndex(r => idx >= r.start && idx <= r.end);
-  const moveVertical = (current: number, direction: 1 | -1) => {
-    const ringIdx = findRingForIndex(current);
-    if (ringIdx === -1) return current;
-    const targetRing = ringMeta[ringIdx + direction];
-    if (!targetRing) return current;
-    const ring = ringMeta[ringIdx];
-    const offsetInRing = current - ring.start;
-    // scale position proportionally into target ring
-    const ratio = offsetInRing / (ring.size - 1 || 1);
-    const targetOffset = Math.round(ratio * (targetRing.size - 1));
-    return targetRing.start + targetOffset;
-  };
-
-  // ResizeObserver for responsive seat scaling
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const el = containerRef.current;
-    const observer = new ResizeObserver(entries => {
-      for (const entry of entries) {
-        const w = entry.contentRect.width;
-        const h = entry.contentRect.height || w / 2;
-        const scale = Math.min(3.4, Math.max(0.9, Math.min(w / 360, h / 200)));
-        setSeatScale(scale);
-      }
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Live region updates when tooltip target changes
-  useEffect(() => {
-    if (tooltip) {
-      const partyPart = tooltip.member.party?.label
-        ? `, ${tooltip.member.party.label}`
-        : '';
-      setLiveMessage(
-        `Seat ${tooltip.i + 1}: ${tooltip.member.label}${partyPart}`
-      );
-    }
-  }, [tooltip]);
 
   // Export helpers via utilities
   const downloadSVG = () => {
@@ -165,33 +91,15 @@ const HemicycleReact = ({
     exportPng(svgRef.current, 'hemicycle.png', 3);
   };
 
-  // Move focus helper
-  const moveFocus = (targetIndex: number, direction: 1 | -1 = 1) => {
-    if (targetIndex < 0 || targetIndex >= seats.length) return;
-    // Skip inactive seats
-    let idx = targetIndex;
-    while (idx >= 0 && idx < seats.length && !seats[idx].active) {
-      idx += direction;
-    }
-    if (idx < 0 || idx >= seats.length) return;
-    setFocusIndex(idx);
-    const seat = seats[idx];
-    if (seat.active) {
-      setTooltip({ x: seat.x, y: seat.y, i: idx, member: seat.member });
-      setTooltipFade(true);
-    } else {
-      setTooltip(null);
-    }
-    requestAnimationFrame(() => {
-      const svg = svgRef.current;
-      if (!svg) return;
-      const nodeList = svg.querySelectorAll('g[data-seat]');
-      const targetNode = nodeList.item(idx) as SVGGElement | null;
-      if (targetNode) {
-        targetNode.focus();
-      }
-    });
-  };
+  // Focus navigation helpers via hook
+  const { moveFocus, moveVertical } = useSeatFocusNavigation({
+    seats,
+    ringMeta,
+    svgRef,
+    setFocusIndex,
+    setTooltip: t => setTooltip(t),
+    setTooltipFade,
+  });
 
   return (
     <div ref={containerRef} className='w-full mx-auto'>
