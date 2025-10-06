@@ -2,7 +2,7 @@
 
 ## Last Updated
 
-2025-10-06 (post parameter options rule enforcement)
+2025-10-06 (geometry extraction & layout refactor applied)
 
 ## Completed (Phase 2)
 
@@ -15,6 +15,10 @@
 
 ## Completed (Phase 3 – Session Updates)
 
+- Refactored `SnapshotExplorer.tsx` into modular hooks + components (removed max-lines + complexity warnings)
+- Commit: `e911be8 refactor(snapshot): extract hooks and components to reduce complexity`
+- Introduced `useHemicycleState` + `useHemicycleTooltipState`; slimmed `HemicycleReact` (removed max-lines warning)
+- Decomposed `HemicycleView` into subcomponents (no remaining warnings)
 - Added component barrels: `components/hemicycle/index.ts`, `components/filters/index.ts`
 - Relocated `filtersContext.tsx` → `context/filtersContext.tsx` and updated all imports
 - Consolidated filter component imports via barrel in `FiltersPanel.tsx`
@@ -22,43 +26,41 @@
 - Normalized import ordering (axios/WBK, etc.)
 - Commit: `dd7826a refactor(parliament): add component barrels and relocate filters context`
 
+## Completed (Phase 4 – Geometry & Layout)
+
+- Extracted geometry + allocation + party grouping into pure modules under `parliament/geometry/`
+- Refactored `useHemicycleLayout` to orchestration-only hook using new pure modules
+- Removed outdated ESLint warnings snapshot (now 0 warnings)
+- Updated TODO to reflect clean state and future targets
+- (Pending commit for geometry/layout extraction refactor) _— commit next step_
+
 ## Current State
 
-- Working tree clean; 0 type errors; no uncommitted changes.
-- Latest commits added `max-params` tightening (3→2) and documentation example for options-object rule.
-- New lint pressure surfaces param offenders (candidates for options interfaces) without refactor yet.
-- Playwright E2E infrastructure added (config: prod/dev switch via `PLAYWRIGHT_PROD`, trace on-first-retry,
-  multi-browser projects).
-- Added E2E tests: parliament (hemicycle + legend + meta assertions), homepage (title/nav/heading), cat (marked fixme in
-  dev mode).
-- Added GitHub Actions `e2e` job (build → install browsers → run prod-mode tests → upload artifacts).
-- Strengthened parliament test: snapshot meta total > 0, legend structural checks (count/total pattern, logical
-  relation).
-- ESLint warnings (current snapshot):
-  - `components/d3/linechart.tsx`: 2 × max-lines-per-function
-  - `parliament/HemicycleReact.tsx`: max-lines-per-function
-  - `parliament/components/hemicycle/HemicycleView.tsx`: max-lines-per-function
-  - `parliament/SnapshotExplorer.tsx`: max-lines-per-function + complexity
-  - `parliament/components/hemicycle/SeatCircles.tsx`: complexity
-  - `parliament/components/hemicycle/seatAria.ts`: max-params (3) → convert to `SeatAriaOptions`
-  - `parliament/components/hemicycle/seatInteractions.ts`: complexity
-  - `parliament/components/hemicycle/tooltipLayout.ts`: complexity
-  - `parliament/context/filtersContext.tsx`: complexity
-  - `parliament/hooks/useHemicycleLayout.ts`: max-lines (2 fns) + complexity (primary hook)
-  - `parliament/d3.ts`: no-explicit-any + multiple max-params (≥3) → consolidate into `GeometryConfig`
-  - `parliament/exportUtils.ts`: max-params (4) → define `ExportSeatsOptions` (or similar)
-  - `parliament/hooks/useSeatFocusNavigation.ts`: no-explicit-any
-  - `parliament/hooks/useSeatHandlers.ts`: react-hooks/exhaustive-deps (callback dependencies)
-- Focus refinement: begin parameter interface conversions in small leaf utilities before large hooks.
+- Working tree contains uncommitted geometry/layout refactor changes.
+- Lint: 0 warnings / 0 errors; TypeScript: 0 errors.
+- Playwright E2E infrastructure active (multi-browser, trace on first retry).
+- E2E tests: parliament (hemicycle + legend + meta), homepage, cat (fixme in dev).
+- GitHub Actions `e2e` job in place.
+- Strengthened parliament test (legend structural + totals checks).
+- Geometry & allocation logic is now isolated and pure (easier future unit tests).
+- Remaining refactor candidates (no active warnings):
+  - `parliament/d3.ts`: introduce `GeometryConfig` (param consolidation) + stronger typing.
+  - `parliament/exportUtils.ts`: wrap multi-arg export into `ExportSeatsOptions`.
+  - `parliament/context/filtersContext.tsx`: extract `apply()` + predicates.
+
+### In Progress
+
+- Planning parameter/options object consolidation (survey phase; implementation not started).
+- Prioritization discussion pending for next concrete coding step (filters context vs. export utils vs. d3 config).
 
 ## Pending / Next Decisions
 
-- **plan-next-phase**: Choose which warning cluster to address first (geometry, snapshot UI, or context logic).
-- **e2e-refactor-parliament**: Reduce lines/complexity by extracting polling + legend assertions.
-- **e2e-legend-sum-assertion**: Sum party legend counts and compare to total members (allow vacancy delta if
-  applicable).
-- **e2e-seat-count-assertion**: Count rendered seat nodes (circle/path) vs total members for integrity.
-- **e2e-tighten-polling**: Reassess need for 25s polling window after stability; aim for 12–15s.
+- **select-next-track**: Choose immediate focus (Filters context simplification vs Options object rollout vs Export
+  utilities cleanup).
+- **e2e-refactor-parliament**: Extract polling + legend assertions to reduce test file complexity.
+- **e2e-legend-sum-assertion**: Sum party legend counts vs total members (allow vacancy delta).
+- **e2e-seat-count-assertion**: Count rendered seat nodes vs total members for integrity.
+- **e2e-tighten-polling**: Reduce 25s polling window to 12–15s after stability confirmation.
 
 ## Candidate Next Refactors
 
@@ -88,9 +90,10 @@
 
 ### E. useHemicycleLayout Heavy Function
 
-- Split geometry calculations (rings, seat placement) into pure utilities (`d3.ts` or `layout/geometry.ts`)
-- Wrap multi-parameter geometry calls into a config object to reduce `max-params`
-- Add thin memo boundaries per derived structure (rings, seat positions, color mapping)
+- (DONE) Geometry & allocation split into pure modules (`parliament/geometry/`)
+- Wrap multi-parameter geometry calls into a config object to reduce `max-params` (optional follow-up)
+- Add thin memo boundaries per derived structure (rings, seat positions, color mapping) (evaluate necessity
+  post-extraction)
 
 ### F. SnapshotExplorer / Filters / Legend
 
@@ -105,7 +108,7 @@
 ### H. d3 Utilities Typing
 
 - Replace remaining `any` with explicit structural types
-- Introduce a `GeometryConfig` interface to remove `max-params` warning
+- Introduce a `GeometryConfig` interface to consolidate parameters (moves under parameter options adoption)
 
 ### I. Documentation & API Surface
 
@@ -161,8 +164,8 @@
 ## Prioritization Guidance
 
 1. High user impact: reduce SnapshotExplorer + HemicycleReact length
-2. High technical debt payoff: isolate geometry & layout math (E + H)
-3. Medium: simplify filters context (G) to ease future test introduction
+2. High technical debt payoff: filters context simplification (G) & parameter objects (L)
+3. Medium: export utilities consolidation & d3 typing (H/L)
 4. Low: docs + root barrel (I) once structural churn slows
 
 ## Definition of Done for Each Refactor
@@ -181,9 +184,9 @@
 
 Select one focused track:
 
-- Complexity: Split `useHemicycleLayout` (E + H)
-- UI Decomposition: Break down `SnapshotExplorer` (F)
 - Logic Isolation: Extract `apply()` + predicates from filters context (G)
+- Parameter Objects: Implement `ExportSeatsOptions` + `GeometryConfig` (L/H)
+- E2E Assertions: Legend sum + seat count (test integrity improvements)
 
 ---
 
