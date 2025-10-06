@@ -65,9 +65,54 @@ test.describe('Parliament Page', () => {
       timeout: 15000,
     });
 
-    // Legend heading
+    // Legend heading + structural assertions
     await expect(page.getByText(/party totals/i)).toBeVisible({
       timeout: 15000,
     });
+
+    // Assert snapshot meta line contains a numeric total members value (> 0)
+    const metaLine = page.getByText(/snapshot date:/i);
+    const metaText = await metaLine.textContent();
+    expect(metaText).toBeTruthy();
+    const totalMatch = metaText!.match(/Total members:\s*(\d+)/i);
+    expect(totalMatch, 'Total members pattern present').toBeTruthy();
+    const totalMembers = parseInt(totalMatch![1], 10);
+    expect(totalMembers).toBeGreaterThan(0);
+
+    // Party legend should list at least 3 parties (historically true for data set)
+    const legend = page.getByRole('list', { name: /party legend/i });
+    await expect(legend).toBeVisible();
+    const partyItems = legend.locator('li');
+    const countParties = await partyItems.count();
+    expect(countParties).toBeGreaterThan(2);
+
+    // Each legend item should contain count/total pattern e.g., "12 / 50" or "12/ 50"
+    const itemCount = await partyItems.count();
+    for (let i = 0; i < itemCount; i++) {
+      const text = (await partyItems.nth(i).textContent()) || '';
+      expect(
+        /\d+\s*\/\s*\d+/.test(text),
+        `legend item ${i} has count/total`
+      ).toBeTruthy();
+    }
+
+    // Ensure at least one party shows filtered state or equal state (count <= total)
+    let anyValidRelation = false;
+    for (let i = 0; i < itemCount; i++) {
+      const txt = (await partyItems.nth(i).textContent()) || '';
+      const m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if (m) {
+        const c = parseInt(m[1], 10);
+        const t = parseInt(m[2], 10);
+        if (c <= t && t > 0) {
+          anyValidRelation = true;
+          break;
+        }
+      }
+    }
+    expect(
+      anyValidRelation,
+      'At least one legend entry has logical counts'
+    ).toBeTruthy();
   });
 });
