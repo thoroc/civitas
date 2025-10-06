@@ -55,7 +55,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^6.1.1",
     "lefthook": "^1.13.6",
-    "lockfile-lint": "^4.13.0",
+    "lockfile-lint": "^4.14.1",
     "markdownlint-cli2": "^0.14.0",
     "postcss": "^8",
     "prettier": "^3.6.2",
