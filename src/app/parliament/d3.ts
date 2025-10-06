@@ -4,6 +4,16 @@ type Score = number;
 type NumberOfElements = number;
 type Size = number;
 
+// Consolidated geometry config for repeated parameter groups
+export interface GeometryConfig {
+  size: Size; // total number of seats/items
+  radius: Radius; // base radius (r0)
+}
+
+export interface GeometryConfigWithN extends GeometryConfig {
+  n: number; // number of rings
+}
+
 export type Ring = Item[];
 export type Item = {
   x: number;
@@ -47,6 +57,9 @@ export const findA = ({ size, n, radius }: FindAOptions): Distance => {
   return x / y;
 };
 
+export const findAWithConfig = (cfg: GeometryConfigWithN): Distance =>
+  findA({ size: cfg.size, n: cfg.n, radius: cfg.radius });
+
 interface GetScoreOptions {
   size: Size;
   n: number;
@@ -56,6 +69,9 @@ interface GetScoreOptions {
 export const getScore = ({ size, n, radius }: GetScoreOptions): Score => {
   return Math.abs((findA({ size, n, radius }) * n) / radius - 5 / 7);
 };
+
+export const getScoreWithConfig = (cfg: GeometryConfigWithN): Score =>
+  getScore({ size: cfg.size, n: cfg.n, radius: cfg.radius });
 
 export const findN = (size: Size, radius: Radius): NumberOfElements => {
   let n = Math.floor(Math.log(size) / Math.log(2)) || 1;
@@ -77,6 +93,9 @@ export const findN = (size: Size, radius: Radius): NumberOfElements => {
 
   return n;
 };
+
+export const findNFromConfig = (cfg: GeometryConfig): NumberOfElements =>
+  findN(cfg.size, cfg.radius);
 
 export const nextRing = (rings: Ring[], ringProgress: number[]): number => {
   let result: number = 0;

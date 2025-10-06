@@ -1,4 +1,11 @@
-import { findA, findN, distribute, populateRings, Item } from '../d3';
+import {
+  findAWithConfig,
+  findNFromConfig,
+  distribute,
+  populateRings,
+  Item,
+  GeometryConfigWithN,
+} from '../d3';
 
 export interface GeometryResult {
   ringMeta: { start: number; end: number; size: number }[];
@@ -15,8 +22,12 @@ export const computeHemicycleGeometry = (
   totalSeats: number
 ): GeometryResult => {
   const r0 = BASE_RADIUS;
-  const numberOfRings = findN(totalSeats, r0);
-  const a0 = findA({ size: totalSeats, n: numberOfRings, radius: r0 });
+  const baseConfig = { size: totalSeats, radius: r0 } as const;
+  const numberOfRings = findNFromConfig(baseConfig);
+  const a0 = findAWithConfig({
+    ...baseConfig,
+    n: numberOfRings,
+  } as GeometryConfigWithN);
   const ringRadiis: number[] = [];
   for (let i = 1; i <= numberOfRings; i++) ringRadiis[i] = r0 - (i - 1) * a0;
   const seatsPerRing = distribute(ringRadiis, totalSeats);
