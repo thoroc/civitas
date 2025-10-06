@@ -68,7 +68,7 @@ export const nextRing = (rings: Ring[], ringProgress: number[]): number => {
   let progressQuota: number = 0;
   let tQuota: number = 0;
 
-  for (let i in rings) {
+  for (const i in rings) {
     tQuota = parseFloat(((ringProgress[i] || 0) / rings[i].length).toFixed(10));
 
     if (!progressQuota || tQuota < progressQuota) {
@@ -76,7 +76,7 @@ export const nextRing = (rings: Ring[], ringProgress: number[]): number => {
     }
   }
 
-  for (let j in rings) {
+  for (const j in rings) {
     tQuota = parseFloat(((ringProgress[j] || 0) / rings[j].length).toFixed(10));
 
     if (tQuota == progressQuota) {
@@ -91,7 +91,7 @@ export const distribute = (votes: number[], seats: number): number[] => {
   // initial settings for divisor finding
   let voteSum = 0;
 
-  for (let party in votes) {
+  for (const party in votes) {
     voteSum += votes[party];
   }
 
@@ -121,9 +121,9 @@ const calculateSeats = (
   votes: number[],
   divisor: number
 ): SeatsDistribution => {
-  let distribution: number[] = [];
+  const distribution: number[] = [];
   let seats = 0;
-  for (let party in votes) {
+  for (const party in votes) {
     distribution[party] = Math.round(votes[party] / divisor);
     seats += distribution[party];
   }
@@ -137,20 +137,20 @@ export const populateRings = (
   a0: number
 ): Ring[] => {
   let radius: number;
-  let points: Ring[] = [];
+  const points: Ring[] = [];
 
   // build seats
   // loop rings
   for (let j = 1; j <= numberOfRings; j++) {
-    let ring = [];
+    const ring = [];
     // calculate ring-specific radius
     radius = r0 - (j - 1) * a0;
     // calculate ring-specific distance
-    let a = (Math.PI * radius) / (seatsPerRing[j] - 1 || 1);
+    const a = (Math.PI * radius) / (seatsPerRing[j] - 1 || 1);
 
     // loop points
     for (let k = 0; k <= seatsPerRing[j] - 1; k++) {
-      let point: Item = getCoordinates(radius, k * a);
+      const point: Item = getCoordinates(radius, k * a);
       point.a = 0.4 * a0;
       ring.push(point);
     }

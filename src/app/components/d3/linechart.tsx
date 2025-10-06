@@ -34,7 +34,7 @@ const Linechart = (props: LinechartProps) => {
 
     d3.csv(
       'https://gist.githubusercontent.com/thoroc/52cde20a73464c8182ad2a737e69267f/raw/6b8c503c4fc1e46a6f9bc3c5091d2385937de5eb/appl.csv'
-    ).then((data) => {
+    ).then(data => {
       const datapoints: Datapoint[] = data.map(
         (d: d3.DSVRowString<string>) => ({
           date: new Date(d.date),
@@ -45,7 +45,7 @@ const Linechart = (props: LinechartProps) => {
       const x = d3
         .scaleUtc()
         .domain(
-          d3.extent(datapoints, function (d: Datapoint) {
+          d3.extent(datapoints, (d: Datapoint) => {
             return d.date;
           }) as unknown as [Date, Date]
         )
@@ -54,14 +54,14 @@ const Linechart = (props: LinechartProps) => {
       // Declare the y (vertical position) scale.
       const y = d3
         .scaleLinear()
-        .domain([0, d3.max(datapoints, (d) => d.close)] as number[])
+        .domain([0, d3.max(datapoints, d => d.close)] as number[])
         .range([height - marginBottom, marginTop]);
 
       // Declare the line generator.
       const line = d3
         .line<Datapoint>()
-        .x((d) => x(d.date))
-        .y((d) => y(d.close));
+        .x(d => x(d.date))
+        .y(d => y(d.close));
 
       // Add the x-axis.
       svg
@@ -79,15 +79,15 @@ const Linechart = (props: LinechartProps) => {
         .append('g')
         .attr('transform', `translate(${marginLeft},0)`)
         .call(d3.axisLeft(y).ticks(height / 40))
-        .call((g) => g.select('.domain').remove())
-        .call((g) =>
+        .call(g => g.select('.domain').remove())
+        .call(g =>
           g
             .selectAll('.tick line')
             .clone()
             .attr('x2', width - marginLeft - marginRight)
             .attr('stroke-opacity', 0.1)
         )
-        .call((g) =>
+        .call(g =>
           g
             .append('text')
             .attr('x', -marginLeft)
@@ -107,7 +107,7 @@ const Linechart = (props: LinechartProps) => {
     });
   }, [height, width]);
 
-  return <svg width={width} height={height} id="linechart" ref={ref} />;
+  return <svg width={width} height={height} id='linechart' ref={ref} />;
 };
 
 export default Linechart;

@@ -9,8 +9,8 @@
  */
 import { useRef, useState, useMemo } from 'react';
 
-import HemicycleView from './components/hemicycle/HemicycleView';
-import { useParliamentFilters } from './filtersContext';
+import { HemicycleView } from './components/hemicycle';
+import { useParliamentFilters } from './context/filtersContext';
 import useHemicycleExport from './hooks/useHemicycleExport';
 import useHemicycleLayout from './hooks/useHemicycleLayout';
 import useLiveAnnouncements from './hooks/useLiveAnnouncements';

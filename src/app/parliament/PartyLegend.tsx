@@ -1,5 +1,5 @@
 'use client';
-import { useParliamentFilters } from './filtersContext';
+import { useParliamentFilters } from './context/filtersContext';
 import { Member } from './types';
 
 interface PartyLegendProps {

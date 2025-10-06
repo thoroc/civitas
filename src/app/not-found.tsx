@@ -6,7 +6,7 @@ const NotFound = () => {
       <h2>Not Found</h2>
       <p>Could not find requested resource</p>
       <p>
-        View <Link href="/">all posts</Link>
+        View <Link href='/'>all posts</Link>
       </p>
     </div>
   );

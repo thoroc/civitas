@@ -24,12 +24,12 @@ const Barchart = () => {
     // Parse the Data
     d3.csv(
       'https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv'
-    ).then(function (data) {
+    ).then(data => {
       // X axis
       const x = d3
         .scaleBand()
         .range([0, width])
-        .domain(data.map((d) => d.Country))
+        .domain(data.map(d => d.Country))
         .padding(0.2);
       svg
         .append('g')
@@ -48,15 +48,15 @@ const Barchart = () => {
         .selectAll('mybar')
         .data(data)
         .join('rect')
-        .attr('x', (d) => x(d.Country) ?? 0)
-        .attr('y', (d) => y(Number(d.Value))) // Convert the value to a number
+        .attr('x', d => x(d.Country) ?? 0)
+        .attr('y', d => y(Number(d.Value))) // Convert the value to a number
         .attr('width', x.bandwidth())
-        .attr('height', (d) => height - y(Number(d.Value))) // Convert the value to a number
+        .attr('height', d => height - y(Number(d.Value))) // Convert the value to a number
         .attr('fill', '#5f0f40');
     });
   }, []);
 
-  return <svg width={460} height={400} id="barchart" ref={ref} />;
+  return <svg width={460} height={400} id='barchart' ref={ref} />;
 };
 
 export default Barchart;

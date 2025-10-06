@@ -8,7 +8,7 @@ import React, {
   useCallback,
 } from 'react';
 
-import { Member } from './types';
+import { Member } from '../types';
 
 export interface ParliamentFiltersState {
   parties: string[]; // party ids to include (empty => all)

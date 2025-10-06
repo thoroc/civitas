@@ -5,7 +5,7 @@ import { ZodError } from 'zod';
 import {
   ParliamentFiltersProvider,
   useParliamentFilters,
-} from './filtersContext';
+} from './context/filtersContext';
 import FiltersPanel from './FiltersPanel';
 import HemicycleReact from './HemicycleReact';
 import PartyLegend from './PartyLegend';

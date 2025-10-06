@@ -1,10 +1,12 @@
 'use client';
-import ActiveFiltersSummary from './components/filters/ActiveFiltersSummary';
-import AgeRangeFilter from './components/filters/AgeRangeFilter';
-import FilterSection from './components/filters/FilterSection';
-import GenderFilterList from './components/filters/GenderFilterList';
-import PartyFilterList from './components/filters/PartyFilterList';
-import { useParliamentFilters } from './filtersContext';
+import {
+  ActiveFiltersSummary,
+  AgeRangeFilter,
+  FilterSection,
+  GenderFilterList,
+  PartyFilterList,
+} from './components/filters';
+import { useParliamentFilters } from './context/filtersContext';
 import { Member } from './types';
 
 interface FiltersPanelProps {
