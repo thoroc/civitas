@@ -218,7 +218,7 @@ const HemicycleReact = ({ members, partyMetaOverride }: HemicycleReactProps) => 
     const vbWidthLocal = r0 * 2 + padLocal * 2;
     const vbHeightLocal = r0 + padLocal * 2;
     return { seats: mappedSeats, pad: padLocal, vbWidth: vbWidthLocal, vbHeight: vbHeightLocal, ringMeta };
-  }, [members, filteredIds, partyMeta, partyMetaLoaded]);
+  }, [members, filteredIds, partyMeta]);
   const aspectPaddingPercent = (vbHeight / vbWidth) * 100;
   const [lockedIndex, setLockedIndex] = useState<number | null>(null);
 
