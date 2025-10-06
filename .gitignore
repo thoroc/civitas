@@ -37,3 +37,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.cache
+
+# IDEs and editors
+.vscode/*
+opencode.json

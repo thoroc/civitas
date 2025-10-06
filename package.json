@@ -7,6 +7,12 @@
     "build": "next build && npm run headers:apply",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "pre-commit": "lefthook run pre-commit",
+    "prepare": "lefthook install",
     "headers:apply": "cp static-headers/_headers out/_headers || echo 'skip headers copy (out/ missing)'",
     "snapshot:parliament": "ts-node --project scripts/tsconfig.scripts.json scripts/generateParliamentSnapshot.ts --date 2021-01-01T00-00-00Z",
     "snapshot:partyMeta": "ts-node --project scripts/tsconfig.scripts.json scripts/generatePartyMeta.ts --snapshot public/data/parliament-2021-01-01T00-00-00Z.json",
@@ -18,10 +24,10 @@
     "csv-loader": "^3.0.5",
     "d3": "^7.8.5",
     "next": "14.2.33",
+    "p-limit": "^5.0.0",
     "react": "^18",
     "react-dom": "^18",
     "wikibase-sdk": "^10.0.0",
-    "p-limit": "^5.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -29,13 +35,21 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.7.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^6.1.1",
+    "lefthook": "^1.13.6",
     "postcss": "^8",
+    "prettier": "^3.6.2",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }

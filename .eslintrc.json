@@ -1,3 +1,61 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "@typescript-eslint/recommended", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react-hooks", "import", "prettier"],
+  "rules": {
+    // Prettier integration
+    "prettier/prettier": "error",
+
+    // TypeScript specific
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/prefer-const": "error",
+    "@typescript-eslint/no-var-requires": "error",
+
+    // React Hooks
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    // Import rules
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-unresolved": "off",
+
+    // General code quality
+    "no-console": "warn",
+    "no-debugger": "error",
+    "no-alert": "error",
+    "prefer-const": "error",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-arrow-callback": "error",
+    "arrow-spacing": "error",
+    "no-duplicate-imports": "error",
+
+    // SOLID principles enforcement
+    "max-lines-per-function": ["warn", { "max": 50 }],
+    "complexity": ["warn", { "max": 10 }],
+    "max-depth": ["warn", { "max": 4 }],
+    "max-params": ["warn", { "max": 3 }]
+  },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.ts"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
 }
