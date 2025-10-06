@@ -32,49 +32,44 @@ export const buildKeyHandler = ({
     if (inactive) return;
     const key = e.key;
     if (key.startsWith('Arrow')) e.preventDefault();
-    switch (key) {
-      case 'ArrowRight':
-        nav.moveFocus(index + 1, 1);
-        break;
-      case 'ArrowLeft':
-        nav.moveFocus(index - 1, -1);
-        break;
-      case 'ArrowUp':
-        nav.moveFocus(nav.moveVertical(index, -1), -1);
-        break;
-      case 'ArrowDown':
-        nav.moveFocus(nav.moveVertical(index, 1), 1);
-        break;
-      case 'Home':
+
+    const lockToggle = () => {
+      e.preventDefault();
+      setLockedIndex(prev => (prev === index ? null : index));
+      if (tooltip) {
+        setLiveMessage(
+          `Seat ${index + 1} ${lockedIndex === index ? 'unlocked' : 'locked'}`
+        );
+      }
+    };
+
+    const actions: Record<string, () => void> = {
+      ArrowRight: () => nav.moveFocus(index + 1, 1),
+      ArrowLeft: () => nav.moveFocus(index - 1, -1),
+      ArrowUp: () => nav.moveFocus(nav.moveVertical(index, -1), -1),
+      ArrowDown: () => nav.moveFocus(nav.moveVertical(index, 1), 1),
+      Home: () => {
         e.preventDefault();
         nav.moveFocus(0, 1);
-        break;
-      case 'End':
+      },
+      End: () => {
         e.preventDefault();
         nav.moveFocus(Number.MAX_SAFE_INTEGER, -1);
-        break;
-      case 'PageDown':
+      },
+      PageDown: () => {
         e.preventDefault();
         nav.moveFocus(index + 10, 1);
-        break;
-      case 'PageUp':
+      },
+      PageUp: () => {
         e.preventDefault();
         nav.moveFocus(index - 10, -1);
-        break;
-      case 'Enter':
-      case ' ': {
-        e.preventDefault();
-        setLockedIndex(prev => (prev === index ? null : index));
-        if (tooltip) {
-          setLiveMessage(
-            `Seat ${index + 1} ${lockedIndex === index ? 'unlocked' : 'locked'}`
-          );
-        }
-        break;
-      }
-      default:
-        break;
-    }
+      },
+      Enter: lockToggle,
+      ' ': lockToggle,
+    };
+
+    const fn = actions[key];
+    if (fn) fn();
   };
 };
 
