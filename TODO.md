@@ -27,6 +27,13 @@
 - Working tree clean; 0 type errors; no uncommitted changes.
 - Latest commits added `max-params` tightening (3→2) and documentation example for options-object rule.
 - New lint pressure surfaces param offenders (candidates for options interfaces) without refactor yet.
+- Playwright E2E infrastructure added (config: prod/dev switch via `PLAYWRIGHT_PROD`, trace on-first-retry,
+  multi-browser projects).
+- Added E2E tests: parliament (hemicycle + legend + meta assertions), homepage (title/nav/heading), cat (marked fixme in
+  dev mode).
+- Added GitHub Actions `e2e` job (build → install browsers → run prod-mode tests → upload artifacts).
+- Strengthened parliament test: snapshot meta total > 0, legend structural checks (count/total pattern, logical
+  relation).
 - ESLint warnings (current snapshot):
   - `components/d3/linechart.tsx`: 2 × max-lines-per-function
   - `parliament/HemicycleReact.tsx`: max-lines-per-function
@@ -47,6 +54,11 @@
 ## Pending / Next Decisions
 
 - **plan-next-phase**: Choose which warning cluster to address first (geometry, snapshot UI, or context logic).
+- **e2e-refactor-parliament**: Reduce lines/complexity by extracting polling + legend assertions.
+- **e2e-legend-sum-assertion**: Sum party legend counts and compare to total members (allow vacancy delta if
+  applicable).
+- **e2e-seat-count-assertion**: Count rendered seat nodes (circle/path) vs total members for integrity.
+- **e2e-tighten-polling**: Reassess need for 25s polling window after stability; aim for 12–15s.
 
 ## Candidate Next Refactors
 
