@@ -38,8 +38,11 @@ Lint now flags only warnings for size/complexity in multiple components. No new 
 
 ### D. FiltersPanel Modularization
 
-- Break into: `FilterSection`, `PartyFilterList`, `ActiveFiltersSummary`
-- Isolate badge toggle rendering + derive counts in a memoized helper
+- (DONE) Extract `FilterBadge` & `FilterSection`
+- (DONE) Extract `PartyFilterList` and `GenderFilterList`
+- (DONE) Add `ActiveFiltersSummary` with memoized derivations
+- (DONE) Centralize per-filter option computation inside dedicated list components
+- Potential: further extract AgeRange inputs if complexity grows
 
 ### E. useHemicycleLayout Heavy Function
 
