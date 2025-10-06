@@ -69,15 +69,17 @@ const useSeatHandlers = ({
   );
 
   const handleKeyDown = useCallback(
-    buildKeyHandler({
-      index,
-      inactive,
-      lockedIndex,
-      tooltip,
-      nav: { moveFocus, moveVertical },
-      setLockedIndex,
-      setLiveMessage,
-    }),
+    (e: React.KeyboardEvent<SVGGElement>) => {
+      return buildKeyHandler({
+        index,
+        inactive,
+        lockedIndex,
+        tooltip,
+        nav: { moveFocus, moveVertical },
+        setLockedIndex,
+        setLiveMessage,
+      })(e);
+    },
     [
       index,
       inactive,

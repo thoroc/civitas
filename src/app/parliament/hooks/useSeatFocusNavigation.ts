@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 
+import { Member } from '../types';
+
 import { HemicycleLayoutResult } from './useHemicycleLayout';
 
 interface UseSeatFocusNavigationParams {
@@ -7,7 +9,9 @@ interface UseSeatFocusNavigationParams {
   ringMeta: { start: number; end: number; size: number }[];
   svgRef: React.RefObject<SVGSVGElement>;
   setFocusIndex: (i: number) => void;
-  setTooltip: (t: any) => void; // kept generic to avoid circular type import
+  setTooltip: (
+    t: { x: number; y: number; i: number; member: Member } | null
+  ) => void;
   setTooltipFade: (b: boolean) => void;
 }
 

@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -37,9 +38,9 @@ export const Navbar = (props: NavbarProps) => {
   return (
     <div className='navbar bg-base-100/90 border-b border-base-300 backdrop-blur supports-[backdrop-filter]:bg-base-100/70'>
       <div className='max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-6'>
-        <a className='font-semibold text-primary text-lg' href='/'>
+        <Link className='font-semibold text-primary text-lg' href='/'>
           {text}
-        </a>
+        </Link>
         <nav className='flex items-center gap-1' aria-label='Main navigation'>
           {props.navItems?.map((item, index) => {
             const active = pathname === `/${item.href}`;

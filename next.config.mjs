@@ -59,8 +59,12 @@ const enableStaticExport = (() => {
 })();
 
 const nextConfig = {
+  outputFileTracingRoot: process.cwd(),
   ...(enableStaticExport ? { output: 'export' } : {}),
   async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
     return [
       {
         source: '/:path*',

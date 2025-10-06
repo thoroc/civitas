@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
+
+export const dynamic = 'force-static';
 import { Navbar } from './components/navigation';
 
 const inter = Inter({ subsets: ['latin'] });

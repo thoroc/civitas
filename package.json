@@ -2,6 +2,9 @@
   "name": "civitas",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18 <25"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build && npm run headers:apply",
@@ -28,7 +31,7 @@
     "axios": "^1.6.7",
     "csv-loader": "^3.0.5",
     "d3": "^7.8.5",
-    "next": "14.2.33",
+    "next": "^15.5.4",
     "p-limit": "^5.0.0",
     "react": "^18",
     "react-dom": "^18",
@@ -46,7 +49,7 @@
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.7.2",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.4",
+    "eslint-config-next": "^15.5.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",

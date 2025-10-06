@@ -13,7 +13,11 @@ export type Item = {
   rgb?: string;
 };
 
-export const getTotal = (resultsList: any[]): number => {
+interface CountResult {
+  count?: { value?: string };
+  [k: string]: unknown;
+}
+export const getTotal = (resultsList: CountResult[]): number => {
   let total = 0;
   for (const item of resultsList) {
     if (item?.count?.value !== undefined) {
