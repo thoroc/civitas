@@ -35,6 +35,24 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+### Static Export & Security Headers
+
+This project uses `output: 'export'` (static export). Next.js does NOT apply `headers()` configuration to exported assets. To ship security headers (CSP, HSTS, etc.) with static hosting:
+
+1. A template file lives at `static-headers/_headers`.
+2. During `npm run build` the script copies it to `out/_headers` (`headers:apply`).
+3. Deploy the contents of `out/` (Netlify, Vercel static, Cloudflare Pages). Netlify and some platforms automatically interpret `_headers`.
+4. If your host ignores `_headers`, configure equivalent headers in its dashboard / CDN layer.
+
+To update headers:
+- Edit `static-headers/_headers` and (optionally) `next.config.mjs` for local dev parity.
+- Re-run `npm run build` to regenerate `out/_headers`.
+
+CSP maintenance tips:
+- Keep `connect-src` limited to required domains (cat facts API, Wikidata endpoints, raw/gist GitHub for demo data).
+- Remove `'unsafe-inline'` from `style-src` once no inline styles remain.
+- If COEP/CORP (`Cross-Origin-Embedder-Policy: require-corp`) blocks resources, relax or remove that directive.
+
 ## Technologies used additionally
 
 - DaisyUI: <https://daisyui.com/>
