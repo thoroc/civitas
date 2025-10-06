@@ -48,7 +48,14 @@ const securityHeaders = [
 // Toggle static export mode with STATIC_EXPORT=true|1 at build time
 const enableStaticExport = (() => {
   const v = process.env.STATIC_EXPORT;
-  return v && ['true', '1'].includes(v.toLowerCase());
+  const enabled = v && ['true', '1'].includes(v.toLowerCase());
+  if (enabled) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      '[civitas] STATIC_EXPORT enabled: Next.js headers() security policies will NOT be applied to exported assets. Ensure equivalent headers are configured at host/CDN.'
+    );
+  }
+  return enabled;
 })();
 
 const nextConfig = {

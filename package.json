@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && npm run headers:apply",
+    "build:static": "STATIC_EXPORT=1 next build && npm run headers:apply",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
