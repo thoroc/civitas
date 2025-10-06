@@ -29,6 +29,48 @@ export interface TooltipLayoutResult {
  * Computes tooltip geometry + truncated labels deterministically so the rendering
  * component stays presentational and small.
  */
+const APPROX_CHAR = 5;
+const SECONDARY_ADJ = 0.8;
+const MIN_W = 42;
+
+interface MeasureWidthOptions {
+  label: string;
+  perChar: number;
+  padPx?: number;
+}
+const measureWidth = ({ label, perChar, padPx = 10 }: MeasureWidthOptions) =>
+  label.length * perChar + padPx;
+
+const truncate = (label: string, capacity: number) =>
+  label.length > capacity
+    ? label.slice(0, Math.max(0, capacity - 1)) + '…'
+    : label;
+
+interface HorizontalOffsetOptions {
+  seatX: number;
+  w: number;
+  leftLimit: number;
+  rightLimit: number;
+}
+const computeHorizontalOffset = ({
+  seatX,
+  w,
+  leftLimit,
+  rightLimit,
+}: HorizontalOffsetOptions) => {
+  let offsetX = 10;
+  if (seatX + offsetX + w > rightLimit) {
+    offsetX = -w - 10;
+    if (seatX + offsetX < leftLimit) {
+      offsetX = Math.min(
+        Math.max(leftLimit - seatX, -w / 2),
+        rightLimit - seatX - w
+      );
+    }
+  }
+  return offsetX;
+};
+
 export const computeTooltipLayout = ({
   tooltip,
   pad,
@@ -39,37 +81,38 @@ export const computeTooltipLayout = ({
   const maxW = vbWidth * 0.24;
   const primaryLabel = tooltip.member.label;
   const secondaryLabel = hasParty ? tooltip.member.party!.label : '';
-  const approxChar = 5;
-  const desiredPrimary = primaryLabel.length * approxChar + 10;
+
+  const desiredPrimary = measureWidth({
+    label: primaryLabel,
+    perChar: APPROX_CHAR,
+  });
   const desiredSecondary = hasParty
-    ? secondaryLabel.length * (approxChar - 0.8) + 10
+    ? measureWidth({
+        label: secondaryLabel,
+        perChar: APPROX_CHAR - SECONDARY_ADJ,
+      })
     : 0;
-  const w = Math.min(maxW, Math.max(42, desiredPrimary, desiredSecondary));
+  const w = Math.min(maxW, Math.max(MIN_W, desiredPrimary, desiredSecondary));
+
   const h = hasParty && !compact ? 30 : hasParty ? 22 : 18;
-  const capacityPrimary = Math.floor((w - 8) / approxChar);
-  const displayedPrimary =
-    primaryLabel.length > capacityPrimary
-      ? primaryLabel.slice(0, Math.max(0, capacityPrimary - 1)) + '…'
-      : primaryLabel;
+
+  const capacityPrimary = Math.floor((w - 8) / APPROX_CHAR);
+  const displayedPrimary = truncate(primaryLabel, capacityPrimary);
   const capacitySecondary = hasParty
-    ? Math.floor((w - 8) / (approxChar - 0.8))
+    ? Math.floor((w - 8) / (APPROX_CHAR - SECONDARY_ADJ))
     : 0;
-  const displayedSecondary =
-    hasParty && secondaryLabel.length > capacitySecondary
-      ? secondaryLabel.slice(0, Math.max(0, capacitySecondary - 1)) + '…'
-      : secondaryLabel;
+  const displayedSecondary = hasParty
+    ? truncate(secondaryLabel, capacitySecondary)
+    : secondaryLabel;
+
   const leftLimit = -pad;
   const rightLimit = -pad + vbWidth;
-  let offsetX = 10;
-  if (tooltip.x + offsetX + w > rightLimit) {
-    offsetX = -w - 10;
-    if (tooltip.x + offsetX < leftLimit) {
-      offsetX = Math.min(
-        Math.max(leftLimit - tooltip.x, -w / 2),
-        rightLimit - tooltip.x - w
-      );
-    }
-  }
+  const offsetX = computeHorizontalOffset({
+    seatX: tooltip.x,
+    w,
+    leftLimit,
+    rightLimit,
+  });
   const offsetY = -h / 2;
   const partyColor = tooltip.member.party?.color || '#6B7280';
   return {
