@@ -162,6 +162,45 @@ interface HemicycleSeatsProps {
   setLiveMessage: (msg: string) => void;
 }
 
+interface SeatCirclesProps {
+  seat: HemicycleLayoutResult['seats'][number];
+  seatScale: number;
+  locked: boolean;
+  inactive: boolean;
+}
+
+const SeatCircles: React.FC<SeatCirclesProps> = ({
+  seat,
+  seatScale,
+  locked,
+  inactive,
+}) => {
+  return (
+    <>
+      {locked && !inactive && (
+        <circle
+          cx={seat.x}
+          cy={seat.y}
+          r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale + 1.5 / seatScale}
+          fill='none'
+          stroke='#111827'
+          strokeWidth={0.8 / seatScale}
+          opacity={0.75}
+        />
+      )}
+      <circle
+        cx={seat.x}
+        cy={seat.y}
+        r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale}
+        fill={seat.member?.party?.color || '#808080'}
+        stroke={locked && !inactive ? '#0f172a' : '#1f2937'}
+        strokeWidth={(locked && !inactive ? 0.9 : 0.4) / seatScale}
+        data-locked={locked && !inactive ? 'true' : undefined}
+      />
+    </>
+  );
+};
+
 interface SeatProps {
   seat: HemicycleLayoutResult['seats'][number];
   index: number;
@@ -251,7 +290,22 @@ const Seat: React.FC<SeatProps> = memo(
       ]
     );
 
-    const ariaLabel = `Seat ${index + 1}: ${seat.member?.label ?? 'Unknown'}${seat.member?.party?.label ? ', ' + seat.member.party.label : ''}${inactive ? ' (filtered out)' : ''}`;
+    const buildAriaLabel = (
+      seatLabel: string | undefined,
+      partyLabel: string | undefined,
+      idx: number,
+      inactiveFlag: boolean
+    ) => {
+      const partyPart = partyLabel ? `, ${partyLabel}` : '';
+      const inactivePart = inactiveFlag ? ' (filtered out)' : '';
+      return `Seat ${idx + 1}: ${seatLabel ?? 'Unknown'}${partyPart}${inactivePart}`;
+    };
+    const ariaLabel = buildAriaLabel(
+      seat.member?.label,
+      seat.member?.party?.label,
+      index,
+      inactive
+    );
     const titleText = `${seat.member?.label ?? 'Unknown'}${seat.member?.party?.label ? ' – ' + seat.member.party.label : ''}${inactive ? ' (filtered out)' : ''}`;
 
     return (
@@ -275,27 +329,11 @@ const Seat: React.FC<SeatProps> = memo(
         aria-label={ariaLabel}
       >
         <title>{titleText}</title>
-        {lockedIndex === index && !inactive && (
-          <circle
-            cx={seat.x}
-            cy={seat.y}
-            r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale + 1.5 / seatScale}
-            fill='none'
-            stroke='#111827'
-            strokeWidth={0.8 / seatScale}
-            opacity={0.75}
-          />
-        )}
-        <circle
-          cx={seat.x}
-          cy={seat.y}
-          r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale}
-          fill={seat.member?.party?.color || '#808080'}
-          stroke={lockedIndex === index && !inactive ? '#0f172a' : '#1f2937'}
-          strokeWidth={
-            (lockedIndex === index && !inactive ? 0.9 : 0.4) / seatScale
-          }
-          data-locked={lockedIndex === index && !inactive ? 'true' : undefined}
+        <SeatCircles
+          seat={seat}
+          seatScale={seatScale}
+          locked={lockedIndex === index && !inactive}
+          inactive={inactive}
         />
       </g>
     );

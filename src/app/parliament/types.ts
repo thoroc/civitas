@@ -1,5 +1,5 @@
 // Deprecated: type interfaces moved to schemas.ts; this file re-exports for compatibility.
-export type { 
+export type {
   Party,
   Constituency,
   Member,
