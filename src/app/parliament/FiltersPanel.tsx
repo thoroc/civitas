@@ -1,5 +1,6 @@
 'use client';
 import ActiveFiltersSummary from './components/ActiveFiltersSummary';
+import AgeRangeFilter from './components/AgeRangeFilter';
 import FilterSection from './components/FilterSection';
 import GenderFilterList from './components/GenderFilterList';
 import PartyFilterList from './components/PartyFilterList';
@@ -11,7 +12,7 @@ interface FiltersPanelProps {
 }
 
 const FiltersPanel = ({ members }: FiltersPanelProps) => {
-  const { filters, setFilters, reset } = useParliamentFilters();
+  const { reset } = useParliamentFilters();
 
   return (
     <div className='space-y-4'>
@@ -38,36 +39,7 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
       </FilterSection>
 
       <FilterSection title='Age Range'>
-        <div className='flex items-center gap-2'>
-          <label className='text-xs flex flex-col'>
-            Min
-            <input
-              type='number'
-              className='input input-bordered input-xs w-20'
-              value={filters.minAge ?? ''}
-              onChange={e =>
-                setFilters(prev => ({
-                  ...prev,
-                  minAge: e.target.value === '' ? null : Number(e.target.value),
-                }))
-              }
-            />
-          </label>
-          <label className='text-xs flex flex-col'>
-            Max
-            <input
-              type='number'
-              className='input input-bordered input-xs w-20'
-              value={filters.maxAge ?? ''}
-              onChange={e =>
-                setFilters(prev => ({
-                  ...prev,
-                  maxAge: e.target.value === '' ? null : Number(e.target.value),
-                }))
-              }
-            />
-          </label>
-        </div>
+        <AgeRangeFilter />
       </FilterSection>
     </div>
   );
