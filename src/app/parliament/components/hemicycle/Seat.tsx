@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import { HemicycleLayoutResult } from '../hooks/useHemicycleLayout';
-import useSeatHandlers from '../hooks/useSeatHandlers';
+import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import useSeatHandlers from '../../hooks/useSeatHandlers';
 
 import { SeatTooltip } from './HemicycleSeats';
 import { buildSeatAria } from './seatAria';

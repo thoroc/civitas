@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { HemicycleLayoutResult } from '../hooks/useHemicycleLayout';
-import { Member } from '../types';
+import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import { Member } from '../../types';
 
 import HemicycleExportBar from './HemicycleExportBar';
 import HemicycleSeats from './HemicycleSeats';

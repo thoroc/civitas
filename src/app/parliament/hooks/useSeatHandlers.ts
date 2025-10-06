@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
 
-import { SeatTooltip } from '../components/HemicycleSeats';
+import { SeatTooltip } from '../components/hemicycle/HemicycleSeats';
 import {
   buildKeyHandler,
   buildSeatInteractions,
-} from '../components/seatInteractions';
+} from '../components/hemicycle/seatInteractions';
 
 import { HemicycleLayoutResult } from './useHemicycleLayout';
 

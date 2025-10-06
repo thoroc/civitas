@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { HemicycleLayoutResult } from '../hooks/useHemicycleLayout';
-import { Member } from '../types';
+import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import { Member } from '../../types';
 
 import Seat from './Seat';
 

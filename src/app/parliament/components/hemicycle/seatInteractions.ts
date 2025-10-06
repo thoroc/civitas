@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HemicycleLayoutResult } from '../hooks/useHemicycleLayout';
+import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
 
 import { SeatTooltip } from './HemicycleSeats';
 

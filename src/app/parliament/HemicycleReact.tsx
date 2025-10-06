@@ -9,7 +9,7 @@
  */
 import { useRef, useState, useMemo } from 'react';
 
-import HemicycleView from './components/HemicycleView';
+import HemicycleView from './components/hemicycle/HemicycleView';
 import { useParliamentFilters } from './filtersContext';
 import useHemicycleExport from './hooks/useHemicycleExport';
 import useHemicycleLayout from './hooks/useHemicycleLayout';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HemicycleLayoutResult } from '../hooks/useHemicycleLayout';
+import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
 
 interface SeatCirclesProps {
   seat: HemicycleLayoutResult['seats'][number];
