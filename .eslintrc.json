@@ -39,7 +39,7 @@
     "max-lines-per-function": ["warn", { "max": 80 }],
     "complexity": ["warn", { "max": 10 }],
     "max-depth": ["warn", { "max": 4 }],
-    "max-params": ["warn", { "max": 3 }]
+    "max-params": ["warn", { "max": 2 }]
   },
   "overrides": [
     {

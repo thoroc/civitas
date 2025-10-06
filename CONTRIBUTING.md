@@ -60,6 +60,26 @@ The hooks run in parallel for faster execution. If any hook fails, the commit is
   `<Verb><Noun>Options` or `<Domain>Config` consistently. Do not prematurely wrap when only two parameters or when the
   function is clearly internal and stable.
 
+  Example (before → after):
+
+  ```ts
+  // Before (discouraged)
+  const renderSeats = (members: Member[], radius: number, colorScale: ColorScale, showVacant: boolean) => {
+    /* ... */
+  };
+
+  // After (preferred)
+  interface RenderSeatsOptions {
+    members: Member[];
+    radius: number;
+    colorScale: ColorScale;
+    showVacant: boolean;
+  }
+  const renderSeats = (opts: RenderSeatsOptions) => {
+    /* ... */
+  };
+  ```
+
 ## Accessibility
 
 - Maintain keyboard parity for any new interactive seat behaviors.
