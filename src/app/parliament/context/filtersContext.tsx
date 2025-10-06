@@ -8,14 +8,12 @@ import React, {
   useCallback,
 } from 'react';
 
+import {
+  ParliamentFiltersState,
+  defaultParliamentFiltersState as defaultState,
+  applyFilters,
+} from '../filters/apply';
 import { Member } from '../types';
-
-export interface ParliamentFiltersState {
-  parties: string[]; // party ids to include (empty => all)
-  genders: string[]; // genders to include (empty => all)
-  minAge: number | null;
-  maxAge: number | null;
-}
 
 interface ParliamentFiltersContextValue {
   filters: ParliamentFiltersState;
@@ -25,13 +23,6 @@ interface ParliamentFiltersContextValue {
   apply: (members: Member[]) => Member[];
   reset: () => void;
 }
-
-const defaultState: ParliamentFiltersState = {
-  parties: [],
-  genders: [],
-  minAge: null,
-  maxAge: null,
-};
 
 const ParliamentFiltersContext = createContext<
   ParliamentFiltersContextValue | undefined
@@ -52,33 +43,8 @@ export const ParliamentFiltersProvider = ({
     []
   );
 
-  const buildPredicates = (f: ParliamentFiltersState) => {
-    const preds: Array<(m: Member) => boolean> = [];
-    if (f.parties.length) {
-      const parties = new Set(f.parties);
-      preds.push(m => parties.has(m.party?.id || 'independent'));
-    }
-    if (f.genders.length) {
-      const genders = new Set(f.genders);
-      preds.push(m => !!m.gender && genders.has(m.gender));
-    }
-    if (f.minAge !== null) {
-      const min = f.minAge;
-      preds.push(m => (m.age ?? Infinity) >= min);
-    }
-    if (f.maxAge !== null) {
-      const max = f.maxAge;
-      preds.push(m => (m.age ?? -Infinity) <= max);
-    }
-    return preds;
-  };
-
   const apply = useCallback(
-    (members: Member[]) => {
-      const predicates = buildPredicates(filters);
-      if (!predicates.length) return members;
-      return members.filter(m => predicates.every(p => p(m)));
-    },
+    (members: Member[]) => applyFilters(members, filters),
     [filters]
   );
 
