@@ -15,13 +15,20 @@ const SeatCircles: React.FC<SeatCirclesProps> = ({
   locked,
   inactive,
 }) => {
+  const lockedActive = locked && !inactive;
+  const seatRadiusBase = (seat.a ? seat.a / 2.05 : 2.7) * seatScale;
+  const partyFill = seat.member?.party?.color || '#808080';
+  const strokeColor = lockedActive ? '#0f172a' : '#1f2937';
+  const strokeWidth = (lockedActive ? 0.9 : 0.4) / seatScale;
+  const outerRadius = seatRadiusBase + 1.5 / seatScale;
+
   return (
     <>
-      {locked && !inactive && (
+      {lockedActive && (
         <circle
           cx={seat.x}
           cy={seat.y}
-          r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale + 1.5 / seatScale}
+          r={outerRadius}
           fill='none'
           stroke='#111827'
           strokeWidth={0.8 / seatScale}
@@ -31,11 +38,11 @@ const SeatCircles: React.FC<SeatCirclesProps> = ({
       <circle
         cx={seat.x}
         cy={seat.y}
-        r={(seat.a ? seat.a / 2.05 : 2.7) * seatScale}
-        fill={seat.member?.party?.color || '#808080'}
-        stroke={locked && !inactive ? '#0f172a' : '#1f2937'}
-        strokeWidth={(locked && !inactive ? 0.9 : 0.4) / seatScale}
-        data-locked={locked && !inactive ? 'true' : undefined}
+        r={seatRadiusBase}
+        fill={partyFill}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        data-locked={lockedActive ? 'true' : undefined}
       />
     </>
   );
