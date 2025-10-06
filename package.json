@@ -12,7 +12,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "lint:md": "markdownlint-cli2",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts registry.npmjs.org",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
