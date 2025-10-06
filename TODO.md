@@ -90,6 +90,14 @@ _Last updated: 2025-10-06 (post component barrels + filters context relocation)_
 - Add short note to `CONTRIBUTING.md` about new `context/` + component barrel conventions
 - Consider root `parliament/index.ts` barrel exporting common hooks + components
 
+### J. Script CLI Consolidation
+
+- Migrate node scripts in `scripts/` (harvest + generation) to a unified Commander.js CLI
+- Provide `--from`, `--to`, `--snapshot`, `--out`, `--verbose` flags with shared validation
+- Output consistent help/usage and exit codes for CI integration
+- Centralize logging + error handling (avoid duplicated try/catch + console noise)
+- Enable future testability by isolating pure logic from Commander action handlers
+
 ## Prioritization Guidance
 
 1. High user impact: reduce SnapshotExplorer + HemicycleReact length
