@@ -27,8 +27,8 @@ Lefthook runs lint, prettier, markdownlint, types. Optional non-blocking lockfil
 ## Tooling Enhancements
 
 - `prettier-plugin-packagejson` auto-sorts `package.json` fields (enforced via existing Prettier hook).
-- `lockfile-lint` ensures the npm lockfile only references HTTPS endpoints and approved hosts
-  (`npm, registry.npmjs.org`). Run manually with `npm run lint:lockfile` or rely on CI step.
+- `lockfile-lint` ensures the npm lockfile only references HTTPS endpoints and the approved host (`registry.npmjs.org`).
+  Run manually with `npm run lint:lockfile` or rely on CI step.
 
 ## Adding Filters
 

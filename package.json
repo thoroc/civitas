@@ -10,7 +10,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "lint:md": "markdownlint-cli2",
-    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm,registry.npmjs.org",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts registry.npmjs.org",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
