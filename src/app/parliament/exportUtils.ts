@@ -1,4 +1,12 @@
-export const exportSvg = (svg: SVGSVGElement, filename = 'hemicycle.svg') => {
+interface ExportSvgOptions {
+  svg: SVGSVGElement;
+  filename?: string;
+}
+
+export const exportSvg = ({
+  svg,
+  filename = 'hemicycle.svg',
+}: ExportSvgOptions) => {
   const serializer = new XMLSerializer();
   let source = serializer.serializeToString(svg);
   if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
@@ -13,12 +21,19 @@ export const exportSvg = (svg: SVGSVGElement, filename = 'hemicycle.svg') => {
   URL.revokeObjectURL(url);
 };
 
-export const exportPng = (
-  svg: SVGSVGElement,
+interface ExportPngOptions {
+  svg: SVGSVGElement;
+  filename?: string;
+  scale?: number;
+  background?: string;
+}
+
+export const exportPng = ({
+  svg,
   filename = 'hemicycle.png',
   scale = 3,
-  background = '#ffffff'
-) => {
+  background = '#ffffff',
+}: ExportPngOptions) => {
   const serializer = new XMLSerializer();
   let source = serializer.serializeToString(svg);
   if (!source.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {

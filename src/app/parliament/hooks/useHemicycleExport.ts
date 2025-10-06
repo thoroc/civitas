@@ -10,13 +10,13 @@ const useHemicycleExport = ({ getSvg }: UseHemicycleExportOptions) => {
   const downloadSVG = useCallback(() => {
     const svg = getSvg();
     if (!svg) return;
-    exportSvg(svg, 'hemicycle.svg');
+    exportSvg({ svg, filename: 'hemicycle.svg' });
   }, [getSvg]);
 
   const downloadPNG = useCallback(() => {
     const svg = getSvg();
     if (!svg) return;
-    exportPng(svg, 'hemicycle.png', 3);
+    exportPng({ svg, filename: 'hemicycle.png', scale: 3 });
   }, [getSvg]);
 
   return { downloadSVG, downloadPNG };

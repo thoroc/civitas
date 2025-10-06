@@ -42,3 +42,6 @@ next-env.d.ts
 # IDEs and editors
 .vscode/*
 opencode.json
+
+# local runtime logs
+server.log
