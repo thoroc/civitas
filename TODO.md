@@ -1,6 +1,6 @@
 # Refactor Plan & Progress
 
-_Last updated: 2025-10-06 (post component barrels + filters context relocation)_
+_Last updated: 2025-10-06 (post lint baseline capture & no new refactors)_
 
 ## Completed (Phase 2)
 
@@ -22,20 +22,28 @@ _Last updated: 2025-10-06 (post component barrels + filters context relocation)_
 
 ## Current State
 
-- Working tree clean; 0 type errors.
-- ESLint warnings (representative hotspots):
-  - `linechart.tsx`: 2 × max-lines-per-function
-  - `HemicycleReact.tsx`: max-lines-per-function
-  - `SnapshotExplorer.tsx`: max-lines-per-function + complexity
-  - `context/filtersContext.tsx`: complexity
-  - `useHemicycleLayout.ts`: max-lines + complexity (full run, not shown in staged-only lint)
-  - `d3.ts`: `no-explicit-any`, max-params
-- Overall focus now shifts from structural extraction → complexity & size reduction.
+- Working tree clean; 0 type errors; no uncommitted changes.
+- This session outcome: captured a full, up-to-date lint warning baseline (no code edits committed).
+- ESLint warnings (full snapshot this run):
+  - `components/d3/linechart.tsx`: 2 × max-lines-per-function
+  - `parliament/HemicycleReact.tsx`: max-lines-per-function
+  - `parliament/components/hemicycle/HemicycleView.tsx`: max-lines-per-function
+  - `parliament/SnapshotExplorer.tsx`: max-lines-per-function + complexity
+  - `parliament/components/hemicycle/SeatCircles.tsx`: complexity
+  - `parliament/components/hemicycle/seatInteractions.ts`: complexity
+  - `parliament/components/hemicycle/tooltipLayout.ts`: complexity
+  - `parliament/context/filtersContext.tsx`: complexity
+  - `parliament/hooks/useHemicycleLayout.ts`: max-lines (2 fns) + complexity (primary hook)
+  - `parliament/d3.ts`: no-explicit-any + max-params
+  - `parliament/exportUtils.ts`: max-params
+  - `parliament/hooks/useSeatFocusNavigation.ts`: no-explicit-any
+  - `parliament/hooks/useSeatHandlers.ts`: react-hooks/exhaustive-deps (callback dependencies)
+- Overall focus remains: shift from structural extraction → complexity & size reduction (targeting large
+  hooks/components + geometry typing / params).
 
 ## Pending / Next Decisions
 
-- **plan-next-phase**: Choose which warning cluster to address first (geometry, snapshot UI, or
-  context logic).
+- **plan-next-phase**: Choose which warning cluster to address first (geometry, snapshot UI, or context logic).
 
 ## Candidate Next Refactors
 
@@ -65,8 +73,7 @@ _Last updated: 2025-10-06 (post component barrels + filters context relocation)_
 
 ### E. useHemicycleLayout Heavy Function
 
-- Split geometry calculations (rings, seat placement) into pure utilities (`d3.ts` or
-  `layout/geometry.ts`)
+- Split geometry calculations (rings, seat placement) into pure utilities (`d3.ts` or `layout/geometry.ts`)
 - Wrap multi-parameter geometry calls into a config object to reduce `max-params`
 - Add thin memo boundaries per derived structure (rings, seat positions, color mapping)
 
@@ -97,6 +104,12 @@ _Last updated: 2025-10-06 (post component barrels + filters context relocation)_
 - Output consistent help/usage and exit codes for CI integration
 - Centralize logging + error handling (avoid duplicated try/catch + console noise)
 - Enable future testability by isolating pure logic from Commander action handlers
+
+### K. markdown linting
+
+- Add dependency to `markdownlint-cli2`
+- Add new script target to lint .md files
+- Add new pre-commit hook to lint .md files
 
 ## Prioritization Guidance
 
