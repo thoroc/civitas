@@ -1,9 +1,9 @@
 'use client';
-import ActiveFiltersSummary from './components/ActiveFiltersSummary';
-import AgeRangeFilter from './components/AgeRangeFilter';
-import FilterSection from './components/FilterSection';
-import GenderFilterList from './components/GenderFilterList';
-import PartyFilterList from './components/PartyFilterList';
+import ActiveFiltersSummary from './components/filters/ActiveFiltersSummary';
+import AgeRangeFilter from './components/filters/AgeRangeFilter';
+import FilterSection from './components/filters/FilterSection';
+import GenderFilterList from './components/filters/GenderFilterList';
+import PartyFilterList from './components/filters/PartyFilterList';
 import { useParliamentFilters } from './filtersContext';
 import { Member } from './types';
 

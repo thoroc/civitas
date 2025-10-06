@@ -1,8 +1,8 @@
 'use client';
 import { useMemo } from 'react';
 
-import { useParliamentFilters } from '../filtersContext';
-import { Member } from '../types';
+import { useParliamentFilters } from '../../filtersContext';
+import { Member } from '../../types';
 
 interface ActiveFiltersSummaryProps {
   members: Member[];

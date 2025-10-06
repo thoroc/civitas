@@ -1,7 +1,7 @@
 'use client';
 import { useCallback } from 'react';
 
-import { useParliamentFilters } from '../filtersContext';
+import { useParliamentFilters } from '../../filtersContext';
 
 const AgeRangeFilter = () => {
   const { filters, setFilters } = useParliamentFilters();
