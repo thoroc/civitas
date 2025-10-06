@@ -48,11 +48,14 @@ The hooks run in parallel for faster execution. If any hook fails, the commit is
 - Embrace SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and
   Dependency Inversion.
 - Follow DRY (Don't Repeat Yourself) principle—extract common logic into reusable utilities and hooks.
-- Keep filtering logic consolidated in `filtersContext.tsx`; consumers should call `apply()` instead of duplicating
-  logic.
+- Filtering logic lives in the pure module `parliament/filters/apply.ts`; the context (`filtersContext.tsx`) simply
+  delegates. Call `apply()` from the hook—do not re‑implement predicates inline.
 - Treat snapshot JSON as immutable historical data—add new files rather than editing old ones unless correcting
   objective errors.
-- Geometry helpers live in `parliament/d3.ts`; extend there if adding new layout variants.
+- Geometry math is split:
+  - Low-level seat math & ring utilities: `parliament/d3.ts` (now exposes `GeometryConfig` helpers)
+  - High-level hemicycle assembly & allocation: `parliament/geometry/` (`geometry.ts`, `allocation.ts`, `parties.ts`)
+    Extend in the lowest appropriate layer; keep new logic pure and parameterized.
 - Avoid premature abstraction; wait for a second concrete use case.
 - For any function taking more than two distinct scalar parameters, prefer a single options object typed by a dedicated
   interface (e.g. `renderSeats(opts: RenderSeatsOptions)`). This improves readability, keeps call sites resilient to
