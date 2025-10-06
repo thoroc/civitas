@@ -66,7 +66,7 @@ const HemicycleView = ({
 }: HemicycleViewProps) => {
   const hasData = members.length > 0;
   return (
-    <div ref={containerRef} className='w-full mx-auto'>
+    <div ref={containerRef} className='w-full mx-auto' data-testid='hemicycle'>
       <div className='relative w-full aspect-[2/1]'>
         <HemicycleExportBar
           compact={compactTooltip}

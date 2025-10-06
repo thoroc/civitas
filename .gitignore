@@ -23,6 +23,11 @@
 # ignore local audit artifacts
 audit-after.json
 
+# playwright
+/playwright-report/
+/test-results/
+/.playwright-mcp-profile/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

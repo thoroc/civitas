@@ -17,6 +17,8 @@ import {
   validatePartyMetaPayload,
 } from './schemas';
 
+const DIAG = process.env.NEXT_PUBLIC_TEST_DIAGNOSTICS === '1';
+
 interface SnapshotExplorerProps {
   initialDate?: string;
 }
@@ -205,6 +207,7 @@ const SnapshotExplorer = ({ initialDate }: SnapshotExplorerProps) => {
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
+      if (DIAG) console.log('[SnapshotExplorer] Begin index fetch');
       setLoading(true);
       setError(null);
       try {

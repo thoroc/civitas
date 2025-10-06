@@ -1,3 +1,8 @@
 export default function Home() {
-  return <div>Hello World</div>;
+  return (
+    <div>
+      <h1 className='text-xl font-semibold'>Civitas</h1>
+      <p>Hello World</p>
+    </div>
+  );
 }
