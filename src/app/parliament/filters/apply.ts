@@ -1,4 +1,4 @@
-import { Member } from '../types';
+import type { Member } from '../types';
 
 export interface ParliamentFiltersState {
   parties: string[];
@@ -30,11 +30,11 @@ export const buildFilterPredicates = (
   }
   if (f.minAge !== null) {
     const min = f.minAge;
-    preds.push(m => (m.age ?? Infinity) >= min);
+    preds.push(m => (m.age ?? -Infinity) >= min);
   }
   if (f.maxAge !== null) {
     const max = f.maxAge;
-    preds.push(m => (m.age ?? -Infinity) <= max);
+    preds.push(m => (m.age ?? Infinity) <= max);
   }
   return preds;
 };

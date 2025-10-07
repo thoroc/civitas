@@ -1,26 +1,27 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#70a3cc",
-    "activityBar.background": "#70a3cc",
+    "activityBar.activeBackground": "#7cc9e1",
+    "activityBar.background": "#7cc9e1",
     "activityBar.foreground": "#15202b",
     "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#a43b75",
+    "activityBarBadge.background": "#d549b4",
     "activityBarBadge.foreground": "#e7e7e7",
-    "commandCenter.border": "#e7e7e799",
-    "sash.hoverBorder": "#70a3cc",
-    "statusBar.background": "#4b8bbe",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBarItem.hoverBackground": "#70a3cc",
-    "statusBarItem.remoteBackground": "#4b8bbe",
-    "statusBarItem.remoteForeground": "#e7e7e7",
-    "titleBar.activeBackground": "#4b8bbe",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#4b8bbe99",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#7cc9e1",
+    "statusBar.background": "#52b8d8",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#2da4ca",
+    "statusBarItem.remoteBackground": "#52b8d8",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#52b8d8",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#52b8d899",
+    "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.remoteColor": "#4B8BBE",
   "deno.path": "/Users/thomas.roche/.local/share/mise/shims/deno",
   "debug.javascript.defaultRuntimeExecutable": {
     "pwa-node": "/Users/thomas.roche/.local/share/mise/shims/node"
-  }
+  },
+  "peacock.color": "#52b8d8"
 }

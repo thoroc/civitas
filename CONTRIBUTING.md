@@ -101,6 +101,10 @@ No formal test suite yet. Pragmatic suggestions when adding one:
 - Unit test `apply()` filtering logic (edge cases: empty arrays, age bounds null, partial filters).
 - Snapshot test legend output for filtered vs full state.
 - Interaction tests (Playwright / Testing Library) for keyboard navigation & locking.
+- Test location rule: Always colocate unit tests next to the code they test (place test files in the same directory as
+  their corresponding module, using the `.spec.ts`, `.spec.tsx`, or `.test.ts` naming convention). Colocating tests
+  keeps tests discoverable, simplifies imports, and reduces friction during refactors. Integration or end-to-end tests
+  may remain under `tests/` or `tests/e2e/`.
 
 ## Adding Filters
 

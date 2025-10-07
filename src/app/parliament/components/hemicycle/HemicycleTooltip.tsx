@@ -3,6 +3,19 @@ import React from 'react';
 import { Member } from '../../types';
 
 import { computeTooltipLayout } from './tooltipLayout';
+import TooltipSecondary from './TooltipSecondary';
+import {
+  TOOLTIP_BG_COLOR,
+  TOOLTIP_SECONDARY_TEXT_COLOR,
+  TOOLTIP_OPACITY,
+  TOOLTIP_RX,
+  TOOLTIP_RY,
+  TOOLTIP_STROKE_WIDTH,
+  TOOLTIP_FONT_FAMILY,
+  TOOLTIP_PRIMARY_FONT_SIZE,
+  TOOLTIP_SEAT_FONT_SIZE,
+  TOOLTIP_SEAT_LETTER_SPACING,
+} from './tooltipTheme';
 
 export interface HemicycleTooltipProps {
   tooltip: { x: number; y: number; i: number; member: Member } | null;
@@ -30,8 +43,10 @@ const TooltipContent: React.FC<{
     hasParty,
     partyColor,
   } = layout;
-  const bgColor = '#1F3A60';
-  const secondaryTextColor = '#E5E9EF';
+
+  const bgColor = TOOLTIP_BG_COLOR;
+  const secondaryTextColor = TOOLTIP_SECONDARY_TEXT_COLOR;
+
   return (
     <g
       transform={`translate(${origin.x}, ${origin.y})`}
@@ -45,44 +60,41 @@ const TooltipContent: React.FC<{
       <rect
         x={offsetX}
         y={offsetY}
-        rx={4}
-        ry={4}
+        rx={TOOLTIP_RX}
+        ry={TOOLTIP_RY}
         width={w}
         height={h}
         fill={bgColor}
-        opacity={0.95}
+        opacity={TOOLTIP_OPACITY}
         stroke={partyColor}
-        strokeWidth={0.6}
+        strokeWidth={TOOLTIP_STROKE_WIDTH}
       />
+
       <text
         x={offsetX + 6}
         y={offsetY + 12}
         fill='#FFFFFF'
-        fontSize={9}
-        fontFamily='system-ui, sans-serif'
+        fontSize={TOOLTIP_PRIMARY_FONT_SIZE}
+        fontFamily={TOOLTIP_FONT_FAMILY}
         fontWeight={600}
       >
         {displayedPrimary}
       </text>
+
       {hasParty && (
-        <text
-          x={offsetX + 6}
-          y={offsetY + (compact ? 20 : 22)}
-          fill={secondaryTextColor}
-          fontSize={7}
-          fontFamily='system-ui, sans-serif'
-        >
+        <TooltipSecondary x={offsetX + 6} y={offsetY + (compact ? 20 : 22)}>
           {displayedSecondary}
-        </text>
+        </TooltipSecondary>
       )}
+
       {!compact && (
         <text
           x={offsetX + 6}
           y={offsetY + h - 5}
           fill={secondaryTextColor}
-          fontSize={6}
-          fontFamily='system-ui, sans-serif'
-          letterSpacing={0.5}
+          fontSize={TOOLTIP_SEAT_FONT_SIZE}
+          fontFamily={TOOLTIP_FONT_FAMILY}
+          letterSpacing={TOOLTIP_SEAT_LETTER_SPACING}
         >
           Seat {seatIndex + 1}
         </text>

@@ -1,10 +1,12 @@
+import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
+
 import axios from 'axios';
-import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './schemas';
+
 import { ensureDir } from './cache';
 import type { HarvestResult } from './membersApiClient';
+import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './schemas';
 
 /*
   Parliament Members Data Platform (MDP) endpoints (XML):
@@ -39,16 +41,32 @@ import type { HarvestResult } from './membersApiClient';
 */
 
 // Simple XML cache (separate from JSON cache)
-function cacheKey(url: string) { return crypto.createHash('sha1').update(url).digest('hex'); }
+function cacheKey(url: string) {
+  return crypto.createHash('sha1').update(url).digest('hex');
+}
 
-async function cachedGetXml(url: string, cfg: { dir: string; forceRefresh: boolean }): Promise<string> {
+async function cachedGetXml(
+  url: string,
+  cfg: { dir: string; forceRefresh: boolean }
+): Promise<string> {
   ensureDir(cfg.dir);
   const key = cacheKey(url) + '.xml';
   const file = path.join(cfg.dir, key);
   if (!cfg.forceRefresh && fs.existsSync(file)) {
-    try { return fs.readFileSync(file, 'utf-8'); } catch {/* ignore */}
+    try {
+      return fs.readFileSync(file, 'utf-8');
+    } catch {
+      /* ignore */
+    }
   }
-  const res = await axios.get(url, { headers: { 'User-Agent': 'civitas-official-harvest/0.1', 'Accept': 'application/xml,text/xml;q=0.9,*/*;q=0.8' }, responseType: 'text', validateStatus: () => true });
+  const res = await axios.get(url, {
+    headers: {
+      'User-Agent': 'civitas-official-harvest/0.1',
+      Accept: 'application/xml,text/xml;q=0.9,*/*;q=0.8',
+    },
+    responseType: 'text',
+    validateStatus: () => true,
+  });
   if (res.status !== 200) throw new Error(`GET ${url} -> ${res.status}`);
   fs.writeFileSync(file, res.data);
   return res.data as string;
@@ -83,11 +101,14 @@ interface ParsedMembershipRow {
   house: string;
   memberFrom: string;
   start: string; // ISO date/time string from XML
-  end?: string;  // ISO date/time string from XML
+  end?: string; // ISO date/time string from XML
 }
 
 function slugify(input: string): string {
-  return input.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return input
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 function parseMembersXml(xml: string): ParsedMembershipRow[] {
@@ -97,8 +118,11 @@ function parseMembersXml(xml: string): ParsedMembershipRow[] {
   while ((m = memberRe.exec(xml))) {
     const attrsStr = m[1];
     const inner = m[2];
-    const attrs: Record<string,string> = {};
-    attrsStr.replace(/(\w+)=("[^"]*"|'[^']*')/g, (_, k, v) => { attrs[k] = v.slice(1, -1); return ''; });
+    const attrs: Record<string, string> = {};
+    attrsStr.replace(/(\w+)=("[^"]*"|'[^']*')/g, (_, k, v) => {
+      attrs[k] = v.slice(1, -1);
+      return '';
+    });
     const memberId = Number(attrs['Member_Id']);
     if (!memberId) continue;
     const house = extractTag(inner, 'House');
@@ -116,7 +140,8 @@ function parseMembersXml(xml: string): ParsedMembershipRow[] {
       const pAttrStr = partyMatch[1];
       const pName = decodeXml(partyMatch[2]) || 'Unknown';
       let pid = 'unknown';
-      const idAttr = pAttrStr.match(/Id=\"([^\"]+)\"/i) || pAttrStr.match(/Id='([^']+)'/i);
+      const idAttr =
+        pAttrStr.match(/Id=\"([^\"]+)\"/i) || pAttrStr.match(/Id='([^']+)'/i);
       if (idAttr) pid = idAttr[1];
       partyId = pid;
       partyName = pName;
@@ -138,8 +163,15 @@ function parseMembersXml(xml: string): ParsedMembershipRow[] {
   return rows;
 }
 
-export async function harvestOData(cfg: HarvestConfig, cacheCfg = { dir: path.join(cfg.cacheDir, 'odata'), forceRefresh: cfg.forceRefresh }): Promise<HarvestResult> {
-  const url = 'https://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons|Membership=All/';
+export async function harvestOData(
+  cfg: HarvestConfig,
+  cacheCfg = {
+    dir: path.join(cfg.cacheDir, 'odata'),
+    forceRefresh: cfg.forceRefresh,
+  }
+): Promise<HarvestResult> {
+  const url =
+    'https://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons|Membership=All/';
   console.log('[odata] Fetching bulk Commons membership list');
   const xml = await cachedGetXml(url, cacheCfg);
   const rows = parseMembersXml(xml);
@@ -177,11 +209,18 @@ export async function harvestOData(cfg: HarvestConfig, cacheCfg = { dir: path.jo
   }
 
   // Heuristic: collapse duplicate consecutive party spells for same member + partyId
-  partySpells.sort((a,b)=> a.memberId - b.memberId || a.start.localeCompare(b.start));
+  partySpells.sort(
+    (a, b) => a.memberId - b.memberId || a.start.localeCompare(b.start)
+  );
   const collapsed: PartySpell[] = [];
   for (const ps of partySpells) {
     const prev = collapsed[collapsed.length - 1];
-    if (prev && prev.memberId === ps.memberId && prev.partyId === ps.partyId && (prev.end === ps.start || prev.end === undefined)) {
+    if (
+      prev &&
+      prev.memberId === ps.memberId &&
+      prev.partyId === ps.partyId &&
+      (prev.end === ps.start || prev.end === undefined)
+    ) {
       // Extend previous if contiguous / overlapping identical party
       if (!prev.end || (ps.end && ps.end > prev.end)) prev.end = ps.end;
     } else {

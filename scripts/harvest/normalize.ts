@@ -1,5 +1,10 @@
 import { HarvestResult } from './membersApiClient';
-import { HarvestConfig, NormalizedData, PartySpell, SeatSpell } from './schemas';
+import {
+  HarvestConfig,
+  NormalizedData,
+  PartySpell,
+  SeatSpell,
+} from './schemas';
 
 function toISO(dateStr: string | undefined): string | undefined {
   if (!dateStr) return undefined;
@@ -10,24 +15,45 @@ function toISO(dateStr: string | undefined): string | undefined {
   return undefined;
 }
 
-interface SpellKeyOpts { endDefault?: string }
+interface SpellKeyOpts {
+  endDefault?: string;
+}
 
-function normalizeSpells<T extends { start: string; end?: string }>(spells: T[], { endDefault }: SpellKeyOpts = {}): T[] {
-  return spells.map(s => ({ ...s, start: toISO(s.start)! , end: toISO(s.end) || endDefault }))
+function normalizeSpells<T extends { start: string; end?: string }>(
+  spells: T[],
+  { endDefault }: SpellKeyOpts = {}
+): T[] {
+  return spells
+    .map(s => ({
+      ...s,
+      start: toISO(s.start)!,
+      end: toISO(s.end) || endDefault,
+    }))
     .filter(s => !!s.start)
-    .sort((a,b)=> (a.start! < b.start! ? -1 : a.start! > b.start! ? 1 : 0));
+    .sort((a, b) => (a.start! < b.start! ? -1 : a.start! > b.start! ? 1 : 0));
 }
 
 function mergeLabourCoopParty(spells: PartySpell[]): PartySpell[] {
   return spells.map(s => {
-    if ((s.partyName.includes('Labour') && s.partyName.includes('Co-operative')) || s.partyName === 'Labour Co-operative') {
-      return { ...s, partyId: 'labour_coop', partyName: 'Labour & Co-operative' };
+    if (
+      (s.partyName.includes('Labour') &&
+        s.partyName.includes('Co-operative')) ||
+      s.partyName === 'Labour Co-operative'
+    ) {
+      return {
+        ...s,
+        partyId: 'labour_coop',
+        partyName: 'Labour & Co-operative',
+      };
     }
     return s;
   });
 }
 
-export function normalize(harvest: HarvestResult, cfg: HarvestConfig): NormalizedData {
+export function normalize(
+  harvest: HarvestResult,
+  cfg: HarvestConfig
+): NormalizedData {
   let partySpells: PartySpell[] = normalizeSpells(harvest.partySpells);
   let seatSpells: SeatSpell[] = normalizeSpells(harvest.seatSpells);
 
@@ -36,18 +62,25 @@ export function normalize(harvest: HarvestResult, cfg: HarvestConfig): Normalize
   }
 
   // Apply alias collapsing (cfg.partyAliases maps original -> canonical)
-  partySpells = partySpells.map(ps => ({ ...ps, partyId: cfg.partyAliases[ps.partyId] || ps.partyId }));
+  partySpells = partySpells.map(ps => ({
+    ...ps,
+    partyId: cfg.partyAliases[ps.partyId] || ps.partyId,
+  }));
 
   // Filter by since date: keep spells that overlap since or start after.
   const since = cfg.since;
-  const overlapsSince = <T extends { start: string; end?: string }>(s: T) => !s.end || s.end >= since;
+  const overlapsSince = <T extends { start: string; end?: string }>(s: T) =>
+    !s.end || s.end >= since;
   partySpells = partySpells.filter(overlapsSince);
   seatSpells = seatSpells.filter(overlapsSince);
 
-  const partiesMap = new Map<string,string>();
-  for (const ps of partySpells) if (!partiesMap.has(ps.partyId)) partiesMap.set(ps.partyId, ps.partyName);
-  const constituenciesMap = new Map<string,string>();
-  for (const ss of seatSpells) if (!constituenciesMap.has(ss.constituencyId)) constituenciesMap.set(ss.constituencyId, ss.constituencyName);
+  const partiesMap = new Map<string, string>();
+  for (const ps of partySpells)
+    if (!partiesMap.has(ps.partyId)) partiesMap.set(ps.partyId, ps.partyName);
+  const constituenciesMap = new Map<string, string>();
+  for (const ss of seatSpells)
+    if (!constituenciesMap.has(ss.constituencyId))
+      constituenciesMap.set(ss.constituencyId, ss.constituencyName);
 
   const members = harvest.members; // Already minimal
 
@@ -55,7 +88,13 @@ export function normalize(harvest: HarvestResult, cfg: HarvestConfig): Normalize
     members,
     seatSpells,
     partySpells,
-    parties: Array.from(partiesMap, ([partyId, name]) => ({ partyId, name })).sort((a,b)=>a.partyId.localeCompare(b.partyId)),
-    constituencies: Array.from(constituenciesMap, ([constituencyId, name]) => ({ constituencyId, name })).sort((a,b)=>a.constituencyId.localeCompare(b.constituencyId)),
+    parties: Array.from(partiesMap, ([partyId, name]) => ({
+      partyId,
+      name,
+    })).sort((a, b) => a.partyId.localeCompare(b.partyId)),
+    constituencies: Array.from(constituenciesMap, ([constituencyId, name]) => ({
+      constituencyId,
+      name,
+    })).sort((a, b) => a.constituencyId.localeCompare(b.constituencyId)),
   };
 }

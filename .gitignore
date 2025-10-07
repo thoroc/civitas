@@ -50,3 +50,5 @@ opencode.json
 
 # local runtime logs
 server.log
+# Ignore generated test build artifacts
+tmp-spec-build/

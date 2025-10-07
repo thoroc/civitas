@@ -1,6 +1,9 @@
 // Minimal general elections baseline (Commons) since 2005.
 // Dates in ISO (YYYY-MM-DD) format.
-export interface ElectionEvent { date: string; label: string; }
+export interface ElectionEvent {
+  date: string;
+  label: string;
+}
 export const GENERAL_ELECTIONS: ElectionEvent[] = [
   { date: '2005-05-05', label: '2005 General Election' },
   { date: '2010-05-06', label: '2010 General Election' },

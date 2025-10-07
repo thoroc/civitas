@@ -20,11 +20,20 @@
 */
 import fs from 'fs';
 import path from 'path';
+
 import axios from 'axios';
 
-interface SnapshotMemberParty { id: string; label: string; color: string; }
-interface SnapshotMember { party: SnapshotMemberParty | null }
-interface Snapshot { members: SnapshotMember[] }
+interface SnapshotMemberParty {
+  id: string;
+  label: string;
+  color: string;
+}
+interface SnapshotMember {
+  party: SnapshotMemberParty | null;
+}
+interface Snapshot {
+  members: SnapshotMember[];
+}
 
 interface PartyMetaSourceInfo {
   ideologies: string[];
@@ -36,7 +45,7 @@ interface PartyMetaSourceInfo {
 export type Leaning = 'left' | 'center' | 'right';
 
 interface PartyMetaRecord {
-  id: string;            // Prefer QID if resolved; fallback to snapshot id/label
+  id: string; // Prefer QID if resolved; fallback to snapshot id/label
   label: string;
   color: string;
   leaning: Leaning;
@@ -46,12 +55,16 @@ interface PartyMetaRecord {
   qidResolved: boolean;
 }
 
-interface Args { snapshot: string }
+interface Args {
+  snapshot: string;
+}
 
 const parseArgs = (): Args => {
   const snapIdx = process.argv.indexOf('--snapshot');
   if (snapIdx === -1 || !process.argv[snapIdx + 1]) {
-    console.error('Missing required --snapshot path to an existing parliament snapshot JSON');
+    console.error(
+      'Missing required --snapshot path to an existing parliament snapshot JSON'
+    );
     process.exit(1);
   }
   return { snapshot: process.argv[snapIdx + 1] };
@@ -63,17 +76,37 @@ const WIKIDATA_SEARCH = 'https://www.wikidata.org/w/api.php';
 // Keyword regex lists (lowercase) for ideology detection
 const KEYWORDS = {
   left: [
-    /social/, /labou?r/, /green/, /social[- ]?democ/, /democratic socialism/, /progressive/, /ecologist/, /environmental/, /sinn/, /plaid/, /socialist/,
+    /social/,
+    /labou?r/,
+    /green/,
+    /social[- ]?democ/,
+    /democratic socialism/,
+    /progressive/,
+    /ecologist/,
+    /environmental/,
+    /sinn/,
+    /plaid/,
+    /socialist/,
   ],
   right: [
-    /conservative/, /unionist/, /libertarian/, /nationalist/, /right-?wing/, /reform/, /ukip/, /patriot/, /populis(t|m)/,
+    /conservative/,
+    /unionist/,
+    /libertarian/,
+    /nationalist/,
+    /right-?wing/,
+    /reform/,
+    /ukip/,
+    /patriot/,
+    /populis(t|m)/,
   ],
-  center: [
-    /liberal/, /centrist/, /christian[- ]?democ/, /moderate/,
-  ]
+  center: [/liberal/, /centrist/, /christian[- ]?democ/, /moderate/],
 };
 
-const spectrumMap: Record<Leaning, number> = { left: 0.25, center: 0.5, right: 0.75 };
+const spectrumMap: Record<Leaning, number> = {
+  left: 0.25,
+  center: 0.5,
+  right: 0.75,
+};
 
 const isQID = (s: string) => /^Q\d+$/.test(s.trim());
 
@@ -90,10 +123,12 @@ const loadSnapshot = (file: string): Snapshot => {
 const tryResolveQID = async (label: string): Promise<string | null> => {
   try {
     const url = `${WIKIDATA_SEARCH}?action=wbsearchentities&search=${encodeURIComponent(label)}&language=en&format=json&type=item&limit=1`;
-    const res = await axios.get(url, { headers: { 'User-Agent': 'civitas-party-meta-script/0.1' } });
+    const res = await axios.get(url, {
+      headers: { 'User-Agent': 'civitas-party-meta-script/0.1' },
+    });
     const id = res.data?.search?.[0]?.id;
     return id || null;
-  } catch (e) {
+  } catch {
     return null;
   }
 };
@@ -102,14 +137,17 @@ const buildIdeologyQuery = (qids: string[]): string => {
   return `SELECT ?party ?partyLabel ?ideology ?ideologyLabel WHERE { VALUES ?party { ${qids.map(q => `wd:${q}`).join(' ')} } OPTIONAL { ?party wdt:P1142 ?ideology . } OPTIONAL { ?party wdt:P1387 ?ideology . } SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } }`;
 };
 
-interface IdeologyRow { party: string; ideologyLabel?: string }
-
-const fetchIdeologies = async (qids: string[]): Promise<Map<string, string[]>> => {
+const fetchIdeologies = async (
+  qids: string[]
+): Promise<Map<string, string[]>> => {
   const map = new Map<string, string[]>();
   if (qids.length === 0) return map;
   const query = buildIdeologyQuery(qids);
-  const url = WIKIDATA_SPARQL + '?format=json&query=' + encodeURIComponent(query);
-  const res = await axios.get(url, { headers: { 'User-Agent': 'civitas-party-meta-script/0.1' } });
+  const url =
+    WIKIDATA_SPARQL + '?format=json&query=' + encodeURIComponent(query);
+  const res = await axios.get(url, {
+    headers: { 'User-Agent': 'civitas-party-meta-script/0.1' },
+  });
   const bindings = res.data?.results?.bindings || [];
   for (const b of bindings) {
     const partyURI: string | undefined = b.party?.value;
@@ -124,7 +162,14 @@ const fetchIdeologies = async (qids: string[]): Promise<Map<string, string[]>> =
   return map;
 };
 
-const matchLeaningFromTextArray = (texts: string[], partyLabel: string): { leaning: Leaning; matched: string[]; method: PartyMetaSourceInfo['method'] } => {
+const matchLeaningFromTextArray = (
+  texts: string[],
+  partyLabel: string
+): {
+  leaning: Leaning;
+  matched: string[];
+  method: PartyMetaSourceInfo['method'];
+} => {
   const collectMatches = (bucket: Leaning, source: string): string[] => {
     const res: string[] = [];
     for (const rx of KEYWORDS[bucket]) {
@@ -134,15 +179,21 @@ const matchLeaningFromTextArray = (texts: string[], partyLabel: string): { leani
   };
 
   // 1. Use ideology texts
-  let ideologyMatches: { leaning: Leaning; matches: string[] }[] = [];
+  const ideologyMatches: { leaning: Leaning; matches: string[] }[] = [];
   for (const leaning of ['left', 'center', 'right'] as Leaning[]) {
-    const matches = texts.flatMap(t => collectMatches(leaning, t.toLowerCase()));
+    const matches = texts.flatMap(t =>
+      collectMatches(leaning, t.toLowerCase())
+    );
     if (matches.length) ideologyMatches.push({ leaning, matches });
   }
   if (ideologyMatches.length) {
     ideologyMatches.sort((a, b) => b.matches.length - a.matches.length);
     const top = ideologyMatches[0];
-    return { leaning: top.leaning, matched: top.matches, method: 'ideology-labels' };
+    return {
+      leaning: top.leaning,
+      matched: top.matches,
+      method: 'ideology-labels',
+    };
   }
   // 2. Fallback to party label heuristics
   const labelLC = partyLabel.toLowerCase();
@@ -158,12 +209,17 @@ const matchLeaningFromTextArray = (texts: string[], partyLabel: string): { leani
 };
 
 const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
-  const overridePath = path.join(process.cwd(), 'public', 'data', 'partyMeta.overrides.json');
+  const overridePath = path.join(
+    process.cwd(),
+    'public',
+    'data',
+    'partyMeta.overrides.json'
+  );
   if (!fs.existsSync(overridePath)) return {};
   try {
     const raw = JSON.parse(fs.readFileSync(overridePath, 'utf-8'));
     return raw;
-  } catch (e) {
+  } catch {
     console.warn('Failed parsing overrides, ignoring.');
     return {};
   }
@@ -176,9 +232,17 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
   const partiesMap = new Map<string, { label: string; color: string }>();
   for (const m of snap.members) {
     if (!m.party) continue;
-    if (!partiesMap.has(m.party.id)) partiesMap.set(m.party.id, { label: m.party.label, color: m.party.color });
+    if (!partiesMap.has(m.party.id))
+      partiesMap.set(m.party.id, {
+        label: m.party.label,
+        color: m.party.color,
+      });
   }
-  const parties = Array.from(partiesMap.entries()).map(([id, v]) => ({ id, label: v.label, color: v.color }));
+  const parties = Array.from(partiesMap.entries()).map(([id, v]) => ({
+    id,
+    label: v.label,
+    color: v.color,
+  }));
   console.log(`Found ${parties.length} unique parties in snapshot.`);
 
   // Resolve QIDs where needed
@@ -195,7 +259,9 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
     await delay(120); // gentle throttle
   }
 
-  const qids = parties.map(p => (p as any).resolvedQid || (isQID(p.id) ? p.id : null)).filter(Boolean) as string[];
+  const qids = parties
+    .map(p => (p as any).resolvedQid || (isQID(p.id) ? p.id : null))
+    .filter(Boolean) as string[];
   const ideologyMap = await fetchIdeologies(qids);
 
   const overrides = loadOverrides();
@@ -203,8 +269,10 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
   const records: PartyMetaRecord[] = [];
   const now = new Date().toISOString();
   for (const p of parties) {
-    const qid: string | undefined = (p as any).resolvedQid || (isQID(p.id) ? p.id : undefined);
-    const override = overrides[p.id] || (qid ? overrides[qid] : undefined) || undefined;
+    const qid: string | undefined =
+      (p as any).resolvedQid || (isQID(p.id) ? p.id : undefined);
+    const override =
+      overrides[p.id] || (qid ? overrides[qid] : undefined) || undefined;
     let leaning: Leaning;
     let matched: string[] = [];
     let method: PartyMetaSourceInfo['method'];
@@ -237,7 +305,8 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
     };
     if (override) {
       if (override.label) rec.label = override.label;
-      if ((override as any).spectrumPosition !== undefined) rec.spectrumPosition = (override as any).spectrumPosition;
+      if ((override as any).spectrumPosition !== undefined)
+        rec.spectrumPosition = (override as any).spectrumPosition;
     }
     records.push(rec);
   }
@@ -254,7 +323,10 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
     if (snapDate) {
       const safeDate = snapDate.replace(/:/g, '-');
       const datedFile = path.join(outDir, `partyMeta-${safeDate}.json`);
-      fs.writeFileSync(datedFile, JSON.stringify({ ...payload, snapshotDate: snapDate }, null, 2));
+      fs.writeFileSync(
+        datedFile,
+        JSON.stringify({ ...payload, snapshotDate: snapDate }, null, 2)
+      );
       console.log(`Per-date party meta written: ${datedFile}`);
     }
   } catch {

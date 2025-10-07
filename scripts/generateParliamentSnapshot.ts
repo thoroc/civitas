@@ -6,15 +6,27 @@
 */
 import fs from 'fs';
 import path from 'path';
-import axios from 'axios';
-import { ParliamentSnapshot, Member, Party, Constituency } from '../src/app/parliament/types';
 
-interface Args { date: string; mergeLabourCoop: boolean }
+import axios from 'axios';
+
+import {
+  ParliamentSnapshot,
+  Member,
+  Party,
+  Constituency,
+} from '../src/app/parliament/types';
+
+interface Args {
+  date: string;
+  mergeLabourCoop: boolean;
+}
 
 const parseArgs = (): Args => {
   const dateIndex = process.argv.indexOf('--date');
   if (dateIndex === -1 || !process.argv[dateIndex + 1]) {
-    console.error('Missing required --date argument (ISO date e.g. 2021-01-01T00:00:00Z)');
+    console.error(
+      'Missing required --date argument (ISO date e.g. 2021-01-01T00:00:00Z)'
+    );
     process.exit(1);
   }
   const mergeLabourCoop = process.argv.includes('--merge-labour-coop');
@@ -75,13 +87,15 @@ const fetchData = async (query: string) => {
       if (attempt > 1) {
         const backoff = 500 * Math.pow(2, attempt - 2); // 500, 1000ms
         await new Promise(res => setTimeout(res, backoff));
-        console.warn(`[snapshot] retry ${attempt - 1} after backoff ${backoff}ms`);
+        console.warn(
+          `[snapshot] retry ${attempt - 1} after backoff ${backoff}ms`
+        );
       }
       const res = await axios.get(url, {
         headers: {
           'User-Agent': 'civitas-snapshot-script/0.2',
-          'Accept': 'application/sparql-results+json',
-          'Cache-Control': 'no-cache'
+          Accept: 'application/sparql-results+json',
+          'Cache-Control': 'no-cache',
         },
         validateStatus: () => true,
       });
@@ -110,20 +124,28 @@ const normalize = (raw: any): Member[] => {
   }
   return raw.results.bindings.map((b: any) => {
     const partyEntity = b.partyText || b.party; // partyText is merged party when flag enabled
-    const party: Party | null = partyEntity?.value ? {
-      id: partyEntity.value.replace('http://www.wikidata.org/entity/', ''),
-      label: b.partyLabel?.value || partyEntity.value.replace('http://www.wikidata.org/entity/', ''),
-      color: `#${b.rgb?.value || '808080'}`
-    } : null;
+    const party: Party | null = partyEntity?.value
+      ? {
+          id: partyEntity.value.replace('http://www.wikidata.org/entity/', ''),
+          label:
+            b.partyLabel?.value ||
+            partyEntity.value.replace('http://www.wikidata.org/entity/', ''),
+          color: `#${b.rgb?.value || '808080'}`,
+        }
+      : null;
 
-    const constituency: Constituency | null = b.constituency ? {
-      id: b.constituency.value,
-      label: b.constituencyLabel?.value || b.constituency.value
-    } : null;
+    const constituency: Constituency | null = b.constituency
+      ? {
+          id: b.constituency.value,
+          label: b.constituencyLabel?.value || b.constituency.value,
+        }
+      : null;
 
     const member: Member = {
       id: b.mp.value.replace('http://www.wikidata.org/entity/', ''),
-      label: b.mpLabel?.value || b.mp.value.replace('http://www.wikidata.org/entity/', ''),
+      label:
+        b.mpLabel?.value ||
+        b.mp.value.replace('http://www.wikidata.org/entity/', ''),
       constituency,
       party,
       gender: b.genderLabel?.value || null,
@@ -135,24 +157,35 @@ const normalize = (raw: any): Member[] => {
 
 const normalizeDate = (input: string): string => {
   if (/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z$/.test(input)) {
-    return input.replace(/^(\d{4}-\d{2}-\d{2}T\d{2})-(\d{2})-(\d{2})Z$/, '$1:$2:$3Z');
+    return input.replace(
+      /^(\d{4}-\d{2}-\d{2}T\d{2})-(\d{2})-(\d{2})Z$/,
+      '$1:$2:$3Z'
+    );
   }
   if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(input)) {
     return input;
   }
-  console.error('Unsupported date format. Use 2021-01-01T00-00-00Z or 2021-01-01T00:00:00Z');
+  console.error(
+    'Unsupported date format. Use 2021-01-01T00-00-00Z or 2021-01-01T00:00:00Z'
+  );
   process.exit(1);
 };
 
 (async () => {
   const { date: inputDate, mergeLabourCoop } = parseArgs();
   const isoDate = normalizeDate(inputDate);
-  console.log(`Fetching parliament snapshot for ${inputDate} (ISO: ${isoDate})`);
+  console.log(
+    `Fetching parliament snapshot for ${inputDate} (ISO: ${isoDate})`
+  );
   const query = buildQuery(isoDate, mergeLabourCoop);
   const raw = await fetchData(query);
   const members = normalize(raw);
   const snapshot: ParliamentSnapshot = {
-    meta: { date: isoDate, generatedAt: new Date().toISOString(), total: members.length },
+    meta: {
+      date: isoDate,
+      generatedAt: new Date().toISOString(),
+      total: members.length,
+    },
     members,
   };
   const outDir = path.join(process.cwd(), 'public', 'data');

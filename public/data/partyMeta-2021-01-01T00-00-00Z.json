@@ -10,16 +10,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "social democracy",
-          "democratic socialism"
-        ],
-        "matched": [
-          "social",
-          "social[- ]?democ",
-          "social",
-          "democratic socialism"
-        ],
+        "ideologies": ["social democracy", "democratic socialism"],
+        "matched": ["social", "social[- ]?democ", "social", "democratic socialism"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -42,10 +34,7 @@
           "unionism in the United Kingdom",
           "Traditionalist School"
         ],
-        "matched": [
-          "liberal",
-          "liberal"
-        ],
+        "matched": ["liberal", "liberal"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -59,15 +48,8 @@
       "leaning": "center",
       "spectrumPosition": 0.5,
       "source": {
-        "ideologies": [
-          "liberalism",
-          "social liberalism",
-          "pro-Europeanism"
-        ],
-        "matched": [
-          "liberal",
-          "liberal"
-        ],
+        "ideologies": ["liberalism", "social liberalism", "pro-Europeanism"],
+        "matched": ["liberal", "liberal"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -81,16 +63,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "social democracy",
-          "Scottish independence",
-          "Scottish nationalism",
-          "pro-Europeanism"
-        ],
-        "matched": [
-          "social",
-          "social[- ]?democ"
-        ],
+        "ideologies": ["social democracy", "Scottish independence", "Scottish nationalism", "pro-Europeanism"],
+        "matched": ["social", "social[- ]?democ"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -104,12 +78,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "centre-left"
-        ],
-        "matched": [
-          "labou?r"
-        ],
+        "ideologies": ["centre-left"],
+        "matched": ["labou?r"],
         "method": "party-label-regex",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -123,18 +93,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "social democracy",
-          "democratic socialism",
-          "Welsh nationalism",
-          "linguistic nationalism"
-        ],
-        "matched": [
-          "social",
-          "social[- ]?democ",
-          "social",
-          "democratic socialism"
-        ],
+        "ideologies": ["social democracy", "democratic socialism", "Welsh nationalism", "linguistic nationalism"],
+        "matched": ["social", "social[- ]?democ", "social", "democratic socialism"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -171,10 +131,7 @@
           "unionism in the United Kingdom",
           "British nationalism"
         ],
-        "matched": [
-          "right-?wing",
-          "populis(t|m)"
-        ],
+        "matched": ["right-?wing", "populis(t|m)"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -188,16 +145,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "social democracy",
-          "Irish nationalism",
-          "United Ireland",
-          "pro-Europeanism"
-        ],
-        "matched": [
-          "social",
-          "social[- ]?democ"
-        ],
+        "ideologies": ["social democracy", "Irish nationalism", "United Ireland", "pro-Europeanism"],
+        "matched": ["social", "social[- ]?democ"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -218,9 +167,7 @@
           "linguistic nationalism",
           "populist socialism"
         ],
-        "matched": [
-          "social"
-        ],
+        "matched": ["social"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -249,14 +196,8 @@
       "leaning": "center",
       "spectrumPosition": 0.5,
       "source": {
-        "ideologies": [
-          "liberalism",
-          "pro-Europeanism",
-          "nonsectarian"
-        ],
-        "matched": [
-          "liberal"
-        ],
+        "ideologies": ["liberalism", "pro-Europeanism", "nonsectarian"],
+        "matched": ["liberal"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }
@@ -270,12 +211,8 @@
       "leaning": "left",
       "spectrumPosition": 0.25,
       "source": {
-        "ideologies": [
-          "eco-socialism"
-        ],
-        "matched": [
-          "social"
-        ],
+        "ideologies": ["eco-socialism"],
+        "matched": ["social"],
         "method": "ideology-labels",
         "generatedAt": "2025-10-05T22:52:25.348Z"
       }

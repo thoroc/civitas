@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 // Reusable ISO date (very loose; format tightening can be added later)
-export const ISODateSchema = z.string().regex(/^[0-9]{4}-[0-9]{2}-[0-9]{2}/, 'Expected ISO date (yyyy-mm-dd...)');
+export const ISODateSchema = z
+  .string()
+  .regex(/^[0-9]{4}-[0-9]{2}-[0-9]{2}/, 'Expected ISO date (yyyy-mm-dd...)');
 
 export const PartySpellSchema = z.object({
   memberId: z.number().int().nonnegative(),
@@ -33,12 +35,21 @@ export const NormalizedDataSchema = z.object({
   seatSpells: z.array(SeatSpellSchema),
   partySpells: z.array(PartySpellSchema),
   parties: z.array(z.object({ partyId: z.string(), name: z.string() })),
-  constituencies: z.array(z.object({ constituencyId: z.string(), name: z.string() })),
+  constituencies: z.array(
+    z.object({ constituencyId: z.string(), name: z.string() })
+  ),
 });
 
 export const EventSchema = z.object({
   date: ISODateSchema,
-  type: z.enum(['generalElection','byElection','partySwitch','seatChange','vacancyStart','vacancyEnd']),
+  type: z.enum([
+    'generalElection',
+    'byElection',
+    'partySwitch',
+    'seatChange',
+    'vacancyStart',
+    'vacancyEnd',
+  ]),
   memberId: z.number().int().optional(),
   constituencyId: z.string().optional(),
   fromPartyId: z.string().optional(),
@@ -69,13 +80,13 @@ export const SnapshotSchema = z.object({
 
 export const HarvestConfigSchema = z.object({
   since: ISODateSchema,
-  granularity: z.enum(['events','monthly','both']),
+  granularity: z.enum(['events', 'monthly', 'both']),
   cacheDir: z.string(),
   mergeLabourCoop: z.boolean(),
   maxConcurrency: z.number().int().positive(),
   forceRefresh: z.boolean(),
   partyAliases: z.record(z.string()),
-  source: z.enum(['membersApi','odata']).optional(),
+  source: z.enum(['membersApi', 'odata']).optional(),
 });
 
 // Type inferences (exported for convenience)

@@ -1,5 +1,18 @@
 import { Member } from '../../types';
 
+import {
+  TOOLTIP_APPROX_CHAR,
+  TOOLTIP_SECONDARY_ADJ,
+  TOOLTIP_MIN_W,
+  TOOLTIP_MEASURE_PAD_PX,
+  TOOLTIP_OFFSET_GUTTER,
+  TOOLTIP_PARTY_FALLBACK_COLOR,
+} from './tooltipTheme';
+
+const APPROX_CHAR = TOOLTIP_APPROX_CHAR;
+const SECONDARY_ADJ = TOOLTIP_SECONDARY_ADJ;
+const MIN_W = TOOLTIP_MIN_W;
+
 export interface RawTooltipData {
   x: number;
   y: number;
@@ -29,17 +42,17 @@ export interface TooltipLayoutResult {
  * Computes tooltip geometry + truncated labels deterministically so the rendering
  * component stays presentational and small.
  */
-const APPROX_CHAR = 5;
-const SECONDARY_ADJ = 0.8;
-const MIN_W = 42;
 
 interface MeasureWidthOptions {
   label: string;
   perChar: number;
   padPx?: number;
 }
-const measureWidth = ({ label, perChar, padPx = 10 }: MeasureWidthOptions) =>
-  label.length * perChar + padPx;
+const measureWidth = ({
+  label,
+  perChar,
+  padPx = TOOLTIP_MEASURE_PAD_PX,
+}: MeasureWidthOptions) => label.length * perChar + padPx;
 
 const truncate = (label: string, capacity: number) =>
   label.length > capacity
@@ -58,9 +71,9 @@ const computeHorizontalOffset = ({
   leftLimit,
   rightLimit,
 }: HorizontalOffsetOptions) => {
-  let offsetX = 10;
+  let offsetX = TOOLTIP_OFFSET_GUTTER;
   if (seatX + offsetX + w > rightLimit) {
-    offsetX = -w - 10;
+    offsetX = -w - TOOLTIP_OFFSET_GUTTER;
     if (seatX + offsetX < leftLimit) {
       offsetX = Math.min(
         Math.max(leftLimit - seatX, -w / 2),
@@ -114,7 +127,8 @@ export const computeTooltipLayout = ({
     rightLimit,
   });
   const offsetY = -h / 2;
-  const partyColor = tooltip.member.party?.color || '#6B7280';
+  const partyColor =
+    tooltip.member.party?.color || TOOLTIP_PARTY_FALLBACK_COLOR;
   return {
     w,
     h,
