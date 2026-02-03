@@ -3,5 +3,12 @@
   "extends": [
     "config:recommended"
   ],
-  "autoApprove": true
+  "autoApprove": true,
+  "packageRules": [
+    {
+      "matchPackageNames": ["next", "eslint-config-next"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "nextjs"
+    }
+  ]
 }

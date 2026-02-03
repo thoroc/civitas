@@ -1,41 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Civitas
 
-## Getting Started
+Parliament visualization and historical membership timelines (Wikidata + Official UK Parliament data) built with
+Next.js 14.
 
-First, run the development server:
+## Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Hemicycle SVG with keyboard navigation & live region accessibility
+- Party filtering, gender & age range filters
+- Multi-date snapshot selection with persisted choice
+- Party metadata enrichment (ideological grouping) and legend counts
+- Optional official data pipeline producing event-driven snapshots
+- Dual build modes: SSR (default) & static export (explicit)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Documentation Index
 
-## Learn More
+- Architecture: `docs/architecture.md`
+- Parliament Snapshots: `docs/parliament-snapshots.md`
+- Party Metadata: `docs/party-metadata.md`
+- Filters & Interaction: `docs/filters-and-interaction.md`
+- Official Timeline: `docs/official-timeline.md`
+- Exporting: `docs/exporting.md`
+- Deployment: `docs/deployment.md`
+- Development & Conventions: `docs/development.md`
+- Roadmap: `docs/roadmap.md`
 
-To learn more about Next.js, take a look at the following resources:
+## Builds & Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Default (SSR) build applies security headers via `next.config.mjs`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run build          # SSR
+npm run build:static   # static export (no automatic headers)
+```
 
-## Deploy on Vercel
+CI (GitHub Actions) runs lint, type-check, SSR build, static export build. See `.github/workflows/ci.yml`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Follow development conventions in `docs/development.md`. Keep snapshot data additive (no destructive rewrites unless
+fixing objective errors). Use options-object pattern for functions with >2 scalar params.
 
-## Technologies used additionally
+## License
 
-- DaisyUI: <https://daisyui.com/>
-- D3js: <https://d3js.org/>
+Unspecified (in-repo usage). Add a LICENSE file before external distribution.

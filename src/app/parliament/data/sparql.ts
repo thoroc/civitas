@@ -1,5 +1,5 @@
-import { WBK } from 'wikibase-sdk';
 import axios from 'axios';
+import { WBK } from 'wikibase-sdk';
 
 const wdk = WBK({
   instance: 'https://www.wikidata.org',
@@ -10,7 +10,7 @@ const getData = async (query: string) => {
   const url = wdk.sparqlQuery(query);
 
   // get response using axios
-  return axios.get(url).then((response) => {
+  return axios.get(url).then(response => {
     return response.data;
   });
 };
