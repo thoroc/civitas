@@ -13,10 +13,7 @@ const ensureProdOrSkip = async (page: Page) => {
     await expect(page.getByText(/loading index/i)).toBeVisible({
       timeout: 15000,
     });
-    test.fixme(
-      !isProd,
-      'Full hemicycle assertions run only in production mode'
-    );
+    test.skip(!isProd, 'Full hemicycle assertions run only in production mode');
     return false;
   }
   return true;
