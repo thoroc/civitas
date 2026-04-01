@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { Member } from '../../types';
-
-import { computeTooltipLayout } from './tooltipLayout';
-import TooltipSecondary from './TooltipSecondary';
 import {
+  computeTooltipLayout,
+  TooltipSecondary,
   TOOLTIP_BG_COLOR,
   TOOLTIP_SECONDARY_TEXT_COLOR,
   TOOLTIP_OPACITY,
@@ -15,7 +14,7 @@ import {
   TOOLTIP_PRIMARY_FONT_SIZE,
   TOOLTIP_SEAT_FONT_SIZE,
   TOOLTIP_SEAT_LETTER_SPACING,
-} from './tooltipTheme';
+} from '../tooltip';
 
 export interface HemicycleTooltipProps {
   tooltip: { x: number; y: number; i: number; member: Member } | null;

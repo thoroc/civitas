@@ -4,7 +4,7 @@ import { SeatTooltip } from '../components/hemicycle/HemicycleSeats';
 import {
   buildKeyHandler,
   buildSeatInteractions,
-} from '../components/hemicycle/seatInteractions';
+} from '../components/seat/seatInteractions';
 
 import { HemicycleLayoutResult } from './useHemicycleLayout';
 

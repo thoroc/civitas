@@ -84,7 +84,7 @@ const computeHorizontalOffset = ({
   return offsetX;
 };
 
-export const computeTooltipLayout = ({
+const computeTooltipLayout = ({
   tooltip,
   pad,
   vbWidth,
@@ -140,3 +140,5 @@ export const computeTooltipLayout = ({
     partyColor,
   };
 };
+
+export default computeTooltipLayout;

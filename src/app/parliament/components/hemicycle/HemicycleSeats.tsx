@@ -2,8 +2,7 @@ import React from 'react';
 
 import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
 import { Member } from '../../types';
-
-import Seat from './Seat';
+import { Seat } from '../seat';
 
 export type SeatTooltip = {
   x: number;

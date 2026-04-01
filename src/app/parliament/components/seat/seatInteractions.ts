@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
-
-import { SeatTooltip } from './HemicycleSeats';
+import { SeatTooltip } from '../hemicycle/HemicycleSeats';
 
 export interface NavigationFns {
   moveFocus: (targetIndex: number, direction?: 1 | -1) => void;
