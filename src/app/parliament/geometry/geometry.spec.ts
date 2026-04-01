@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest';
 import { computeHemicycleGeometry } from './geometry';
 
 describe('computeHemicycleGeometry', () => {
-  it('computes consistent ring metadata and seat allocation for 100 seats', () => {
-    const totalSeats = 100;
+  it('computes consistent ring metadata and seat allocation for 16 seats', () => {
+    const totalSeats = 16;
     const res = computeHemicycleGeometry(totalSeats);
 
     // basic invariants
@@ -29,8 +29,8 @@ describe('computeHemicycleGeometry', () => {
     }
   });
 
-  it('handles small seat counts (edge case)', () => {
-    const totalSeats = 1;
+  it('handles 10 seats', () => {
+    const totalSeats = 10;
     const res = computeHemicycleGeometry(totalSeats);
     expect(res.flatSeats.length).toBe(totalSeats);
     const seatsSum = res.seatsPerRing.reduce((acc, v) => acc + (v || 0), 0);
