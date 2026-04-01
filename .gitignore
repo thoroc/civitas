@@ -54,6 +54,7 @@ opencode.json
 .codex/
 .cursor/
 .gemini/
+.github/skills/
 .tessl/tiles/
 
 # local runtime logs
