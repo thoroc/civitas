@@ -24,7 +24,7 @@ const ensureProdOrSkip = async (page: Page) => {
 
 const waitForSnapshotMeta = async (page: Page) => {
   const start = Date.now();
-  const maxMs = 25_000;
+  const maxMs = 13_000;
   while (Date.now() - start < maxMs) {
     const visible = await page
       .getByText(/snapshot date:/i)
