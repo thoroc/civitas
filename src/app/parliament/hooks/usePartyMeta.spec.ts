@@ -1,3 +1,3 @@
 import { describe } from 'vitest';
 
-describe.todo('tooltipTheme');
+describe.todo('usePartyMeta');
