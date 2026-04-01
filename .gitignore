@@ -48,6 +48,14 @@ next-env.d.ts
 .vscode/*
 opencode.json
 
+# Agentic
+.agents/
+.claude/
+.codex/
+.cursor/
+.gemini/
+.tessl/tiles/
+
 # local runtime logs
 server.log
 # Ignore generated test build artifacts
