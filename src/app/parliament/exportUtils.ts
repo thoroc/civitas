@@ -6,18 +6,6 @@ export interface HemicycleExportOptions {
   background?: string; // png only
 }
 
-// Backwards-compatible specific option interfaces (kept for minimal diff imports)
-interface ExportSvgOptions {
-  svg: SVGSVGElement;
-  filename?: string;
-}
-interface ExportPngOptions {
-  svg: SVGSVGElement;
-  filename?: string;
-  scale?: number;
-  background?: string;
-}
-
 export const exportHemicycle = (opts: HemicycleExportOptions) => {
   const { svg, format, filename, scale = 3, background = '#ffffff' } = opts;
   const serializer = new XMLSerializer();
@@ -64,15 +52,3 @@ export const exportHemicycle = (opts: HemicycleExportOptions) => {
   };
   img.src = url;
 };
-
-// Backwards-compatible wrappers
-export const exportSvg = ({ svg, filename }: ExportSvgOptions) =>
-  exportHemicycle({ svg, filename, format: 'svg' });
-
-export const exportPng = ({
-  svg,
-  filename,
-  scale = 3,
-  background = '#ffffff',
-}: ExportPngOptions) =>
-  exportHemicycle({ svg, filename, format: 'png', scale, background });
