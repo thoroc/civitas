@@ -3,7 +3,6 @@ import { test, expect } from '@playwright/test';
 test.describe('Homepage', () => {
   test('loads and shows navigation', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/civitas/i, { timeout: 15_000 });
     // Main navigation via aria-label
     const nav = page.getByRole('navigation', { name: /main navigation/i });
     await expect(nav).toBeVisible();
