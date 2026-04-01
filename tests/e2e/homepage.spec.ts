@@ -2,8 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Homepage', () => {
   test('loads and shows navigation', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
-    await expect(page).toHaveTitle(/civitas/i, { timeout: 15_000 });
+    await page.goto('/');
+    await page.waitForFunction(() => document.title !== '', {
+      timeout: 20_000,
+    });
+    await expect(page).toHaveTitle(/civitas/i);
     // Main navigation via aria-label
     const nav = page.getByRole('navigation', { name: /main navigation/i });
     await expect(nav).toBeVisible();

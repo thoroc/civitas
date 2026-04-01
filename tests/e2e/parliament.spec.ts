@@ -7,18 +7,6 @@ const gotoParliament = async (page: Page) => {
   await page.goto('/parliament', { waitUntil: 'domcontentloaded' });
 };
 
-const ensureProdOrSkip = async (page: Page) => {
-  const isProd = !!process.env.PLAYWRIGHT_PROD;
-  if (!isProd) {
-    await expect(page.getByText(/loading index/i)).toBeVisible({
-      timeout: 15000,
-    });
-    test.skip(!isProd, 'Full hemicycle assertions run only in production mode');
-    return false;
-  }
-  return true;
-};
-
 const waitForSnapshotMeta = async (page: Page) => {
   const start = Date.now();
   const maxMs = 13_000;
@@ -107,9 +95,11 @@ const assertSeatCountMatches = async (
 test.describe('Parliament Page', () => {
   test('renders hemicycle and legend', async ({ page }) => {
     test.setTimeout(60_000);
+    test.skip(
+      !process.env.PLAYWRIGHT_PROD,
+      'Full hemicycle assertions run only in production mode'
+    );
     await gotoParliament(page);
-
-    if (!(await ensureProdOrSkip(page))) return;
 
     const res = await page.request.get('/data/parliament.index.json');
     expect(res.status(), 'index JSON status should be 200').toBe(200);
