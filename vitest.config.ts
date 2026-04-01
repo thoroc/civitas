@@ -13,5 +13,13 @@ export default defineConfig({
       'src/**/*.spec.js',
       'src/**/*.spec.jsx',
     ],
+    coverage: {
+      include: ['src/app/parliament/**'],
+      thresholds: {
+        lines: 55,
+        functions: 80,
+        branches: 85,
+      },
+    },
   },
 });
