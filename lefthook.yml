@@ -11,6 +11,9 @@ pre-commit:
     markdownlint:
       glob: '*.{md,markdown}'
       run: bunx markdownlint-cli2 {staged_files}
+    conventions:
+      glob: '*.{ts,tsx}'
+      run: bash scripts/check-conventions.sh {staged_files}
 # pre-push:
 #   commands:
 #     lint-all:

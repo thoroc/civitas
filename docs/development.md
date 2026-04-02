@@ -19,14 +19,27 @@ bun dev
 
 Functions with >2 scalar parameters must take a single options object. Interface naming: `<Verb><Noun>Options`.
 
+## Code Conventions
+
+Four conventions are enforced automatically on every commit. See `CONTRIBUTING.md § Code Conventions` for full
+details and examples.
+
+| Convention | Enforcement |
+| --- | --- |
+| One exported function per module | `scripts/check-conventions.sh` `[one-function-per-module]` |
+| Barrel modules (`index.ts` re-exports) | documented + code review |
+| Unit tests collocated (`.spec.ts` / `.test.ts` next to source) | vitest config + code review |
+| Arrow functions only — no `function` declarations, no `class` | Biome `complexity/useArrowFunction` + `[arrow-only]` / `[no-class]` |
+| Function body ≤ 80 substantive lines | `scripts/check-conventions.sh` `[max-function-lines]` |
+| Cognitive complexity ≤ 12 | Biome `complexity/noExcessiveCognitiveComplexity` |
+
 ## Pre-commit Hooks
 
-Lefthook runs lint, prettier, markdownlint, types, and a blocking lockfile integrity check on staged
-`bun.lock`.
+Lefthook runs Biome (lint + format), markdownlint, type-check, convention check, and a blocking lockfile
+integrity check on staged `bun.lock`. All hooks run in parallel.
 
 ## Tooling Enhancements
 
-- `prettier-plugin-packagejson` auto-sorts `package.json` fields (enforced via existing Prettier hook).
 - `lockfile-lint` ensures the lockfile only references HTTPS endpoints and the approved host (`registry.npmjs.org`).
   Run manually with `bun run lint:lockfile` or rely on CI step.
 

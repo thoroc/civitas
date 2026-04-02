@@ -2,8 +2,8 @@
 
 Two modes:
 
-- SSR / ISR capable (default): `npm run build`
-- Static export: `npm run build:static` (loss of Next.js `headers()`; replicate security headers manually)
+- SSR / ISR capable (default): `bun run build`
+- Static export: `bun run build:static` (loss of Next.js `headers()`; replicate security headers manually)
 
 ## Security Headers
 
@@ -37,8 +37,8 @@ Look for `Content-Security-Policy` & `Strict-Transport-Security`.
 
 | Job                      | Trigger             | Command                               |
 | ------------------------ | ------------------- | ------------------------------------- |
-| `deploy-ssr`             | Push to `main`      | `npm run build` → Vercel production   |
-| `deploy-static`          | Push tag `v*`       | `npm run build:static` → Vercel alias |
+| `deploy-ssr`             | Push to `main`      | `bun run build` → Vercel production   |
+| `deploy-static`          | Push tag `v*`       | `bun run build:static` → Vercel alias |
 | `deploy-static` (manual) | `workflow_dispatch` | Dry-run / preview                     |
 
 Both jobs **skip cleanly** (no failure) when Vercel secrets are absent — safe for forks and open PRs.
@@ -71,7 +71,7 @@ The job exits 0. No red CI.
 
 ```bash
 # Install Vercel CLI globally if needed
-npm i -g vercel
+bun add -g vercel
 
 # Link the project (run once in repo root)
 vercel link

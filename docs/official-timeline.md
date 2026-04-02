@@ -5,7 +5,7 @@ Alternative pipeline ingesting UK Parliament OData XML to derive events & snapsh
 ## Command
 
 ```bash
-npm run snapshot:official -- --since 2005-01-01 --granularity events --source odata
+bun run snapshot:official -- --since 2005-01-01 --granularity events --source odata
 ```
 
 ## Outputs

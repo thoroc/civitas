@@ -5,7 +5,7 @@ Snapshots capture chamber membership at specific dates and live in `public/data/
 ## Generation
 
 ```bash
-npm run snapshot:parliament -- --date 2021-01-01T00:00:00Z
+bun run snapshot:parliament -- --date 2021-01-01T00:00:00Z
 ```
 
 Date must be ISO UTC. A dash-normalized form (`T00-00-00Z`) is used for filenames.
@@ -26,7 +26,7 @@ Generate with new dates; commit new files (do not rewrite historical ones unless
 Build multiple historical term snapshots:
 
 ```bash
-npm run snapshot:range:terms
+bun run snapshot:range:terms
 ```
 
 Outputs `parliament.index.json` plus dated party metadata files when present.

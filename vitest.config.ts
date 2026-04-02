@@ -12,6 +12,8 @@ export default defineConfig({
       'src/**/*.spec.tsx',
       'src/**/*.spec.js',
       'src/**/*.spec.jsx',
+      'src/**/*.test.ts',
+      'src/**/*.test.tsx',
     ],
     coverage: {
       include: ['src/app/parliament/**'],

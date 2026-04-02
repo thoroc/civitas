@@ -5,7 +5,7 @@
 ## Generation
 
 ```bash
-npm run snapshot:partyMeta -- --snapshot public/data/parliament-2021-01-01T00-00-00Z.json
+bun run snapshot:partyMeta -- --snapshot public/data/parliament-2021-01-01T00-00-00Z.json
 ```
 
 Commit the resulting `public/data/partyMeta.json`.

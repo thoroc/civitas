@@ -57,7 +57,14 @@
         "noNonNullAssertion": "warn"
       },
       "complexity": {
-        "noForEach": "warn"
+        "noForEach": "warn",
+        "useArrowFunction": "error",
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 12
+          }
+        }
       }
     }
   },
