@@ -92,6 +92,15 @@ When this skill is active, begin with:
 
 Then follow the protocol through subsequent turns.
 
+## Reference documents
+
+Detailed supporting material lives in `references/`:
+
+- [`question-taxonomy.md`](references/question-taxonomy.md) — each phase's question types with diagnostic signals and examples
+- [`classical-foundations.md`](references/classical-foundations.md) — elenchus, maieutics, dialectic, and aporia explained
+- [`anti-patterns.md`](references/anti-patterns.md) — common failure modes and how to avoid them
+- [`worked-examples.md`](references/worked-examples.md) — two fully annotated dialogues end-to-end
+
 ## Classical foundations
 
 The five phases map to established Socratic techniques:
