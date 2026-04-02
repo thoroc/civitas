@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+package-lock.json
 
 # testing
 /coverage
@@ -61,5 +62,3 @@ opencode.json
 
 # local runtime logs
 server.log
-# Ignore generated test build artifacts
-tmp-spec-build/
