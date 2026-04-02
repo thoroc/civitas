@@ -39,7 +39,7 @@ jobs:
       - name: Build (SSR)
         run: npm run build
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: next-ssr-build
           path: .next
@@ -65,7 +65,7 @@ jobs:
             echo "Warning: expected static export warning not found (non-blocking)";
           fi
       - name: Upload static artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: static-export-out
           path: out
@@ -95,7 +95,7 @@ jobs:
         run: npx playwright test --reporter=github
       - name: Upload Playwright Artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-artifacts
           path: |
