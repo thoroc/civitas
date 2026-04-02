@@ -19,6 +19,7 @@ export default defineConfig({
       url: 'http://localhost:3000/',
       timeout: 120_000,
       reuseExistingServer: !process.env.CI,
+      env: { PLAYWRIGHT_CI: '1' },
     },
   ],
   projects: [

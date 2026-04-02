@@ -62,7 +62,7 @@ const nextConfig = {
   outputFileTracingRoot: process.cwd(),
   ...(enableStaticExport ? { output: 'export' } : {}),
   async headers() {
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production' || process.env.PLAYWRIGHT_CI) {
       return [];
     }
     return [
