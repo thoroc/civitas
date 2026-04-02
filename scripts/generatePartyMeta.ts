@@ -18,8 +18,8 @@
     the Wikidata search API when an id does not look like a QID (Q\d+). For best results, consider updating
     the snapshot generator to include the party QID directly.
 */
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import axios from 'axios';
 
@@ -143,8 +143,7 @@ const fetchIdeologies = async (
   const map = new Map<string, string[]>();
   if (qids.length === 0) return map;
   const query = buildIdeologyQuery(qids);
-  const url =
-    WIKIDATA_SPARQL + '?format=json&query=' + encodeURIComponent(query);
+  const url = `${WIKIDATA_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
   const res = await axios.get(url, {
     headers: { 'User-Agent': 'civitas-party-meta-script/0.1' },
   });
@@ -156,7 +155,7 @@ const fetchIdeologies = async (
     const label = b.ideologyLabel?.value;
     if (label) {
       if (!map.has(qid)) map.set(qid, []);
-      map.get(qid)!.push(label);
+      map.get(qid)?.push(label);
     }
   }
   return map;

@@ -1,19 +1,20 @@
 'use client';
 
-import React, {
+import type React from 'react';
+import {
   createContext,
+  useCallback,
   useContext,
   useMemo,
   useState,
-  useCallback,
 } from 'react';
 
 import {
-  ParliamentFiltersState,
-  defaultParliamentFiltersState as defaultState,
+  type ParliamentFiltersState,
   applyFilters,
+  defaultParliamentFiltersState as defaultState,
 } from '../filters/apply';
-import { Member } from '../types';
+import type { Member } from '../types';
 
 interface ParliamentFiltersContextValue {
   filters: ParliamentFiltersState;

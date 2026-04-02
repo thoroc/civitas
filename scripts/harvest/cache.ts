@@ -1,6 +1,6 @@
-import crypto from 'crypto';
-import fs from 'fs';
-import path from 'path';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const hashKey = (input: string) =>
 export async function cachedGet(url: string, cfg: CacheConfig): Promise<any> {
   ensureDir(cfg.dir);
   const key = hashKey(url);
-  const file = path.join(cfg.dir, key + '.json');
+  const file = path.join(cfg.dir, `${key}.json`);
   if (!cfg.forceRefresh && fs.existsSync(file)) {
     try {
       return JSON.parse(fs.readFileSync(file, 'utf-8'));

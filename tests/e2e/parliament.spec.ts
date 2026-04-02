@@ -1,4 +1,4 @@
-import { test, expect, Page } from '@playwright/test';
+import { type Page, expect, test } from '@playwright/test';
 
 // Smoke test ensuring the parliament page renders hemicycle content after snapshot load.
 // Strategy: navigate (DOM load), then detect hemicycle and validate structural + numeric invariants.
@@ -25,9 +25,9 @@ const extractTotalMembers = async (page: Page) => {
   const metaLine = page.getByText(/snapshot date:/i);
   const metaText = await metaLine.textContent();
   expect(metaText).toBeTruthy();
-  const match = metaText!.match(/Total members:\s*(\d+)/i);
+  const match = metaText?.match(/Total members:\s*(\d+)/i);
   expect(match, 'Total members pattern present').toBeTruthy();
-  const total = parseInt(match![1], 10);
+  const total = Number.parseInt(match?.[1] ?? '', 10);
   expect(total).toBeGreaterThan(0);
   return total;
 };
@@ -68,8 +68,8 @@ const analyzeLegendCounts = async (partyItems: ReturnType<Page['locator']>) => {
     ).toBeTruthy();
     const m = text.match(/(\d+)\s*\/\s*(\d+)/);
     if (m) {
-      const c = parseInt(m[1], 10);
-      const t = parseInt(m[2], 10);
+      const c = Number.parseInt(m[1], 10);
+      const t = Number.parseInt(m[2], 10);
       summedCounts += c;
       summedTotals += t;
       if (c <= t && t > 0) anyValidRelation = true;

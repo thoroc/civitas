@@ -30,11 +30,11 @@ export const buildFilterPredicates = (
   }
   if (f.minAge !== null) {
     const min = f.minAge;
-    preds.push(m => (m.age ?? -Infinity) >= min);
+    preds.push(m => (m.age ?? Number.NEGATIVE_INFINITY) >= min);
   }
   if (f.maxAge !== null) {
     const max = f.maxAge;
-    preds.push(m => (m.age ?? Infinity) <= max);
+    preds.push(m => (m.age ?? Number.POSITIVE_INFINITY) <= max);
   }
   return preds;
 };

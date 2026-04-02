@@ -1,11 +1,12 @@
-import React, { memo } from 'react';
+import type React from 'react';
+import { memo } from 'react';
 
-import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import type { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
 import useSeatHandlers from '../../hooks/useSeatHandlers';
-import { SeatTooltip } from '../hemicycle/HemicycleSeats';
+import type { SeatTooltip } from '../hemicycle/HemicycleSeats';
 
-import { buildSeatAria } from './seatAria';
 import SeatCircles from './SeatCircles';
+import { buildSeatAria } from './seatAria';
 
 interface SeatProps {
   seat: HemicycleLayoutResult['seats'][number];

@@ -6,7 +6,7 @@
     "code_blocks": false,
     "tables": false,
     "headings": false,
-    "heading_line_length": 200,
+    "heading_line_length": 200
   },
-  "MD029": { "style": "ordered" },
+  "MD029": { "style": "ordered" }
 }

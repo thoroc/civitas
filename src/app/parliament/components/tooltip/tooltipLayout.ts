@@ -1,12 +1,12 @@
-import { Member } from '../../types';
+import type { Member } from '../../types';
 
 import {
   TOOLTIP_APPROX_CHAR,
-  TOOLTIP_SECONDARY_ADJ,
-  TOOLTIP_MIN_W,
   TOOLTIP_MEASURE_PAD_PX,
+  TOOLTIP_MIN_W,
   TOOLTIP_OFFSET_GUTTER,
   TOOLTIP_PARTY_FALLBACK_COLOR,
+  TOOLTIP_SECONDARY_ADJ,
 } from './tooltipTheme';
 
 const APPROX_CHAR = TOOLTIP_APPROX_CHAR;
@@ -56,7 +56,7 @@ const measureWidth = ({
 
 const truncate = (label: string, capacity: number) =>
   label.length > capacity
-    ? label.slice(0, Math.max(0, capacity - 1)) + '…'
+    ? `${label.slice(0, Math.max(0, capacity - 1))}…`
     : label;
 
 interface HorizontalOffsetOptions {
@@ -93,7 +93,7 @@ const computeTooltipLayout = ({
   const hasParty = Boolean(tooltip.member.party?.label);
   const maxW = vbWidth * 0.24;
   const primaryLabel = tooltip.member.label;
-  const secondaryLabel = hasParty ? tooltip.member.party!.label : '';
+  const secondaryLabel = tooltip.member.party?.label ?? '';
 
   const desiredPrimary = measureWidth({
     label: primaryLabel,

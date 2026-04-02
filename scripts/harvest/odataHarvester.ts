@@ -1,12 +1,17 @@
-import crypto from 'crypto';
-import fs from 'fs';
-import path from 'path';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import axios from 'axios';
 
 import { ensureDir } from './cache';
 import type { HarvestResult } from './membersApiClient';
-import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './schemas';
+import type {
+  HarvestConfig,
+  MemberCore,
+  PartySpell,
+  SeatSpell,
+} from './schemas';
 
 /*
   Parliament Members Data Platform (MDP) endpoints (XML):
@@ -50,7 +55,7 @@ async function cachedGetXml(
   cfg: { dir: string; forceRefresh: boolean }
 ): Promise<string> {
   ensureDir(cfg.dir);
-  const key = cacheKey(url) + '.xml';
+  const key = `${cacheKey(url)}.xml`;
   const file = path.join(cfg.dir, key);
   if (!cfg.forceRefresh && fs.existsSync(file)) {
     try {
@@ -123,7 +128,7 @@ function parseMembersXml(xml: string): ParsedMembershipRow[] {
       attrs[k] = v.slice(1, -1);
       return '';
     });
-    const memberId = Number(attrs['Member_Id']);
+    const memberId = Number(attrs.Member_Id);
     if (!memberId) continue;
     const house = extractTag(inner, 'House');
     if (house !== 'Commons') continue; // restrict to Commons

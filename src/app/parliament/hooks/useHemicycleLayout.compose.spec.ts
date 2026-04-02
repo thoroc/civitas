@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { Member } from '../types';
+import type { Member } from '../types';
 
 import { useHemicycleLayout } from './useHemicycleLayout';
 

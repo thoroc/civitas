@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
-import { Member } from '../types';
+import type { Member } from '../types';
 
-import { HemicycleLayoutResult } from './useHemicycleLayout';
+import type { HemicycleLayoutResult } from './useHemicycleLayout';
 
 interface UseSeatFocusNavigationParams {
   seats: HemicycleLayoutResult['seats'];

@@ -1,9 +1,9 @@
-import React from 'react';
+import type React from 'react';
 
 import {
-  TOOLTIP_SECONDARY_TEXT_COLOR,
   TOOLTIP_FONT_FAMILY,
   TOOLTIP_SECONDARY_FONT_SIZE,
+  TOOLTIP_SECONDARY_TEXT_COLOR,
 } from './tooltipTheme';
 
 const TooltipSecondary: React.FC<{

@@ -15,9 +15,9 @@
     Skips existing snapshot files unless --force is supplied.
 
 */
-import { execFileSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 
 interface Args {
   mode: 'terms';
@@ -33,8 +33,10 @@ const parseArgs = (): Args => {
     modeIdx !== -1 ? process.argv[modeIdx + 1] : 'terms'
   ) as 'terms';
   const throttle =
-    throttleIdx !== -1 ? parseInt(process.argv[throttleIdx + 1], 10) : 300;
-  return { mode, throttle: isNaN(throttle) ? 300 : throttle, force };
+    throttleIdx !== -1
+      ? Number.parseInt(process.argv[throttleIdx + 1], 10)
+      : 300;
+  return { mode, throttle: Number.isNaN(throttle) ? 300 : throttle, force };
 };
 
 const WIKIDATA_SPARQL = 'https://query.wikidata.org/sparql';
@@ -63,11 +65,10 @@ const fetchTermStartDates = async (): Promise<
   ): Promise<TermStart[]> => {
     const MAX_ATTEMPTS = 3;
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-      const url =
-        WIKIDATA_SPARQL + '?format=json&query=' + encodeURIComponent(query);
+      const url = `${WIKIDATA_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
       try {
         if (attempt > 1) {
-          const backoff = 400 * Math.pow(2, attempt - 2); // 400, 800ms for attempts 2/3
+          const backoff = 400 * 2 ** (attempt - 2); // 400, 800ms for attempts 2/3
           await new Promise(res => setTimeout(res, backoff));
           console.warn(
             `[terms] retry ${attempt - 1} for ${label} after backoff ${backoff}ms`

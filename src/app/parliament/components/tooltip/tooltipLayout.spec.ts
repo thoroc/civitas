@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import computeTooltipLayout from './tooltipLayout';
 import { TOOLTIP_MIN_W, TOOLTIP_PARTY_FALLBACK_COLOR } from './tooltipTheme';

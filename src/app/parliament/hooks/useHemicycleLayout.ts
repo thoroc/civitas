@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-import { Item } from '../d3';
+import type { Item } from '../d3';
 import {
   allocateMembersToRings,
   initAllocationContext,
 } from '../geometry/allocation';
 import {
-  computeHemicycleGeometry,
   HEMICYCLE_BASE_PADDING,
+  computeHemicycleGeometry,
 } from '../geometry/geometry';
 import { groupAndSortParties } from '../geometry/parties';
-import { Member } from '../types';
+import type { Member } from '../types';
 
 export interface HemicycleLayoutResult {
   seats: Array<Item & { member: Member; active: boolean }>;
@@ -45,7 +45,7 @@ const mapSeats = ({
     x: seat.x + r0,
     y: seat.y + r0,
     member: orderedMembers[idx]!,
-    active: filteredIds.has(orderedMembers[idx]!.id),
+    active: filteredIds.has(orderedMembers[idx]?.id),
   }));
 
 export const useHemicycleLayout = ({

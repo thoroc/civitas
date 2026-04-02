@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import {
-  getTotal,
-  getCoordinates,
+  distribute,
   findA,
   findAWithConfig,
-  getScore,
-  getScoreWithConfig,
   findN,
   findNFromConfig,
-  nextRing,
-  distribute,
-  populateRings,
+  getCoordinates,
+  getScore,
+  getScoreWithConfig,
+  getTotal,
   merge,
+  nextRing,
+  populateRings,
 } from './d3';
 
 describe('parliament d3 utilities', () => {

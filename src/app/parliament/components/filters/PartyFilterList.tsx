@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 
 import { useParliamentFilters } from '../../context/filtersContext';
-import { Member } from '../../types';
+import type { Member } from '../../types';
 
 import FilterBadge from './FilterBadge';
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Member } from '../types';
+import type { Member } from '../types';
 
 interface UseLiveAnnouncementsParams {
   tooltip: { i: number; member: Member } | null;

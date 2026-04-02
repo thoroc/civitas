@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
-import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
-import { Member } from '../../types';
+import type { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import type { Member } from '../../types';
 
 import HemicycleExportBar from './HemicycleExportBar';
 import HemicycleSeats from './HemicycleSeats';
@@ -79,7 +79,7 @@ const EmptyStateOverlay = ({
   vbWidth: number;
   vbHeight: number;
 }) => (
-  <g aria-hidden='true'>
+  <g>
     <rect
       x={-pad}
       y={-pad}

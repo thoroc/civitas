@@ -1,7 +1,12 @@
 import pLimit from 'p-limit';
 
 import { cachedGet } from './cache';
-import { HarvestConfig, MemberCore, PartySpell, SeatSpell } from './schemas';
+import type {
+  HarvestConfig,
+  MemberCore,
+  PartySpell,
+  SeatSpell,
+} from './schemas';
 
 interface RawSearchMember {
   MemberId: number;

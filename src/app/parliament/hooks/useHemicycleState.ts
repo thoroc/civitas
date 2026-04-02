@@ -1,13 +1,13 @@
 import { useMemo, useRef, useState } from 'react';
 
 import { useParliamentFilters } from '../context/filtersContext';
-import { Member } from '../types';
+import type { Member } from '../types';
 
 import useHemicycleExport from './useHemicycleExport';
 import useHemicycleLayout from './useHemicycleLayout';
 import { useHemicycleTooltipState } from './useHemicycleTooltipState';
 import useLiveAnnouncements from './useLiveAnnouncements';
-import usePartyMeta, { Leaning } from './usePartyMeta';
+import usePartyMeta, { type Leaning } from './usePartyMeta';
 import useResponsiveSeatScale from './useResponsiveSeatScale';
 import useSeatFocusNavigation from './useSeatFocusNavigation';
 

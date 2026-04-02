@@ -1,13 +1,13 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react';
-import React from 'react';
-import { describe, it, expect } from 'vitest';
+import type React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import TooltipSecondary from './TooltipSecondary';
 import {
-  TOOLTIP_SECONDARY_TEXT_COLOR,
   TOOLTIP_FONT_FAMILY,
   TOOLTIP_SECONDARY_FONT_SIZE,
+  TOOLTIP_SECONDARY_TEXT_COLOR,
 } from './tooltipTheme';
 
 const renderInSvg = (props: React.ComponentProps<typeof TooltipSecondary>) => {
@@ -27,7 +27,7 @@ describe('TooltipSecondary', () => {
 
   it('renders children text', () => {
     const svg = renderInSvg({ x: 0, y: 0, children: 'Liberal' });
-    expect(svg.querySelector('text')!.textContent).toBe('Liberal');
+    expect(svg.querySelector('text')?.textContent).toBe('Liberal');
   });
 
   it('sets x and y attributes', () => {

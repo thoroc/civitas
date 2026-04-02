@@ -1,10 +1,10 @@
 import {
+  type GeometryConfigWithN,
+  type Item,
+  distribute,
   findAWithConfig,
   findNFromConfig,
-  distribute,
   populateRings,
-  Item,
-  GeometryConfigWithN,
 } from '../d3';
 
 export interface GeometryResult {

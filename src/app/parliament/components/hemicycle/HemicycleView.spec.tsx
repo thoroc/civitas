@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { render, screen } from '@testing-library/react';
-import React, { createRef } from 'react';
-import { describe, it, expect, vi } from 'vitest';
+import { createRef } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 
 import HemicycleView from './HemicycleView';
 

@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from 'react';
 
-import { SeatTooltip } from '../components/hemicycle/HemicycleSeats';
+import type { SeatTooltip } from '../components/hemicycle/HemicycleSeats';
 import {
   buildKeyHandler,
   buildSeatInteractions,
 } from '../components/seat/seatInteractions';
 
-import { HemicycleLayoutResult } from './useHemicycleLayout';
+import type { HemicycleLayoutResult } from './useHemicycleLayout';
 
 interface UseSeatHandlersArgs {
   inactive: boolean;

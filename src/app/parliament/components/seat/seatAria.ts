@@ -1,4 +1,4 @@
-import { Member } from '../../types';
+import type { Member } from '../../types';
 
 interface SeatAriaOptions {
   seatIndex: number;
@@ -16,6 +16,6 @@ export const buildSeatAria = ({
   const inactivePart = inactive ? ' (filtered out)' : '';
   return {
     ariaLabel: `Seat ${seatIndex + 1}: ${label}${party}${inactivePart}`,
-    titleText: `${label}${party ? ' –' + party.slice(1) : ''}${inactivePart}`,
+    titleText: `${label}${party ? ` –${party.slice(1)}` : ''}${inactivePart}`,
   };
 };

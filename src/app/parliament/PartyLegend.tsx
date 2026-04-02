@@ -1,6 +1,6 @@
 'use client';
 import { useParliamentFilters } from './context/filtersContext';
-import { Member } from './types';
+import type { Member } from './types';
 
 interface PartyLegendProps {
   members: Member[];

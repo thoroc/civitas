@@ -1,6 +1,11 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
-import { Event, NormalizedData, Snapshot, SnapshotMember } from './schemas';
+import type {
+  Event,
+  NormalizedData,
+  Snapshot,
+  SnapshotMember,
+} from './schemas';
 
 function hash(obj: any): string {
   return crypto
@@ -194,7 +199,7 @@ export function buildSnapshots(
       const month = ev.date.slice(0, 7);
       if (month !== currentMonth) {
         currentMonth = month;
-        emit(month + '-01');
+        emit(`${month}-01`);
       }
     }
   }

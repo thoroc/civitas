@@ -1,8 +1,8 @@
 import { GENERAL_ELECTIONS } from './electionsBaseline';
-import {
-  NormalizedData,
+import type {
   Event,
   HarvestConfig,
+  NormalizedData,
   PartySpell,
   SeatSpell,
 } from './schemas';
@@ -37,9 +37,9 @@ export function buildEvents(
   for (const ss of normalized.seatSpells) {
     if (!constituencyGroups.has(ss.constituencyId))
       constituencyGroups.set(ss.constituencyId, []);
-    constituencyGroups.get(ss.constituencyId)!.push(ss);
+    constituencyGroups.get(ss.constituencyId)?.push(ss);
     if (!seatGroups.has(ss.memberId)) seatGroups.set(ss.memberId, []);
-    seatGroups.get(ss.memberId)!.push(ss);
+    seatGroups.get(ss.memberId)?.push(ss);
   }
   // seat changes (member has multiple seat spells with different constituency ids)
   for (const [mid, spells] of Array.from(seatGroups.entries())) {
@@ -90,7 +90,7 @@ export function buildEvents(
   const partyGroups = new Map<number, PartySpell[]>();
   for (const ps of normalized.partySpells) {
     if (!partyGroups.has(ps.memberId)) partyGroups.set(ps.memberId, []);
-    partyGroups.get(ps.memberId)!.push(ps);
+    partyGroups.get(ps.memberId)?.push(ps);
   }
   for (const [mid, spells] of Array.from(partyGroups.entries())) {
     spells.sort(byStart);

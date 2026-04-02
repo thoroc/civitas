@@ -1,19 +1,19 @@
-import React from 'react';
+import type React from 'react';
 
-import { Member } from '../../types';
+import type { Member } from '../../types';
 import {
-  computeTooltipLayout,
-  TooltipSecondary,
   TOOLTIP_BG_COLOR,
-  TOOLTIP_SECONDARY_TEXT_COLOR,
+  TOOLTIP_FONT_FAMILY,
   TOOLTIP_OPACITY,
+  TOOLTIP_PRIMARY_FONT_SIZE,
   TOOLTIP_RX,
   TOOLTIP_RY,
-  TOOLTIP_STROKE_WIDTH,
-  TOOLTIP_FONT_FAMILY,
-  TOOLTIP_PRIMARY_FONT_SIZE,
   TOOLTIP_SEAT_FONT_SIZE,
   TOOLTIP_SEAT_LETTER_SPACING,
+  TOOLTIP_SECONDARY_TEXT_COLOR,
+  TOOLTIP_STROKE_WIDTH,
+  TooltipSecondary,
+  computeTooltipLayout,
 } from '../tooltip';
 
 export interface HemicycleTooltipProps {

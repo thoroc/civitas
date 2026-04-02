@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react';
-import React from 'react';
-import { describe, it, expect } from 'vitest';
+import type React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import SeatCircles from './SeatCircles';
 

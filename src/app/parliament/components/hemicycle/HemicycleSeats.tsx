@@ -1,7 +1,7 @@
-import React from 'react';
+import type React from 'react';
 
-import { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
-import { Member } from '../../types';
+import type { HemicycleLayoutResult } from '../../hooks/useHemicycleLayout';
+import type { Member } from '../../types';
 import { Seat } from '../seat';
 
 export type SeatTooltip = {

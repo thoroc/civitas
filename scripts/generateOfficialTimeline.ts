@@ -1,16 +1,16 @@
 #!/usr/bin/env ts-node
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { buildEvents } from './harvest/buildEvents';
 import { buildSnapshots } from './harvest/buildSnapshots';
 import { harvestMembers } from './harvest/membersApiClient';
 import { normalize } from './harvest/normalize';
 import {
-  HarvestConfig,
+  EventSchema,
+  type HarvestConfig,
   HarvestConfigSchema,
   NormalizedDataSchema,
-  EventSchema,
   SnapshotSchema,
 } from './harvest/schemas';
 
@@ -43,7 +43,10 @@ async function main() {
   const granularity = (args.granularity as any) || 'events';
   const mergeLabourCoop = !!args['merge-labour-coop'];
   const forceRefresh = !!args['force-refresh'];
-  const maxConcurrency = parseInt(String(args['max-concurrency'] || '6'), 10);
+  const maxConcurrency = Number.parseInt(
+    String(args['max-concurrency'] || '6'),
+    10
+  );
   const cacheDir = String(
     args['cache-dir'] || path.join('.cache', 'members-api')
   );
@@ -71,13 +74,10 @@ async function main() {
   console.log(
     `[official] Harvest starting since=${since} granularity=${granularity} source=${source}`
   );
-  let harvest;
-  if (source === 'odata') {
-    const { harvestOData } = await import('./harvest/odataHarvester');
-    harvest = await harvestOData(cfg);
-  } else {
-    harvest = await harvestMembers(cfg);
-  }
+  const harvest =
+    source === 'odata'
+      ? await (await import('./harvest/odataHarvester')).harvestOData(cfg)
+      : await harvestMembers(cfg);
   console.log(
     `[official] Harvest members=${harvest.members.length} partySpells=${harvest.partySpells.length} seatSpells=${harvest.seatSpells.length}`
   );
@@ -118,7 +118,7 @@ async function main() {
     const byMember = new Map<number, T[]>();
     for (const s of spells) {
       if (!byMember.has(s.memberId)) byMember.set(s.memberId, []);
-      byMember.get(s.memberId)!.push(s);
+      byMember.get(s.memberId)?.push(s);
     }
     const overlaps: string[] = [];
     const negatives: string[] = [];

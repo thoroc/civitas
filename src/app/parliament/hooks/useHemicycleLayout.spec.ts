@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import {
-  computeHemicycleGeometry,
   HEMICYCLE_BASE_PADDING,
+  computeHemicycleGeometry,
 } from '../geometry/geometry';
 import { groupAndSortParties } from '../geometry/parties';
-import { Member } from '../types';
+import type { Member } from '../types';
 
 describe('useHemicycleLayout (geometry + parties helpers)', () => {
   it('computeHemicycleGeometry produces consistent ring metadata and seat counts', () => {

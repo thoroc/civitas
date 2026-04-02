@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { Member } from '../types';
+import type { Member } from '../types';
 
 export interface TooltipState {
   x: number;

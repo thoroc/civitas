@@ -7,7 +7,7 @@ import {
   PartyFilterList,
 } from './components/filters';
 import { useParliamentFilters } from './context/filtersContext';
-import { Member } from './types';
+import type { Member } from './types';
 
 interface FiltersPanelProps {
   members: Member[];

@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import type { Member } from '../types';
 
 import {
-  buildFilterPredicates,
   applyFilters,
+  buildFilterPredicates,
   defaultParliamentFiltersState,
 } from './apply';
 

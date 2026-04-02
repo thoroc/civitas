@@ -7,8 +7,8 @@
  */
 import { HemicycleView } from './components/hemicycle';
 import { useHemicycleState } from './hooks/useHemicycleState';
-import { Leaning } from './hooks/usePartyMeta';
-import { Member } from './types';
+import type { Leaning } from './hooks/usePartyMeta';
+import type { Member } from './types';
 
 interface HemicycleReactProps {
   members: Member[];

@@ -31,7 +31,7 @@ export const getTotal = (resultsList: CountResult[]): number => {
   let total = 0;
   for (const item of resultsList) {
     if (item?.count?.value !== undefined) {
-      const v = parseInt(item.count.value);
+      const v = Number.parseInt(item.count.value);
       if (!Number.isNaN(v)) total += v;
     }
   }
@@ -39,8 +39,12 @@ export const getTotal = (resultsList: CountResult[]): number => {
 };
 
 export const getCoordinates = (radius: Radius, b: number): Item => {
-  const x = parseFloat((radius * Math.cos(b / radius - Math.PI)).toFixed(10));
-  const y = parseFloat((radius * Math.sin(b / radius - Math.PI)).toFixed(10));
+  const x = Number.parseFloat(
+    (radius * Math.cos(b / radius - Math.PI)).toFixed(10)
+  );
+  const y = Number.parseFloat(
+    (radius * Math.sin(b / radius - Math.PI)).toFixed(10)
+  );
 
   return { x, y };
 };
@@ -76,7 +80,7 @@ export const getScoreWithConfig = (cfg: GeometryConfigWithN): Score =>
 export const findN = (size: Size, radius: Radius): NumberOfElements => {
   let n = Math.floor(Math.log(size) / Math.log(2)) || 1;
   let distance: Score = getScore({ size, n, radius });
-  let direction: number = 0;
+  let direction = 0;
 
   if (getScore({ size, n: n + 1, radius }) < distance) {
     direction = 1;
@@ -98,12 +102,14 @@ export const findNFromConfig = (cfg: GeometryConfig): NumberOfElements =>
   findN(cfg.size, cfg.radius);
 
 export const nextRing = (rings: Ring[], ringProgress: number[]): number => {
-  let result: number = 0;
-  let progressQuota: number = 0;
-  let tQuota: number = 0;
+  let result = 0;
+  let progressQuota = 0;
+  let tQuota = 0;
 
   for (const i in rings) {
-    tQuota = parseFloat(((ringProgress[i] || 0) / rings[i].length).toFixed(10));
+    tQuota = Number.parseFloat(
+      ((ringProgress[i] || 0) / rings[i].length).toFixed(10)
+    );
 
     if (!progressQuota || tQuota < progressQuota) {
       progressQuota = tQuota;
@@ -111,10 +117,12 @@ export const nextRing = (rings: Ring[], ringProgress: number[]): number => {
   }
 
   for (const j in rings) {
-    tQuota = parseFloat(((ringProgress[j] || 0) / rings[j].length).toFixed(10));
+    tQuota = Number.parseFloat(
+      ((ringProgress[j] || 0) / rings[j].length).toFixed(10)
+    );
 
-    if (tQuota == progressQuota) {
-      result = parseInt(j);
+    if (tQuota === progressQuota) {
+      result = Number.parseInt(j);
     }
   }
 
@@ -136,7 +144,7 @@ export const distribute = (votes: number[], seats: number): number[] => {
   let parliament = calculateSeats(votes, divisor);
 
   // find divisor
-  while (parliament.seats != seats) {
+  while (parliament.seats !== seats) {
     if (parliament.seats < seats) low = divisor;
     if (parliament.seats > seats) high = divisor;
     divisor = (low + high) / 2;

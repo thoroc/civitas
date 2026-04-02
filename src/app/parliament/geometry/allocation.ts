@@ -1,6 +1,6 @@
-import { Member } from '../types';
+import type { Member } from '../types';
 
-import { PartyGroup } from './parties';
+import type { PartyGroup } from './parties';
 
 export interface AllocationContext {
   partyGroups: PartyGroup[];

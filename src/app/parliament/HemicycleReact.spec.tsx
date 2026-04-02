@@ -1,10 +1,9 @@
 // @vitest-environment jsdom
 import { render, screen } from '@testing-library/react';
-import React from 'react';
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 
-import { ParliamentFiltersProvider } from './context/filtersContext';
 import HemicycleReact from './HemicycleReact';
+import { ParliamentFiltersProvider } from './context/filtersContext';
 
 vi.mock('./exportUtils', () => ({ exportHemicycle: vi.fn() }));
 

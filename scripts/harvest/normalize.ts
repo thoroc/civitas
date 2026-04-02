@@ -1,5 +1,5 @@
-import { HarvestResult } from './membersApiClient';
-import {
+import type { HarvestResult } from './membersApiClient';
+import type {
   HarvestConfig,
   NormalizedData,
   PartySpell,
@@ -11,7 +11,7 @@ function toISO(dateStr: string | undefined): string | undefined {
   // Accept already ISO; otherwise try Date parse
   if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) return dateStr.slice(0, 10);
   const d = new Date(dateStr);
-  if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+  if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
   return undefined;
 }
 

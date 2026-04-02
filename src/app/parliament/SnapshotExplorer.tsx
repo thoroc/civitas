@@ -1,17 +1,17 @@
 'use client';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ZodError } from 'zod';
 
-import {
-  ParliamentFiltersProvider,
-  useParliamentFilters,
-} from './context/filtersContext';
 import FiltersPanel from './FiltersPanel';
 import HemicycleReact from './HemicycleReact';
 import PartyLegend from './PartyLegend';
 import {
-  ParliamentIndexEntry,
-  ParliamentSnapshot,
+  ParliamentFiltersProvider,
+  useParliamentFilters,
+} from './context/filtersContext';
+import {
+  type ParliamentIndexEntry,
+  type ParliamentSnapshot,
   validateParliamentIndex,
   validateParliamentSnapshot,
   validatePartyMetaPayload,

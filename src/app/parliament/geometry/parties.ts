@@ -1,4 +1,4 @@
-import { Member } from '../types';
+import type { Member } from '../types';
 
 export type Leaning = 'left' | 'center' | 'right';
 export const LEANING_ORDER: Leaning[] = ['left', 'center', 'right'];

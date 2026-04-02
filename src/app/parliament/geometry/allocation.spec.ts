@@ -1,5 +1,5 @@
-import { initAllocationContext, allocateMembersToRings } from './allocation';
-import { PartyGroup } from './parties';
+import { allocateMembersToRings, initAllocationContext } from './allocation';
+import type { PartyGroup } from './parties';
 
 // Helper to create a minimal Member object conforming to expected shape
 const makeMember = (id: string, partyId?: string) => ({

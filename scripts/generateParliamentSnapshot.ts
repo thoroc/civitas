@@ -4,16 +4,16 @@
   Usage: npx ts-node scripts/generateParliamentSnapshot.ts --date 2021-01-01T00:00:00Z
   Description: Fetches parliament members at a given date from Wikidata and stores a normalized snapshot JSON under public/data.
 */
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import axios from 'axios';
 
-import {
-  ParliamentSnapshot,
-  Member,
-  Party,
+import type {
   Constituency,
+  Member,
+  ParliamentSnapshot,
+  Party,
 } from '../src/app/parliament/types';
 
 interface Args {
@@ -80,12 +80,12 @@ WHERE {
 
 const fetchData = async (query: string) => {
   const endpoint = 'https://query.wikidata.org/sparql';
-  const url = endpoint + '?format=json&query=' + encodeURIComponent(query);
+  const url = `${endpoint}?format=json&query=${encodeURIComponent(query)}`;
   const MAX_ATTEMPTS = 3;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
       if (attempt > 1) {
-        const backoff = 500 * Math.pow(2, attempt - 2); // 500, 1000ms
+        const backoff = 500 * 2 ** (attempt - 2); // 500, 1000ms
         await new Promise(res => setTimeout(res, backoff));
         console.warn(
           `[snapshot] retry ${attempt - 1} after backoff ${backoff}ms`
@@ -149,7 +149,7 @@ const normalize = (raw: any): Member[] => {
       constituency,
       party,
       gender: b.genderLabel?.value || null,
-      age: b.age?.value ? parseInt(b.age.value) : null,
+      age: b.age?.value ? Number.parseInt(b.age.value) : null,
     };
     return member;
   });
