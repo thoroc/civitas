@@ -9,5 +9,15 @@
     ".github/*.md",
     ".github/ISSUE_TEMPLATE/**/*.md"
   ],
-  "fix": false
+  "fix": false,
+  "config": {
+    "MD013": {
+      "line_length": 200,
+      "code_blocks": false,
+      "tables": false,
+      "headings": false,
+      "heading_line_length": 200
+    },
+    "MD029": { "style": "ordered" }
+  }
 }
