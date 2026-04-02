@@ -14,12 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run: npm ci
+        run: bun install
       - name: Run unit tests (vitest)
-        run: npm run test:unit:run
+        run: bun run test:unit:run

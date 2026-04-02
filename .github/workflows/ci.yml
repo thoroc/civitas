@@ -19,25 +19,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run: npm ci
+        run: bun install
       - name: Run unit tests (vitest)
-        run: npm run test:unit:run
-      - name: Lockfile lint
-        run: npm run lint:lockfile
+        run: bun run test:unit:run
       - name: Lint
-        run: npm run lint
+        run: bun run lint
       - name: Markdown lint
-        run: npm run lint:md
+        run: bun run lint:md
       - name: Type check
-        run: npm run type-check
+        run: bun run type-check
       - name: Build (SSR)
-        run: npm run build
+        run: bun run build
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -50,15 +45,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run: npm ci
+        run: bun install
       - name: Build (Static Export)
-        run: npm run build:static
+        run: bun run build:static
       - name: Assert headers warning logged
         run: |
           if ! grep -q "STATIC_EXPORT enabled" server.log 2>/dev/null; then
@@ -77,22 +69,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run: npm ci
+        run: bun install
       - name: Build (SSR)
-        run: npm run build
+        run: bun run build
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: bunx playwright install --with-deps
       - name: Run E2E Tests (prod server)
         env:
           PLAYWRIGHT_PROD: '1'
           CI: '1'
-        run: npx playwright test --reporter=github
+        run: bunx playwright test --reporter=github
       - name: Upload Playwright Artifacts
         if: always()
         uses: actions/upload-artifact@v4
