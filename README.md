@@ -6,8 +6,8 @@ Next.js 14.
 ## Quick Start
 
 ```bash
-npm install
-npm run dev
+bun install
+bun dev
 # visit http://localhost:3000
 ```
 
@@ -37,8 +37,8 @@ npm run dev
 Default (SSR) build applies security headers via `next.config.mjs`.
 
 ```bash
-npm run build          # SSR
-npm run build:static   # static export (no automatic headers)
+bun run build          # SSR
+bun run build:static   # static export (no automatic headers)
 ```
 
 CI (GitHub Actions) runs lint, type-check, SSR build, static export build. See `.github/workflows/ci.yml`.
