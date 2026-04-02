@@ -128,8 +128,33 @@ When either limit is approached, extract pure helper functions into their own mo
 
 > **Note on Biome plugins**: Biome 1.x has no user-space plugin API for custom lint
 > rules. The checks in `check-conventions.sh` (no-class, arrow-only,
-> one-function-per-module, max-function-lines) live in the script until Biome 2.0
-> introduces a plugin system.
+> one-function-per-module, no-internal-function, max-function-lines) live in the
+> script until Biome 2.0 introduces a plugin system.
+
+### 6. No internal functions
+
+Do not define functions inside other functions. Inner helpers must be extracted into
+their own modules (following the one-function-per-module rule).
+
+```ts
+// ❌ inner function
+export const processItems = (items: Item[]) => {
+  const format = (item: Item) => item.name.trim();
+  return items.map(format);
+};
+
+// ✅ separate modules
+// format.ts
+export const format = (item: Item) => item.name.trim();
+
+// processItems.ts
+import { format } from './format';
+export const processItems = (items: Item[]) => items.map(format);
+```
+
+React hook callbacks (`useMemo`, `useCallback`, `useEffect`, etc.) are not inner
+functions in this sense — they are arguments, not named local definitions, and are
+exempt from this rule.
 
 ## Branching & Commits
 

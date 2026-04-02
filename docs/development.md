@@ -30,6 +30,7 @@ details and examples.
 | Barrel modules (`index.ts` re-exports) | documented + code review |
 | Unit tests collocated (`.spec.ts` / `.test.ts` next to source) | vitest config + code review |
 | Arrow functions only — no `function` declarations, no `class` | Biome `complexity/useArrowFunction` + `[arrow-only]` / `[no-class]` |
+| No functions defined inside other functions | `scripts/check-conventions.sh` `[no-internal-function]` |
 | Function body ≤ 80 substantive lines | `scripts/check-conventions.sh` `[max-function-lines]` |
 | Cognitive complexity ≤ 12 | Biome `complexity/noExcessiveCognitiveComplexity` |
 

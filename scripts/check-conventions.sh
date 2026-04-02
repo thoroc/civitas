@@ -6,6 +6,7 @@
 #   [no-class]               No class declarations — use arrow functions + plain objects
 #   [arrow-only]             No named function declarations — use arrow functions
 #   [one-function-per-module] Max 1 exported function per non-barrel module
+#   [no-internal-function]   No functions defined inside other functions
 #   [max-function-lines]     Function body must not exceed 80 lines
 #
 # Note: cognitive complexity (threshold 12) is enforced by Biome's
@@ -60,6 +61,22 @@ for file in "$@"; do
     if [ "$total" -gt 1 ]; then
       echo "FAIL [one-function-per-module] $file ($total exported functions, max 1)"
       echo "       → Split into separate modules, one function per file."
+      ERRORS=$((ERRORS + 1))
+    fi
+  fi
+
+  # --- [no-internal-function]: No functions defined inside other functions ---
+  # Detects indented arrow function assignments: `  const fn = (async )? (` on a line
+  # that also contains `=>`. This reliably catches inner helpers while avoiding false
+  # positives from hook calls like `useMemo(() => ...)` where `=` is not immediately
+  # followed by `(`.
+  # Test files are exempt (describe/it/beforeEach callbacks are a standard pattern).
+  if ! $is_test; then
+    inner=$(grep -nE '^\s+(const|let) [a-z][A-Za-z0-9_]* = (async )?\(' "$file" | grep '=>' || true)
+    if [ -n "$inner" ]; then
+      echo "FAIL [no-internal-function] $file"
+      echo "$inner" | head -3 | sed 's/^/       /'
+      echo "       → Extract inner functions into their own modules."
       ERRORS=$((ERRORS + 1))
     fi
   fi
