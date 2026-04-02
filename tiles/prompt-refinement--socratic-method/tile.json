@@ -1,0 +1,11 @@
+{
+  "name": "thoroc/prompt-refinement--socratic-method",
+  "version": "0.1.0",
+  "summary": "Refine prompts and decisions using Socratic questioning — surfaces hidden assumptions, probes reasoning, and iterates toward clarity before committing to a response",
+  "private": true,
+  "skills": {
+    "socratic-method": {
+      "path": "skills/socratic-method/SKILL.md"
+    }
+  }
+}

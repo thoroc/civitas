@@ -4,6 +4,9 @@
     "pantheon-ai/agent-browser": {
       "source": "file:tiles/agent-browser"
     },
+    "thoroc/prompt-refinement--socratic-method": {
+      "source": "file:tiles/prompt-refinement--socratic-method"
+    },
     "tessl-labs/tessl-skill-eval-scenarios": {
       "version": "0.1.0"
     }
