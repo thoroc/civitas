@@ -1,0 +1,43 @@
+{
+  "total_scenarios": 5,
+  "instructions_coverage": {
+    "total_instructions": 14,
+    "instructions_tested": 10,
+    "coverage_percentage": 71,
+    "covered": [1, 2, 3, 4, 5, 6, 8, 9, 10, 14],
+    "not_covered": [7, 11, 12, 13],
+    "not_covered_notes": "Instruction 7 (headed debug mode), 11 (annotated screenshots), 12 (semantic locators), and 13 (batch execution) were not covered within the 5-scenario limit. All are 'new knowledge' type and candidates for additional scenarios."
+  },
+  "reason_distribution": {
+    "reminder": 1,
+    "new knowledge": 10,
+    "preference": 3
+  },
+  "scenarios": [
+    {
+      "id": "scenario-0",
+      "capability": "Security environment setup",
+      "instructions_covered": [1, 2, 3, 14]
+    },
+    {
+      "id": "scenario-1",
+      "capability": "Navigate-snapshot-interact-re-snapshot workflow",
+      "instructions_covered": [3, 4, 5, 6, 14]
+    },
+    {
+      "id": "scenario-2",
+      "capability": "JavaScript eval with --stdin heredoc",
+      "instructions_covered": [6, 9, 14]
+    },
+    {
+      "id": "scenario-3",
+      "capability": "UI change verification with diff snapshot",
+      "instructions_covered": [4, 5, 6, 10, 14]
+    },
+    {
+      "id": "scenario-4",
+      "capability": "Command chaining strategy",
+      "instructions_covered": [3, 5, 8, 14]
+    }
+  ]
+}

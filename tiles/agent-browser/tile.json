@@ -1,0 +1,11 @@
+{
+  "name": "pantheon-ai/agent-browser",
+  "version": "0.1.0",
+  "summary": "Improved agent-browser skill for local dev/debug with security hardening and project-specific context",
+  "private": true,
+  "skills": {
+    "agent-browser": {
+      "path": "skills/agent-browser/SKILL.md"
+    }
+  }
+}

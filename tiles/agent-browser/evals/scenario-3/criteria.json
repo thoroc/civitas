@@ -1,0 +1,46 @@
+{
+  "context": "Tests that the agent uses `diff snapshot` to verify a UI change had the intended effect, taking a snapshot before the action as a baseline and diffing after.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "snapshot before action",
+      "description": "Script calls `agent-browser snapshot -i` (or `snapshot`) BEFORE clicking the toggle",
+      "max_score": 20
+    },
+    {
+      "name": "diff snapshot used",
+      "description": "Script calls `agent-browser diff snapshot` after the toggle interaction",
+      "max_score": 25
+    },
+    {
+      "name": "diff output captured",
+      "description": "Script redirects or saves the output of `diff snapshot` to `toggle-diff.txt`",
+      "max_score": 15
+    },
+    {
+      "name": "Uses @ref for toggle click",
+      "description": "Toggle is clicked using an `@eN` ref obtained from the snapshot (not a raw CSS selector passed directly to click)",
+      "max_score": 10
+    },
+    {
+      "name": "Re-snapshot after toggle",
+      "description": "Script calls `snapshot -i` again after clicking the toggle (refs are stale after DOM change)",
+      "max_score": 10
+    },
+    {
+      "name": "No screenshot diff only",
+      "description": "Script does NOT rely solely on `diff screenshot` — uses `diff snapshot` for accessibility tree changes",
+      "max_score": 10
+    },
+    {
+      "name": "networkidle or wait after open",
+      "description": "Script waits for the page to load (networkidle or element wait) before the first snapshot",
+      "max_score": 5
+    },
+    {
+      "name": "Session closed",
+      "description": "Script calls `agent-browser close` at the end",
+      "max_score": 5
+    }
+  ]
+}

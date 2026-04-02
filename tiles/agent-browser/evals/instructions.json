@@ -1,0 +1,88 @@
+{
+  "instructions": [
+    {
+      "instruction": "Export AGENT_BROWSER_CONTENT_BOUNDARIES=1, AGENT_BROWSER_ALLOWED_DOMAINS=\"localhost,127.0.0.1\", and AGENT_BROWSER_MAX_OUTPUT=30000 at the start of every browser session.",
+      "original_snippets": "## Security defaults (always apply)\n\nexport AGENT_BROWSER_CONTENT_BOUNDARIES=1\nexport AGENT_BROWSER_ALLOWED_DOMAINS=\"localhost,127.0.0.1\"\nexport AGENT_BROWSER_MAX_OUTPUT=30000\n\nSet these at the start of every browser session.",
+      "relevant_when": "Any browser automation task using agent-browser",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Always target http://localhost:3000 unless told otherwise.",
+      "original_snippets": "The app runs at **http://localhost:3000** (`bun dev`). Always target that unless told otherwise.",
+      "relevant_when": "Any browser task against the local dev app",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Never store credentials in state files — use env vars or the auth vault only.",
+      "original_snippets": "Never store credentials in state files — use env vars or auth vault only.",
+      "relevant_when": "Any task involving authentication or login",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Follow the Navigate → Snapshot → Interact → Re-snapshot workflow for every interaction.",
+      "original_snippets": "Every interaction follows this pattern:\n1. **Navigate**: `agent-browser open <url>`\n2. **Snapshot**: `agent-browser snapshot -i`\n3. **Interact**: Use refs to click, fill, select\n4. **Re-snapshot**: After navigation or DOM changes, get fresh refs",
+      "relevant_when": "Any browser interaction task",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Always re-snapshot after navigation, form submission, or dynamic content loading — refs are invalidated after page changes.",
+      "original_snippets": "Refs (`@e1`, `@e2`, etc.) are invalidated when the page changes. Always re-snapshot after:\n- Clicking links or buttons that navigate\n- Form submissions\n- Dynamic content loading (dropdowns, modals)",
+      "relevant_when": "Multi-step interactions where the page changes between steps",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use `agent-browser wait --load networkidle` after opening a page, especially for SPAs and slow pages.",
+      "original_snippets": "agent-browser open http://localhost:3000\nagent-browser wait --load networkidle\nagent-browser snapshot -i",
+      "relevant_when": "Navigating to pages, especially SPAs or slow-loading pages",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Use `--headed` or `AGENT_BROWSER_HEADED=1` for visual debugging — also use `highlight`, `inspect`, and `record`.",
+      "original_snippets": "## Headed mode (visual debugging)\nUse `--headed` whenever you need to see what's happening:\nagent-browser --headed open http://localhost:3000\nagent-browser highlight @e1\nagent-browser inspect\nagent-browser record start debug.webm",
+      "relevant_when": "Debugging UI issues or when asked to visually inspect the app",
+      "why_given": "preference"
+    },
+    {
+      "instruction": "Chain commands with `&&` when intermediate output isn't needed. Use separate calls when snapshot output (refs) must be parsed before proceeding.",
+      "original_snippets": "Chain commands with `&&` when intermediate output isn't needed:\nagent-browser open http://localhost:3000 && agent-browser wait --load networkidle && agent-browser snapshot -i\n\nUse separate calls when you need to read refs from snapshot output before proceeding.",
+      "relevant_when": "Multi-step browser automation scripts",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use `eval --stdin <<'EVALEOF'` for complex JS (nested quotes, multiline, arrow functions, template literals). Use `eval -b` for programmatic/generated scripts.",
+      "original_snippets": "# Complex JS: use --stdin with heredoc (RECOMMENDED)\nagent-browser eval --stdin <<'EVALEOF'\nJSON.stringify(\n  Array.from(document.querySelectorAll(\"img\"))\n    .filter(i => !i.alt)\n    .map(i => ({ src: i.src.split(\"/\").pop(), width: i.width }))\n)\nEVALEOF\n\n# Alternative: base64 encoding\nagent-browser eval -b \"$(echo -n '...' | base64)\"",
+      "relevant_when": "Extracting data from a page using JavaScript evaluation",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use `diff snapshot` after an action to verify it had the intended effect. Take a snapshot before the action as a baseline.",
+      "original_snippets": "## Diffing UI changes\nUse `diff` to verify a change had the intended effect:\nagent-browser snapshot -i              # baseline\nagent-browser click @e2                # action\nagent-browser diff snapshot            # what changed in the accessibility tree",
+      "relevant_when": "Verifying that a UI action (click, form submit) changed the page state as expected",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use `screenshot --annotate` for unlabeled/icon-only elements, canvas/chart elements, or when spatial reasoning about element positions is needed.",
+      "original_snippets": "Use annotated screenshots when:\n- The page has unlabeled icon buttons or visual-only elements\n- You need to verify visual layout or styling\n- Canvas or chart elements are present (invisible to text snapshots)\n- You need spatial reasoning about element positions",
+      "relevant_when": "Pages with icon buttons, canvas elements, or visually-complex layouts",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use semantic locators (`agent-browser find text/label/role/placeholder/testid`) when refs are unavailable or unreliable.",
+      "original_snippets": "## Semantic Locators (Alternative to Refs)\nagent-browser find text \"Sign In\" click\nagent-browser find label \"Email\" fill \"user@test.com\"\nagent-browser find role button click --name \"Submit\"",
+      "relevant_when": "When snapshot refs are unstable or unavailable",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Use `batch` for known sequences of commands that don't depend on intermediate output.",
+      "original_snippets": "## Batch Execution\nExecute multiple commands in a single invocation by piping a JSON array of string arrays to `batch`. This avoids per-command process startup overhead when running multi-step workflows.",
+      "relevant_when": "Known multi-step sequences with no intermediate output parsing",
+      "why_given": "new knowledge"
+    },
+    {
+      "instruction": "Close the browser session when done using `agent-browser close` to avoid leaked processes.",
+      "original_snippets": "Always close your browser session when done to avoid leaked processes:\nagent-browser close",
+      "relevant_when": "End of any browser automation script",
+      "why_given": "reminder"
+    }
+  ]
+}

@@ -1,38 +1,11 @@
 {
   "name": "project",
   "dependencies": {
-    "tessl/npm-testing-library--react": {
-      "version": "16.3.2"
+    "pantheon-ai/agent-browser": {
+      "source": "file:tiles/agent-browser"
     },
-    "tessl/npm-testing-library--react-hooks": {
-      "version": "8.0.0"
-    },
-    "tessl/npm-vitest--coverage-v8": {
-      "version": "4.0.2"
-    },
-    "jbvc/unit-testing-test-generate": {
+    "tessl-labs/tessl-skill-eval-scenarios": {
       "version": "0.1.0"
-    },
-    "tessl-labs/playwright-testing": {
-      "version": "0.2.0"
-    },
-    "jbvc/e2e-testing": {
-      "version": "0.1.0"
-    },
-    "pantheon-ai/github-actions-generator": {
-      "version": "0.1.1"
-    },
-    "pantheon-ai/github-actions-validator": {
-      "version": "0.1.1"
-    },
-    "popey/github-action-monitor": {
-      "version": "0.5.0"
-    },
-    "tessl-labs/web-accessibility-essentials": {
-      "version": "0.2.2"
-    },
-    "pantheon-ai/typescript-advanced": {
-      "version": "0.1.1"
     }
   }
 }

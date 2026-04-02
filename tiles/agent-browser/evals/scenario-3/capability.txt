@@ -1,0 +1,1 @@
+UI change verification with diff snapshot

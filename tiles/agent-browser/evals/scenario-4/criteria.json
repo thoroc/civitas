@@ -1,0 +1,46 @@
+{
+  "context": "Tests that the agent correctly applies the chaining strategy: uses && for open+wait+screenshot sequences where no intermediate output is needed, but uses separate calls when snapshot output (refs) must be parsed before interacting.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "open chained with wait",
+      "description": "At least one `agent-browser open` is chained with `wait --load networkidle` using `&&` (no separate call)",
+      "max_score": 15
+    },
+    {
+      "name": "open+wait+screenshot chained",
+      "description": "For the read-only pages, `open` and `screenshot` are chained with `&&` (not run as separate commands with intermediate output)",
+      "max_score": 15
+    },
+    {
+      "name": "snapshot as separate call",
+      "description": "On the contact form page, `agent-browser snapshot -i` is run as a separate command (not chained with `&&` before a fill/click that depends on its refs)",
+      "max_score": 20
+    },
+    {
+      "name": "No chain snapshot with fill",
+      "description": "Script does NOT use `&&` to chain `snapshot` directly with `fill` or `click` in a single shell line (snapshot output must be read first)",
+      "max_score": 20
+    },
+    {
+      "name": "Re-snapshot after submit",
+      "description": "Script calls `snapshot -i` again after submitting the contact form (refs invalidated by navigation)",
+      "max_score": 10
+    },
+    {
+      "name": "Credentials from env vars",
+      "description": "Script uses $CONTACT_NAME and $CONTACT_EMAIL (or equivalent) — no hardcoded values",
+      "max_score": 8
+    },
+    {
+      "name": "Screenshots to ./screenshots/",
+      "description": "Screenshot commands target the `./screenshots/` directory",
+      "max_score": 7
+    },
+    {
+      "name": "Session closed",
+      "description": "Script calls `agent-browser close` or `agent-browser close --all` at the end",
+      "max_score": 5
+    }
+  ]
+}

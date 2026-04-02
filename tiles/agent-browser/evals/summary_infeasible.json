@@ -1,0 +1,17 @@
+{
+  "total_infeasible": 3,
+  "infeasible_scenarios": [
+    {
+      "scenario": "Headed mode visual debugging",
+      "reasoning": "Verifying that --headed or AGENT_BROWSER_HEADED=1 actually opens a visible browser window requires a display server and visual inspection. No artifact the agent can produce (beyond including the flag in a script) would let a grader confirm headed mode was genuinely used. Partially covered by script review in other scenarios."
+    },
+    {
+      "scenario": "Annotated screenshots in practice",
+      "reasoning": "Testing that the agent correctly chooses --annotate for icon-only / canvas elements requires a live page with those specific element types. The eval sandbox has no running app with canvas or unlabeled icon buttons to trigger this decision."
+    },
+    {
+      "scenario": "Dashboard live viewport",
+      "reasoning": "Verifying agent-browser dashboard start/stop behaviour and confirming the dashboard is accessible at :4848 requires a running daemon and a separate browser to check the dashboard UI. Neither is available in the file-based eval sandbox."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "context": "Tests that the agent uses eval --stdin with a quoted heredoc for complex multi-line JavaScript, rather than inline quoting which breaks with nested quotes and special characters.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "eval --stdin used",
+      "description": "Script uses `agent-browser eval --stdin` (not plain `agent-browser eval 'expr'`) for the JS extraction",
+      "max_score": 25
+    },
+    {
+      "name": "Quoted heredoc delimiter",
+      "description": "The heredoc uses a quoted delimiter (e.g. <<'EVALEOF' or <<'EOF') to prevent shell expansion inside the JS",
+      "max_score": 20
+    },
+    {
+      "name": "JS spans multiple lines",
+      "description": "The JavaScript expression inside the heredoc spans at least 2 lines (not collapsed to one line)",
+      "max_score": 10
+    },
+    {
+      "name": "No inline quoting for complex JS",
+      "description": "Script does NOT use `agent-browser eval '...'` with nested double quotes inside the single-quoted string for the main extraction",
+      "max_score": 20
+    },
+    {
+      "name": "wait before eval",
+      "description": "Script calls a wait command (networkidle, element wait, or similar) before running eval to ensure the nav is rendered",
+      "max_score": 10
+    },
+    {
+      "name": "Output written to file",
+      "description": "Script redirects or pipes eval output to `nav-links.json`",
+      "max_score": 10
+    },
+    {
+      "name": "Session closed",
+      "description": "Script calls `agent-browser close` at the end",
+      "max_score": 5
+    }
+  ]
+}

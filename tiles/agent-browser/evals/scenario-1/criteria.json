@@ -1,0 +1,51 @@
+{
+  "context": "Tests that the agent follows the navigate-snapshot-interact-re-snapshot workflow, waits for network idle after navigation, reads credentials from env vars rather than hardcoding them, and closes the session on exit.",
+  "type": "weighted_checklist",
+  "checklist": [
+    {
+      "name": "snapshot before fill",
+      "description": "Script calls `agent-browser snapshot -i` (or `snapshot`) before any `fill` or `click` command",
+      "max_score": 12
+    },
+    {
+      "name": "Uses @ref syntax",
+      "description": "Interaction commands (`fill`, `click`) use `@eN` ref syntax, not raw CSS selectors",
+      "max_score": 10
+    },
+    {
+      "name": "networkidle after open",
+      "description": "Script calls `agent-browser wait --load networkidle` after the initial `open` command",
+      "max_score": 12
+    },
+    {
+      "name": "Re-snapshot after form submit",
+      "description": "Script calls `snapshot` again after the login form is submitted / after navigation to the next page",
+      "max_score": 15
+    },
+    {
+      "name": "networkidle after submit",
+      "description": "Script calls `wait --load networkidle` (or another wait) after clicking the submit/login button",
+      "max_score": 10
+    },
+    {
+      "name": "Credentials from env vars",
+      "description": "Script uses $TEST_USERNAME and $TEST_PASSWORD (or equivalent env var references) — no hardcoded credential strings",
+      "max_score": 15
+    },
+    {
+      "name": "No credentials in files",
+      "description": "Script does NOT call `state save` or write session/auth data to a file",
+      "max_score": 10
+    },
+    {
+      "name": "Session closed",
+      "description": "Script calls `agent-browser close` at the end (or in a trap/cleanup block)",
+      "max_score": 8
+    },
+    {
+      "name": "Targets localhost:3000",
+      "description": "Script navigates to localhost:3000 as the base URL",
+      "max_score": 8
+    }
+  ]
+}
