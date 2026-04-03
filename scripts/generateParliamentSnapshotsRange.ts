@@ -19,7 +19,13 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { OUTPUT_DIR, PARLIAMENT_INDEX } from './lib/paths.ts';
 import { toSafeFilename } from './lib/toSafeFilename.ts';
+import {
+  WIKIDATA_SPARQL_ENDPOINT,
+  buildTermsQuery,
+  buildTermsQueryFallback,
+} from './lib/wikidata/index.ts';
 
 interface Args {
   mode: 'terms';
@@ -41,7 +47,6 @@ const parseArgs = (): Args => {
   return { mode, throttle: Number.isNaN(throttle) ? 300 : throttle, force };
 };
 
-const WIKIDATA_SPARQL = 'https://query.wikidata.org/sparql';
 import axios from 'axios';
 
 const fetchTermStartDates = async (): Promise<
@@ -49,17 +54,6 @@ const fetchTermStartDates = async (): Promise<
 > => {
   type TermStart = { term: string; start: string };
   const MIN_DATE = '2005-01-01T00:00:00Z';
-  const PRIMARY_QUERY = `SELECT ?term ?termLabel ?start WHERE {
-    ?term wdt:P31/wdt:P279* wd:Q15238777 ; wdt:P194 wd:Q11005 ; wdt:P580 ?start .
-    OPTIONAL { ?term wdt:P582 ?end }
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-  } ORDER BY ?start`;
-  // Fallback drops the subclass traversal which occasionally returns zero rows under load / caching anomalies
-  const FALLBACK_QUERY = `SELECT ?term ?termLabel ?start WHERE {
-    ?term wdt:P31 wd:Q15238777 ; wdt:P194 wd:Q11005 ; wdt:P580 ?start .
-    OPTIONAL { ?term wdt:P582 ?end }
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-  } ORDER BY ?start`;
 
   const runQuery = async (
     query: string,
@@ -68,7 +62,7 @@ const fetchTermStartDates = async (): Promise<
   ): Promise<TermStart[]> => {
     const MAX_ATTEMPTS = 3;
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-      const url = `${WIKIDATA_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
+      const url = `${WIKIDATA_SPARQL_ENDPOINT}?format=json&query=${encodeURIComponent(query)}`;
       try {
         if (attempt > 1) {
           const backoff = 400 * 2 ** (attempt - 2); // 400, 800ms for attempts 2/3
@@ -117,12 +111,12 @@ const fetchTermStartDates = async (): Promise<
   };
 
   // Primary
-  let terms = await runQuery(PRIMARY_QUERY, 'primary');
+  let terms = await runQuery(buildTermsQuery(), 'primary');
   if (terms.length === 0) {
     console.warn(
       '[terms] falling back to simplified query (no subclass traversal)'
     );
-    terms = await runQuery(FALLBACK_QUERY, 'fallback');
+    terms = await runQuery(buildTermsQueryFallback(), 'fallback');
   }
   if (terms.length === 0) {
     console.warn(
@@ -148,14 +142,12 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
   const uniqueStarts = Array.from(new Set(terms.map(t => t.start))).sort();
   console.log(`Found ${uniqueStarts.length} term start dates (>=2005).`);
 
-  const outDir = path.join(process.cwd(), 'public', 'data');
-  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  const indexFile = path.join(outDir, 'parliament.index.json');
   let index: any[] = [];
-  if (fs.existsSync(indexFile)) {
+  if (fs.existsSync(PARLIAMENT_INDEX)) {
     try {
-      index = JSON.parse(fs.readFileSync(indexFile, 'utf-8'));
+      index = JSON.parse(fs.readFileSync(PARLIAMENT_INDEX, 'utf-8'));
     } catch {
       index = [];
     }
@@ -167,7 +159,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
       'No term start dates discovered from SPARQL; falling back to existing snapshot files.'
     );
     const files = fs
-      .readdirSync(outDir)
+      .readdirSync(OUTPUT_DIR)
       .filter(f =>
         /^parliament-\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z\.json$/.test(f)
       );
@@ -175,18 +167,18 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
       console.warn(
         'No existing parliament-* snapshot files found. Writing empty index.'
       );
-      fs.writeFileSync(indexFile, JSON.stringify([], null, 2));
-      console.log(`Index written: ${indexFile}`);
+      fs.writeFileSync(PARLIAMENT_INDEX, JSON.stringify([], null, 2));
+      console.log(`Index written: ${PARLIAMENT_INDEX}`);
       return;
     }
     for (const f of files) {
-      const snapshotFile = path.join(outDir, f);
+      const snapshotFile = path.join(OUTPUT_DIR, f);
       try {
         const snap = JSON.parse(fs.readFileSync(snapshotFile, 'utf-8'));
         const safeDate = f.replace(/^parliament-|\.json$/g, '');
         const date = snap.meta?.date || safeDate.replace(/-/g, ':');
         const partyMetaFilePath = path.join(
-          outDir,
+          OUTPUT_DIR,
           `partyMeta-${safeDate}.json`
         );
         if (!fs.existsSync(partyMetaFilePath)) {
@@ -228,9 +220,9 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
     const fallbackIndex = Array.from(indexByDate.values()).sort((a, b) =>
       a.date.localeCompare(b.date)
     );
-    fs.writeFileSync(indexFile, JSON.stringify(fallbackIndex, null, 2));
+    fs.writeFileSync(PARLIAMENT_INDEX, JSON.stringify(fallbackIndex, null, 2));
     console.log(
-      `Index written (fallback from existing snapshots): ${indexFile}`
+      `Index written (fallback from existing snapshots): ${PARLIAMENT_INDEX}`
     );
     return;
   }
@@ -238,7 +230,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
   for (const start of uniqueStarts) {
     const date = start; // Use exact start timestamp
     const safeDate = toSafeFilename(start);
-    const snapshotFile = path.join(outDir, `parliament-${safeDate}.json`);
+    const snapshotFile = path.join(OUTPUT_DIR, `parliament-${safeDate}.json`);
     if (fs.existsSync(snapshotFile) && !force) {
       console.log(`Skipping existing snapshot ${snapshotFile}`);
     } else {
@@ -280,7 +272,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
     // Load snapshot summary
     try {
       const snap = JSON.parse(fs.readFileSync(snapshotFile, 'utf-8'));
-      const partyMetaFile = path.join(outDir, `partyMeta-${safeDate}.json`);
+      const partyMetaFile = path.join(OUTPUT_DIR, `partyMeta-${safeDate}.json`);
       const summary = {
         date: snap.meta?.date || date,
         safeDate,
@@ -304,6 +296,6 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
   index = Array.from(indexByDate.values()).sort((a, b) =>
     a.date.localeCompare(b.date)
   );
-  fs.writeFileSync(indexFile, JSON.stringify(index, null, 2));
-  console.log(`Index written: ${indexFile}`);
+  fs.writeFileSync(PARLIAMENT_INDEX, JSON.stringify(index, null, 2));
+  console.log(`Index written: ${PARLIAMENT_INDEX}`);
 })();

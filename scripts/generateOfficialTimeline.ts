@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { OFFICIAL_DIR, OFFICIAL_INDEX } from './lib/paths.ts';
 import { toSafeFilename } from './lib/toSafeFilename.ts';
 
 import { buildEvents } from './harvest/buildEvents';
@@ -195,12 +196,12 @@ async function main() {
   }
   console.log(`[official] Snapshots count=${snapshots.length}`);
 
-  const outDir = path.join('public', 'data', 'official');
-  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  if (!fs.existsSync(OFFICIAL_DIR))
+    fs.mkdirSync(OFFICIAL_DIR, { recursive: true });
 
   // Write events
   fs.writeFileSync(
-    path.join(outDir, 'events.json'),
+    path.join(OFFICIAL_DIR, 'events.json'),
     JSON.stringify(events, null, 2)
   );
 
@@ -209,7 +210,10 @@ async function main() {
   for (const sn of snapshots) {
     const safeDate = toSafeFilename(sn.date);
     const file = `official-parliament-${safeDate}.json`;
-    fs.writeFileSync(path.join(outDir, file), JSON.stringify(sn, null, 2));
+    fs.writeFileSync(
+      path.join(OFFICIAL_DIR, file),
+      JSON.stringify(sn, null, 2)
+    );
     index.push({
       date: sn.date,
       safeDate,
@@ -218,11 +222,10 @@ async function main() {
       generatedAt: sn.meta.generatedAt,
     });
   }
-  fs.writeFileSync(
-    path.join(outDir, 'official.index.json'),
-    JSON.stringify(index, null, 2)
+  fs.writeFileSync(OFFICIAL_INDEX, JSON.stringify(index, null, 2));
+  console.log(
+    `[official] Wrote ${snapshots.length} snapshots to ${OFFICIAL_DIR}`
   );
-  console.log(`[official] Wrote ${snapshots.length} snapshots to ${outDir}`);
 }
 
 main().catch(e => {

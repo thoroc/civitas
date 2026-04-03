@@ -23,6 +23,11 @@ import path from 'node:path';
 
 import axios from 'axios';
 
+import {
+  WIKIDATA_SPARQL_ENDPOINT,
+  buildIdeologyQuery,
+} from './lib/wikidata/index.ts';
+
 interface SnapshotMemberParty {
   id: string;
   label: string;
@@ -70,7 +75,6 @@ const parseArgs = (): Args => {
   return { snapshot: process.argv[snapIdx + 1] };
 };
 
-const WIKIDATA_SPARQL = 'https://query.wikidata.org/sparql';
 const WIKIDATA_SEARCH = 'https://www.wikidata.org/w/api.php';
 
 // Keyword regex lists (lowercase) for ideology detection
@@ -133,17 +137,13 @@ const tryResolveQID = async (label: string): Promise<string | null> => {
   }
 };
 
-const buildIdeologyQuery = (qids: string[]): string => {
-  return `SELECT ?party ?partyLabel ?ideology ?ideologyLabel WHERE { VALUES ?party { ${qids.map(q => `wd:${q}`).join(' ')} } OPTIONAL { ?party wdt:P1142 ?ideology . } OPTIONAL { ?party wdt:P1387 ?ideology . } SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } }`;
-};
-
 const fetchIdeologies = async (
   qids: string[]
 ): Promise<Map<string, string[]>> => {
   const map = new Map<string, string[]>();
   if (qids.length === 0) return map;
   const query = buildIdeologyQuery(qids);
-  const url = `${WIKIDATA_SPARQL}?format=json&query=${encodeURIComponent(query)}`;
+  const url = `${WIKIDATA_SPARQL_ENDPOINT}?format=json&query=${encodeURIComponent(query)}`;
   const res = await axios.get(url, {
     headers: { 'User-Agent': 'civitas-party-meta-script/0.1' },
   });
@@ -224,6 +224,7 @@ const loadOverrides = (): Record<string, Partial<PartyMetaRecord>> => {
   }
 };
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: main orchestration IIFE coordinates party-meta generation
 (async () => {
   const { snapshot } = parseArgs();
   console.log(`Reading snapshot: ${snapshot}`);
