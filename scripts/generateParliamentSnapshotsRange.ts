@@ -47,7 +47,7 @@ const parseArgs = (): Args => {
   return { mode, throttle: Number.isNaN(throttle) ? 300 : throttle, force };
 };
 
-import axios from 'axios';
+import { fetchWithRetry } from './lib/http.ts';
 
 const fetchTermStartDates = async (): Promise<
   { term: string; start: string }[]
@@ -58,56 +58,34 @@ const fetchTermStartDates = async (): Promise<
   const runQuery = async (
     query: string,
     label: string
-    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: retry loop with backoff is inherently complex
   ): Promise<TermStart[]> => {
-    const MAX_ATTEMPTS = 3;
-    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-      const url = `${WIKIDATA_SPARQL_ENDPOINT}?format=json&query=${encodeURIComponent(query)}`;
-      try {
-        if (attempt > 1) {
-          const backoff = 400 * 2 ** (attempt - 2); // 400, 800ms for attempts 2/3
-          await new Promise(res => setTimeout(res, backoff));
-          console.warn(
-            `[terms] retry ${attempt - 1} for ${label} after backoff ${backoff}ms`
-          );
-        }
-        const res = await axios.get(url, {
-          headers: {
-            'User-Agent': 'civitas-batch-script/0.2',
-            Accept: 'application/sparql-results+json',
-            'Cache-Control': 'no-cache',
-          },
-          validateStatus: () => true,
-        });
-        if (res.status !== 200) {
-          console.warn(`[terms] ${label} query HTTP ${res.status}`);
-          if (res.status === 429 || res.status >= 500) continue; // retry
-          break; // non-retriable (e.g. 400)
-        }
-        const terms = res.data?.results?.bindings || [];
-        if (!Array.isArray(terms)) {
-          console.warn(`[terms] ${label} unexpected response shape`);
-          continue;
-        }
-        if (terms.length === 0) {
-          console.warn(`[terms] ${label} returned 0 rows (attempt ${attempt})`);
-          // zero rows might be a transient WDQS quirk; retry unless final attempt
-          continue;
-        }
-        return terms.map(
-          (b: any): TermStart => ({
-            term: b.term.value.split('/').pop(),
-            start: b.start.value,
-          })
-        );
-      } catch (e: any) {
-        console.warn(
-          `[terms] ${label} attempt ${attempt} error: ${e?.message || e}`
-        );
-        if (attempt === MAX_ATTEMPTS) break;
-      }
+    const url = `${WIKIDATA_SPARQL_ENDPOINT}?format=json&query=${encodeURIComponent(query)}`;
+    const res = await fetchWithRetry(url, {
+      headers: {
+        'User-Agent': 'civitas-batch-script/0.2',
+        Accept: 'application/sparql-results+json',
+        'Cache-Control': 'no-cache',
+      },
+    });
+    if (!res.ok) {
+      console.warn(`[terms] ${label} query HTTP ${res.status}`);
+      return [];
     }
-    return [];
+    const data = await res.json();
+    const terms = data?.results?.bindings || [];
+    if (!Array.isArray(terms)) {
+      console.warn(`[terms] ${label} unexpected response shape`);
+      return [];
+    }
+    if (terms.length === 0) {
+      console.warn(`[terms] ${label} returned 0 rows`);
+    }
+    return terms.map(
+      (b: any): TermStart => ({
+        term: b.term.value.split('/').pop(),
+        start: b.start.value,
+      })
+    );
   };
 
   // Primary
