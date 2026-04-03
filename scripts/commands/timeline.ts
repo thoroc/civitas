@@ -2,11 +2,11 @@ import { Command } from '@cliffy/command';
 
 import type { HarvestConfig } from '../harvest/schemas.ts';
 import { HarvestConfigSchema } from '../harvest/schemas.ts';
-import { buildEventsAndSnapshots } from '../lib/buildEventsAndSnapshots.ts';
-import { reportValidation } from '../lib/reportValidation.ts';
 import { runHarvest } from '../lib/runHarvest.ts';
-import { validateSpells } from '../lib/validation.ts';
-import { writeTimelineOutput } from '../lib/writeTimelineOutput.ts';
+import { buildEventsAndSnapshots } from '../timeline/buildEventsAndSnapshots.ts';
+import { reportValidation } from '../timeline/reportValidation.ts';
+import { validateSpells } from '../timeline/validation.ts';
+import { writeTimelineOutput } from '../timeline/writeTimelineOutput.ts';
 
 export type TimelineOptions = {
   since: string;

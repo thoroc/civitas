@@ -5,9 +5,9 @@ export type ValidationReport = {
   gaps: string[];
 };
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: spell validation logic is inherently branchy
 export const validateSpells = <T extends TemporalSpell>(
   spells: T[]
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: spell validation logic is inherently branchy
 ): ValidationReport => {
   const byMember = new Map<number, T[]>();
   for (const s of spells) {

@@ -14,11 +14,11 @@ vi.mock('node:fs', () => ({
     writeFileSync: mocks.writeFileSync,
   },
 }));
-vi.mock('./paths.ts', () => ({
+vi.mock('../lib/paths.ts', () => ({
   OFFICIAL_DIR: '/test/official',
   OFFICIAL_INDEX: '/test/official/official.index.json',
 }));
-vi.mock('./toSafeFilename.ts', () => ({
+vi.mock('../lib/toSafeFilename.ts', () => ({
   toSafeFilename: mocks.toSafeFilename,
 }));
 
