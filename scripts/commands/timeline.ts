@@ -1,8 +1,8 @@
 import { Command } from '@cliffy/command';
 
+import { runHarvest } from '../harvest/runHarvest.ts';
 import type { HarvestConfig } from '../harvest/schemas.ts';
 import { HarvestConfigSchema } from '../harvest/schemas.ts';
-import { runHarvest } from '../lib/runHarvest.ts';
 import { buildEventsAndSnapshots } from '../timeline/buildEventsAndSnapshots.ts';
 import { reportValidation } from '../timeline/reportValidation.ts';
 import { validateSpells } from '../timeline/validation.ts';

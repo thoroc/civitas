@@ -7,14 +7,14 @@ const mocks = vi.hoisted(() => ({
   harvestOData: vi.fn(),
 }));
 
-vi.mock('../harvest/membersApiClient.ts', () => ({
+vi.mock('./membersApiClient.ts', () => ({
   harvestMembers: mocks.harvestMembers,
 }));
-vi.mock('../harvest/normalize.ts', () => ({ normalize: mocks.normalize }));
-vi.mock('../harvest/schemas.ts', () => ({
+vi.mock('./normalize.ts', () => ({ normalize: mocks.normalize }));
+vi.mock('./schemas.ts', () => ({
   NormalizedDataSchema: { parse: mocks.parseNormalized },
 }));
-vi.mock('../harvest/odataHarvester.ts', () => ({
+vi.mock('./odataHarvester.ts', () => ({
   harvestOData: mocks.harvestOData,
 }));
 

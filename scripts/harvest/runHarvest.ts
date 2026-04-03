@@ -1,14 +1,14 @@
-import { harvestMembers } from '../harvest/membersApiClient.ts';
-import { normalize } from '../harvest/normalize.ts';
-import type { HarvestConfig, NormalizedData } from '../harvest/schemas.ts';
-import { NormalizedDataSchema } from '../harvest/schemas.ts';
+import { harvestMembers } from './membersApiClient.ts';
+import { normalize } from './normalize.ts';
+import type { HarvestConfig, NormalizedData } from './schemas.ts';
+import { NormalizedDataSchema } from './schemas.ts';
 
 export const runHarvest = async (
   cfg: HarvestConfig
 ): Promise<NormalizedData> => {
   const harvest =
     cfg.source === 'odata'
-      ? await (await import('../harvest/odataHarvester.ts')).harvestOData(cfg)
+      ? await (await import('./odataHarvester.ts')).harvestOData(cfg)
       : await harvestMembers(cfg);
   console.log(
     `[official] Harvest members=${harvest.members.length} partySpells=${harvest.partySpells.length} seatSpells=${harvest.seatSpells.length}`
