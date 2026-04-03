@@ -1,5 +1,5 @@
 {
-  "date": "2010-05-06",
+  "date": "2010-05-01",
   "meta": {
     "generatedAt": "2026-04-03T12:08:46.381Z",
     "source": {
@@ -69,7 +69,7 @@
       "constituencyName": "Selby and Ainsty",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": true
+      "provisional": false
     },
     {
       "memberId": 4069,
@@ -78,7 +78,7 @@
       "constituencyName": "Waveney",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": true
+      "provisional": false
     }
   ],
   "parties": {
