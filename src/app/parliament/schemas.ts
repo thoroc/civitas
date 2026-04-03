@@ -45,7 +45,7 @@ export const ParliamentIndexEntrySchema = z.object({
   date: isoDateTime,
   safeDate: z.string().min(1),
   file: z.string().min(1),
-  partyMetaFile: z.string().min(1).nullable(),
+  partyMetaFile: z.string().min(1).nullable().optional().default(null),
   total: z.number().int().positive(),
   generatedAt: isoDateTime,
 });
@@ -73,11 +73,3 @@ export type ParliamentSnapshot = z.infer<typeof ParliamentSnapshotSchema>;
 export type ParliamentIndexEntry = z.infer<typeof ParliamentIndexEntrySchema>;
 export type PartyMetaRecord = z.infer<typeof PartyMetaRecordSchema>;
 export type PartyMetaPayload = z.infer<typeof PartyMetaPayloadSchema>;
-
-// Helper validation wrappers
-export const validateParliamentIndex = (data: unknown) =>
-  ParliamentIndexSchema.parse(data);
-export const validateParliamentSnapshot = (data: unknown) =>
-  ParliamentSnapshotSchema.parse(data);
-export const validatePartyMetaPayload = (data: unknown) =>
-  PartyMetaPayloadSchema.parse(data);

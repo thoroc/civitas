@@ -7,6 +7,23 @@ interface UsePartyMetaOptions {
   path?: string; // allow overriding fetch path for future flexibility
 }
 
+const fetchPartyMeta = async (
+  path: string
+): Promise<Record<string, { leaning: Leaning }>> => {
+  try {
+    const res = await fetch(path, { cache: 'no-store' });
+    if (!res.ok) return {};
+    const json = await res.json();
+    const { PartyMetaPayloadSchema } = await import('../schemas');
+    const parsed = PartyMetaPayloadSchema.parse(json);
+    const map: Record<string, { leaning: Leaning }> = {};
+    for (const p of parsed.parties) map[p.id] = { leaning: p.leaning };
+    return map;
+  } catch {
+    return {};
+  }
+};
+
 /**
  * usePartyMeta
  * ------------
@@ -28,26 +45,10 @@ export const usePartyMeta = ({
       return;
     }
     let cancelled = false;
-    const load = async () => {
-      try {
-        const res = await fetch(path, { cache: 'no-store' });
-        if (!res.ok) return;
-        const json = await res.json();
-        if (cancelled) return;
-        const { validatePartyMetaPayload } = await import('../schemas');
-        try {
-          const parsed = validatePartyMetaPayload(json);
-          const map: Record<string, { leaning: Leaning }> = {};
-          for (const p of parsed.parties) map[p.id] = { leaning: p.leaning };
-          setPartyMeta(map);
-        } catch {
-          // ignore schema errors
-        }
-      } catch {
-        // silent fallback
-      }
-    };
-    load();
+    void (async () => {
+      const map = await fetchPartyMeta(path);
+      if (!cancelled) setPartyMeta(map);
+    })();
     return () => {
       cancelled = true;
     };

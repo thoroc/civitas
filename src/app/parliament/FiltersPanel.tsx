@@ -1,4 +1,6 @@
 'use client';
+import { useMemo } from 'react';
+
 import {
   ActiveFiltersSummary,
   AgeRangeFilter,
@@ -15,6 +17,12 @@ interface FiltersPanelProps {
 
 const FiltersPanel = ({ members }: FiltersPanelProps) => {
   const { reset } = useParliamentFilters();
+
+  const hasGender = useMemo(
+    () => members.some(m => m.gender !== null),
+    [members]
+  );
+  const hasAge = useMemo(() => members.some(m => m.age !== null), [members]);
 
   return (
     <div className='space-y-4'>
@@ -36,13 +44,17 @@ const FiltersPanel = ({ members }: FiltersPanelProps) => {
         <PartyFilterList members={members} />
       </FilterSection>
 
-      <FilterSection title='Gender'>
-        <GenderFilterList members={members} />
-      </FilterSection>
+      {hasGender && (
+        <FilterSection title='Gender'>
+          <GenderFilterList members={members} />
+        </FilterSection>
+      )}
 
-      <FilterSection title='Age Range'>
-        <AgeRangeFilter />
-      </FilterSection>
+      {hasAge && (
+        <FilterSection title='Age Range'>
+          <AgeRangeFilter />
+        </FilterSection>
+      )}
     </div>
   );
 };
