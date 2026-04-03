@@ -7,7 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import axios from 'axios';
+import { fetchWithRetry } from './lib/http.ts';
 
 import type {
   Constituency,
@@ -81,40 +81,18 @@ WHERE {
 const fetchData = async (query: string) => {
   const endpoint = 'https://query.wikidata.org/sparql';
   const url = `${endpoint}?format=json&query=${encodeURIComponent(query)}`;
-  const MAX_ATTEMPTS = 3;
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    try {
-      if (attempt > 1) {
-        const backoff = 500 * 2 ** (attempt - 2); // 500, 1000ms
-        await new Promise(res => setTimeout(res, backoff));
-        console.warn(
-          `[snapshot] retry ${attempt - 1} after backoff ${backoff}ms`
-        );
-      }
-      const res = await axios.get(url, {
-        headers: {
-          'User-Agent': 'civitas-snapshot-script/0.2',
-          Accept: 'application/sparql-results+json',
-          'Cache-Control': 'no-cache',
-        },
-        validateStatus: () => true,
-      });
-      if (res.status !== 200) {
-        console.warn(`[snapshot] HTTP ${res.status} fetching snapshot data`);
-        if (res.status === 429 || res.status >= 500) continue;
-        break; // non-retriable
-      }
-      if (!res.data?.results?.bindings) {
-        console.warn('[snapshot] unexpected response shape');
-        continue;
-      }
-      return res.data;
-    } catch (e: any) {
-      console.warn(`[snapshot] attempt error: ${e?.message || e}`);
-      if (attempt === MAX_ATTEMPTS) throw e;
-    }
+  const res = await fetchWithRetry(url, {
+    headers: {
+      'User-Agent': 'civitas-snapshot-script/0.2',
+      Accept: 'application/sparql-results+json',
+      'Cache-Control': 'no-cache',
+    },
+  });
+  if (!res.ok) {
+    console.warn(`[snapshot] HTTP ${res.status} fetching snapshot data`);
+    return { results: { bindings: [] } };
   }
-  return { results: { bindings: [] } }; // fallback empty
+  return res.json();
 };
 
 const normalize = (raw: any): Member[] => {
