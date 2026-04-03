@@ -19,6 +19,8 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { toSafeFilename } from './lib/toSafeFilename.ts';
+
 interface Args {
   mode: 'terms';
   throttle: number;
@@ -62,6 +64,7 @@ const fetchTermStartDates = async (): Promise<
   const runQuery = async (
     query: string,
     label: string
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: retry loop with backoff is inherently complex
   ): Promise<TermStart[]> => {
     const MAX_ATTEMPTS = 3;
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
@@ -131,6 +134,7 @@ const fetchTermStartDates = async (): Promise<
 
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: main orchestration IIFE coordinates snapshot generation
 (async () => {
   const { mode, throttle, force } = parseArgs();
   if (mode !== 'terms') {
@@ -233,7 +237,7 @@ const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 
   for (const start of uniqueStarts) {
     const date = start; // Use exact start timestamp
-    const safeDate = date.replace(/:/g, '-');
+    const safeDate = toSafeFilename(start);
     const snapshotFile = path.join(outDir, `parliament-${safeDate}.json`);
     if (fs.existsSync(snapshotFile) && !force) {
       console.log(`Skipping existing snapshot ${snapshotFile}`);

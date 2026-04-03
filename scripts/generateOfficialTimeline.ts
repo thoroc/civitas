@@ -2,6 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { toSafeFilename } from './lib/toSafeFilename.ts';
+
 import { buildEvents } from './harvest/buildEvents';
 import { buildSnapshots } from './harvest/buildSnapshots';
 import { harvestMembers } from './harvest/membersApiClient';
@@ -37,6 +39,7 @@ function parseArgs(): Args {
   return out;
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: orchestration function coordinates multiple async operations
 async function main() {
   const args = parseArgs();
   const since = String(args.since || '2005-01-01');
@@ -94,6 +97,7 @@ async function main() {
 
   const events = buildEvents(normalized, cfg);
   try {
+    // biome-ignore lint/complexity/noForEach: forEach used intentionally in try/catch validation block
     events.forEach(ev => EventSchema.parse(ev));
   } catch (e) {
     console.error('[official] Event validation error', (e as Error).message);
@@ -111,6 +115,7 @@ async function main() {
     negatives: string[];
     gaps: string[];
   }
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: spell validation logic is inherently branchy
   function validateSpells<T extends TemporalSpell>(
     spells: T[],
     label: string
@@ -183,6 +188,7 @@ async function main() {
   const monthly = granularity !== 'events';
   const snapshots = buildSnapshots(normalized, events, { monthly });
   try {
+    // biome-ignore lint/complexity/noForEach: forEach used intentionally in try/catch validation block
     snapshots.forEach(sn => SnapshotSchema.parse(sn));
   } catch (e) {
     console.error('[official] Snapshot validation error', (e as Error).message);
@@ -201,7 +207,7 @@ async function main() {
   // Write snapshots and index
   const index: any[] = [];
   for (const sn of snapshots) {
-    const safeDate = sn.date.replace(/:/g, '-');
+    const safeDate = toSafeFilename(sn.date);
     const file = `official-parliament-${safeDate}.json`;
     fs.writeFileSync(path.join(outDir, file), JSON.stringify(sn, null, 2));
     index.push({

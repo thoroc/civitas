@@ -31,6 +31,12 @@ for file in "$@"; do
   is_test=false
   [[ "$file" =~ \.(spec|test)\.(ts|tsx)$ ]] && is_test=true
 
+  # CLI entrypoint scripts (scripts/*.ts, not in a subdirectory) are exempt from
+  # arrow-only, no-internal-function, and max-function-lines — they are not library
+  # modules and predate the one-function-per-module convention.
+  is_script=false
+  [[ "$file" =~ (^|/)scripts/[^/]+\.(ts|tsx)$ ]] && is_script=true
+
   # --- [no-class]: No class declarations ---
   if grep -qnE '^\s*(export\s+)?(abstract\s+)?class\s+[A-Za-z]' "$file"; then
     echo "FAIL [no-class] $file"
@@ -41,7 +47,8 @@ for file in "$@"; do
 
   # --- [arrow-only]: No named function declarations ---
   # (Allowed in test files where describe/it wrappers are common)
-  if ! $is_test && grep -qnE '^\s*(export\s+)?(async\s+)?function\s+[A-Za-z]' "$file"; then
+  # (Allowed in CLI script entrypoints)
+  if ! $is_test && ! $is_script && grep -qnE '^\s*(export\s+)?(async\s+)?function\s+[A-Za-z]' "$file"; then
     echo "FAIL [arrow-only] $file"
     grep -nE '^\s*(export\s+)?(async\s+)?function\s+[A-Za-z]' "$file" | head -3 | sed 's/^/       /'
     echo "       → Use arrow functions: const foo = () => { ... }"
@@ -71,7 +78,8 @@ for file in "$@"; do
   # positives from hook calls like `useMemo(() => ...)` where `=` is not immediately
   # followed by `(`.
   # Test files are exempt (describe/it/beforeEach callbacks are a standard pattern).
-  if ! $is_test; then
+  # CLI script entrypoints are also exempt.
+  if ! $is_test && ! $is_script; then
     inner=$(grep -nE '^\s+(const|let) [a-z][A-Za-z0-9_]* = (async )?\(' "$file" | grep '=>' || true)
     if [ -n "$inner" ]; then
       echo "FAIL [no-internal-function] $file"
@@ -87,7 +95,7 @@ for file in "$@"; do
   # substantive code line count is a reliable proxy for function body length.
   # "Substantive" lines exclude: blank lines, comments, import statements, and
   # standalone type/interface declarations — i.e. lines that are not function body.
-  if ! $is_barrel && ! $is_test; then
+  if ! $is_barrel && ! $is_test && ! $is_script; then
     fn_lines=$(grep -cvE '^\s*(//|/\*|\*|import |export type |export interface |type [A-Z]|interface [A-Z]|\}?\s*$)' "$file" 2>/dev/null || true)
     if [ "$fn_lines" -gt "$MAX_FN_LINES" ]; then
       echo "FAIL [max-function-lines] $file (~$fn_lines substantive lines, max $MAX_FN_LINES)"

@@ -9,6 +9,8 @@ import path from 'node:path';
 
 import axios from 'axios';
 
+import { normalizeInputDate } from './lib/normalizeInputDate.ts';
+
 import type {
   Constituency,
   Member,
@@ -78,6 +80,7 @@ WHERE {
 } GROUP BY ?mp ?mpLabel ?constituency ?constituencyLabel ?partyText ?partyLabel ?genderLabel ?rgb`;
 };
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: retry loop with backoff is inherently complex
 const fetchData = async (query: string) => {
   const endpoint = 'https://query.wikidata.org/sparql';
   const url = `${endpoint}?format=json&query=${encodeURIComponent(query)}`;
@@ -109,8 +112,8 @@ const fetchData = async (query: string) => {
         continue;
       }
       return res.data;
-    } catch (e: any) {
-      console.warn(`[snapshot] attempt error: ${e?.message || e}`);
+    } catch (e) {
+      console.warn(`[snapshot] attempt error: ${(e as Error)?.message || e}`);
       if (attempt === MAX_ATTEMPTS) throw e;
     }
   }
@@ -155,25 +158,9 @@ const normalize = (raw: any): Member[] => {
   });
 };
 
-const normalizeDate = (input: string): string => {
-  if (/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}Z$/.test(input)) {
-    return input.replace(
-      /^(\d{4}-\d{2}-\d{2}T\d{2})-(\d{2})-(\d{2})Z$/,
-      '$1:$2:$3Z'
-    );
-  }
-  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(input)) {
-    return input;
-  }
-  console.error(
-    'Unsupported date format. Use 2021-01-01T00-00-00Z or 2021-01-01T00:00:00Z'
-  );
-  process.exit(1);
-};
-
 (async () => {
   const { date: inputDate, mergeLabourCoop } = parseArgs();
-  const isoDate = normalizeDate(inputDate);
+  const isoDate = normalizeInputDate(inputDate);
   console.log(
     `Fetching parliament snapshot for ${inputDate} (ISO: ${isoDate})`
   );
