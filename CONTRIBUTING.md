@@ -169,6 +169,9 @@ exempt from this rule.
 
 - Prefer functional React components with hooks.
 - Favor small modules focused on a single domain or responsibility.
+- Group code logic by domain, not by technical layer. Place related types, logic, and tests together under a shared
+  domain directory (e.g. `elections/`, `districts/`, `seats/`) rather than splitting them across `models/`, `utils/`,
+  or `helpers/`.
 - Embrace SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and
   Dependency Inversion.
 - Follow DRY (Don't Repeat Yourself) principle — extract common logic into reusable utilities and hooks.
