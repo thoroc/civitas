@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('./runTermsQuery.ts', () => ({ runTermsQuery: vi.fn() }));
+vi.mock('../lib/runTermsQuery.ts', () => ({ runTermsQuery: vi.fn() }));
 
+import { runTermsQuery } from '../lib/runTermsQuery.ts';
 import { fetchTermStartDates } from './fetchTermStartDates.ts';
-import { runTermsQuery } from './runTermsQuery.ts';
 
 const mockedQuery = vi.mocked(runTermsQuery);
 

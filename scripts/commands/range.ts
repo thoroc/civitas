@@ -3,12 +3,12 @@ import path from 'node:path';
 
 import { Command } from '@cliffy/command';
 
-import { buildIndexEntry } from '../lib/buildIndexEntry.ts';
-import type { IndexEntry } from '../lib/buildIndexEntry.ts';
-import { fetchTermStartDates } from '../lib/fetchTermStartDates.ts';
 import { OUTPUT_DIR, PARLIAMENT_INDEX } from '../lib/paths.ts';
 import { sleep } from '../lib/sleep.ts';
 import { toSafeFilename } from '../lib/toSafeFilename.ts';
+import { buildIndexEntry } from '../range/buildIndexEntry.ts';
+import type { IndexEntry } from '../range/buildIndexEntry.ts';
+import { fetchTermStartDates } from '../range/fetchTermStartDates.ts';
 import { handleFallbackRange } from '../range/range-fallback.ts';
 import { runPartyMeta } from './party-meta.ts';
 import { runSnapshot } from './snapshot.ts';
