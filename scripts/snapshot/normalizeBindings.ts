@@ -1,5 +1,5 @@
-import { buildConstituencyFromBinding } from '../lib/buildConstituencyFromBinding.ts';
-import { buildPartyFromBinding } from '../lib/buildPartyFromBinding.ts';
+import { buildConstituencyFromBinding } from './buildConstituencyFromBinding.ts';
+import { buildPartyFromBinding } from './buildPartyFromBinding.ts';
 
 import type { Member } from '../../src/app/parliament/types';
 
