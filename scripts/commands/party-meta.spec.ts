@@ -10,25 +10,25 @@ const mocks = vi.hoisted(() => ({
   isQID: vi.fn(),
 }));
 
-vi.mock('../lib/party-meta/loadSnapshot.ts', () => ({
+vi.mock('../party-meta/loadSnapshot.ts', () => ({
   loadSnapshot: mocks.loadSnapshot,
 }));
-vi.mock('../lib/party-meta/resolveQids.ts', () => ({
+vi.mock('../party-meta/resolveQids.ts', () => ({
   resolveQids: mocks.resolveQids,
 }));
-vi.mock('../lib/party-meta/fetchIdeologies.ts', () => ({
+vi.mock('../party-meta/fetchIdeologies.ts', () => ({
   fetchIdeologies: mocks.fetchIdeologies,
 }));
-vi.mock('../lib/party-meta/loadOverrides.ts', () => ({
+vi.mock('../party-meta/loadOverrides.ts', () => ({
   loadOverrides: mocks.loadOverrides,
 }));
-vi.mock('../lib/party-meta/buildPartyRecord.ts', () => ({
+vi.mock('../party-meta/buildPartyRecord.ts', () => ({
   buildPartyRecord: mocks.buildPartyRecord,
 }));
-vi.mock('../lib/party-meta/writePartyMeta.ts', () => ({
+vi.mock('../party-meta/writePartyMeta.ts', () => ({
   writePartyMeta: mocks.writePartyMeta,
 }));
-vi.mock('../lib/party-meta/isQID.ts', () => ({ isQID: mocks.isQID }));
+vi.mock('../party-meta/isQID.ts', () => ({ isQID: mocks.isQID }));
 
 import { runPartyMeta } from './party-meta.ts';
 

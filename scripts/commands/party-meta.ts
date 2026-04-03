@@ -1,13 +1,13 @@
 import { Command } from '@cliffy/command';
 
-import { buildPartyRecord } from '../lib/party-meta/buildPartyRecord.ts';
-import { fetchIdeologies } from '../lib/party-meta/fetchIdeologies.ts';
-import { isQID } from '../lib/party-meta/isQID.ts';
-import { loadOverrides } from '../lib/party-meta/loadOverrides.ts';
-import { loadSnapshot } from '../lib/party-meta/loadSnapshot.ts';
-import { resolveQids } from '../lib/party-meta/resolveQids.ts';
-import type { PartyEntry } from '../lib/party-meta/types.ts';
-import { writePartyMeta } from '../lib/party-meta/writePartyMeta.ts';
+import { buildPartyRecord } from '../party-meta/buildPartyRecord.ts';
+import { fetchIdeologies } from '../party-meta/fetchIdeologies.ts';
+import { isQID } from '../party-meta/isQID.ts';
+import { loadOverrides } from '../party-meta/loadOverrides.ts';
+import { loadSnapshot } from '../party-meta/loadSnapshot.ts';
+import { resolveQids } from '../party-meta/resolveQids.ts';
+import type { PartyEntry } from '../party-meta/types.ts';
+import { writePartyMeta } from '../party-meta/writePartyMeta.ts';
 
 export type PartyMetaOptions = { snapshot: string };
 
