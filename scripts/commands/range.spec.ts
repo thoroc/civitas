@@ -14,15 +14,15 @@ const mocks = vi.hoisted(() => ({
   writeFileSync: vi.fn(),
 }));
 
-vi.mock('../lib/fetchTermStartDates.ts', () => ({
+vi.mock('../range/fetchTermStartDates.ts', () => ({
   fetchTermStartDates: mocks.fetchTermStartDates,
 }));
-vi.mock('./range-fallback.ts', () => ({
+vi.mock('../range/range-fallback.ts', () => ({
   handleFallbackRange: mocks.handleFallbackRange,
 }));
 vi.mock('./snapshot.ts', () => ({ runSnapshot: mocks.runSnapshot }));
 vi.mock('./party-meta.ts', () => ({ runPartyMeta: mocks.runPartyMeta }));
-vi.mock('../lib/buildIndexEntry.ts', () => ({
+vi.mock('../range/buildIndexEntry.ts', () => ({
   buildIndexEntry: mocks.buildIndexEntry,
 }));
 vi.mock('../lib/sleep.ts', () => ({ sleep: mocks.sleep }));

@@ -18,7 +18,7 @@ vi.mock('../lib/normalizeInputDate.ts', () => ({
 vi.mock('../lib/toSafeFilename.ts', () => ({
   toSafeFilename: mocks.toSafeFilename,
 }));
-vi.mock('./normalizeBindings.ts', () => ({
+vi.mock('../snapshot/normalizeBindings.ts', () => ({
   normalizeBindings: mocks.normalizeBindings,
 }));
 vi.mock('../lib/wikidata/index.ts', () => ({

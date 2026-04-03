@@ -9,17 +9,17 @@ const mocks = vi.hoisted(() => ({
   parseSchema: vi.fn(),
 }));
 
-vi.mock('../lib/runHarvest.ts', () => ({ runHarvest: mocks.runHarvest }));
-vi.mock('../lib/reportValidation.ts', () => ({
+vi.mock('../harvest/runHarvest.ts', () => ({ runHarvest: mocks.runHarvest }));
+vi.mock('../timeline/reportValidation.ts', () => ({
   reportValidation: mocks.reportValidation,
 }));
-vi.mock('../lib/validation.ts', () => ({
+vi.mock('../timeline/validation.ts', () => ({
   validateSpells: mocks.validateSpells,
 }));
-vi.mock('../lib/buildEventsAndSnapshots.ts', () => ({
+vi.mock('../timeline/buildEventsAndSnapshots.ts', () => ({
   buildEventsAndSnapshots: mocks.buildEventsAndSnapshots,
 }));
-vi.mock('../lib/writeTimelineOutput.ts', () => ({
+vi.mock('../timeline/writeTimelineOutput.ts', () => ({
   writeTimelineOutput: mocks.writeTimelineOutput,
 }));
 vi.mock('../harvest/schemas.ts', () => ({
