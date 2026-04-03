@@ -54,7 +54,7 @@ export const timelineCommand = new Command()
   )
   .option('--since <date:string>', 'Start date', { default: '2005-01-01' })
   .option('--granularity <granularity:string>', 'events, monthly, or both', {
-    default: 'events',
+    default: 'monthly',
   })
   .option('--merge-labour-coop', 'Merge Labour and Co-op', { default: false })
   .option('--force-refresh', 'Force re-fetch cached member data', {
