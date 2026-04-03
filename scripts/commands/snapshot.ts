@@ -12,7 +12,7 @@ import {
   buildParliamentMembersQuery,
 } from '../lib/wikidata/index.ts';
 
-import { normalizeBindings } from './normalizeBindings.ts';
+import { normalizeBindings } from '../snapshot/normalizeBindings.ts';
 
 import type { ParliamentSnapshot } from '../../src/app/parliament/types';
 

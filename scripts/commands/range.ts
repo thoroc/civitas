@@ -9,8 +9,8 @@ import { fetchTermStartDates } from '../lib/fetchTermStartDates.ts';
 import { OUTPUT_DIR, PARLIAMENT_INDEX } from '../lib/paths.ts';
 import { sleep } from '../lib/sleep.ts';
 import { toSafeFilename } from '../lib/toSafeFilename.ts';
+import { handleFallbackRange } from '../range/range-fallback.ts';
 import { runPartyMeta } from './party-meta.ts';
-import { handleFallbackRange } from './range-fallback.ts';
 import { runSnapshot } from './snapshot.ts';
 
 export type RangeOptions = {
