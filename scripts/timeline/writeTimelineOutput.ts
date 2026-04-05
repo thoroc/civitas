@@ -17,6 +17,12 @@ export const writeTimelineOutput = (
     JSON.stringify(events, null, 2)
   );
 
+  // Deduplicate by date — multiple events on the same day each emit a snapshot;
+  // keep the last one (most complete state after all events on that day).
+  const byDate = new Map<string, Snapshot>();
+  for (const sn of snapshots) byDate.set(sn.date, sn);
+  const deduped = [...byDate.values()];
+
   const index: Array<{
     date: string;
     safeDate: string;
@@ -24,7 +30,7 @@ export const writeTimelineOutput = (
     total: number;
     generatedAt: string;
   }> = [];
-  for (const sn of snapshots) {
+  for (const sn of deduped) {
     const safeDate = toSafeFilename(sn.date);
     const file = `official-parliament-${safeDate}.json`;
     fs.writeFileSync(
@@ -41,6 +47,6 @@ export const writeTimelineOutput = (
   }
   fs.writeFileSync(OFFICIAL_INDEX, JSON.stringify(index, null, 2));
   console.log(
-    `[official] Wrote ${snapshots.length} snapshots to ${OFFICIAL_DIR}`
+    `[official] Wrote ${deduped.length} snapshots to ${OFFICIAL_DIR} (${snapshots.length - deduped.length} duplicates removed)`
   );
 };
