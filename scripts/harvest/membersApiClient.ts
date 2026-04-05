@@ -17,7 +17,7 @@ export const harvestMembers = async (
   cacheCfg = { dir: cfg.cacheDir, forceRefresh: cfg.forceRefresh }
 ): Promise<HarvestResult> => {
   const base = 'https://members-api.parliament.uk';
-  const members = await fetchMemberIds(base, 100, cacheCfg);
+  const members = await fetchMemberIds(base, cacheCfg);
 
   const limit = pLimit(cfg.maxConcurrency);
   const partySpells: PartySpell[] = [];

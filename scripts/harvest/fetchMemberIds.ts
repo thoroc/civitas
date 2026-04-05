@@ -3,43 +3,54 @@ import type { MemberCore } from './schemas';
 
 type CacheCfg = { dir: string; forceRefresh: boolean };
 
-const extractItems = (data: unknown): unknown[] => {
+interface SearchPage {
+  items?: unknown[];
+  totalResults?: number;
+}
+
+const extractPage = (data: unknown): SearchPage => {
   const d = data as Record<string, unknown>;
+  // Parliament API returns { items: [...], totalResults: N, take: N, skip: N }
+  // The API caps page size at 20 regardless of the take parameter.
+  if (Array.isArray(d?.items)) return d as SearchPage;
+  // Fallback: some endpoints nest under value
   const v = d?.value as Record<string, unknown> | undefined;
-  const items = v?.items ?? d?.items ?? d?.results;
-  return Array.isArray(items) ? items : [];
+  return Array.isArray(v?.items) ? (v as SearchPage) : {};
+};
+
+const parseMember = (it: unknown): MemberCore | null => {
+  const i = it as Record<string, unknown>;
+  const v = i?.value as Record<string, unknown> | undefined;
+  const id = (v?.id ?? i?.id ?? i?.MemberId ?? i?.Id) as number | undefined;
+  const name = String(
+    v?.nameDisplayAs ?? i?.nameDisplayAs ?? i?.Name ?? i?.name ?? ''
+  );
+  return id ? { memberId: id, name } : null;
 };
 
 export const fetchMemberIds = async (
   base: string,
-  pageSize: number,
   cacheCfg: CacheCfg
 ): Promise<MemberCore[]> => {
-  let skip = 0;
   const members: MemberCore[] = [];
+  let skip = 0;
+  let totalResults = Number.MAX_SAFE_INTEGER;
 
-  while (true) {
-    const url = `${base}/api/Members/Search?House=Commons&IsCurrentMember=false&skip=${skip}&take=${pageSize}`;
+  while (skip < totalResults) {
+    // No IsCurrentMember filter — returns both current and former MPs.
+    // API ignores take>20; use totalResults from response to drive pagination.
+    const url = `${base}/api/Members/Search?House=Commons&skip=${skip}&take=20`;
     const data = await cachedGet(url, cacheCfg);
-    const rawItems = extractItems(data);
-    const batch = rawItems.map(it => {
-      const i = it as Record<string, unknown>;
-      const v = i?.value as Record<string, unknown> | undefined;
-      return {
-        MemberId: (v?.id ?? i?.MemberId ?? i?.Id ?? i?.id) as number,
-        Name: (v?.nameDisplayAs ??
-          i?.Name ??
-          i?.DisplayAs ??
-          i?.name ??
-          '') as string,
-      };
-    });
-    if (!batch.length) break;
-    for (const m of batch) {
-      if (m.MemberId) members.push({ memberId: m.MemberId, name: m.Name });
+    const page = extractPage(data);
+    const items = page.items ?? [];
+    if (!items.length) break;
+
+    totalResults = page.totalResults ?? totalResults;
+    for (const it of items) {
+      const member = parseMember(it);
+      if (member) members.push(member);
     }
-    if (batch.length < pageSize) break;
-    skip += pageSize;
+    skip += items.length;
   }
 
   return members;

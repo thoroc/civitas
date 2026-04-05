@@ -38,7 +38,6 @@ describe('harvestMembers', () => {
 
     expect(fetchMemberIds).toHaveBeenCalledWith(
       'https://members-api.parliament.uk',
-      100,
       { dir: cfg.cacheDir, forceRefresh: cfg.forceRefresh }
     );
     expect(result.members).toEqual([mockMember]);
