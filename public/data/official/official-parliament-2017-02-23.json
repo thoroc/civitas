@@ -1,10 +1,11 @@
 {
   "date": "2017-02-23",
+  "eventType": "by-election",
   "meta": {
-    "generatedAt": "2026-04-05T15:59:41.669Z",
+    "generatedAt": "2026-04-05T22:08:49.029Z",
     "source": {
       "membersHash": "b8b353f90c",
-      "eventsHash": "18668250a9"
+      "eventsHash": "14a0c05c5b"
     }
   },
   "members": [

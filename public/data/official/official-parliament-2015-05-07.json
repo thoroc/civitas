@@ -1,10 +1,11 @@
 {
   "date": "2015-05-07",
+  "eventType": "general",
   "meta": {
-    "generatedAt": "2026-04-05T15:59:41.585Z",
+    "generatedAt": "2026-04-05T22:08:48.940Z",
     "source": {
       "membersHash": "b8b353f90c",
-      "eventsHash": "18668250a9"
+      "eventsHash": "14a0c05c5b"
     }
   },
   "members": [

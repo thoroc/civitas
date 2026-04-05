@@ -1,8 +1,8 @@
 {
-  "date": "2006-04-01",
+  "date": "2008-05-01",
   "eventType": "unknown",
   "meta": {
-    "generatedAt": "2026-04-05T22:08:47.601Z",
+    "generatedAt": "2026-04-05T22:08:47.637Z",
     "source": {
       "membersHash": "b8b353f90c",
       "eventsHash": "14a0c05c5b"
@@ -907,7 +907,7 @@
       "constituencyName": "Bromley and Chislehurst",
       "partyId": "4",
       "partyName": "Conservative",
-      "provisional": true
+      "provisional": false
     },
     {
       "memberId": 151,
@@ -970,7 +970,7 @@
       "constituencyName": "Ealing, Southall",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": true
+      "provisional": false
     },
     {
       "memberId": 163,
@@ -2581,7 +2581,7 @@
       "constituencyName": "Crewe and Nantwich",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": true
+      "provisional": false
     },
     {
       "memberId": 427,
@@ -3148,7 +3148,7 @@
       "constituencyName": "Sedgefield",
       "partyId": "15",
       "partyName": "Labour",
-      "provisional": true
+      "provisional": false
     },
     {
       "memberId": 514,
@@ -5561,15 +5561,42 @@
       "partyId": "17",
       "partyName": "Liberal Democrat",
       "provisional": true
+    },
+    {
+      "memberId": 1601,
+      "name": "Sir Robert Neill",
+      "constituencyId": "3372",
+      "constituencyName": "Bromley and Chislehurst",
+      "partyId": "4",
+      "partyName": "Conservative",
+      "provisional": true
+    },
+    {
+      "memberId": 1602,
+      "name": "Mr Dai Davies",
+      "constituencyId": "338",
+      "constituencyName": "Blaenau Gwent",
+      "partyId": "8",
+      "partyName": "Independent",
+      "provisional": true
+    },
+    {
+      "memberId": 1604,
+      "name": "Mr Virendra Sharma",
+      "constituencyId": "3457",
+      "constituencyName": "Ealing, Southall",
+      "partyId": "15",
+      "partyName": "Labour",
+      "provisional": true
     }
   ],
   "parties": {
-    "4": 147,
+    "4": 148,
     "7": 5,
-    "8": 35,
+    "8": 36,
     "9": 2,
     "10": 1,
-    "15": 348,
+    "15": 349,
     "17": 53,
     "22": 4,
     "29": 5,
@@ -5580,5 +5607,5 @@
     "1004": 2,
     "1036": 1
   },
-  "total": 617
+  "total": 620
 }
