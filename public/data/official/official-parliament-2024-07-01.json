@@ -1,10 +1,10 @@
 {
   "date": "2024-07-01",
   "meta": {
-    "generatedAt": "2026-04-05T15:54:54.285Z",
+    "generatedAt": "2026-04-05T15:59:43.223Z",
     "source": {
       "membersHash": "b8b353f90c",
-      "eventsHash": "73bcb34dbf"
+      "eventsHash": "18668250a9"
     }
   },
   "members": [
@@ -5769,12 +5769,12 @@
       "provisional": true
     },
     {
-      "memberId": 5120,
-      "name": "Shockat Adam",
-      "constituencyId": "4142",
-      "constituencyName": "Leicester South",
-      "partyId": "8",
-      "partyName": "Independent",
+      "memberId": 5131,
+      "name": "Jack Abbott",
+      "constituencyId": "4117",
+      "constituencyName": "Ipswich",
+      "partyId": "15",
+      "partyName": "Labour (Co-op)",
       "provisional": false
     }
   ],
@@ -5782,8 +5782,8 @@
     "1": 1,
     "4": 333,
     "7": 7,
-    "8": 29,
-    "15": 190,
+    "8": 28,
+    "15": 191,
     "17": 15,
     "22": 3,
     "29": 43,

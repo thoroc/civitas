@@ -2615,14 +2615,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5120,
-    "constituencyId": "4142"
+    "memberId": 5131,
+    "constituencyId": "4117"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5131,
-    "constituencyId": "4117"
+    "memberId": 5120,
+    "constituencyId": "4142"
   },
   {
     "date": "2024-07-04",
@@ -2645,14 +2645,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 632,
-    "constituencyId": "4485"
+    "memberId": 5172,
+    "constituencyId": "4396"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5172,
-    "constituencyId": "4396"
+    "memberId": 632,
+    "constituencyId": "4485"
   },
   {
     "date": "2024-07-04",
@@ -2687,14 +2687,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5212,
-    "constituencyId": "4470"
+    "memberId": 5164,
+    "constituencyId": "4211"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5164,
-    "constituencyId": "4211"
+    "memberId": 5212,
+    "constituencyId": "4470"
   },
   {
     "date": "2024-07-04",
@@ -2735,14 +2735,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5337,
-    "constituencyId": "4254"
+    "memberId": 5054,
+    "constituencyId": "4149"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5054,
-    "constituencyId": "4149"
+    "memberId": 5337,
+    "constituencyId": "4254"
   },
   {
     "date": "2024-07-04",
@@ -2765,14 +2765,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5048,
-    "constituencyId": "4362"
+    "memberId": 5238,
+    "constituencyId": "4076"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5238,
-    "constituencyId": "4076"
+    "memberId": 5048,
+    "constituencyId": "4362"
   },
   {
     "date": "2024-07-04",
@@ -2801,14 +2801,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5330,
-    "constituencyId": "4179"
+    "memberId": 5232,
+    "constituencyId": "3919"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5232,
-    "constituencyId": "3919"
+    "memberId": 5330,
+    "constituencyId": "4179"
   },
   {
     "date": "2024-07-04",
@@ -3029,14 +3029,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5201,
-    "constituencyId": "4083"
+    "memberId": 5087,
+    "constituencyId": "4412"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5087,
-    "constituencyId": "4412"
+    "memberId": 5201,
+    "constituencyId": "4083"
   },
   {
     "date": "2024-07-04",
@@ -3179,14 +3179,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5102,
-    "constituencyId": "3946"
+    "memberId": 5224,
+    "constituencyId": "4077"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5224,
-    "constituencyId": "4077"
+    "memberId": 5102,
+    "constituencyId": "3946"
   },
   {
     "date": "2024-07-04",
@@ -3293,8 +3293,8 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5190,
-    "constituencyId": "4478"
+    "memberId": 5295,
+    "constituencyId": "3962"
   },
   {
     "date": "2024-07-04",
@@ -3305,8 +3305,8 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5295,
-    "constituencyId": "3962"
+    "memberId": 5190,
+    "constituencyId": "4478"
   },
   {
     "date": "2024-07-04",
@@ -3347,14 +3347,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5184,
-    "constituencyId": "3904"
+    "memberId": 5101,
+    "constituencyId": "3941"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5101,
-    "constituencyId": "3941"
+    "memberId": 5184,
+    "constituencyId": "3904"
   },
   {
     "date": "2024-07-04",
@@ -3413,20 +3413,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5252,
-    "constituencyId": "4363"
-  },
-  {
-    "date": "2024-07-04",
-    "type": "byElection",
     "memberId": 5188,
     "constituencyId": "4468"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5318,
-    "constituencyId": "4012"
+    "memberId": 5252,
+    "constituencyId": "4363"
   },
   {
     "date": "2024-07-04",
@@ -3437,14 +3431,20 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5205,
-    "constituencyId": "4304"
+    "memberId": 5318,
+    "constituencyId": "4012"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
     "memberId": 5073,
     "constituencyId": "3974"
+  },
+  {
+    "date": "2024-07-04",
+    "type": "byElection",
+    "memberId": 5205,
+    "constituencyId": "4304"
   },
   {
     "date": "2024-07-04",
@@ -3461,14 +3461,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5170,
-    "constituencyId": "4473"
+    "memberId": 5305,
+    "constituencyId": "4250"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5305,
-    "constituencyId": "4250"
+    "memberId": 5170,
+    "constituencyId": "4473"
   },
   {
     "date": "2024-07-04",
@@ -3551,14 +3551,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5231,
-    "constituencyId": "3917"
+    "memberId": 5052,
+    "constituencyId": "4319"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5119,
-    "constituencyId": "4001"
+    "memberId": 5231,
+    "constituencyId": "3917"
   },
   {
     "date": "2024-07-04",
@@ -3569,8 +3569,8 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5052,
-    "constituencyId": "4319"
+    "memberId": 5119,
+    "constituencyId": "4001"
   },
   {
     "date": "2024-07-04",
@@ -3611,6 +3611,12 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
+    "memberId": 5332,
+    "constituencyId": "4320"
+  },
+  {
+    "date": "2024-07-04",
+    "type": "byElection",
     "memberId": 5059,
     "constituencyId": "4293"
   },
@@ -3619,12 +3625,6 @@
     "type": "byElection",
     "memberId": 5247,
     "constituencyId": "3884"
-  },
-  {
-    "date": "2024-07-04",
-    "type": "byElection",
-    "memberId": 5332,
-    "constituencyId": "4320"
   },
   {
     "date": "2024-07-04",
@@ -3689,14 +3689,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5345,
-    "constituencyId": "3999"
+    "memberId": 5285,
+    "constituencyId": "4385"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5285,
-    "constituencyId": "4385"
+    "memberId": 5345,
+    "constituencyId": "3999"
   },
   {
     "date": "2024-07-04",
@@ -3737,14 +3737,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5265,
-    "constituencyId": "4145"
+    "memberId": 5033,
+    "constituencyId": "4398"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5033,
-    "constituencyId": "4398"
+    "memberId": 5265,
+    "constituencyId": "4145"
   },
   {
     "date": "2024-07-04",
@@ -3833,14 +3833,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5037,
-    "constituencyId": "4005"
+    "memberId": 5076,
+    "constituencyId": "4442"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5076,
-    "constituencyId": "4442"
+    "memberId": 5037,
+    "constituencyId": "4005"
   },
   {
     "date": "2024-07-04",
@@ -3851,14 +3851,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5300,
-    "constituencyId": "4289"
+    "memberId": 5189,
+    "constituencyId": "4476"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5189,
-    "constituencyId": "4476"
+    "memberId": 5300,
+    "constituencyId": "4289"
   },
   {
     "date": "2024-07-04",
@@ -3899,14 +3899,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5094,
-    "constituencyId": "3967"
+    "memberId": 5329,
+    "constituencyId": "4109"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5329,
-    "constituencyId": "4109"
+    "memberId": 5094,
+    "constituencyId": "3967"
   },
   {
     "date": "2024-07-04",
@@ -3959,14 +3959,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5245,
-    "constituencyId": "4467"
+    "memberId": 5248,
+    "constituencyId": "3893"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5248,
-    "constituencyId": "3893"
+    "memberId": 5245,
+    "constituencyId": "4467"
   },
   {
     "date": "2024-07-04",
@@ -3977,26 +3977,20 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5147,
-    "constituencyId": "4183"
-  },
-  {
-    "date": "2024-07-04",
-    "type": "byElection",
     "memberId": 5157,
     "constituencyId": "4486"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5047,
-    "constituencyId": "4272"
+    "memberId": 5147,
+    "constituencyId": "4183"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 3909,
-    "constituencyId": "4488"
+    "memberId": 5047,
+    "constituencyId": "4272"
   },
   {
     "date": "2024-07-04",
@@ -4009,6 +4003,12 @@
     "type": "byElection",
     "memberId": 5039,
     "constituencyId": "4525"
+  },
+  {
+    "date": "2024-07-04",
+    "type": "byElection",
+    "memberId": 3909,
+    "constituencyId": "4488"
   },
   {
     "date": "2024-07-04",
@@ -4067,14 +4067,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5297,
-    "constituencyId": "4257"
+    "memberId": 5162,
+    "constituencyId": "4404"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5162,
-    "constituencyId": "4404"
+    "memberId": 5297,
+    "constituencyId": "4257"
   },
   {
     "date": "2024-07-04",
@@ -4151,14 +4151,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5320,
-    "constituencyId": "4384"
+    "memberId": 5068,
+    "constituencyId": "4141"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5068,
-    "constituencyId": "4141"
+    "memberId": 5320,
+    "constituencyId": "4384"
   },
   {
     "date": "2024-07-04",
@@ -4205,14 +4205,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5251,
-    "constituencyId": "4474"
+    "memberId": 5343,
+    "constituencyId": "4163"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5343,
-    "constituencyId": "4163"
+    "memberId": 5251,
+    "constituencyId": "4474"
   },
   {
     "date": "2024-07-04",
@@ -4265,14 +4265,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5222,
-    "constituencyId": "4033"
+    "memberId": 5324,
+    "constituencyId": "3993"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5324,
-    "constituencyId": "3993"
+    "memberId": 5222,
+    "constituencyId": "4033"
   },
   {
     "date": "2024-07-04",
@@ -4283,26 +4283,26 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5204,
-    "constituencyId": "4053"
-  },
-  {
-    "date": "2024-07-04",
-    "type": "byElection",
     "memberId": 5286,
     "constituencyId": "4056"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5258,
-    "constituencyId": "4206"
+    "memberId": 5204,
+    "constituencyId": "4053"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
     "memberId": 5259,
     "constituencyId": "4157"
+  },
+  {
+    "date": "2024-07-04",
+    "type": "byElection",
+    "memberId": 5258,
+    "constituencyId": "4206"
   },
   {
     "date": "2024-07-04",
@@ -4319,14 +4319,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5176,
-    "constituencyId": "4009"
+    "memberId": 5166,
+    "constituencyId": "4139"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5166,
-    "constituencyId": "4139"
+    "memberId": 5176,
+    "constituencyId": "4009"
   },
   {
     "date": "2024-07-04",
@@ -4349,14 +4349,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5070,
-    "constituencyId": "4092"
+    "memberId": 5127,
+    "constituencyId": "4268"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5127,
-    "constituencyId": "4268"
+    "memberId": 5070,
+    "constituencyId": "4092"
   },
   {
     "date": "2024-07-04",
@@ -4379,14 +4379,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5072,
-    "constituencyId": "4057"
+    "memberId": 4595,
+    "constituencyId": "4335"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 4595,
-    "constituencyId": "4335"
+    "memberId": 5072,
+    "constituencyId": "4057"
   },
   {
     "date": "2024-07-04",
@@ -4505,14 +4505,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5174,
-    "constituencyId": "4241"
+    "memberId": 5354,
+    "constituencyId": "4357"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5354,
-    "constituencyId": "4357"
+    "memberId": 5174,
+    "constituencyId": "4241"
   },
   {
     "date": "2024-07-04",
@@ -4553,12 +4553,6 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5130,
-    "constituencyId": "4383"
-  },
-  {
-    "date": "2024-07-04",
-    "type": "byElection",
     "memberId": 5121,
     "constituencyId": "4515"
   },
@@ -4567,6 +4561,12 @@
     "type": "byElection",
     "memberId": 4449,
     "constituencyId": "4255"
+  },
+  {
+    "date": "2024-07-04",
+    "type": "byElection",
+    "memberId": 5130,
+    "constituencyId": "4383"
   },
   {
     "date": "2024-07-04",
@@ -4637,14 +4637,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5342,
-    "constituencyId": "4010"
+    "memberId": 5242,
+    "constituencyId": "4413"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5242,
-    "constituencyId": "4413"
+    "memberId": 5342,
+    "constituencyId": "4010"
   },
   {
     "date": "2024-07-04",
@@ -4685,14 +4685,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5111,
-    "constituencyId": "4196"
+    "memberId": 5331,
+    "constituencyId": "4126"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5331,
-    "constituencyId": "4126"
+    "memberId": 5111,
+    "constituencyId": "4196"
   },
   {
     "date": "2024-07-04",
@@ -4703,14 +4703,14 @@
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5140,
-    "constituencyId": "4360"
+    "memberId": 5194,
+    "constituencyId": "4170"
   },
   {
     "date": "2024-07-04",
     "type": "byElection",
-    "memberId": 5194,
-    "constituencyId": "4170"
+    "memberId": 5140,
+    "constituencyId": "4360"
   },
   {
     "date": "2025-03-17",
