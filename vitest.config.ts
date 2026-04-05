@@ -20,6 +20,7 @@ export default defineConfig({
       'src/**/*.test.tsx',
       'scripts/lib/**/*.spec.ts',
       'scripts/commands/**/*.spec.ts',
+      'scripts/harvest/**/*.spec.ts',
     ],
     coverage: {
       include: [
