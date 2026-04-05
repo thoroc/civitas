@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "providers": [
+    "claude-code",
+    "gemini-cli",
+    "openai-codex",
+    "opencode"
+  ],
+  "servers": {
+    "vercel": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp.vercel.com"
+      ]
+    },
+    "uk-parliament": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "uk-parliament-mcp"
+      ]
+    },
+    "Wikipedia": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "wikipedia-mcp"
+      ]
+    }
+  }
+}
