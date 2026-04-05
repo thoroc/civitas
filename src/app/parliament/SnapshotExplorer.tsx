@@ -18,7 +18,14 @@ const SnapshotInner = ({
   index: ParliamentIndexEntry[];
   initialDate?: string;
 }) => {
-  const { filteredIndex, queryDate } = useSnapshotSelection(index);
+  const { filteredIndex, queryDate, selectedEventType, setSelectedEventType } =
+    useSnapshotSelection(index);
+  const showAllOption =
+    selectedEventType === 'all' ||
+    index.some(
+      entry => entry.eventType === 'other' || entry.eventType === 'unknown'
+    );
+  const isEmpty = filteredIndex.length === 0;
 
   const {
     selectedDate,
@@ -34,19 +41,34 @@ const SnapshotInner = ({
     <div className='space-y-6'>
       <SnapshotHeader
         index={filteredIndex}
+        isEmpty={isEmpty}
         selectedDate={selectedDate}
         onDateChange={setSelectedDate}
+        selectedEventType={selectedEventType}
+        onEventTypeChange={setSelectedEventType}
+        showAllOption={showAllOption}
       />
-      {error && <div className='alert alert-error text-sm'>{error}</div>}
-      {!error && loadingSnapshot && (
-        <div className='skeleton h-32 w-full' aria-label='Loading snapshot' />
-      )}
-      {snapshot && !loadingSnapshot && (
-        <SnapshotPanels
-          snapshot={snapshot}
-          loadingMeta={loadingMeta}
-          partyMetaMap={partyMetaMap}
-        />
+      {isEmpty ? (
+        <div className='text-sm text-muted'>
+          No snapshots for this event type.
+        </div>
+      ) : (
+        <>
+          {error && <div className='alert alert-error text-sm'>{error}</div>}
+          {!error && loadingSnapshot && (
+            <div
+              className='skeleton h-32 w-full'
+              aria-label='Loading snapshot'
+            />
+          )}
+          {snapshot && !loadingSnapshot && (
+            <SnapshotPanels
+              snapshot={snapshot}
+              loadingMeta={loadingMeta}
+              partyMetaMap={partyMetaMap}
+            />
+          )}
+        </>
       )}
     </div>
   );
