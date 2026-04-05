@@ -53,7 +53,7 @@ describe('runTimeline', () => {
       negatives: [],
       gaps: [],
     });
-    mocks.buildEventsAndSnapshots.mockReturnValue({
+    mocks.buildEventsAndSnapshots.mockResolvedValue({
       events: [],
       snapshots: [],
     });
@@ -118,7 +118,7 @@ describe('runTimeline', () => {
   it('passes snapshots and events to writeTimelineOutput', async () => {
     const events = [{ type: 'join' }];
     const snapshots = [{ date: '2021-01-01' }];
-    mocks.buildEventsAndSnapshots.mockReturnValueOnce({ events, snapshots });
+    mocks.buildEventsAndSnapshots.mockResolvedValueOnce({ events, snapshots });
 
     await runTimeline(BASE_OPTS);
 

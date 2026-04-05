@@ -5,6 +5,7 @@ const mocks = vi.hoisted(() => ({
   buildSnapshots: vi.fn(),
   parseEvent: vi.fn(),
   parseSnapshot: vi.fn(),
+  fetchWikidataEventTypeLookup: vi.fn(),
 }));
 
 vi.mock('../harvest/buildEvents.ts', () => ({
@@ -16,6 +17,9 @@ vi.mock('../harvest/buildSnapshots.ts', () => ({
 vi.mock('../harvest/schemas.ts', () => ({
   EventSchema: { parse: mocks.parseEvent },
   SnapshotSchema: { parse: mocks.parseSnapshot },
+}));
+vi.mock('../harvest/eventType.ts', () => ({
+  fetchWikidataEventTypeLookup: mocks.fetchWikidataEventTypeLookup,
 }));
 
 import { buildEventsAndSnapshots } from './buildEventsAndSnapshots.ts';
@@ -43,28 +47,32 @@ describe('buildEventsAndSnapshots', () => {
     vi.clearAllMocks();
     mocks.buildEvents.mockReturnValue([]);
     mocks.buildSnapshots.mockReturnValue([]);
+    mocks.fetchWikidataEventTypeLookup.mockResolvedValue({
+      general: new Set(),
+      byElection: new Set(),
+    });
   });
 
-  it('returns events and snapshots from builders', () => {
+  it('returns events and snapshots from builders', async () => {
     const events = [{ type: 'join' }];
     const snapshots = [{ date: '2021-01-01' }];
     mocks.buildEvents.mockReturnValue(events);
     mocks.buildSnapshots.mockReturnValue(snapshots);
 
-    const result = buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
+    const result = await buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
 
     expect(result.events).toBe(events);
     expect(result.snapshots).toBe(snapshots);
   });
 
-  it('passes normalized and cfg to buildEvents', () => {
-    buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
+  it('passes normalized and cfg to buildEvents', async () => {
+    await buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
 
     expect(mocks.buildEvents).toHaveBeenCalledWith(NORMALIZED, BASE_CFG);
   });
 
-  it('passes monthly=false when granularity is "events"', () => {
-    buildEventsAndSnapshots(NORMALIZED as never, {
+  it('passes monthly=false when granularity is "events"', async () => {
+    await buildEventsAndSnapshots(NORMALIZED as never, {
       ...BASE_CFG,
       granularity: 'events',
     });
@@ -72,12 +80,12 @@ describe('buildEventsAndSnapshots', () => {
     expect(mocks.buildSnapshots).toHaveBeenCalledWith(
       NORMALIZED,
       expect.anything(),
-      { monthly: false }
+      expect.objectContaining({ monthly: false })
     );
   });
 
-  it('passes monthly=true when granularity is "monthly"', () => {
-    buildEventsAndSnapshots(NORMALIZED as never, {
+  it('passes monthly=true when granularity is "monthly"', async () => {
+    await buildEventsAndSnapshots(NORMALIZED as never, {
       ...BASE_CFG,
       granularity: 'monthly',
     });
@@ -85,47 +93,47 @@ describe('buildEventsAndSnapshots', () => {
     expect(mocks.buildSnapshots).toHaveBeenCalledWith(
       NORMALIZED,
       expect.anything(),
-      { monthly: true }
+      expect.objectContaining({ monthly: true })
     );
   });
 
-  it('validates each event via EventSchema.parse', () => {
+  it('validates each event via EventSchema.parse', async () => {
     const events = [{ type: 'join' }, { type: 'leave' }];
     mocks.buildEvents.mockReturnValue(events);
 
-    buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
+    await buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
 
     expect(mocks.parseEvent).toHaveBeenCalledTimes(2);
   });
 
-  it('validates each snapshot via SnapshotSchema.parse', () => {
+  it('validates each snapshot via SnapshotSchema.parse', async () => {
     const snapshots = [{ date: '2021-01-01' }, { date: '2022-01-01' }];
     mocks.buildSnapshots.mockReturnValue(snapshots);
 
-    buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
+    await buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG);
 
     expect(mocks.parseSnapshot).toHaveBeenCalledTimes(2);
   });
 
-  it('continues when EventSchema.parse throws', () => {
+  it('continues when EventSchema.parse throws', async () => {
     mocks.buildEvents.mockReturnValue([{ type: 'bad' }]);
     mocks.parseEvent.mockImplementation(() => {
       throw new Error('invalid event');
     });
 
-    expect(() =>
+    await expect(
       buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG)
-    ).not.toThrow();
+    ).resolves.not.toThrow();
   });
 
-  it('continues when SnapshotSchema.parse throws', () => {
+  it('continues when SnapshotSchema.parse throws', async () => {
     mocks.buildSnapshots.mockReturnValue([{ date: 'bad' }]);
     mocks.parseSnapshot.mockImplementation(() => {
       throw new Error('invalid snapshot');
     });
 
-    expect(() =>
+    await expect(
       buildEventsAndSnapshots(NORMALIZED as never, BASE_CFG)
-    ).not.toThrow();
+    ).resolves.not.toThrow();
   });
 });

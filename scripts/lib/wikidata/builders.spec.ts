@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { buildByElectionQuery } from './buildByElectionQuery.ts';
+import { buildGeneralElectionQuery } from './buildGeneralElectionQuery.ts';
 import { buildIdeologyQuery } from './buildIdeologyQuery.ts';
 import { buildParliamentMembersQuery } from './buildParliamentMembersQuery.ts';
 import { buildTermsQuery } from './buildTermsQuery.ts';
@@ -43,6 +45,32 @@ describe('buildTermsQueryFallback', () => {
     const q = buildTermsQueryFallback();
     expect(q).toContain('SELECT');
     expect(q).toContain('WHERE');
+  });
+});
+
+describe('buildGeneralElectionQuery', () => {
+  it('includes general election QID', () => {
+    const q = buildGeneralElectionQuery();
+    expect(q).toContain('Q15283424');
+  });
+
+  it('returns a non-empty SPARQL string', () => {
+    const q = buildGeneralElectionQuery();
+    expect(typeof q).toBe('string');
+    expect(q.length).toBeGreaterThan(0);
+  });
+});
+
+describe('buildByElectionQuery', () => {
+  it('includes UK parliamentary by-election QID', () => {
+    const q = buildByElectionQuery();
+    expect(q).toContain('Q7864918');
+  });
+
+  it('returns a non-empty SPARQL string', () => {
+    const q = buildByElectionQuery();
+    expect(typeof q).toBe('string');
+    expect(q.length).toBeGreaterThan(0);
   });
 });
 

@@ -29,6 +29,7 @@ export const writeTimelineOutput = (
     file: string;
     total: number;
     generatedAt: string;
+    eventType: Snapshot['eventType'];
   }> = [];
   for (const sn of deduped) {
     const safeDate = toSafeFilename(sn.date);
@@ -43,6 +44,7 @@ export const writeTimelineOutput = (
       file,
       total: sn.total,
       generatedAt: sn.meta.generatedAt,
+      eventType: sn.eventType,
     });
   }
   fs.writeFileSync(OFFICIAL_INDEX, JSON.stringify(index, null, 2));

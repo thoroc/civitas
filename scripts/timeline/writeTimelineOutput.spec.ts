@@ -24,8 +24,13 @@ vi.mock('../lib/toSafeFilename.ts', () => ({
 
 import { writeTimelineOutput } from './writeTimelineOutput.ts';
 
-const makeSnapshot = (date: string, total = 5): object => ({
+const makeSnapshot = (
+  date: string,
+  total = 5,
+  eventType: 'general' | 'by-election' | 'other' | 'unknown' = 'unknown'
+): object => ({
   date,
+  eventType,
   total,
   meta: { date, generatedAt: '2024-01-01T00:00:00Z', total },
   members: [],
@@ -95,7 +100,7 @@ describe('writeTimelineOutput', () => {
   });
 
   it('writes the index file with entries for each snapshot', () => {
-    const sn = makeSnapshot('2021-01-01T00:00:00Z', 10);
+    const sn = makeSnapshot('2021-01-01T00:00:00Z', 10, 'general');
 
     writeTimelineOutput([sn] as never, []);
 
@@ -107,6 +112,7 @@ describe('writeTimelineOutput', () => {
     expect(index).toHaveLength(1);
     expect(index[0].date).toBe('2021-01-01T00:00:00Z');
     expect(index[0].total).toBe(10);
+    expect(index[0].eventType).toBe('general');
   });
 
   it('writes empty index when no snapshots', () => {

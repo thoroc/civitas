@@ -10,5 +10,6 @@ export const GENERAL_ELECTIONS: ElectionEvent[] = [
   { date: '2015-05-07', label: '2015 General Election' },
   { date: '2017-06-08', label: '2017 General Election' },
   { date: '2019-12-12', label: '2019 General Election' },
+  { date: '2024-07-04', label: '2024 General Election' },
   // Future elections can be appended here.
 ];

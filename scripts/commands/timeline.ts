@@ -43,7 +43,7 @@ export const runTimeline = async (opts: TimelineOptions): Promise<void> => {
     validateSpells(normalized.partySpells),
     validateSpells(normalized.seatSpells)
   );
-  const { events, snapshots } = buildEventsAndSnapshots(normalized, cfg);
+  const { events, snapshots } = await buildEventsAndSnapshots(normalized, cfg);
   writeTimelineOutput(snapshots, events);
 };
 
