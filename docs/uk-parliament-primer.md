@@ -27,14 +27,14 @@ At a general election **all 650 seats** are contested simultaneously. The result
 
 **UK general elections covered by this project (since 2005):**
 
-| Date              | Parliament  |
-| ----------------- | ----------- |
-| 5 May 2005        | 54th        |
-| 6 May 2010        | 55th        |
-| 7 May 2015        | 56th        |
-| 8 June 2017       | 57th        |
-| 12 December 2019  | 58th        |
-| 4 July 2024       | 59th        |
+| Date | Parliament |
+| --- | --- |
+| 5 May 2005 | 54th |
+| 6 May 2010 | 55th |
+| 7 May 2015 | 56th |
+| 8 June 2017 | 57th |
+| 12 December 2019 | 58th |
+| 4 July 2024 | 59th |
 
 ## By-Elections
 
@@ -44,7 +44,7 @@ A **by-election** fills a **single vacant seat** between general elections. Vaca
 - Resignation (an MP wishing to resign formally applies for the [Chiltern Hundreds](https://en.wikipedia.org/wiki/Chiltern_Hundreds), a legal device).
 - Disqualification (criminal conviction, prohibited dual mandate, etc.).
 - Recall — under the [Recall of MPs Act 2015](https://en.wikipedia.org/wiki/Recall_of_MPs_Act_2015), if 10% of constituency voters sign a petition after an MP is found guilty of certain misconduct,
-the seat is vacated and a by-election triggered.
+  the seat is vacated and a by-election triggered.
 - Election of an MP to the Speakership (convention, not always followed).
 
 Key characteristics:

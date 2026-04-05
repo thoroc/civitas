@@ -35,11 +35,11 @@ Look for `Content-Security-Policy` & `Strict-Transport-Security`.
 
 ### Triggers
 
-| Job                      | Trigger             | Command                               |
-| ------------------------ | ------------------- | ------------------------------------- |
-| `deploy-ssr`             | Push to `main`      | `bun run build` → Vercel production   |
-| `deploy-static`          | Push tag `v*`       | `bun run build:static` → Vercel alias |
-| `deploy-static` (manual) | `workflow_dispatch` | Dry-run / preview                     |
+| Job | Trigger | Command |
+| --- | --- | --- |
+| `deploy-ssr` | Push to `main` | `bun run build` → Vercel production |
+| `deploy-static` | Push tag `v*` | `bun run build:static` → Vercel alias |
+| `deploy-static` (manual) | `workflow_dispatch` | Dry-run / preview |
 
 Both jobs **skip cleanly** (no failure) when Vercel secrets are absent — safe for forks and open PRs.
 
@@ -47,11 +47,11 @@ Both jobs **skip cleanly** (no failure) when Vercel secrets are absent — safe 
 
 Add these in **GitHub → Settings → Secrets and variables → Actions**:
 
-| Secret              | Where to find it                                             |
-| ------------------- | ------------------------------------------------------------ |
-| `VERCEL_TOKEN`      | Vercel dashboard → Account Settings → Tokens                 |
-| `VERCEL_ORG_ID`     | Vercel dashboard → Team/Account Settings → General (Team ID) |
-| `VERCEL_PROJECT_ID` | Vercel project → Settings → General (Project ID)             |
+| Secret | Where to find it |
+| --- | --- |
+| `VERCEL_TOKEN` | Vercel dashboard → Account Settings → Tokens |
+| `VERCEL_ORG_ID` | Vercel dashboard → Team/Account Settings → General (Team ID) |
+| `VERCEL_PROJECT_ID` | Vercel project → Settings → General (Project ID) |
 
 ### Workflow file
 

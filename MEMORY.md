@@ -59,29 +59,29 @@ snapshot available.
 
 ## Key source files
 
-| Purpose                     | Path                                             |
-| --------------------------- | ------------------------------------------------ |
-| Hemicycle container         | `src/app/parliament/HemicycleReact.tsx`          |
-| Snapshot explorer (UI)      | `src/app/parliament/SnapshotExplorer.tsx`        |
-| Data schemas (Zod)          | `src/app/parliament/schemas.ts`                  |
-| Snapshot index hook         | `src/app/parliament/hooks/useParliamentIndex.ts` |
-| Snapshot loader hook        | `src/app/parliament/hooks/useSnapshotLoader.ts`  |
-| State machine               | `scripts/harvest/buildSnapshots.ts`              |
-| Members API client          | `scripts/harvest/membersApiClient.ts`            |
-| Timeline CLI command        | `scripts/commands/timeline.ts`                   |
-| Official data dir           | `public/data/official/`                          |
+| Purpose | Path |
+| --- | --- |
+| Hemicycle container | `src/app/parliament/HemicycleReact.tsx` |
+| Snapshot explorer (UI) | `src/app/parliament/SnapshotExplorer.tsx` |
+| Data schemas (Zod) | `src/app/parliament/schemas.ts` |
+| Snapshot index hook | `src/app/parliament/hooks/useParliamentIndex.ts` |
+| Snapshot loader hook | `src/app/parliament/hooks/useSnapshotLoader.ts` |
+| State machine | `scripts/harvest/buildSnapshots.ts` |
+| Members API client | `scripts/harvest/membersApiClient.ts` |
+| Timeline CLI command | `scripts/commands/timeline.ts` |
+| Official data dir | `public/data/official/` |
 
 ## Docs index
 
-| File                                                                  | Topic                                         |
-| --------------------------------------------------------------------- | --------------------------------------------- |
-| [`docs/uk-parliament-primer.md`](docs/uk-parliament-primer.md)        | UK Commons structure, elections, by-elections |
-| [`docs/official-timeline.md`](docs/official-timeline.md)              | Data generation pipeline                      |
-| [`docs/architecture.md`](docs/architecture.md)                        | Overall app architecture                      |
-| [`docs/parliament-snapshots.md`](docs/parliament-snapshots.md)        | Snapshot data format                          |
-| [`docs/party-metadata.md`](docs/party-metadata.md)                    | Party colour & leaning metadata               |
-| [`docs/filters-and-interaction.md`](docs/filters-and-interaction.md)  | UI filter system                              |
-| [`docs/exporting.md`](docs/exporting.md)                              | SVG/PNG export feature                        |
-| [`docs/development.md`](docs/development.md)                          | Local dev setup                               |
-| [`docs/deployment.md`](docs/deployment.md)                            | Deployment                                    |
-| [`docs/roadmap.md`](docs/roadmap.md)                                  | Planned features                              |
+| File | Topic |
+| --- | --- |
+| [`docs/uk-parliament-primer.md`](docs/uk-parliament-primer.md) | UK Commons structure, elections, by-elections |
+| [`docs/official-timeline.md`](docs/official-timeline.md) | Data generation pipeline |
+| [`docs/architecture.md`](docs/architecture.md) | Overall app architecture |
+| [`docs/parliament-snapshots.md`](docs/parliament-snapshots.md) | Snapshot data format |
+| [`docs/party-metadata.md`](docs/party-metadata.md) | Party colour & leaning metadata |
+| [`docs/filters-and-interaction.md`](docs/filters-and-interaction.md) | UI filter system |
+| [`docs/exporting.md`](docs/exporting.md) | SVG/PNG export feature |
+| [`docs/development.md`](docs/development.md) | Local dev setup |
+| [`docs/deployment.md`](docs/deployment.md) | Deployment |
+| [`docs/roadmap.md`](docs/roadmap.md) | Planned features |

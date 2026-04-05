@@ -168,22 +168,30 @@ exempt from this rule.
 ## Code Style & Patterns
 
 - Prefer functional React components with hooks.
+
 - Favor small modules focused on a single domain or responsibility.
+
 - Group code logic by domain, not by technical layer. Place related types, logic, and tests together under a shared
   domain directory (e.g. `elections/`, `districts/`, `seats/`) rather than splitting them across `models/`, `utils/`,
   or `helpers/`.
+
 - Embrace SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and
   Dependency Inversion.
+
 - Follow DRY (Don't Repeat Yourself) principle — extract common logic into reusable utilities and hooks.
+
 - Filtering logic lives in the pure module `parliament/filters/apply.ts`; the context (`filtersContext.tsx`) simply
   delegates. Call `apply()` from the hook — do not re-implement predicates inline.
+
 - Treat snapshot JSON as immutable historical data — add new files rather than editing old ones unless correcting
   objective errors.
+
 - Geometry math is split:
   - Low-level seat math & ring utilities: `parliament/d3.ts` (exposes `GeometryConfig` helpers)
   - High-level hemicycle assembly & allocation: `parliament/geometry/` (`geometry.ts`, `allocation.ts`, `parties.ts`)
-  Extend in the lowest appropriate layer; keep new logic pure and parameterised.
+    Extend in the lowest appropriate layer; keep new logic pure and parameterised.
 - Avoid premature abstraction; wait for a second concrete use case.
+
 - For any function taking more than two distinct scalar parameters, prefer a single options object typed by a dedicated
   interface (e.g. `renderSeats(opts: RenderSeatsOptions)`). Name the interface `<Verb><Noun>Options` or `<Domain>Config`
   consistently.
@@ -237,7 +245,7 @@ exempt from this rule.
 
 1. Ensure lint passes with zero warnings.
 2. Rebase onto latest `main` (prefer fast-forward merges).
-3. Open a PR with a concise summary focusing on _why_.
+3. Open a PR with a concise summary focusing on *why*.
 4. Include before/after screenshots or GIFs for UI-affecting changes.
 
 ## License / Attribution
