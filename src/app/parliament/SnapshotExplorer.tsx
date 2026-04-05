@@ -3,6 +3,7 @@ import SnapshotHeader from './components/SnapshotHeader';
 import SnapshotPanels from './components/SnapshotPanels';
 import { ParliamentFiltersProvider } from './context/filtersContext';
 import { useParliamentIndex } from './hooks/useParliamentIndex';
+import { useSnapshotSelection } from './hooks/useSnapshotSelection';
 import { useSnapshotState } from './hooks/useSnapshotState';
 import type { ParliamentIndexEntry } from './schemas';
 
@@ -17,6 +18,8 @@ const SnapshotInner = ({
   index: ParliamentIndexEntry[];
   initialDate?: string;
 }) => {
+  const { filteredIndex, queryDate } = useSnapshotSelection(index);
+
   const {
     selectedDate,
     setSelectedDate,
@@ -25,12 +28,12 @@ const SnapshotInner = ({
     partyMetaMap,
     loadingMeta,
     error,
-  } = useSnapshotState(index, initialDate);
+  } = useSnapshotState(filteredIndex, queryDate ?? initialDate);
 
   return (
     <div className='space-y-6'>
       <SnapshotHeader
-        index={index}
+        index={filteredIndex}
         selectedDate={selectedDate}
         onDateChange={setSelectedDate}
       />

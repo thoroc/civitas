@@ -9,7 +9,8 @@ const LOCAL_KEY = 'parliamentSelectedDate';
 
 const useSelectedDate = (index: ParliamentIndexEntry[], initialDate?: string) =>
   useState<string | undefined>(() => {
-    if (initialDate) return initialDate;
+    if (initialDate && index.some(e => e.date === initialDate))
+      return initialDate;
     try {
       const stored = localStorage.getItem(LOCAL_KEY);
       if (stored && index.some(e => e.date === stored)) return stored;
@@ -38,6 +39,14 @@ export const useSnapshotState = (
   const { partyMetaMap, loadingMeta, loadPartyMeta } = usePartyMetaLoader();
 
   const selectedEntry = index.find(e => e.date === selectedDate);
+
+  useEffect(() => {
+    if (index.length === 0) return;
+    if (selectedDate && index.some(e => e.date === selectedDate)) return;
+    const latestDate = index[index.length - 1]?.date;
+    if (!latestDate || latestDate === selectedDate) return;
+    setSelectedDate(latestDate);
+  }, [index, selectedDate, setSelectedDate]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: mount-only; loadSnapshot/loadPartyMeta are stable useCallback refs
   useEffect(() => {
