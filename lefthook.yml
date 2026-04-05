@@ -11,6 +11,7 @@ pre-commit:
     markdownlint:
       glob: '*.{md,markdown}'
       run: mdlint format {staged_files}
+      stage_fixed: true
     conventions:
       glob: '*.{ts,tsx}'
       run: bash scripts/check-conventions.sh {staged_files}
