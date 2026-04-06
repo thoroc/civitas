@@ -3,10 +3,12 @@ import { readFileSync } from 'node:fs';
 
 import { Command } from '@cliffy/command';
 
-import { partyMetaCommand } from './commands/party-meta.ts';
-import { rangeCommand } from './commands/range.ts';
-import { snapshotCommand } from './commands/snapshot.ts';
-import { timelineCommand } from './commands/timeline.ts';
+import {
+  partyMetaCommand,
+  rangeCommand,
+  snapshotCommand,
+  timelineCommand,
+} from './commands/index.ts';
 
 const { version } = JSON.parse(readFileSync('package.json', 'utf-8')) as {
   version: string;
