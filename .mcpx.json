@@ -30,6 +30,18 @@
         "-y",
         "wikipedia-mcp"
       ]
+    },
+    "context-mode": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "context-mode"
+      ]
+    },
+    "codebase-memory-mcp": {
+      "transport": "stdio",
+      "command": "/Users/thomas.roche/.local/bin/codebase-memory-mcp"
     }
   }
 }
