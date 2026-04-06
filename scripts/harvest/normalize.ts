@@ -1,4 +1,4 @@
-import type { HarvestResult } from './membersApiClient';
+import type { HarvestResult } from './members-api-client';
 import type {
   HarvestConfig,
   NormalizedData,

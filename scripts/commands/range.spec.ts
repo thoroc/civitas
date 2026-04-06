@@ -14,7 +14,7 @@ const mocks = vi.hoisted(() => ({
   writeFileSync: vi.fn(),
 }));
 
-vi.mock('../range/fetchTermStartDates.ts', () => ({
+vi.mock('../range/fetch-term-start-dates.ts', () => ({
   fetchTermStartDates: mocks.fetchTermStartDates,
 }));
 vi.mock('../range/range-fallback.ts', () => ({
@@ -22,11 +22,11 @@ vi.mock('../range/range-fallback.ts', () => ({
 }));
 vi.mock('./snapshot.ts', () => ({ runSnapshot: mocks.runSnapshot }));
 vi.mock('./party-meta.ts', () => ({ runPartyMeta: mocks.runPartyMeta }));
-vi.mock('../range/buildIndexEntry.ts', () => ({
+vi.mock('../range/build-index-entry.ts', () => ({
   buildIndexEntry: mocks.buildIndexEntry,
 }));
 vi.mock('../lib/sleep.ts', () => ({ sleep: mocks.sleep }));
-vi.mock('../lib/toSafeFilename.ts', () => ({
+vi.mock('../lib/to-safe-filename.ts', () => ({
   toSafeFilename: mocks.toSafeFilename,
 }));
 vi.mock('../lib/paths.ts', () => ({

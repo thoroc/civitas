@@ -29,11 +29,11 @@ vi.mock('../lib/paths.ts', () => ({
   PARLIAMENT_INDEX: '/test/output/parliament.index.json',
 }));
 
-vi.mock('./buildIndexEntry.ts', () => ({
+vi.mock('./build-index-entry.ts', () => ({
   buildIndexEntry: mockBuildIndexEntry,
 }));
 
-vi.mock('../lib/normalizeInputDate.ts', () => ({
+vi.mock('../lib/normalize-input-date.ts', () => ({
   normalizeInputDate: mockNormalizeInputDate,
 }));
 
@@ -41,7 +41,7 @@ vi.mock('../commands/party-meta.ts', () => ({
   runPartyMeta: mockRunPartyMeta,
 }));
 
-import type { IndexEntry } from './buildIndexEntry.ts';
+import type { IndexEntry } from './build-index-entry.ts';
 import { handleFallbackRange } from './range-fallback.ts';
 
 const makeEntry = (date: string): IndexEntry => ({

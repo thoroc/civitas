@@ -9,6 +9,6 @@ export {
   TOOLTIP_PRIMARY_FONT_SIZE,
   TOOLTIP_SEAT_FONT_SIZE,
   TOOLTIP_SEAT_LETTER_SPACING,
-} from './tooltipTheme';
-export { default as TooltipSecondary } from './TooltipSecondary';
-export { default as computeTooltipLayout } from './tooltipLayout';
+} from './tooltip-theme';
+export { default as TooltipSecondary } from './tooltip-secondary';
+export { default as computeTooltipLayout } from './tooltip-layout';

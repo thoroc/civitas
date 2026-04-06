@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildByElectionQuery } from './buildByElectionQuery.ts';
-import { buildGeneralElectionQuery } from './buildGeneralElectionQuery.ts';
-import { buildIdeologyQuery } from './buildIdeologyQuery.ts';
-import { buildParliamentMembersQuery } from './buildParliamentMembersQuery.ts';
-import { buildTermsQuery } from './buildTermsQuery.ts';
-import { buildTermsQueryFallback } from './buildTermsQueryFallback.ts';
-import { WIKIDATA_SPARQL_ENDPOINT } from './wikidataSparqlEndpoint.ts';
+import { buildByElectionQuery } from './build-by-election-query.ts';
+import { buildGeneralElectionQuery } from './build-general-election-query.ts';
+import { buildIdeologyQuery } from './build-ideology-query.ts';
+import { buildParliamentMembersQuery } from './build-parliament-members-query.ts';
+import { buildTermsQuery } from './build-terms-query.ts';
+import { buildTermsQueryFallback } from './build-terms-query-fallback.ts';
+import { WIKIDATA_SPARQL_ENDPOINT } from './wikidata-sparql-endpoint.ts';
 
 describe('WIKIDATA_SPARQL_ENDPOINT', () => {
   it('is a non-empty string URL', () => {

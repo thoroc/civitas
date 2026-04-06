@@ -1,33 +1,33 @@
-export { buildEvents } from './buildEvents.ts';
-export { byStart } from './byStart.ts';
-export { collectConstituencyEvents } from './collectConstituencyEvents.ts';
-export { collectGeneralElectionEvents } from './collectGeneralElectionEvents.ts';
-export { collectPartySwitchEvents } from './collectPartySwitchEvents.ts';
-export { collectSeatEvents } from './collectSeatEvents.ts';
-export { deduplicateEvents } from './deduplicateEvents.ts';
-export { filterElectionsSince } from './filterElectionsSince.ts';
-export { sortEvents } from './sortEvents.ts';
-export type { BuildSnapshotsOptions } from './buildSnapshots.ts';
-export { buildSnapshots } from './buildSnapshots.ts';
+export { buildEvents } from './build-events.ts';
+export { byStart } from './by-start.ts';
+export { collectConstituencyEvents } from './collect-constituency-events.ts';
+export { collectGeneralElectionEvents } from './collect-general-election-events.ts';
+export { collectPartySwitchEvents } from './collect-party-switch-events.ts';
+export { collectSeatEvents } from './collect-seat-events.ts';
+export { deduplicateEvents } from './deduplicate-events.ts';
+export { filterElectionsSince } from './filter-elections-since.ts';
+export { sortEvents } from './sort-events.ts';
+export type { BuildSnapshotsOptions } from './build-snapshots.ts';
+export { buildSnapshots } from './build-snapshots.ts';
 export type { CacheConfig } from './cache.ts';
 export { cachedGet } from './cache.ts';
 export type {
   EventType as ClassifyEventType,
   EventTypeLookup,
-} from './classifyEventType.ts';
-export { classifyEventType, emptyLookup } from './classifyEventType.ts';
-export type { ElectionEvent } from './electionsBaseline.ts';
-export { GENERAL_ELECTIONS } from './electionsBaseline.ts';
-export { ensureDir } from './ensureDir.ts';
-export { fetchWikidataEventTypeLookup } from './eventType.ts';
-export { extractPartySpells } from './extractPartySpells.ts';
-export { extractSeatSpells } from './extractSeatSpells.ts';
-export { fetchMemberIds } from './fetchMemberIds.ts';
-export type { HarvestResult } from './membersApiClient.ts';
-export { harvestMembers } from './membersApiClient.ts';
+} from './classify-event-type.ts';
+export { classifyEventType, emptyLookup } from './classify-event-type.ts';
+export type { ElectionEvent } from './elections-baseline.ts';
+export { GENERAL_ELECTIONS } from './elections-baseline.ts';
+export { ensureDir } from './ensure-dir.ts';
+export { fetchWikidataEventTypeLookup } from './event-type.ts';
+export { extractPartySpells } from './extract-party-spells.ts';
+export { extractSeatSpells } from './extract-seat-spells.ts';
+export { fetchMemberIds } from './fetch-member-ids.ts';
+export type { HarvestResult } from './members-api-client.ts';
+export { harvestMembers } from './members-api-client.ts';
 export { normalize } from './normalize.ts';
-export { harvestOData } from './odataHarvester.ts';
-export { runHarvest } from './runHarvest.ts';
+export { harvestOData } from './odata-harvester.ts';
+export { runHarvest } from './run-harvest.ts';
 
 export {
   EventSchema,

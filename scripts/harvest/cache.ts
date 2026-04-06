@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import axios from 'axios';
 
-import { ensureDir } from './ensureDir.ts';
+import { ensureDir } from './ensure-dir.ts';
 
 export interface CacheConfig {
   dir: string;
