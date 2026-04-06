@@ -1,5 +1,3 @@
-import { Command } from '@cliffy/command';
-
 import { buildPartyRecord } from '../party-meta/buildPartyRecord.ts';
 import { fetchIdeologies } from '../party-meta/fetchIdeologies.ts';
 import { isQID } from '../party-meta/isQID.ts';
@@ -50,17 +48,3 @@ export const runPartyMeta = async (opts: PartyMetaOptions): Promise<void> => {
 
   writePartyMeta(snapshotPath, { generatedAt: now, parties: records });
 };
-
-export const partyMetaCommand = new Command()
-  .name('party-meta')
-  .description(
-    'Generate party metadata (ideological leaning) from a parliament snapshot'
-  )
-  .option(
-    '--snapshot <path:string>',
-    'Path to an existing parliament snapshot JSON',
-    { required: true }
-  )
-  .action(async opts => {
-    await runPartyMeta({ snapshot: opts.snapshot });
-  });

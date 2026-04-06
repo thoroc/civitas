@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Command } from '@cliffy/command';
-
 import { OUTPUT_DIR, PARLIAMENT_INDEX } from '../lib/paths.ts';
 import { sleep } from '../lib/sleep.ts';
 import { toSafeFilename } from '../lib/toSafeFilename.ts';
@@ -83,26 +81,3 @@ export const runRange = async (opts: RangeOptions): Promise<void> => {
   fs.writeFileSync(PARLIAMENT_INDEX, JSON.stringify(sorted, null, 2));
   console.log(`Index written: ${PARLIAMENT_INDEX}`);
 };
-
-export const rangeCommand = new Command()
-  .description(
-    'Generate parliament snapshots for all UK Parliament term start dates'
-  )
-  .option('--mode <mode:string>', 'Discovery mode (only "terms" supported)', {
-    required: true,
-  })
-  .option('--throttle <ms:number>', 'Milliseconds between requests', {
-    default: 300,
-  })
-  .option('--force', 'Overwrite existing snapshots')
-  .action(async opts => {
-    if (opts.mode !== 'terms') {
-      console.error('Only --mode terms is supported');
-      process.exit(1);
-    }
-    await runRange({
-      mode: 'terms',
-      throttle: opts.throttle,
-      force: opts.force ?? false,
-    });
-  });

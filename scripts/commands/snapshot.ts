@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Command } from '@cliffy/command';
-
 import { fetchWithRetry } from '../lib/http.ts';
 import { normalizeInputDate } from '../lib/normalizeInputDate.ts';
 import { OUTPUT_DIR } from '../lib/paths.ts';
@@ -60,19 +58,3 @@ export const runSnapshot = async (opts: SnapshotOptions): Promise<void> => {
   fs.writeFileSync(outFile, JSON.stringify(snapshot, null, 2));
   console.log(`Snapshot written: ${outFile} (members: ${members.length})`);
 };
-
-export const snapshotCommand = new Command()
-  .name('snapshot')
-  .description('Fetch a parliament snapshot for a given date from Wikidata')
-  .option('--date <date:string>', 'ISO date (e.g. 2021-01-01T00:00:00Z)', {
-    required: true,
-  })
-  .option('--merge-labour-coop', 'Merge Labour and Co-op into one party', {
-    default: false,
-  })
-  .action(async opts => {
-    await runSnapshot({
-      date: opts.date,
-      mergeLabourCoop: opts.mergeLabourCoop ?? false,
-    });
-  });
