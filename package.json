@@ -27,6 +27,7 @@
     "test:unit:run": "vitest run"
   },
   "dependencies": {
+    "@cliffy/command": "npm:@jsr/cliffy__command",
     "axios": "^1.14.0",
     "csv-loader": "^3.0.5",
     "d3": "^7.8.5",
