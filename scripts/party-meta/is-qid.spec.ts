@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { isQID } from './is-q-i-d.ts';
+import { isQID } from './is-qid.ts';
 
 describe('isQID', () => {
   it('returns true for valid QID', () => {

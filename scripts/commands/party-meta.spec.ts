@@ -28,7 +28,7 @@ vi.mock('../party-meta/build-party-record.ts', () => ({
 vi.mock('../party-meta/write-party-meta.ts', () => ({
   writePartyMeta: mocks.writePartyMeta,
 }));
-vi.mock('../party-meta/is-q-i-d.ts', () => ({ isQID: mocks.isQID }));
+vi.mock('../party-meta/is-qid.ts', () => ({ isQID: mocks.isQID }));
 
 import { runPartyMeta } from './party-meta.ts';
 

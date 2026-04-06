@@ -1,7 +1,7 @@
 export { buildPartyRecord } from './build-party-record.ts';
 export { collectMatches } from './collect-matches.ts';
 export { fetchIdeologies } from './fetch-ideologies.ts';
-export { isQID } from './is-q-i-d.ts';
+export { isQID } from './is-qid.ts';
 export { KEYWORDS, spectrumMap } from './keywords.ts';
 export { loadOverrides } from './load-overrides.ts';
 export { loadSnapshot } from './load-snapshot.ts';

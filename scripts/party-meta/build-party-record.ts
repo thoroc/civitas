@@ -1,4 +1,4 @@
-import { isQID } from './is-q-i-d.ts';
+import { isQID } from './is-qid.ts';
 import { spectrumMap } from './keywords.ts';
 import { resolveLeaningForParty } from './resolve-leaning-for-party.ts';
 import type { PartyEntry, PartyMetaRecord } from './types.ts';

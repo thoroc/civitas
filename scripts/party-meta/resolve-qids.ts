@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { isQID } from './is-q-i-d.ts';
+import { isQID } from './is-qid.ts';
 
 const WIKIDATA_SEARCH = 'https://www.wikidata.org/w/api.php';
 
