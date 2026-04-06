@@ -4,14 +4,12 @@ import path from 'node:path';
 
 import axios from 'axios';
 
+import { ensureDir } from './ensureDir.ts';
+
 export interface CacheConfig {
   dir: string;
   forceRefresh: boolean;
 }
-
-export const ensureDir = (dir: string) => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-};
 
 const hashKey = (input: string) =>
   crypto.createHash('sha1').update(input).digest('hex');

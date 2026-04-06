@@ -1,5 +1,5 @@
+import { classifyEventType } from '../classifyEventType.ts';
 import type { EventTypeLookup } from '../eventType.ts';
-import { classifyEventType } from '../eventType.ts';
 import type { NormalizedData, Snapshot, SnapshotMember } from '../schemas.ts';
 import type { ActiveState, SnapshotSourceHashes } from './types.ts';
 
