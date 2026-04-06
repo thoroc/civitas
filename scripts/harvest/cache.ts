@@ -16,7 +16,10 @@ export const ensureDir = (dir: string) => {
 const hashKey = (input: string) =>
   crypto.createHash('sha1').update(input).digest('hex');
 
-export async function cachedGet(url: string, cfg: CacheConfig): Promise<any> {
+export const cachedGet = async (
+  url: string,
+  cfg: CacheConfig
+): Promise<any> => {
   ensureDir(cfg.dir);
   const key = hashKey(url);
   const file = path.join(cfg.dir, `${key}.json`);
@@ -39,4 +42,4 @@ export async function cachedGet(url: string, cfg: CacheConfig): Promise<any> {
   }
   fs.writeFileSync(file, JSON.stringify(res.data, null, 2));
   return res.data;
-}
+};
