@@ -7,19 +7,19 @@ import type {
   SeatSpell,
 } from './schemas';
 
-function byStart<T extends { start: string }>(a: T, b: T) {
+const byStart = <T extends { start: string }>(a: T, b: T): number => {
   return a.start < b.start ? -1 : a.start > b.start ? 1 : 0;
-}
+};
 
 interface BuildEventsOptions {
   elections?: { date: string; label: string }[];
 }
 
-export function buildEvents(
+export const buildEvents = (
   normalized: NormalizedData,
   cfg: HarvestConfig,
   opts: BuildEventsOptions = {}
-): Event[] {
+): Event[] => {
   const elections = (opts.elections || GENERAL_ELECTIONS).filter(
     e => e.date >= cfg.since
   );
@@ -146,4 +146,4 @@ export function buildEvents(
         : 1
   );
   return dedup;
-}
+};

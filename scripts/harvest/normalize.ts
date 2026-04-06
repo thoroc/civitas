@@ -6,23 +6,23 @@ import type {
   SeatSpell,
 } from './schemas';
 
-function toISO(dateStr: string | undefined): string | undefined {
+const toISO = (dateStr: string | undefined): string | undefined => {
   if (!dateStr) return undefined;
   // Accept already ISO; otherwise try Date parse
   if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) return dateStr.slice(0, 10);
   const d = new Date(dateStr);
   if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10);
   return undefined;
-}
+};
 
 interface SpellKeyOpts {
   endDefault?: string;
 }
 
-function normalizeSpells<T extends { start: string; end?: string }>(
+const normalizeSpells = <T extends { start: string; end?: string }>(
   spells: T[],
   { endDefault }: SpellKeyOpts = {}
-): T[] {
+): T[] => {
   return spells
     .map(s => ({
       ...s,
@@ -31,9 +31,9 @@ function normalizeSpells<T extends { start: string; end?: string }>(
     }))
     .filter(s => !!s.start)
     .sort((a, b) => (a.start! < b.start! ? -1 : a.start! > b.start! ? 1 : 0));
-}
+};
 
-function mergeLabourCoopParty(spells: PartySpell[]): PartySpell[] {
+const mergeLabourCoopParty = (spells: PartySpell[]): PartySpell[] => {
   return spells.map(s => {
     if (
       (s.partyName.includes('Labour') &&
@@ -48,12 +48,12 @@ function mergeLabourCoopParty(spells: PartySpell[]): PartySpell[] {
     }
     return s;
   });
-}
+};
 
-export function normalize(
+export const normalize = (
   harvest: HarvestResult,
   cfg: HarvestConfig
-): NormalizedData {
+): NormalizedData => {
   let partySpells: PartySpell[] = normalizeSpells(harvest.partySpells);
   let seatSpells: SeatSpell[] = normalizeSpells(harvest.seatSpells);
 
@@ -97,4 +97,4 @@ export function normalize(
       name,
     })).sort((a, b) => a.constituencyId.localeCompare(b.constituencyId)),
   };
-}
+};
