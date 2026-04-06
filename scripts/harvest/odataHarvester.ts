@@ -46,14 +46,13 @@ import type {
 */
 
 // Simple XML cache (separate from JSON cache)
-function cacheKey(url: string) {
-  return crypto.createHash('sha1').update(url).digest('hex');
-}
+const cacheKey = (url: string) =>
+  crypto.createHash('sha1').update(url).digest('hex');
 
-async function cachedGetXml(
+const cachedGetXml = async (
   url: string,
   cfg: { dir: string; forceRefresh: boolean }
-): Promise<string> {
+): Promise<string> => {
   ensureDir(cfg.dir);
   const key = `${cacheKey(url)}.xml`;
   const file = path.join(cfg.dir, key);
@@ -75,9 +74,9 @@ async function cachedGetXml(
   if (res.status !== 200) throw new Error(`GET ${url} -> ${res.status}`);
   fs.writeFileSync(file, res.data);
   return res.data as string;
-}
+};
 
-function decodeXml(str: string | undefined): string | undefined {
+const decodeXml = (str: string | undefined): string | undefined => {
   if (!str) return str;
   return str
     .replace(/&amp;/g, '&')
@@ -86,9 +85,9 @@ function decodeXml(str: string | undefined): string | undefined {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .trim();
-}
+};
 
-function extractTag(block: string, tag: string): string | undefined {
+const extractTag = (block: string, tag: string): string | undefined => {
   const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\/${tag}>`, 'i');
   const m = block.match(re);
   if (m) return decodeXml(m[1]);
@@ -96,7 +95,7 @@ function extractTag(block: string, tag: string): string | undefined {
   const nilRe = new RegExp(`<${tag}[^>]*xsi:nil=\"true\"[^>]*/>`, 'i');
   if (nilRe.test(block)) return undefined;
   return undefined;
-}
+};
 
 interface ParsedMembershipRow {
   memberId: number;
@@ -109,14 +108,14 @@ interface ParsedMembershipRow {
   end?: string; // ISO date/time string from XML
 }
 
-function slugify(input: string): string {
+const slugify = (input: string): string => {
   return input
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
-}
+};
 
-function parseMembersXml(xml: string): ParsedMembershipRow[] {
+const parseMembersXml = (xml: string): ParsedMembershipRow[] => {
   const rows: ParsedMembershipRow[] = [];
   const memberRe = /<Member\b([^>]*)>([\s\S]*?)<\/Member>/g;
   let m: RegExpExecArray | null;
@@ -166,15 +165,15 @@ function parseMembersXml(xml: string): ParsedMembershipRow[] {
     });
   }
   return rows;
-}
+};
 
-export async function harvestOData(
+export const harvestOData = async (
   cfg: HarvestConfig,
   cacheCfg = {
     dir: path.join(cfg.cacheDir, 'odata'),
     forceRefresh: cfg.forceRefresh,
   }
-): Promise<HarvestResult> {
+): Promise<HarvestResult> => {
   const url =
     'https://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons|Membership=All/';
   console.log('[odata] Fetching bulk Commons membership list');
@@ -234,4 +233,4 @@ export async function harvestOData(
   }
 
   return { members, partySpells: collapsed, seatSpells };
-}
+};
