@@ -1,4 +1,4 @@
-import type { Event, MemberCore } from '../schemas.ts';
+import type { Event, MemberCore } from '../schemas';
 import { hashObject } from './hashObject.ts';
 import type { SnapshotSourceHashes } from './types.ts';
 

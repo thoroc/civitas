@@ -1,11 +1,13 @@
-import { buildPartyRecord } from '../party-meta/buildPartyRecord.ts';
-import { fetchIdeologies } from '../party-meta/fetchIdeologies.ts';
-import { isQID } from '../party-meta/isQID.ts';
-import { loadOverrides } from '../party-meta/loadOverrides.ts';
-import { loadSnapshot } from '../party-meta/loadSnapshot.ts';
-import { resolveQids } from '../party-meta/resolveQids.ts';
-import type { PartyEntry } from '../party-meta/types.ts';
-import { writePartyMeta } from '../party-meta/writePartyMeta.ts';
+import {
+  buildPartyRecord,
+  fetchIdeologies,
+  isQID,
+  loadOverrides,
+  loadSnapshot,
+  resolveQids,
+  writePartyMeta,
+} from '../party-meta';
+import type { PartyEntry } from '../party-meta';
 
 export type PartyMetaOptions = { snapshot: string };
 

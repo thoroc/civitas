@@ -2,7 +2,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { fetchWikidataEventTypeLookup } from './harvest/eventType.ts';
+import { fetchWikidataEventTypeLookup } from './harvest';
 
 const toDateKey = (value: string): string => value.slice(0, 10);
 

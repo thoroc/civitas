@@ -1,4 +1,4 @@
-import type { NormalizedData } from '../schemas.ts';
+import type { NormalizedData } from '../schemas';
 import type { ActiveState } from './types.ts';
 
 export const applyGeneralElection = (
