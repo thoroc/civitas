@@ -36,7 +36,25 @@ The hooks run in parallel for faster execution. If any hook fails, the commit is
 These conventions are enforced automatically on every commit via
 `scripts/check-conventions.sh` and Biome rules.
 
-### 1. One function per module
+### 1. Kebab-case file names
+
+All TypeScript/TSX source files must use kebab-case: all lowercase, words separated by
+hyphens. This applies to modules, components, hooks, and utilities alike.
+
+```text
+✅ my-module.ts
+✅ use-snapshot-state.ts
+✅ build-events.ts
+✅ index.ts          ← barrel files are a single word, fine as-is
+
+❌ myModule.ts
+❌ MyComponent.tsx
+❌ buildEvents.ts
+```
+
+`scripts/check-conventions.sh` blocks commits with non-kebab-case file names.
+
+### 2. One function per module
 
 Each non-barrel module exports exactly one function (or component). Split unrelated
 utilities into separate files.
@@ -54,7 +72,25 @@ export const formatDate = (d: Date) => ...;
 export const parseDate = (s: string) => ...;
 ```
 
-### 2. Barrel modules
+### 2. One function per module
+
+Each non-barrel module exports exactly one function (or component). Split unrelated
+utilities into separate files.
+
+```ts
+// ❌ two exports in one file
+export const formatDate = (d: Date) => ...;
+export const parseDate = (s: string) => ...;
+
+// ✅ one per file
+// format-date.ts
+export const formatDate = (d: Date) => ...;
+
+// parse-date.ts
+export const parseDate = (s: string) => ...;
+```
+
+### 3. Barrel modules
 
 Every directory exposes a single `index.ts` that re-exports its public API. Consumers
 import from the directory, not from deep paths.
@@ -73,7 +109,7 @@ import { applyFilters } from '@/app/parliament/filters/apply';
 
 Barrel files are exempt from the one-function-per-module rule.
 
-### 3. Unit tests collocated
+### 4. Unit tests collocated
 
 Place unit test files next to the module they test, using `.spec.ts` / `.spec.tsx` /
 `.test.ts` / `.test.tsx` naming. Integration or end-to-end tests stay under `tests/`.
@@ -87,7 +123,7 @@ src/app/parliament/filters/
 
 Vitest is already configured to pick up `src/**/*.spec.*` and `src/**/*.test.*`.
 
-### 4. Arrow functions — no named functions, no classes
+### 5. Arrow functions — no named functions, no classes
 
 Use arrow functions for everything. Do not use `class` declarations or named `function`
 declarations unless a framework explicitly requires them (e.g. Next.js `generateMetadata`
@@ -113,7 +149,7 @@ const SeatGrid = ({ seats }: SeatGridProps) => <div>...</div>;
 `scripts/check-conventions.sh` blocks commits. Biome additionally auto-fixes function
 expressions via `complexity/useArrowFunction`.
 
-### 5. Function complexity and length
+### 6. Function complexity and length
 
 A function must not exceed **both** a cognitive complexity score of 12 **and** a body
 length of 80 lines. Either alone is tolerable; both together is a signal to decompose.
@@ -131,7 +167,7 @@ When either limit is approached, extract pure helper functions into their own mo
 > one-function-per-module, no-internal-function, max-function-lines) live in the
 > script until Biome 2.0 introduces a plugin system.
 
-### 6. No internal functions
+### 7. No internal functions
 
 Do not define functions inside other functions. Inner helpers must be extracted into
 their own modules (following the one-function-per-module rule).

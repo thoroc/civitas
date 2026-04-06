@@ -3,6 +3,7 @@
 # Usage: bash scripts/check-conventions.sh <file1> <file2> ...
 #
 # Conventions checked:
+#   [kebab-case-filenames]   File names must use kebab-case (e.g. my-module.ts)
 #   [no-class]               No class declarations — use arrow functions + plain objects
 #   [arrow-only]             No named function declarations — use arrow functions
 #   [one-function-per-module] Max 1 exported function per non-barrel module
@@ -36,6 +37,14 @@ for file in "$@"; do
   # modules and predate the one-function-per-module convention.
   is_script=false
   [[ "$file" =~ (^|/)scripts/[^/]+\.(ts|tsx)$ ]] && is_script=true
+
+  # --- [kebab-case-filenames]: File names must use kebab-case ---
+  basename=$(basename "$file")
+  if ! echo "$basename" | grep -qE '^[a-z][a-z0-9]*(-[a-z0-9]+)*\.(ts|tsx)$'; then
+    echo "FAIL [kebab-case-filenames] $file"
+    echo "       → Rename to kebab-case: e.g. my-module.ts instead of myModule.ts"
+    ERRORS=$((ERRORS + 1))
+  fi
 
   # --- [no-class]: No class declarations ---
   if grep -qnE '^\s*(export\s+)?(abstract\s+)?class\s+[A-Za-z]' "$file"; then
