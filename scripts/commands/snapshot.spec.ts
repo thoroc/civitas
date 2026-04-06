@@ -12,13 +12,13 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock('../lib/http.ts', () => ({ fetchWithRetry: mocks.fetchWithRetry }));
-vi.mock('../lib/normalizeInputDate.ts', () => ({
+vi.mock('../lib/normalize-input-date.ts', () => ({
   normalizeInputDate: mocks.normalizeInputDate,
 }));
-vi.mock('../lib/toSafeFilename.ts', () => ({
+vi.mock('../lib/to-safe-filename.ts', () => ({
   toSafeFilename: mocks.toSafeFilename,
 }));
-vi.mock('../snapshot/normalizeBindings.ts', () => ({
+vi.mock('../snapshot/normalize-bindings.ts', () => ({
   normalizeBindings: mocks.normalizeBindings,
 }));
 vi.mock('../lib/wikidata/index.ts', () => ({

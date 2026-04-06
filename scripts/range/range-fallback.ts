@@ -3,8 +3,8 @@ import path from 'node:path';
 
 import { runPartyMeta } from '../commands';
 import { OUTPUT_DIR, PARLIAMENT_INDEX, normalizeInputDate } from '../lib';
-import { buildIndexEntry } from './buildIndexEntry.ts';
-import type { IndexEntry } from './buildIndexEntry.ts';
+import { buildIndexEntry } from './build-index-entry.ts';
+import type { IndexEntry } from './build-index-entry.ts';
 
 export const handleFallbackRange = async (
   indexByDate: Map<string, IndexEntry>

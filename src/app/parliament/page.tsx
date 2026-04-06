@@ -1,4 +1,4 @@
-import SnapshotExplorer from './SnapshotExplorer';
+import SnapshotExplorer from './snapshot-explorer';
 
 // Server component wrapper; SnapshotExplorer is client-side.
 // Optional: could pass an initialDate param via search params in future.
