@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import axios from 'axios';
 
-import { ensureDir } from './cache';
+import { ensureDir } from './ensureDir';
 import type { HarvestResult } from './membersApiClient';
 import type {
   HarvestConfig,
