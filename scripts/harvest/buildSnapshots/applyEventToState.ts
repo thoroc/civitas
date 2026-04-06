@@ -1,4 +1,4 @@
-import type { Event, NormalizedData } from '../schemas.ts';
+import type { Event, NormalizedData } from '../schemas';
 import { applyByElection } from './applyByElection.ts';
 import { applyGeneralElection } from './applyGeneralElection.ts';
 import { applyPartySwitch } from './applyPartySwitch.ts';

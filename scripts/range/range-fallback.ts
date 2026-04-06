@@ -1,9 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { runPartyMeta } from '../commands/party-meta.ts';
-import { normalizeInputDate } from '../lib/normalizeInputDate.ts';
-import { OUTPUT_DIR, PARLIAMENT_INDEX } from '../lib/paths.ts';
+import { runPartyMeta } from '../commands';
+import { OUTPUT_DIR, PARLIAMENT_INDEX, normalizeInputDate } from '../lib';
 import { buildIndexEntry } from './buildIndexEntry.ts';
 import type { IndexEntry } from './buildIndexEntry.ts';
 

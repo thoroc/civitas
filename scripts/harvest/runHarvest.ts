@@ -1,7 +1,7 @@
 import { harvestMembers } from './membersApiClient.ts';
 import { normalize } from './normalize.ts';
-import type { HarvestConfig, NormalizedData } from './schemas.ts';
-import { NormalizedDataSchema } from './schemas.ts';
+import type { HarvestConfig, NormalizedData } from './schemas';
+import { NormalizedDataSchema } from './schemas';
 
 export const runHarvest = async (
   cfg: HarvestConfig

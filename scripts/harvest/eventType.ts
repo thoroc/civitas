@@ -1,9 +1,9 @@
-import type { TermStart } from '../lib/runTermsQuery.ts';
-import { runTermsQuery } from '../lib/runTermsQuery.ts';
+import type { TermStart } from '../lib';
+import { runTermsQuery } from '../lib';
 import {
   buildByElectionQuery,
   buildGeneralElectionQuery,
-} from '../lib/wikidata/index.ts';
+} from '../lib/wikidata';
 import { emptyLookup } from './classifyEventType.ts';
 import type { EventTypeLookup } from './classifyEventType.ts';
 

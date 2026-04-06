@@ -1,5 +1,4 @@
-import type { EventTypeLookup } from '../harvest/eventType.ts';
-import type { Event } from '../harvest/schemas.ts';
+import type { Event, EventTypeLookup } from '../harvest';
 
 const typeOrder: Record<Event['type'], number> = {
   generalElection: 0,

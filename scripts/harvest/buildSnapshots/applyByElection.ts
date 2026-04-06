@@ -1,4 +1,4 @@
-import type { Event, NormalizedData } from '../schemas.ts';
+import type { Event, NormalizedData } from '../schemas';
 import type { ActiveState } from './types.ts';
 
 export const applyByElection = (

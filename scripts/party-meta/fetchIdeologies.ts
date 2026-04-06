@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-import {
-  WIKIDATA_SPARQL_ENDPOINT,
-  buildIdeologyQuery,
-} from '../lib/wikidata/index.ts';
+import { WIKIDATA_SPARQL_ENDPOINT, buildIdeologyQuery } from '../lib/wikidata';
 
 export const fetchIdeologies = async (
   qids: string[]

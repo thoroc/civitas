@@ -1,6 +1,6 @@
 import { classifyEventType } from '../classifyEventType.ts';
 import type { EventTypeLookup } from '../eventType.ts';
-import type { NormalizedData, Snapshot, SnapshotMember } from '../schemas.ts';
+import type { NormalizedData, Snapshot, SnapshotMember } from '../schemas';
 import type { ActiveState, SnapshotSourceHashes } from './types.ts';
 
 export const buildSnapshot = (params: {

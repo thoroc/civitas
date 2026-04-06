@@ -1,9 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { Snapshot } from '../harvest/schemas.ts';
-import { OFFICIAL_DIR, OFFICIAL_INDEX } from '../lib/paths.ts';
-import { toSafeFilename } from '../lib/toSafeFilename.ts';
+import type { Snapshot } from '../harvest';
+import { OFFICIAL_DIR, OFFICIAL_INDEX, toSafeFilename } from '../lib';
 
 export const writeTimelineOutput = (
   snapshots: Snapshot[],

@@ -3,7 +3,7 @@ import { buildSnapshot } from './buildSnapshots/buildSnapshot.ts';
 import { createInitialState } from './buildSnapshots/createInitialState.ts';
 import { createSnapshotSourceHashes } from './buildSnapshots/createSnapshotSourceHashes.ts';
 import type { EventTypeLookup } from './eventType.ts';
-import type { Event, NormalizedData, Snapshot } from './schemas.ts';
+import type { Event, NormalizedData, Snapshot } from './schemas';
 
 export interface BuildSnapshotsOptions {
   monthly?: boolean;

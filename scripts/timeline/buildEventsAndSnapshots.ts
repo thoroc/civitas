@@ -1,14 +1,15 @@
-import { buildEvents } from '../harvest/buildEvents.ts';
-import { buildSnapshots } from '../harvest/buildSnapshots.ts';
-import { fetchWikidataEventTypeLookup } from '../harvest/eventType.ts';
-import type { NormalizedData } from '../harvest/schemas.ts';
 import {
-  type Event,
-  EventSchema,
-  type HarvestConfig,
-  type Snapshot,
-  SnapshotSchema,
-} from '../harvest/schemas.ts';
+  buildEvents,
+  buildSnapshots,
+  fetchWikidataEventTypeLookup,
+} from '../harvest';
+import type {
+  Event,
+  HarvestConfig,
+  NormalizedData,
+  Snapshot,
+} from '../harvest';
+import { EventSchema, SnapshotSchema } from '../harvest';
 import { mergeWikidataEvents } from './mergeWikidataEvents.ts';
 
 type Pipeline = { events: Event[]; snapshots: Snapshot[] };

@@ -1,10 +1,7 @@
-import { runTermsQuery } from '../lib/runTermsQuery.ts';
-import {
-  buildTermsQuery,
-  buildTermsQueryFallback,
-} from '../lib/wikidata/index.ts';
+import { runTermsQuery } from '../lib';
+import { buildTermsQuery, buildTermsQueryFallback } from '../lib/wikidata';
 
-export type { TermStart } from '../lib/runTermsQuery.ts';
+export type { TermStart } from '../lib';
 
 const MIN_DATE = '2005-01-01T00:00:00Z';
 

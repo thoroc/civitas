@@ -1,16 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { fetchWithRetry } from '../lib/http.ts';
-import { normalizeInputDate } from '../lib/normalizeInputDate.ts';
-import { OUTPUT_DIR } from '../lib/paths.ts';
-import { toSafeFilename } from '../lib/toSafeFilename.ts';
+import {
+  OUTPUT_DIR,
+  fetchWithRetry,
+  normalizeInputDate,
+  toSafeFilename,
+} from '../lib';
 import {
   WIKIDATA_SPARQL_ENDPOINT,
   buildParliamentMembersQuery,
-} from '../lib/wikidata/index.ts';
+} from '../lib/wikidata';
 
-import { normalizeBindings } from '../snapshot/normalizeBindings.ts';
+import { normalizeBindings } from '../snapshot';
 
 import type { ParliamentSnapshot } from '../../src/app/parliament/types';
 

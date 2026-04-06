@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { OUTPUT_DIR } from '../lib/paths.ts';
+import { OUTPUT_DIR } from '../lib';
 
 export type IndexEntry = {
   date: string;

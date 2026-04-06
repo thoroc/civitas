@@ -1,4 +1,4 @@
-import type { Event } from '../schemas.ts';
+import type { Event } from '../schemas';
 import type { ActiveState } from './types.ts';
 
 export const applyVacancyStart = (

@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { OUTPUT_DIR, PARLIAMENT_INDEX } from '../lib/paths.ts';
-import { sleep } from '../lib/sleep.ts';
-import { toSafeFilename } from '../lib/toSafeFilename.ts';
-import { buildIndexEntry } from '../range/buildIndexEntry.ts';
-import type { IndexEntry } from '../range/buildIndexEntry.ts';
-import { fetchTermStartDates } from '../range/fetchTermStartDates.ts';
-import { handleFallbackRange } from '../range/range-fallback.ts';
+import { OUTPUT_DIR, PARLIAMENT_INDEX, sleep, toSafeFilename } from '../lib';
+import {
+  buildIndexEntry,
+  fetchTermStartDates,
+  handleFallbackRange,
+} from '../range';
+import type { IndexEntry } from '../range';
 import { runPartyMeta } from './party-meta.ts';
 import { runSnapshot } from './snapshot.ts';
 

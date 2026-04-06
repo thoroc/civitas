@@ -1,10 +1,12 @@
-import { runHarvest } from '../harvest/runHarvest.ts';
-import type { HarvestConfig } from '../harvest/schemas.ts';
-import { HarvestConfigSchema } from '../harvest/schemas.ts';
-import { buildEventsAndSnapshots } from '../timeline/buildEventsAndSnapshots.ts';
-import { reportValidation } from '../timeline/reportValidation.ts';
-import { validateSpells } from '../timeline/validation.ts';
-import { writeTimelineOutput } from '../timeline/writeTimelineOutput.ts';
+import { runHarvest } from '../harvest';
+import type { HarvestConfig } from '../harvest';
+import { HarvestConfigSchema } from '../harvest';
+import {
+  buildEventsAndSnapshots,
+  reportValidation,
+  validateSpells,
+  writeTimelineOutput,
+} from '../timeline';
 
 export type TimelineOptions = {
   since: string;
