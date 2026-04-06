@@ -1,4 +1,12 @@
 export { buildEvents } from './buildEvents.ts';
+export { byStart } from './byStart.ts';
+export { collectConstituencyEvents } from './collectConstituencyEvents.ts';
+export { collectGeneralElectionEvents } from './collectGeneralElectionEvents.ts';
+export { collectPartySwitchEvents } from './collectPartySwitchEvents.ts';
+export { collectSeatEvents } from './collectSeatEvents.ts';
+export { deduplicateEvents } from './deduplicateEvents.ts';
+export { filterElectionsSince } from './filterElectionsSince.ts';
+export { sortEvents } from './sortEvents.ts';
 export type { BuildSnapshotsOptions } from './buildSnapshots.ts';
 export { buildSnapshots } from './buildSnapshots.ts';
 export type { CacheConfig } from './cache.ts';
