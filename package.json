@@ -53,7 +53,7 @@
     "@vitest/coverage-v8": "^4.0.0",
     "autoprefixer": "^10.0.1",
     "daisyui": "^5.0.0",
-    "jsdom": "^29.0.1",
+    "jsdom": "^30.0.0",
     "lefthook": "^2.1.4",
     "markdownlint-cli2": "^0.22.0",
     "postcss": "^8",
